@@ -4,24 +4,24 @@
   <meta charset="utf-8">
   
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
-  <title>Theewind</title>
+  <title>thrift学习 | Theewind</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="##thrift学习其实thrift和点评的nvobject蛮像的，其中，TBinaryProtocol都是二进制传输，然后将属性的字段进行压缩，较少网络传输的数据。比如点评是采用hash值，每个对象的属性都有个hash值，然后传输此hash值，客户端根据hash值对应属性，而thrift是采用编号的方式，在idl描述文件中，就已经设置好了编号，然后传输编号到服务端，客户端根据编号对应属性。
+  <meta name="description" content="其实thrift和点评的nvobject蛮像的，其中，TBinaryProtocol都是二进制传输，然后将属性的字段进行压缩，较少网络传输的数据。比如点评是采用hash值，每个对象的属性都有个hash值，然后传输此hash值，客户端根据hash值对应属性，而thrift是采用编号的方式，在idl描述文件中，就已经设置好了编号，然后传输编号到服务端，客户端根据编号对应属性。
 
-t">
+thrift -gen">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Theewind">
+<meta property="og:title" content="thrift学习">
 <meta property="og:url" content="http://theewind.github.io/2016/01/13/My-First/index.html">
 <meta property="og:site_name" content="Theewind">
-<meta property="og:description" content="##thrift学习其实thrift和点评的nvobject蛮像的，其中，TBinaryProtocol都是二进制传输，然后将属性的字段进行压缩，较少网络传输的数据。比如点评是采用hash值，每个对象的属性都有个hash值，然后传输此hash值，客户端根据hash值对应属性，而thrift是采用编号的方式，在idl描述文件中，就已经设置好了编号，然后传输编号到服务端，客户端根据编号对应属性。
+<meta property="og:description" content="其实thrift和点评的nvobject蛮像的，其中，TBinaryProtocol都是二进制传输，然后将属性的字段进行压缩，较少网络传输的数据。比如点评是采用hash值，每个对象的属性都有个hash值，然后传输此hash值，客户端根据hash值对应属性，而thrift是采用编号的方式，在idl描述文件中，就已经设置好了编号，然后传输编号到服务端，客户端根据编号对应属性。
 
-t">
-<meta property="og:updated_time" content="2016-01-13T03:54:02.000Z">
+thrift -gen">
+<meta property="og:updated_time" content="2016-04-28T04:50:04.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Theewind">
-<meta name="twitter:description" content="##thrift学习其实thrift和点评的nvobject蛮像的，其中，TBinaryProtocol都是二进制传输，然后将属性的字段进行压缩，较少网络传输的数据。比如点评是采用hash值，每个对象的属性都有个hash值，然后传输此hash值，客户端根据hash值对应属性，而thrift是采用编号的方式，在idl描述文件中，就已经设置好了编号，然后传输编号到服务端，客户端根据编号对应属性。
+<meta name="twitter:title" content="thrift学习">
+<meta name="twitter:description" content="其实thrift和点评的nvobject蛮像的，其中，TBinaryProtocol都是二进制传输，然后将属性的字段进行压缩，较少网络传输的数据。比如点评是采用hash值，每个对象的属性都有个hash值，然后传输此hash值，客户端根据hash值对应属性，而thrift是采用编号的方式，在idl描述文件中，就已经设置好了编号，然后传输编号到服务端，客户端根据编号对应属性。
 
-t">
+thrift -gen">
   
     <link rel="alternative" href="/atom.xml" title="Theewind" type="application/atom+xml">
   
@@ -79,7 +79,7 @@ t">
 						<li>Tags</li>
 						
 						
-						<li>Über</li>
+						<li>About</li>
 						
 					</ul>
 				</div>
@@ -195,9 +195,27 @@ t">
       <input type="hidden" class="isFancy" />
     
     
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      thrift学习
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+        
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="thrift学习"><a href="#thrift学习" class="headerlink" title="##thrift学习"></a>##thrift学习</h2><p><strong>其实thrift和点评的nvobject蛮像的，其中，TBinaryProtocol都是二进制传输，然后将属性的字段进行压缩，较少网络传输的数据。<br>比如点评是采用hash值，每个对象的属性都有个hash值，然后传输此hash值，客户端根据hash值对应属性，而thrift是采用编号的方式，在idl描述文件中，就已经设置好了编号，然后传输编号到服务端，客户端根据编号对应属性。
+        <p><strong>其实thrift和点评的nvobject蛮像的，其中，TBinaryProtocol都是二进制传输，然后将属性的字段进行压缩，较少网络传输的数据。<br>比如点评是采用hash值，每个对象的属性都有个hash值，然后传输此hash值，客户端根据hash值对应属性，而thrift是采用编号的方式，在idl描述文件中，就已经设置好了编号，然后传输编号到服务端，客户端根据编号对应属性。
 </strong></p>
 <p><strong>thrift -gen cocoa <em>**</em></strong>.thrift 生成.h.m文件，然后添加工程，然后调用方法如下：**</p>
 <p>##例如：<br>METMemberCardServiceClient是最终发送请求的类，而他依赖TBinaryProtocol<tportocol></tportocol></p>
@@ -301,7 +319,7 @@ SAKMascoTransport *mascoTransport = [[SAKMascoTransport alloc] initWithTransport
 
 <div class="duoshuo">
 	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="My-First" data-title="" data-url="http://theewind.github.io/2016/01/13/My-First/"></div>
+	<div class="ds-thread" data-thread-key="My-First" data-title="thrift学习" data-url="http://theewind.github.io/2016/01/13/My-First/"></div>
 	<!-- 多说评论框 end -->
 	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 	<script type="text/javascript">
