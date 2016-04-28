@@ -11,19 +11,17 @@
 thrift -gen">
 <meta property="og:type" content="article">
 <meta property="og:title" content="thrift学习">
-<meta property="og:url" content="http://theewind.github.io/2016/01/13/My-First/index.html">
+<meta property="og:url" content="http://theewind.github.io/2016/04/29/thrift-study/index.html">
 <meta property="og:site_name" content="sanfeng’s blog">
 <meta property="og:description" content="其实thrift和点评的nvobject蛮像的，其中，TBinaryProtocol都是二进制传输，然后将属性的字段进行压缩，较少网络传输的数据。比如点评是采用hash值，每个对象的属性都有个hash值，然后传输此hash值，客户端根据hash值对应属性，而thrift是采用编号的方式，在idl描述文件中，就已经设置好了编号，然后传输编号到服务端，客户端根据编号对应属性。
 
 thrift -gen">
-<meta property="og:updated_time" content="2016-04-28T09:52:59.000Z">
+<meta property="og:updated_time" content="2016-04-28T09:58:58.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="thrift学习">
 <meta name="twitter:description" content="其实thrift和点评的nvobject蛮像的，其中，TBinaryProtocol都是二进制传输，然后将属性的字段进行压缩，较少网络传输的数据。比如点评是采用hash值，每个对象的属性都有个hash值，然后传输此hash值，客户端根据hash值对应属性，而thrift是采用编号的方式，在idl描述文件中，就已经设置好了编号，然后传输编号到服务端，客户端根据编号对应属性。
 
 thrift -gen">
-  
-    <link rel="alternative" href="/atom.xml" title="sanfeng’s blog" type="application/atom+xml">
   
   
     <link rel="icon" href="/favicon.png">
@@ -96,7 +94,9 @@ thrift -gen">
 				        
 							<li><a href="/archives">所有文章</a></li>
 				        
-							<li><a href="/tags/随笔">随笔</a></li>
+							<li><a href="/tags/">标签云</a></li>
+				        
+							<li><a href="/tags/swift">swift</a></li>
 				        
 							<li><a href="/about">关于</a></li>
 				        
@@ -105,13 +105,9 @@ thrift -gen">
 					<nav class="header-nav">
 						<div class="social">
 							
-								<a class="github" target="_blank" href="#" title="github">github</a>
+								<a class="github" target="_blank" href="https://github.com/theewind" title="github">github</a>
 					        
-								<a class="weibo" target="_blank" href="#" title="weibo">weibo</a>
-					        
-								<a class="rss" target="_blank" href="#" title="rss">rss</a>
-					        
-								<a class="zhihu" target="_blank" href="#" title="zhihu">zhihu</a>
+								<a class="mail" target="_blank" href="/sanfengflying@126.com" title="mail">mail</a>
 					        
 						</div>
 					</nav>
@@ -120,7 +116,7 @@ thrift -gen">
 				
 				<section class="switch-part switch-part2">
 					<div class="widget tagcloud" id="js-tagcloud">
-						<a href="/tags/first-second/" style="font-size: 10px;">first  second</a> <a href="/tags/hexo/" style="font-size: 20px;">hexo</a> <a href="/tags/测试/" style="font-size: 10px;">测试</a> <a href="/tags/随笔，生活，swift，React-Native/" style="font-size: 10px;">随笔，生活，swift，React Native</a>
+						<a href="/tags/hexo/" style="font-size: 20px;">hexo</a> <a href="/tags/swift/" style="font-size: 10px;">swift</a> <a href="/tags/测试/" style="font-size: 10px;">测试</a> <a href="/tags/随笔/" style="font-size: 10px;">随笔</a>
 					</div>
 				</section>
 				
@@ -166,7 +162,9 @@ thrift -gen">
 		        
 					<li><a href="/archives">所有文章</a></li>
 		        
-					<li><a href="/tags/随笔">随笔</a></li>
+					<li><a href="/tags/">标签云</a></li>
+		        
+					<li><a href="/tags/swift">swift</a></li>
 		        
 					<li><a href="/about">关于</a></li>
 		        
@@ -176,13 +174,9 @@ thrift -gen">
 			<nav class="header-nav">
 				<div class="social">
 					
-						<a class="github" target="_blank" href="#" title="github">github</a>
+						<a class="github" target="_blank" href="https://github.com/theewind" title="github">github</a>
 			        
-						<a class="weibo" target="_blank" href="#" title="weibo">weibo</a>
-			        
-						<a class="rss" target="_blank" href="#" title="rss">rss</a>
-			        
-						<a class="zhihu" target="_blank" href="#" title="zhihu">zhihu</a>
+						<a class="mail" target="_blank" href="/sanfengflying@126.com" title="mail">mail</a>
 			        
 				</div>
 			</nav>
@@ -190,11 +184,11 @@ thrift -gen">
 	</div>
 </nav>
 
-      <div class="body-wrap"><article id="post-My-First" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-thrift-study" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2016/01/13/My-First/" class="article-date">
-  	<time datetime="2016-01-13T03:54:02.000Z" itemprop="datePublished">2016-01-13</time>
+      <a href="/2016/04/29/thrift-study/" class="article-date">
+  	<time datetime="2016-04-29T09:44:20.000Z" itemprop="datePublished">2016-04-29</time>
 </a>
     </div>
   
@@ -226,6 +220,7 @@ thrift -gen">
         <p><strong>其实thrift和点评的nvobject蛮像的，其中，TBinaryProtocol都是二进制传输，然后将属性的字段进行压缩，较少网络传输的数据。<br>比如点评是采用hash值，每个对象的属性都有个hash值，然后传输此hash值，客户端根据hash值对应属性，而thrift是采用编号的方式，在idl描述文件中，就已经设置好了编号，然后传输编号到服务端，客户端根据编号对应属性。
 </strong></p>
 <p><strong>thrift -gen cocoa <em>**</em></strong>.thrift 生成.h.m文件，然后添加工程，然后调用方法如下：**</p>
+<a id="more"></a>
 <p>##例如：<br>METMemberCardServiceClient是最终发送请求的类，而他依赖TBinaryProtocol<tportocol></tportocol></p>
 <pre><code>- (void)getDisplayTypefinished:(void(^)(METMineMembercardExhibitionType result, SAKError *error))finished
 {
@@ -286,15 +281,11 @@ SAKMascoTransport *mascoTransport = [[SAKMascoTransport alloc] initWithTransport
     
 <nav id="article-nav">
   
-    <a href="/2016/04/28/hello-world/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption"><</strong>
-      <div class="article-nav-title">
-        
-          Hexo 学习
-        
-      </div>
-    </a>
   
+    <a href="/2016/04/28/今天好兴奋/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">今天好兴奋</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
   
 </nav>
 
@@ -323,26 +314,6 @@ SAKMascoTransport *mascoTransport = [[SAKMascoTransport alloc] initWithTransport
 
 
 
-
-
-<div class="duoshuo">
-	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="My-First" data-title="thrift学习" data-url="http://theewind.github.io/2016/01/13/My-First/"></div>
-	<!-- 多说评论框 end -->
-	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
-	<script type="text/javascript">
-	var duoshuoQuery = {short_name:"true"};
-	(function() {
-		var ds = document.createElement('script');
-		ds.type = 'text/javascript';ds.async = true;
-		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
-		ds.charset = 'UTF-8';
-		(document.getElementsByTagName('head')[0] 
-		 || document.getElementsByTagName('body')[0]).appendChild(ds);
-	})();
-	</script>
-	<!-- 多说公共JS代码 end -->
-</div>
 
 
 
@@ -375,7 +346,7 @@ SAKMascoTransport *mascoTransport = [[SAKMascoTransport alloc] initWithTransport
 		isArchive: false,
 		isTag: false,
 		isCategory: false,
-		open_in_new: false
+		open_in_new: true
 	}
 </script>
 <script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
