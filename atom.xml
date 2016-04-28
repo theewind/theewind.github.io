@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>sanfeng’s blog</title>
+  <subtitle>sanfengflying</subtitle>
+  <link href="/atom.xml" rel="self"/>
+  
+  <link href="http://theewind.github.io/"/>
+  <updated>2016-04-28T09:58:58.000Z</updated>
+  <id>http://theewind.github.io/</id>
+  
+  <author>
+    <name>sanfeng.li</name>
+    <email>sanfengflying@126.com</email>
+  </author>
+  
+  <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>thrift学习</title>
+    <link href="http://theewind.github.io/2016/04/29/thrift-study/"/>
+    <id>http://theewind.github.io/2016/04/29/thrift-study/</id>
+    <published>2016-04-29T09:44:20.000Z</published>
+    <updated>2016-04-28T09:58:58.000Z</updated>
+    
+    <content type="html">&lt;p&gt;&lt;strong&gt;其实thrift和点评的nvobject蛮像的，其中，TBinaryProtocol都是二进制传输，然后将属性的字段进行压缩，较少网络传输的数据。&lt;br&gt;比如点评是采用hash值，每个对象的属性都有个hash值，然后传输此hash值，客户端根据hash值对应属性，而thrift是采用编号的方式，在idl描述文件中，就已经设置好了编号，然后传输编号到服务端，客户端根据编号对应属性。
+&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;thrift -gen cocoa &lt;em&gt;**&lt;/em&gt;&lt;/strong&gt;.thrift 生成.h.m文件，然后添加工程，然后调用方法如下：**&lt;/p&gt;
+&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
+&lt;p&gt;##例如：&lt;br&gt;METMemberCardServiceClient是最终发送请求的类，而他依赖TBinaryProtocol&lt;tportocol&gt;&lt;/tportocol&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;- (void)getDisplayTypefinished:(void(^)(METMineMembercardExhibitionType result, SAKError *error))finished
+{
+NSDictionary *headerParams = @{@&amp;quot;token&amp;quot; : kUserToken, @&amp;quot;userId&amp;quot; : kUserID, @&amp;quot;clientKey&amp;quot; :  @&amp;quot;group&amp;quot;};
+TBinaryProtocol *binaryProtocol = [self createThriftProtocol:kMemberCardServiceURLString headerParameters:headerParams];
+METMemberCardServiceClient *memberCardService = [[METMemberCardServiceClient alloc] initWithProtocol:binaryProtocol];
+[memberCardService getDisplayTypefinished:^(int result, SAKError *error) {
+    if (error) {
+        if (finished) {
+            @within_main_thread(finished, 0, error);
+        }
+        return;
+    }
+    if (finished) {
+        @within_main_thread(finished, result, error);
+    }
+}];
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;TBinaryProtocol的构造需要SAKMascoTransport&lt;ttransport&gt;，而SAKMascoTransport&lt;ttransport&gt;的构造需要：THTTPClient&lt;ttransport&gt;，其中SAKMascoTransport是对THTTPClient的封装。&lt;br&gt;THTTPClient的概念比较简单，主要是read，write及flush（发送网络请求），不管数据的意义，而SAKMascoTransport是有数据概念的，比如header，body，元数据等，将有意义的数据进行组合后，然后掉用THTTPClient的read，write等。&lt;/ttransport&gt;&lt;/ttransport&gt;&lt;/ttransport&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;- (TBinaryProtocol *)createThriftProtocol:(NSString *)serviceURLString headerParameters:(NSDictionary *)headerParameters
+{
+NSString *commonParameterString = [[[SAKEnvironment environment] commonParameter] queryStringEncoded];
+NSString *serviceURLStringWithCommonParameter = [NSString stringWithFormat:@&amp;quot;%@?%@&amp;quot;, serviceURLString, commonParameterString];
+THTTPClient *httpClient = [[THTTPClient alloc] initWithURL:[NSURL URLWithString:serviceURLStringWithCommonParameter]];
+SAKMascoTransport *mascoTransport = [[SAKMascoTransport alloc] initWithTransport:httpClient andSerialID:1];
+
+[headerParameters enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
+    NSString *keyString = (NSString *)key;
+    if (keyString.length) {
+        [mascoTransport appendHeaderData:[keyString dataUsingEncoding:NSUTF8StringEncoding]];
+    }
+
+    // Replace user id and user token
+    NSString *valueString = (NSString *)obj;
+    if ([valueString isEqualToString:kUserID]) {
+        valueString = [valueString stringByReplacingOccurrencesOfString:kUserID withString:(self.user ? [self.user.userID stringValue] : @&amp;quot;&amp;quot;)];
+    }
+    else if ([valueString isEqualToString:kUserToken]) {
+        valueString = [valueString stringByReplacingOccurrencesOfString:kUserToken withString:(self.user ? self.user.token : @&amp;quot;&amp;quot;)];
+    } else {
+        // Do nothing
+    }
+
+    if (valueString.length) {
+        [mascoTransport appendHeaderData:[valueString dataUsingEncoding:NSUTF8StringEncoding]];
+    }
+}];
+
+    TBinaryProtocol *customProtocol = [[TBinaryProtocol alloc] initWithTransport:mascoTransport strictRead:NO strictWrite:YES];
+    return customProtocol;
+}
+&lt;/code&gt;&lt;/pre&gt;</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&lt;strong&gt;其实thrift和点评的nvobject蛮像的，其中，TBinaryProtocol都是二进制传输，然后将属性的字段进行压缩，较少网络传输的数据。&lt;br&gt;比如点评是采用hash值，每个对象的属性都有个hash值，然后传输此hash值，客户端根据hash值对应属性，而thrift是采用编号的方式，在idl描述文件中，就已经设置好了编号，然后传输编号到服务端，客户端根据编号对应属性。
+&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;thrift -gen cocoa &lt;em&gt;**&lt;/em&gt;&lt;/strong&gt;.thrift 生成.h.m文件，然后添加工程，然后调用方法如下：**&lt;/p&gt;
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>今天好兴奋</title>
+    <link href="http://theewind.github.io/2016/04/28/%E4%BB%8A%E5%A4%A9%E5%A5%BD%E5%85%B4%E5%A5%8B/"/>
+    <id>http://theewind.github.io/2016/04/28/今天好兴奋/</id>
+    <published>2016-04-28T09:58:08.000Z</published>
+    <updated>2016-04-28T09:58:45.000Z</updated>
+    
+    <content type="html">&lt;p&gt;###github + hexo &lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;###github + hexo &lt;/p&gt;
+
+    
+    </summary>
+    
+    
+      <category term="随笔" scheme="http://theewind.github.io/tags/%E9%9A%8F%E7%AC%94/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>hexo 基础</title>
+    <link href="http://theewind.github.io/2016/04/28/hexo-study/"/>
+    <id>http://theewind.github.io/2016/04/28/hexo-study/</id>
+    <published>2016-04-28T09:44:20.000Z</published>
+    <updated>2016-04-28T09:51:46.000Z</updated>
+    
+    <content type="html">&lt;h3 id=&quot;tags的用法&quot;&gt;&lt;a href=&quot;#tags的用法&quot; class=&quot;headerlink&quot; title=&quot;tags的用法&quot;&gt;&lt;/a&gt;tags的用法&lt;/h3&gt;&lt;p&gt;基本使用方法是：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;tags: hexo
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;如果一行多个标签，使用&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;tags: [hexo, hexo1, hexo2, ...]
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;如果一篇文章属于多个标签&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;tags: 
+- hexo
+- hexo2
+- hexo3
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&quot;new-和-new-page&quot;&gt;&lt;a href=&quot;#new-和-new-page&quot; class=&quot;headerlink&quot; title=&quot;new 和 new page&quot;&gt;&lt;/a&gt;new 和 new page&lt;/h3&gt;&lt;p&gt;最终生成的静态文档都在public下&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;new: 统一在归档目录 archive下&lt;/li&gt;
+&lt;li&gt;new page: 新建一个目录，比如about，然后在theme/yilia/_config.yml 的 menu下可以添加新的模块，比如 about: /about    &lt;/li&gt;
+&lt;/ul&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;h3 id=&quot;tags的用法&quot;&gt;&lt;a href=&quot;#tags的用法&quot; class=&quot;headerlink&quot; title=&quot;tags的用法&quot;&gt;&lt;/a&gt;tags的用法&lt;/h3&gt;&lt;p&gt;基本使用方法是：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;tags: hexo
+&lt;/code&gt;&lt;/pre&gt;&lt;p
+    
+    </summary>
+    
+    
+      <category term="hexo" scheme="http://theewind.github.io/tags/hexo/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>swift 学习计划</title>
+    <link href="http://theewind.github.io/2016/04/28/swift/"/>
+    <id>http://theewind.github.io/2016/04/28/swift/</id>
+    <published>2016-04-28T09:39:06.000Z</published>
+    <updated>2016-04-28T09:55:18.000Z</updated>
+    
+    <content type="html"></content>
+    
+    <summary type="html">
+    
+    </summary>
+    
+    
+      <category term="swift" scheme="http://theewind.github.io/tags/swift/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Hexo 学习</title>
+    <link href="http://theewind.github.io/2016/04/28/hexo-first/"/>
+    <id>http://theewind.github.io/2016/04/28/hexo-first/</id>
+    <published>2016-04-28T02:55:40.000Z</published>
+    <updated>2016-04-28T09:57:07.000Z</updated>
+    
+    <content type="html">&lt;p&gt;Welcome to &lt;a href=&quot;https://hexo.io/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Hexo&lt;/a&gt;! This is your very first post. Check &lt;a href=&quot;https://hexo.io/docs/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;documentation&lt;/a&gt; for more info. If you get any problems when using Hexo, you can find the answer in &lt;a href=&quot;https://hexo.io/docs/troubleshooting.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;troubleshooting&lt;/a&gt; or you can ask me on &lt;a href=&quot;https://github.com/hexojs/hexo/issues&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;GitHub&lt;/a&gt;.&lt;/p&gt;
+&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
+&lt;h2 id=&quot;Quick-Start&quot;&gt;&lt;a href=&quot;#Quick-Start&quot; class=&quot;headerlink&quot; title=&quot;Quick Start&quot;&gt;&lt;/a&gt;Quick Start&lt;/h2&gt;&lt;h3 id=&quot;Create-a-new-post&quot;&gt;&lt;a href=&quot;#Create-a-new-post&quot; class=&quot;headerlink&quot; title=&quot;Create a new post&quot;&gt;&lt;/a&gt;Create a new post&lt;/h3&gt;&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;$ hexo new &lt;span class=&quot;string&quot;&gt;&quot;My New Post&quot;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;More info: &lt;a href=&quot;https://hexo.io/docs/writing.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Writing&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&quot;Run-server&quot;&gt;&lt;a href=&quot;#Run-server&quot; class=&quot;headerlink&quot; title=&quot;Run server&quot;&gt;&lt;/a&gt;Run server&lt;/h3&gt;&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;$ hexo server&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;More info: &lt;a href=&quot;https://hexo.io/docs/server.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Server&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&quot;Generate-static-files&quot;&gt;&lt;a href=&quot;#Generate-static-files&quot; class=&quot;headerlink&quot; title=&quot;Generate static files&quot;&gt;&lt;/a&gt;Generate static files&lt;/h3&gt;&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;$ hexo generate&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;More info: &lt;a href=&quot;https://hexo.io/docs/generating.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Generating&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&quot;Deploy-to-remote-sites&quot;&gt;&lt;a href=&quot;#Deploy-to-remote-sites&quot; class=&quot;headerlink&quot; title=&quot;Deploy to remote sites&quot;&gt;&lt;/a&gt;Deploy to remote sites&lt;/h3&gt;&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;$ hexo deploy&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;More info: &lt;a href=&quot;https://hexo.io/docs/deployment.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Deployment&lt;/a&gt;&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;Welcome to &lt;a href=&quot;https://hexo.io/&quot;&gt;Hexo&lt;/a&gt;! This is your very first post. Check &lt;a href=&quot;https://hexo.io/docs/&quot;&gt;documentation&lt;/a&gt; for more info. If you get any problems when using Hexo, you can find the answer in &lt;a href=&quot;https://hexo.io/docs/troubleshooting.html&quot;&gt;troubleshooting&lt;/a&gt; or you can ask me on &lt;a href=&quot;https://github.com/hexojs/hexo/issues&quot;&gt;GitHub&lt;/a&gt;.&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="hexo" scheme="http://theewind.github.io/tags/hexo/"/>
+    
+      <category term="测试" scheme="http://theewind.github.io/tags/%E6%B5%8B%E8%AF%95/"/>
+    
+  </entry>
+  
+</feed>
