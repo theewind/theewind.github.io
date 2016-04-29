@@ -91,11 +91,32 @@ SAKMascoTransport *mascoTransport = [[SAKMascoTransport alloc] initWithTransport
   </entry>
   
   <entry>
+    <title>JetBrains产品注册码</title>
+    <link href="http://theewind.github.io/2016/04/29/JetBrains%E6%B3%A8%E5%86%8C%E7%A0%81/"/>
+    <id>http://theewind.github.io/2016/04/29/JetBrains注册码/</id>
+    <published>2016-04-29T08:45:47.000Z</published>
+    <updated>2016-04-29T08:48:18.000Z</updated>
+    
+    <content type="html">&lt;p&gt;对于JetBrains系列产品，比如webStorm，appCode等，注册很简单：选择 License Servers，然后输入&lt;a href=&quot;http://idea.qinxi1992.cn，点击OK&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://idea.qinxi1992.cn，点击OK&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;参考：&lt;a href=&quot;http://idea.lanyus.com&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;IntelliJ IDEA 注册码&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;有条件的还是支持正版吧~~~&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;对于JetBrains系列产品，比如webStorm，appCode等，注册很简单：选择 License Servers，然后输入&lt;a href=&quot;http://idea.qinxi1992.cn，点击OK&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;h
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
     <title>代码分析脚本</title>
     <link href="http://theewind.github.io/2016/04/29/%E4%BB%A3%E7%A0%81%E5%88%86%E6%9E%90%E8%84%9A%E6%9C%AC/"/>
     <id>http://theewind.github.io/2016/04/29/代码分析脚本/</id>
     <published>2016-04-29T06:40:40.000Z</published>
-    <updated>2016-04-29T07:50:39.000Z</updated>
+    <updated>2016-04-29T08:48:42.000Z</updated>
     
     <content type="html">&lt;p&gt;iOS开发过程中，随着版本迭代的更新，会有很多无用代码及文件产生，今天主要是参考网上的一些内容，并进行思路分析，给需要的人提供一个参考。&lt;/p&gt;
 &lt;p&gt;主要参考&lt;a href=&quot;http://stackoverflow.com/questions/14631204/finding-unused-files-in-xcode&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Finding unused files in Xcode&lt;/a&gt; 里面有很多脚本，因为自己对shell脚本也不是很熟悉，边看边学习。&lt;/p&gt;
@@ -117,7 +138,9 @@ SAKMascoTransport *mascoTransport = [[SAKMascoTransport alloc] initWithTransport
     </summary>
     
     
-      <category term="脚本 代码检测" scheme="http://theewind.github.io/tags/%E8%84%9A%E6%9C%AC-%E4%BB%A3%E7%A0%81%E6%A3%80%E6%B5%8B/"/>
+      <category term="脚本" scheme="http://theewind.github.io/tags/%E8%84%9A%E6%9C%AC/"/>
+    
+      <category term="代码检测" scheme="http://theewind.github.io/tags/%E4%BB%A3%E7%A0%81%E6%A3%80%E6%B5%8B/"/>
     
   </entry>
   
