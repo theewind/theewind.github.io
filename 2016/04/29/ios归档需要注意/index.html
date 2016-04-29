@@ -4,18 +4,30 @@
   <meta charset="utf-8">
   
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
-  <title>swift 学习计划 | sanfeng’s blog</title>
+  <title>iOS归档之NSKeyedArchiver | sanfeng’s blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="这是我的三风的博客">
+  <meta name="description" content="如果对象是NSString、NSDictionary、NSArray、NSData、NSNumber等类型，可以直接用NSKeyedArchiver进行归档和恢复。
+不是所有的对象都可以直接用这种方法进行归档，只有遵守了NSCoding协议的对象才可以。
+NSCoding协议有2个方法：
+encodeWithCoder:
+每次归档对象时，都会调用这个方法。一般在这个方法里面指定如何归档对象中的每个">
 <meta property="og:type" content="article">
-<meta property="og:title" content="swift 学习计划">
-<meta property="og:url" content="http://theewind.github.io/2016/04/28/swift/index.html">
+<meta property="og:title" content="iOS归档之NSKeyedArchiver">
+<meta property="og:url" content="http://theewind.github.io/2016/04/29/ios归档需要注意/index.html">
 <meta property="og:site_name" content="sanfeng’s blog">
-<meta property="og:description" content="这是我的三风的博客">
-<meta property="og:updated_time" content="2016-04-28T09:55:18.000Z">
+<meta property="og:description" content="如果对象是NSString、NSDictionary、NSArray、NSData、NSNumber等类型，可以直接用NSKeyedArchiver进行归档和恢复。
+不是所有的对象都可以直接用这种方法进行归档，只有遵守了NSCoding协议的对象才可以。
+NSCoding协议有2个方法：
+encodeWithCoder:
+每次归档对象时，都会调用这个方法。一般在这个方法里面指定如何归档对象中的每个">
+<meta property="og:updated_time" content="2016-04-29T06:04:42.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="swift 学习计划">
-<meta name="twitter:description" content="这是我的三风的博客">
+<meta name="twitter:title" content="iOS归档之NSKeyedArchiver">
+<meta name="twitter:description" content="如果对象是NSString、NSDictionary、NSArray、NSData、NSNumber等类型，可以直接用NSKeyedArchiver进行归档和恢复。
+不是所有的对象都可以直接用这种方法进行归档，只有遵守了NSCoding协议的对象才可以。
+NSCoding协议有2个方法：
+encodeWithCoder:
+每次归档对象时，都会调用这个方法。一般在这个方法里面指定如何归档对象中的每个">
   
   
     <link rel="icon" href="/favicon.png">
@@ -178,11 +190,11 @@
 	</div>
 </nav>
 
-      <div class="body-wrap"><article id="post-swift" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-ios归档需要注意" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2016/04/28/swift/" class="article-date">
-  	<time datetime="2016-04-28T09:39:06.000Z" itemprop="datePublished">2016-04-28</time>
+      <a href="/2016/04/29/ios归档需要注意/" class="article-date">
+  	<time datetime="2016-04-29T06:01:52.000Z" itemprop="datePublished">2016-04-29</time>
 </a>
     </div>
   
@@ -195,7 +207,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      swift 学习计划
+      iOS归档之NSKeyedArchiver
     </h1>
   
 
@@ -204,7 +216,7 @@
       <div class="article-info article-info-post">
         
 	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/swift/">swift</a></li></ul>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS/">iOS</a></li></ul>
 	</div>
 
         
@@ -215,7 +227,14 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        
+        <p>如果对象是NSString、NSDictionary、NSArray、NSData、NSNumber等类型，可以直接用NSKeyedArchiver进行归档和恢复。</p>
+<p>不是所有的对象都可以直接用这种方法进行归档，只有遵守了NSCoding协议的对象才可以。</p>
+<p>NSCoding协议有2个方法：</p>
+<pre><code>encodeWithCoder:
+</code></pre><p>每次归档对象时，都会调用这个方法。一般在这个方法里面指定如何归档对象中的每个实例变量，可以使用encodeObject:forKey:方法归档实例变量</p>
+<pre><code>initWithCoder:
+</code></pre><p>每次从文件中恢复(解码)对象时，都会调用这个方法。一般在这个方法里面指定如何解码文件中的数据为对象的实例变量，可以使用decodeObject:forKey方法解码实例变量</p>
+
       
     </div>
     
@@ -224,18 +243,18 @@
     
 <nav id="article-nav">
   
-    <a href="/2016/04/28/hexo-study/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2016/04/29/thrift-study/" id="article-nav-newer" class="article-nav-link-wrap">
       <strong class="article-nav-caption"><</strong>
       <div class="article-nav-title">
         
-          hexo 基础
+          thrift学习
         
       </div>
     </a>
   
   
-    <a href="/2016/04/28/hexo-first/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">Hexo 学习</div>
+    <a href="/2016/04/28/今天好兴奋/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">今天好兴奋</div>
       <strong class="article-nav-caption">></strong>
     </a>
   

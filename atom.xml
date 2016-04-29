@@ -91,6 +91,34 @@ SAKMascoTransport *mascoTransport = [[SAKMascoTransport alloc] initWithTransport
   </entry>
   
   <entry>
+    <title>iOS归档之NSKeyedArchiver</title>
+    <link href="http://theewind.github.io/2016/04/29/ios%E5%BD%92%E6%A1%A3%E9%9C%80%E8%A6%81%E6%B3%A8%E6%84%8F/"/>
+    <id>http://theewind.github.io/2016/04/29/ios归档需要注意/</id>
+    <published>2016-04-29T06:01:52.000Z</published>
+    <updated>2016-04-29T06:04:42.000Z</updated>
+    
+    <content type="html">&lt;p&gt;如果对象是NSString、NSDictionary、NSArray、NSData、NSNumber等类型，可以直接用NSKeyedArchiver进行归档和恢复。&lt;/p&gt;
+&lt;p&gt;不是所有的对象都可以直接用这种方法进行归档，只有遵守了NSCoding协议的对象才可以。&lt;/p&gt;
+&lt;p&gt;NSCoding协议有2个方法：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;encodeWithCoder:
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;每次归档对象时，都会调用这个方法。一般在这个方法里面指定如何归档对象中的每个实例变量，可以使用encodeObject:forKey:方法归档实例变量&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;initWithCoder:
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;每次从文件中恢复(解码)对象时，都会调用这个方法。一般在这个方法里面指定如何解码文件中的数据为对象的实例变量，可以使用decodeObject:forKey方法解码实例变量&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;如果对象是NSString、NSDictionary、NSArray、NSData、NSNumber等类型，可以直接用NSKeyedArchiver进行归档和恢复。&lt;/p&gt;
+&lt;p&gt;不是所有的对象都可以直接用这种方法进行归档，只有遵守了NSCoding协议的对象才可以。&lt;/p
+    
+    </summary>
+    
+    
+      <category term="iOS" scheme="http://theewind.github.io/tags/iOS/"/>
+    
+  </entry>
+  
+  <entry>
     <title>今天好兴奋</title>
     <link href="http://theewind.github.io/2016/04/28/%E4%BB%8A%E5%A4%A9%E5%A5%BD%E5%85%B4%E5%A5%8B/"/>
     <id>http://theewind.github.io/2016/04/28/今天好兴奋/</id>
