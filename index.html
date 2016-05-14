@@ -109,7 +109,7 @@
 				
 				<section class="switch-part switch-part2">
 					<div class="widget tagcloud" id="js-tagcloud">
-						<a href="/tags/hexo/" style="font-size: 20px;">hexo</a> <a href="/tags/iOS/" style="font-size: 10px;">iOS</a> <a href="/tags/shell/" style="font-size: 20px;">shell</a> <a href="/tags/swift/" style="font-size: 10px;">swift</a> <a href="/tags/代码检测/" style="font-size: 10px;">代码检测</a> <a href="/tags/测试/" style="font-size: 10px;">测试</a> <a href="/tags/脚本/" style="font-size: 10px;">脚本</a> <a href="/tags/随笔/" style="font-size: 10px;">随笔</a>
+						<a href="/tags/hexo/" style="font-size: 20px;">hexo</a> <a href="/tags/iOS/" style="font-size: 20px;">iOS</a> <a href="/tags/shell/" style="font-size: 20px;">shell</a> <a href="/tags/swift/" style="font-size: 10px;">swift</a> <a href="/tags/代码检测/" style="font-size: 10px;">代码检测</a> <a href="/tags/测试/" style="font-size: 10px;">测试</a> <a href="/tags/脚本/" style="font-size: 10px;">脚本</a> <a href="/tags/随笔/" style="font-size: 10px;">随笔</a>
 					</div>
 				</section>
 				
@@ -178,6 +178,64 @@
 </nav>
 
       <div class="body-wrap">
+  
+    <article id="post-iOS横屏应用旋转无动画" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/05/14/iOS横屏应用旋转无动画/" class="article-date">
+  	<time datetime="2016-05-14T06:43:33.000Z" itemprop="datePublished">2016-05-14</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/05/14/iOS横屏应用旋转无动画/">iOS横屏应用旋转无动画</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>最近开发一个紧支持横屏的应用，发现进行180°旋转的时候没有动画，Google也没有遇到有用的信息，显示的情况跟下面连接比较像<a href="http://stackoverflow.com/questions/32848456/ios-9-orientation-auto-rotation-animation-not-working-but-always-on-main-thread/37222383#37222383" target="_blank" rel="external">无动画效果</a>. 最后在苹果的官网资料上找到了灵感：<a href="https://developer.apple.com/library/ios/technotes/tn2244/_index.html" target="_blank" rel="external">https://developer.apple.com/library/ios/technotes/tn2244/_index.html</a> 根据这个里面的内容，全部进行了操作，最后发现是LaunchScreen.stroyboard的问题，在<br><img src="http://7xthb9.com1.z0.glb.clouddn.com/launchScreen.png" alt="设置"> 中对Main Interface 和 Launch Screen File都设置成了空，将Launch Images Source 另外指定了图片，然后就解决了此问题。</p>
+<p>我的解决方案不一定完全使用所有的情况，这里仅仅是做一个记录，有需要的可以试一下。</p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS/">iOS</a></li></ul>
+	</div>
+
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
   
     <article id="post-命令行解释括号说明" class="article article-type-post" itemscope itemprop="blogPost">
   
@@ -767,66 +825,10 @@
 
 
   
-    <article id="post-hexo-first" class="article article-type-post" itemscope itemprop="blogPost">
   
-    <div class="article-meta">
-      <a href="/2016/04/28/hexo-first/" class="article-date">
-  	<time datetime="2016-04-28T02:55:40.000Z" itemprop="datePublished">2016-04-28</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/04/28/hexo-first/">Hexo 学习</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hexo/">hexo</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/测试/">测试</a></li></ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a  href="/2016/04/28/hexo-first/#more">more >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
+    <nav id="page-nav">
+      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
+    </nav>
   
 </div>
       <footer id="footer">
