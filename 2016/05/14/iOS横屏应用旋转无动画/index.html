@@ -6,17 +6,17 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <title>iOS横屏应用旋转无动画 | sanfeng’s blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="最近开发一个紧支持横屏的应用，发现进行180°旋转的时候没有动画，Google也没有遇到有用的信息，显示的情况跟下面连接比较像无动画效果. 最后在苹果的官网资料上找到了灵感：https://developer.apple.com/library/ios/technotes/tn2244/_index.html 根据这个里面的内容，全部进行了操作，最后发现是LaunchScreen.stroyboa">
+  <meta name="description" content="最近开发一个仅支持横屏的应用，发现进行180°旋转的时候没有动画，Google也没有找到有用的信息，显示的情况跟下面链接中的比较像无动画效果. 最后在苹果的官网资料上找到了灵感：https://developer.apple.com/library/ios/technotes/tn2244/_index.html自己就是根据这个里面的内容，全部进行了操作，最后发现是LaunchScreen.str">
 <meta property="og:type" content="article">
 <meta property="og:title" content="iOS横屏应用旋转无动画">
 <meta property="og:url" content="http://theewind.github.io/2016/05/14/iOS横屏应用旋转无动画/index.html">
 <meta property="og:site_name" content="sanfeng’s blog">
-<meta property="og:description" content="最近开发一个紧支持横屏的应用，发现进行180°旋转的时候没有动画，Google也没有遇到有用的信息，显示的情况跟下面连接比较像无动画效果. 最后在苹果的官网资料上找到了灵感：https://developer.apple.com/library/ios/technotes/tn2244/_index.html 根据这个里面的内容，全部进行了操作，最后发现是LaunchScreen.stroyboa">
+<meta property="og:description" content="最近开发一个仅支持横屏的应用，发现进行180°旋转的时候没有动画，Google也没有找到有用的信息，显示的情况跟下面链接中的比较像无动画效果. 最后在苹果的官网资料上找到了灵感：https://developer.apple.com/library/ios/technotes/tn2244/_index.html自己就是根据这个里面的内容，全部进行了操作，最后发现是LaunchScreen.str">
 <meta property="og:image" content="http://7xthb9.com1.z0.glb.clouddn.com/launchScreen.png">
-<meta property="og:updated_time" content="2016-05-14T06:54:18.000Z">
+<meta property="og:updated_time" content="2016-05-14T06:56:10.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="iOS横屏应用旋转无动画">
-<meta name="twitter:description" content="最近开发一个紧支持横屏的应用，发现进行180°旋转的时候没有动画，Google也没有遇到有用的信息，显示的情况跟下面连接比较像无动画效果. 最后在苹果的官网资料上找到了灵感：https://developer.apple.com/library/ios/technotes/tn2244/_index.html 根据这个里面的内容，全部进行了操作，最后发现是LaunchScreen.stroyboa">
+<meta name="twitter:description" content="最近开发一个仅支持横屏的应用，发现进行180°旋转的时候没有动画，Google也没有找到有用的信息，显示的情况跟下面链接中的比较像无动画效果. 最后在苹果的官网资料上找到了灵感：https://developer.apple.com/library/ios/technotes/tn2244/_index.html自己就是根据这个里面的内容，全部进行了操作，最后发现是LaunchScreen.str">
 <meta name="twitter:image" content="http://7xthb9.com1.z0.glb.clouddn.com/launchScreen.png">
   
   
@@ -217,7 +217,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>最近开发一个紧支持横屏的应用，发现进行180°旋转的时候没有动画，Google也没有遇到有用的信息，显示的情况跟下面连接比较像<a href="http://stackoverflow.com/questions/32848456/ios-9-orientation-auto-rotation-animation-not-working-but-always-on-main-thread/37222383#37222383" target="_blank" rel="external">无动画效果</a>. 最后在苹果的官网资料上找到了灵感：<a href="https://developer.apple.com/library/ios/technotes/tn2244/_index.html" target="_blank" rel="external">https://developer.apple.com/library/ios/technotes/tn2244/_index.html</a> 根据这个里面的内容，全部进行了操作，最后发现是LaunchScreen.stroyboard的问题，在<br><img src="http://7xthb9.com1.z0.glb.clouddn.com/launchScreen.png" alt="设置"> 中对Main Interface 和 Launch Screen File都设置成了空，将Launch Images Source 另外指定了图片，然后就解决了此问题。</p>
+        <p>最近开发一个仅支持横屏的应用，发现进行180°旋转的时候没有动画，Google也没有找到有用的信息，显示的情况跟下面链接中的比较像<a href="http://stackoverflow.com/questions/32848456/ios-9-orientation-auto-rotation-animation-not-working-but-always-on-main-thread/37222383#37222383" target="_blank" rel="external">无动画效果</a>. 最后在苹果的官网资料上找到了灵感：<a href="https://developer.apple.com/library/ios/technotes/tn2244/_index.html" target="_blank" rel="external">https://developer.apple.com/library/ios/technotes/tn2244/_index.html</a><br>自己就是根据这个里面的内容，全部进行了操作，最后发现是LaunchScreen.stroyboard的问题，在<br><img src="http://7xthb9.com1.z0.glb.clouddn.com/launchScreen.png" alt="设置"> 中对Main Interface 和 Launch Screen File都设置成了空，将Launch Images Source 另外指定了图片，然后就解决了此问题。</p>
 <p>我的解决方案不一定完全使用所有的情况，这里仅仅是做一个记录，有需要的可以试一下。</p>
 
       

@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://theewind.github.io/"/>
-  <updated>2016-05-14T06:54:18.000Z</updated>
+  <updated>2016-05-14T06:56:10.000Z</updated>
   <id>http://theewind.github.io/</id>
   
   <author>
@@ -20,15 +20,15 @@
     <link href="http://theewind.github.io/2016/05/14/iOS%E6%A8%AA%E5%B1%8F%E5%BA%94%E7%94%A8%E6%97%8B%E8%BD%AC%E6%97%A0%E5%8A%A8%E7%94%BB/"/>
     <id>http://theewind.github.io/2016/05/14/iOS横屏应用旋转无动画/</id>
     <published>2016-05-14T06:43:33.000Z</published>
-    <updated>2016-05-14T06:54:18.000Z</updated>
+    <updated>2016-05-14T06:56:10.000Z</updated>
     
-    <content type="html">&lt;p&gt;最近开发一个紧支持横屏的应用，发现进行180°旋转的时候没有动画，Google也没有遇到有用的信息，显示的情况跟下面连接比较像&lt;a href=&quot;http://stackoverflow.com/questions/32848456/ios-9-orientation-auto-rotation-animation-not-working-but-always-on-main-thread/37222383#37222383&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;无动画效果&lt;/a&gt;. 最后在苹果的官网资料上找到了灵感：&lt;a href=&quot;https://developer.apple.com/library/ios/technotes/tn2244/_index.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://developer.apple.com/library/ios/technotes/tn2244/_index.html&lt;/a&gt; 根据这个里面的内容，全部进行了操作，最后发现是LaunchScreen.stroyboard的问题，在&lt;br&gt;&lt;img src=&quot;http://7xthb9.com1.z0.glb.clouddn.com/launchScreen.png&quot; alt=&quot;设置&quot;&gt; 中对Main Interface 和 Launch Screen File都设置成了空，将Launch Images Source 另外指定了图片，然后就解决了此问题。&lt;/p&gt;
+    <content type="html">&lt;p&gt;最近开发一个仅支持横屏的应用，发现进行180°旋转的时候没有动画，Google也没有找到有用的信息，显示的情况跟下面链接中的比较像&lt;a href=&quot;http://stackoverflow.com/questions/32848456/ios-9-orientation-auto-rotation-animation-not-working-but-always-on-main-thread/37222383#37222383&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;无动画效果&lt;/a&gt;. 最后在苹果的官网资料上找到了灵感：&lt;a href=&quot;https://developer.apple.com/library/ios/technotes/tn2244/_index.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://developer.apple.com/library/ios/technotes/tn2244/_index.html&lt;/a&gt;&lt;br&gt;自己就是根据这个里面的内容，全部进行了操作，最后发现是LaunchScreen.stroyboard的问题，在&lt;br&gt;&lt;img src=&quot;http://7xthb9.com1.z0.glb.clouddn.com/launchScreen.png&quot; alt=&quot;设置&quot;&gt; 中对Main Interface 和 Launch Screen File都设置成了空，将Launch Images Source 另外指定了图片，然后就解决了此问题。&lt;/p&gt;
 &lt;p&gt;我的解决方案不一定完全使用所有的情况，这里仅仅是做一个记录，有需要的可以试一下。&lt;/p&gt;
 </content>
     
     <summary type="html">
     
-      &lt;p&gt;最近开发一个紧支持横屏的应用，发现进行180°旋转的时候没有动画，Google也没有遇到有用的信息，显示的情况跟下面连接比较像&lt;a href=&quot;http://stackoverflow.com/questions/32848456/ios-9-orientation-aut
+      &lt;p&gt;最近开发一个仅支持横屏的应用，发现进行180°旋转的时候没有动画，Google也没有找到有用的信息，显示的情况跟下面链接中的比较像&lt;a href=&quot;http://stackoverflow.com/questions/32848456/ios-9-orientation-a
     
     </summary>
     
