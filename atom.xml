@@ -375,24 +375,33 @@ SAKMascoTransport *mascoTransport = [[SAKMascoTransport alloc] initWithTransport
   </entry>
   
   <entry>
-    <title>今天好兴奋</title>
+    <title>JS == 与 ===的区别</title>
     <link href="http://theewind.github.io/2016/04/28/%E4%BB%8A%E5%A4%A9%E5%A5%BD%E5%85%B4%E5%A5%8B/"/>
     <id>http://theewind.github.io/2016/04/28/今天好兴奋/</id>
     <published>2016-04-28T09:58:08.000Z</published>
-    <updated>2016-04-28T09:58:45.000Z</updated>
+    <updated>2016-05-26T07:26:39.000Z</updated>
     
-    <content type="html">&lt;p&gt;###github + hexo &lt;/p&gt;
+    <content type="html">&lt;h4 id=&quot;1、对于string-number等基础类型，-和-是有区别的&quot;&gt;&lt;a href=&quot;#1、对于string-number等基础类型，-和-是有区别的&quot; class=&quot;headerlink&quot; title=&quot;1、对于string,number等基础类型，==和===是有区别的&quot;&gt;&lt;/a&gt;1、对于string,number等基础类型，==和===是有区别的&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;1）不同类型间比较，==之比较“转化成同一类型后的值”看“值”是否相等，===如果类型不同，其结果就是不等&lt;/li&gt;
+&lt;li&gt;2）同类型比较，直接进行“值”比较，两者结果一样&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&quot;2、对于Array-Object等高级类型，-和-是没有区别的&quot;&gt;&lt;a href=&quot;#2、对于Array-Object等高级类型，-和-是没有区别的&quot; class=&quot;headerlink&quot; title=&quot;2、对于Array,Object等高级类型，==和===是没有区别的&quot;&gt;&lt;/a&gt;2、对于Array,Object等高级类型，==和===是没有区别的&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;进行“指针地址”比较&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&quot;3、基础类型与高级类型，-和-是有区别的&quot;&gt;&lt;a href=&quot;#3、基础类型与高级类型，-和-是有区别的&quot; class=&quot;headerlink&quot; title=&quot;3、基础类型与高级类型，==和===是有区别的&quot;&gt;&lt;/a&gt;3、基础类型与高级类型，==和===是有区别的&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;1）对于==，将高级转化为基础类型，进行“值”比较&lt;/li&gt;
+&lt;li&gt;2）因为类型不同，===结果为false&lt;/li&gt;
+&lt;/ul&gt;
 </content>
     
     <summary type="html">
     
-      &lt;p&gt;###github + hexo &lt;/p&gt;
-
+      &lt;h4 id=&quot;1、对于string-number等基础类型，-和-是有区别的&quot;&gt;&lt;a href=&quot;#1、对于string-number等基础类型，-和-是有区别的&quot; class=&quot;headerlink&quot; title=&quot;1、对于string,number等基础类型，==和===是
     
     </summary>
     
     
-      <category term="随笔" scheme="http://theewind.github.io/tags/%E9%9A%8F%E7%AC%94/"/>
+      <category term="JavaScript" scheme="http://theewind.github.io/tags/JavaScript/"/>
     
   </entry>
   

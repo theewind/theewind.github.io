@@ -109,7 +109,7 @@
 				
 				<section class="switch-part switch-part2">
 					<div class="widget tagcloud" id="js-tagcloud">
-						<a href="/tags/React-Native/" style="font-size: 10px;">React Native</a> <a href="/tags/hexo/" style="font-size: 15px;">hexo</a> <a href="/tags/iOS/" style="font-size: 20px;">iOS</a> <a href="/tags/shell/" style="font-size: 15px;">shell</a> <a href="/tags/swift/" style="font-size: 10px;">swift</a> <a href="/tags/代码检测/" style="font-size: 10px;">代码检测</a> <a href="/tags/测试/" style="font-size: 10px;">测试</a> <a href="/tags/缓存/" style="font-size: 10px;">缓存</a> <a href="/tags/脚本/" style="font-size: 10px;">脚本</a> <a href="/tags/随笔/" style="font-size: 10px;">随笔</a>
+						<a href="/tags/JavaScript/" style="font-size: 10px;">JavaScript</a> <a href="/tags/React-Native/" style="font-size: 10px;">React Native</a> <a href="/tags/hexo/" style="font-size: 15px;">hexo</a> <a href="/tags/iOS/" style="font-size: 20px;">iOS</a> <a href="/tags/shell/" style="font-size: 15px;">shell</a> <a href="/tags/swift/" style="font-size: 10px;">swift</a> <a href="/tags/代码检测/" style="font-size: 10px;">代码检测</a> <a href="/tags/测试/" style="font-size: 10px;">测试</a> <a href="/tags/缓存/" style="font-size: 10px;">缓存</a> <a href="/tags/脚本/" style="font-size: 10px;">脚本</a>
 					</div>
 				</section>
 				
@@ -779,7 +779,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2016/04/28/今天好兴奋/">今天好兴奋</a>
+      <a class="article-title" href="/2016/04/28/今天好兴奋/">JS == 与 ===的区别</a>
     </h1>
   
 
@@ -788,7 +788,17 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>###github + hexo </p>
+        <h4 id="1、对于string-number等基础类型，-和-是有区别的"><a href="#1、对于string-number等基础类型，-和-是有区别的" class="headerlink" title="1、对于string,number等基础类型，==和===是有区别的"></a>1、对于string,number等基础类型，==和===是有区别的</h4><ul>
+<li>1）不同类型间比较，==之比较“转化成同一类型后的值”看“值”是否相等，===如果类型不同，其结果就是不等</li>
+<li>2）同类型比较，直接进行“值”比较，两者结果一样</li>
+</ul>
+<h4 id="2、对于Array-Object等高级类型，-和-是没有区别的"><a href="#2、对于Array-Object等高级类型，-和-是没有区别的" class="headerlink" title="2、对于Array,Object等高级类型，==和===是没有区别的"></a>2、对于Array,Object等高级类型，==和===是没有区别的</h4><ul>
+<li>进行“指针地址”比较</li>
+</ul>
+<h4 id="3、基础类型与高级类型，-和-是有区别的"><a href="#3、基础类型与高级类型，-和-是有区别的" class="headerlink" title="3、基础类型与高级类型，==和===是有区别的"></a>3、基础类型与高级类型，==和===是有区别的</h4><ul>
+<li>1）对于==，将高级转化为基础类型，进行“值”比较</li>
+<li>2）因为类型不同，===结果为false</li>
+</ul>
 
       
     </div>
@@ -797,7 +807,7 @@
       
       
 	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/随笔/">随笔</a></li></ul>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/">JavaScript</a></li></ul>
 	</div>
 
       
