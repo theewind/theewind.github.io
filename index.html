@@ -109,7 +109,7 @@
 				
 				<section class="switch-part switch-part2">
 					<div class="widget tagcloud" id="js-tagcloud">
-						<a href="/tags/hexo/" style="font-size: 15px;">hexo</a> <a href="/tags/iOS/" style="font-size: 20px;">iOS</a> <a href="/tags/shell/" style="font-size: 15px;">shell</a> <a href="/tags/swift/" style="font-size: 10px;">swift</a> <a href="/tags/代码检测/" style="font-size: 10px;">代码检测</a> <a href="/tags/测试/" style="font-size: 10px;">测试</a> <a href="/tags/缓存/" style="font-size: 10px;">缓存</a> <a href="/tags/脚本/" style="font-size: 10px;">脚本</a> <a href="/tags/随笔/" style="font-size: 10px;">随笔</a>
+						<a href="/tags/React-Native/" style="font-size: 10px;">React Native</a> <a href="/tags/hexo/" style="font-size: 15px;">hexo</a> <a href="/tags/iOS/" style="font-size: 20px;">iOS</a> <a href="/tags/shell/" style="font-size: 15px;">shell</a> <a href="/tags/swift/" style="font-size: 10px;">swift</a> <a href="/tags/代码检测/" style="font-size: 10px;">代码检测</a> <a href="/tags/测试/" style="font-size: 10px;">测试</a> <a href="/tags/缓存/" style="font-size: 10px;">缓存</a> <a href="/tags/脚本/" style="font-size: 10px;">脚本</a> <a href="/tags/随笔/" style="font-size: 10px;">随笔</a>
 					</div>
 				</section>
 				
@@ -192,10 +192,21 @@
       <input type="hidden" class="isFancy" />
     
     
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/05/26/ReactNative 学习笔记/">React Native学习笔记</a>
+    </h1>
+  
+
+      </header>
+      
+    
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="React-Native学习笔记"><a href="#React-Native学习笔记" class="headerlink" title="React Native学习笔记"></a>React Native学习笔记</h1><p>在学习react Native的过程中，对一些知识的记录，不定期更新。。。</p>
-<p>####1. React 里直接修改 this.state 和调用 setState() 修改 state 的值有什么区别？<br><a href="https://segmentfault.com/q/1010000002958584">https://segmentfault.com/q/1010000002958584</a></p>
+        <p>在学习react Native的过程中，对一些知识的记录，不定期更新。。。</p>
+<h2 id="1-React-里直接修改-this-state-和调用-setState-修改-state-的值有什么区别？"><a href="#1-React-里直接修改-this-state-和调用-setState-修改-state-的值有什么区别？" class="headerlink" title="1. React 里直接修改 this.state 和调用 setState() 修改 state 的值有什么区别？"></a>1. React 里直接修改 this.state 和调用 setState() 修改 state 的值有什么区别？</h2><p><a href="https://segmentfault.com/q/1010000002958584">https://segmentfault.com/q/1010000002958584</a></p>
 <p>使用对this.state赋值并没有什么作用，官方提醒，应该把this.state当成不可变变量。<br>而使用this.setState方法，会触发异步修改状态，状态改变的同时，会重新执行一次willUpdate，render等流程。需要注意的是，避免在执行完this.setState后马上读取this.state，此操作并不会获得最新修改的状态。</p>
       
     </div>
@@ -203,6 +214,10 @@
     <div class="article-info article-info-index">
       
       
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/React-Native/">React Native</a></li></ul>
+	</div>
+
       
 
       
