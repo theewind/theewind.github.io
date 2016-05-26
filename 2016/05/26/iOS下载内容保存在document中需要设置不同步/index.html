@@ -4,20 +4,21 @@
   <meta charset="utf-8">
   
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
-  <title>iOS横屏应用旋转无动画 | sanfeng’s blog</title>
+  <title>iOS下载内容保存在document中需要设置不同步 | sanfeng’s blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="最近开发一个仅支持横屏的应用，发现进行180°旋转的时候没有动画，Google也没有找到有用的信息，显示的情况跟下面链接中的比较像无动画效果. 最后在苹果的官网资料上找到了灵感：https://developer.apple.com/library/ios/technotes/tn2244/_index.html自己就是根据这个里面的内容，全部进行了操作，最后发现是LaunchScreen.str">
+  <meta name="description" content="之前因为在document，保存了下载数据，导致app审核不通过。这个苹果是严格要求，网络下载的数据一般是不能保存在document目录中，建议是保存在cache中，如果真的需要保存在document中，就需要对保存的内容设置不同步标识。具体代码如下：
+12345678910111213- (BOOL)addSkipBackupAttributeToItemAtURL:(NSURL *)URL&amp;#">
 <meta property="og:type" content="article">
-<meta property="og:title" content="iOS横屏应用旋转无动画">
-<meta property="og:url" content="http://theewind.github.io/2016/05/14/iOS横屏应用旋转无动画/index.html">
+<meta property="og:title" content="iOS下载内容保存在document中需要设置不同步">
+<meta property="og:url" content="http://theewind.github.io/2016/05/26/iOS下载内容保存在document中需要设置不同步/index.html">
 <meta property="og:site_name" content="sanfeng’s blog">
-<meta property="og:description" content="最近开发一个仅支持横屏的应用，发现进行180°旋转的时候没有动画，Google也没有找到有用的信息，显示的情况跟下面链接中的比较像无动画效果. 最后在苹果的官网资料上找到了灵感：https://developer.apple.com/library/ios/technotes/tn2244/_index.html自己就是根据这个里面的内容，全部进行了操作，最后发现是LaunchScreen.str">
-<meta property="og:image" content="http://7xthb9.com1.z0.glb.clouddn.com/launchScreen.png">
-<meta property="og:updated_time" content="2016-05-14T06:56:10.000Z">
+<meta property="og:description" content="之前因为在document，保存了下载数据，导致app审核不通过。这个苹果是严格要求，网络下载的数据一般是不能保存在document目录中，建议是保存在cache中，如果真的需要保存在document中，就需要对保存的内容设置不同步标识。具体代码如下：
+12345678910111213- (BOOL)addSkipBackupAttributeToItemAtURL:(NSURL *)URL&amp;#">
+<meta property="og:updated_time" content="2016-05-26T03:29:34.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="iOS横屏应用旋转无动画">
-<meta name="twitter:description" content="最近开发一个仅支持横屏的应用，发现进行180°旋转的时候没有动画，Google也没有找到有用的信息，显示的情况跟下面链接中的比较像无动画效果. 最后在苹果的官网资料上找到了灵感：https://developer.apple.com/library/ios/technotes/tn2244/_index.html自己就是根据这个里面的内容，全部进行了操作，最后发现是LaunchScreen.str">
-<meta name="twitter:image" content="http://7xthb9.com1.z0.glb.clouddn.com/launchScreen.png">
+<meta name="twitter:title" content="iOS下载内容保存在document中需要设置不同步">
+<meta name="twitter:description" content="之前因为在document，保存了下载数据，导致app审核不通过。这个苹果是严格要求，网络下载的数据一般是不能保存在document目录中，建议是保存在cache中，如果真的需要保存在document中，就需要对保存的内容设置不同步标识。具体代码如下：
+12345678910111213- (BOOL)addSkipBackupAttributeToItemAtURL:(NSURL *)URL&amp;#">
   
   
     <link rel="icon" href="/favicon.png">
@@ -180,11 +181,11 @@
 	</div>
 </nav>
 
-      <div class="body-wrap"><article id="post-iOS横屏应用旋转无动画" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-iOS下载内容保存在document中需要设置不同步" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2016/05/14/iOS横屏应用旋转无动画/" class="article-date">
-  	<time datetime="2016-05-14T06:43:33.000Z" itemprop="datePublished">2016-05-14</time>
+      <a href="/2016/05/26/iOS下载内容保存在document中需要设置不同步/" class="article-date">
+  	<time datetime="2016-05-26T03:26:03.000Z" itemprop="datePublished">2016-05-26</time>
 </a>
     </div>
   
@@ -197,7 +198,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      iOS横屏应用旋转无动画
+      iOS下载内容保存在document中需要设置不同步
     </h1>
   
 
@@ -206,7 +207,7 @@
       <div class="article-info article-info-post">
         
 	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS/">iOS</a></li></ul>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS/">iOS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/缓存/">缓存</a></li></ul>
 	</div>
 
         
@@ -217,8 +218,8 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>最近开发一个仅支持横屏的应用，发现进行180°旋转的时候没有动画，Google也没有找到有用的信息，显示的情况跟下面链接中的比较像<a href="http://stackoverflow.com/questions/32848456/ios-9-orientation-auto-rotation-animation-not-working-but-always-on-main-thread/37222383#37222383" target="_blank" rel="external">无动画效果</a>. 最后在苹果的官网资料上找到了灵感：<a href="https://developer.apple.com/library/ios/technotes/tn2244/_index.html" target="_blank" rel="external">https://developer.apple.com/library/ios/technotes/tn2244/_index.html</a><br>自己就是根据这个里面的内容，全部进行了操作，最后发现是LaunchScreen.stroyboard的问题，在<br><img src="http://7xthb9.com1.z0.glb.clouddn.com/launchScreen.png" alt="设置"> 中对Main Interface 和 Launch Screen File都设置成了空，将Launch Images Source 另外指定了图片，然后就解决了此问题。</p>
-<p>我的解决方案不一定完全使用所有的情况，这里仅仅是做一个记录，有需要的可以试一下。</p>
+        <p>之前因为在document，保存了下载数据，导致app审核不通过。这个苹果是严格要求，网络下载的数据一般是不能保存在document目录中，建议是保存在cache中，如果真的需要保存在document中，就需要对保存的内容设置不同步标识。具体代码如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">- (BOOL)addSkipBackupAttributeToItemAtURL:(NSURL *)URL</span><br><span class="line">&#123;</span><br><span class="line">    if (![[NSFileManager defaultManager] fileExistsAtPath:[URL path]])</span><br><span class="line">    &#123;</span><br><span class="line">        return NO;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    BOOL success = NO;</span><br><span class="line">    NSError *error = nil;</span><br><span class="line">    success = [URL setResourceValue:[NSNumber numberWithBool: YES]</span><br><span class="line">                             forKey:NSURLIsExcludedFromBackupKey error: &amp;error];</span><br><span class="line">    return success;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -228,18 +229,9 @@
     
 <nav id="article-nav">
   
-    <a href="/2016/05/26/iOS下载内容保存在document中需要设置不同步/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption"><</strong>
-      <div class="article-nav-title">
-        
-          iOS下载内容保存在document中需要设置不同步
-        
-      </div>
-    </a>
   
-  
-    <a href="/2016/05/03/命令行解释括号说明/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">命令行解释括号说明</div>
+    <a href="/2016/05/14/iOS横屏应用旋转无动画/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">iOS横屏应用旋转无动画</div>
       <strong class="article-nav-caption">></strong>
     </a>
   

@@ -4,20 +4,17 @@
   <meta charset="utf-8">
   
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
-  <title>iOS横屏应用旋转无动画 | sanfeng’s blog</title>
+  <title>Tag: 缓存 | sanfeng’s blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="最近开发一个仅支持横屏的应用，发现进行180°旋转的时候没有动画，Google也没有找到有用的信息，显示的情况跟下面链接中的比较像无动画效果. 最后在苹果的官网资料上找到了灵感：https://developer.apple.com/library/ios/technotes/tn2244/_index.html自己就是根据这个里面的内容，全部进行了操作，最后发现是LaunchScreen.str">
-<meta property="og:type" content="article">
-<meta property="og:title" content="iOS横屏应用旋转无动画">
-<meta property="og:url" content="http://theewind.github.io/2016/05/14/iOS横屏应用旋转无动画/index.html">
+  <meta name="description" content="这是我的三风的博客">
+<meta property="og:type" content="website">
+<meta property="og:title" content="sanfeng’s blog">
+<meta property="og:url" content="http://theewind.github.io/tags/缓存/index.html">
 <meta property="og:site_name" content="sanfeng’s blog">
-<meta property="og:description" content="最近开发一个仅支持横屏的应用，发现进行180°旋转的时候没有动画，Google也没有找到有用的信息，显示的情况跟下面链接中的比较像无动画效果. 最后在苹果的官网资料上找到了灵感：https://developer.apple.com/library/ios/technotes/tn2244/_index.html自己就是根据这个里面的内容，全部进行了操作，最后发现是LaunchScreen.str">
-<meta property="og:image" content="http://7xthb9.com1.z0.glb.clouddn.com/launchScreen.png">
-<meta property="og:updated_time" content="2016-05-14T06:56:10.000Z">
+<meta property="og:description" content="这是我的三风的博客">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="iOS横屏应用旋转无动画">
-<meta name="twitter:description" content="最近开发一个仅支持横屏的应用，发现进行180°旋转的时候没有动画，Google也没有找到有用的信息，显示的情况跟下面链接中的比较像无动画效果. 最后在苹果的官网资料上找到了灵感：https://developer.apple.com/library/ios/technotes/tn2244/_index.html自己就是根据这个里面的内容，全部进行了操作，最后发现是LaunchScreen.str">
-<meta name="twitter:image" content="http://7xthb9.com1.z0.glb.clouddn.com/launchScreen.png">
+<meta name="twitter:title" content="sanfeng’s blog">
+<meta name="twitter:description" content="这是我的三风的博客">
   
   
     <link rel="icon" href="/favicon.png">
@@ -180,99 +177,53 @@
 	</div>
 </nav>
 
-      <div class="body-wrap"><article id="post-iOS横屏应用旋转无动画" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap">
   
-    <div class="article-meta">
-      <a href="/2016/05/14/iOS横屏应用旋转无动画/" class="article-date">
-  	<time datetime="2016-05-14T06:43:33.000Z" itemprop="datePublished">2016-05-14</time>
+  
+    
+    
+      
+      
+      <section class="archives-wrap">
+        <div class="archive-year-wrap">
+          <a href="/archives/2016" class="archive-year">2016</a>
+        </div>
+        <div class="archives">
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      	<div class="article-meta">
+	      	<a href="/2016/05/26/iOS下载内容保存在document中需要设置不同步/" class="archive-article-date">
+  	<time datetime="2016-05-26T03:26:03.000Z" itemprop="datePublished">May 26</time>
 </a>
-    </div>
+        </div>
+    	 
   
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 class="article-title" itemprop="name">
-      iOS横屏应用旋转无动画
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/2016/05/26/iOS下载内容保存在document中需要设置不同步/">iOS下载内容保存在document中需要设置不同步</a>
     </h1>
   
 
-      </header>
-      
-      <div class="article-info article-info-post">
-        
+        <div class="article-info info-on-right">
+          
 	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS/">iOS</a></li></ul>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS/">iOS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/缓存/">缓存</a></li></ul>
 	</div>
 
-        
+          
 
+        </div>
         <div class="clearfix"></div>
-      </div>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>最近开发一个仅支持横屏的应用，发现进行180°旋转的时候没有动画，Google也没有找到有用的信息，显示的情况跟下面链接中的比较像<a href="http://stackoverflow.com/questions/32848456/ios-9-orientation-auto-rotation-animation-not-working-but-always-on-main-thread/37222383#37222383" target="_blank" rel="external">无动画效果</a>. 最后在苹果的官网资料上找到了灵感：<a href="https://developer.apple.com/library/ios/technotes/tn2244/_index.html" target="_blank" rel="external">https://developer.apple.com/library/ios/technotes/tn2244/_index.html</a><br>自己就是根据这个里面的内容，全部进行了操作，最后发现是LaunchScreen.stroyboard的问题，在<br><img src="http://7xthb9.com1.z0.glb.clouddn.com/launchScreen.png" alt="设置"> 中对Main Interface 和 Launch Screen File都设置成了空，将Launch Images Source 另外指定了图片，然后就解决了此问题。</p>
-<p>我的解决方案不一定完全使用所有的情况，这里仅仅是做一个记录，有需要的可以试一下。</p>
-
-      
-    </div>
-    
+    </header>
   </div>
-  
-    
-<nav id="article-nav">
-  
-    <a href="/2016/05/26/iOS下载内容保存在document中需要设置不同步/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption"><</strong>
-      <div class="article-nav-title">
-        
-          iOS下载内容保存在document中需要设置不同步
-        
-      </div>
-    </a>
-  
-  
-    <a href="/2016/05/03/命令行解释括号说明/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">命令行解释括号说明</div>
-      <strong class="article-nav-caption">></strong>
-    </a>
-  
-</nav>
-
-  
 </article>
+  
+  
+    </div></section>
+  
 
-
-<div class="share_jia">
-	<!-- JiaThis Button BEGIN -->
-	<div class="jiathis_style">
-		<span class="jiathis_txt">分享到: &nbsp; </span>
-		<a class="jiathis_button_facebook"></a> 
-    <a class="jiathis_button_twitter"></a>
-    <a class="jiathis_button_plus"></a> 
-    <a class="jiathis_button_tsina"></a>
-		<a class="jiathis_button_cqq"></a>
-		<a class="jiathis_button_douban"></a>
-		<a class="jiathis_button_weixin"></a>
-		<a class="jiathis_button_tumblr"></a>
-    <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
-	</div>
-	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
-	<!-- JiaThis Button END -->
-</div>
-
-
-
-
-
-
-
+    
 
 </div>
       <footer id="footer">
@@ -298,9 +249,9 @@
 		mathjax: true,
 		animate: true,
 		isHome: false,
-		isPost: true,
+		isPost: false,
 		isArchive: false,
-		isTag: false,
+		isTag: true,
 		isCategory: false,
 		open_in_new: true
 	}
