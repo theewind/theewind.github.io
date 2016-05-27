@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://theewind.github.io/"/>
-  <updated>2016-05-26T07:10:02.000Z</updated>
+  <updated>2016-05-27T15:13:02.000Z</updated>
   <id>http://theewind.github.io/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="http://theewind.github.io/2016/05/26/ReactNative%20%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
     <id>http://theewind.github.io/2016/05/26/ReactNative 学习笔记/</id>
     <published>2016-05-26T06:36:44.000Z</published>
-    <updated>2016-05-26T07:10:02.000Z</updated>
+    <updated>2016-05-27T15:13:02.000Z</updated>
     
     <content type="html">&lt;p&gt;在学习react Native的过程中，对一些知识的记录，不定期更新。。。&lt;/p&gt;
 &lt;h2 id=&quot;1-React-里直接修改-this-state-和调用-setState-修改-state-的值有什么区别？&quot;&gt;&lt;a href=&quot;#1-React-里直接修改-this-state-和调用-setState-修改-state-的值有什么区别？&quot; class=&quot;headerlink&quot; title=&quot;1. React 里直接修改 this.state 和调用 setState() 修改 state 的值有什么区别？&quot;&gt;&lt;/a&gt;1. React 里直接修改 this.state 和调用 setState() 修改 state 的值有什么区别？&lt;/h2&gt;&lt;p&gt;&lt;a href=&quot;https://segmentfault.com/q/1010000002958584&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://segmentfault.com/q/1010000002958584&lt;/a&gt;&lt;/p&gt;
@@ -46,6 +46,15 @@
 &lt;blockquote&gt;
 &lt;p&gt;&lt;a href=&quot;http://stackoverflow.com/questions/29351259/how-to-add-delete-item-into-listview&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;How to add/Delete item into ListView?&lt;/a&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
+&lt;h2 id=&quot;4-onLayout方法&quot;&gt;&lt;a href=&quot;#4-onLayout方法&quot; class=&quot;headerlink&quot; title=&quot;4. onLayout方法&quot;&gt;&lt;/a&gt;4. onLayout方法&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;onLayout&lt;/strong&gt; &lt;em&gt;function&lt;/em&gt; &lt;/p&gt;
+&lt;p&gt;当组件挂载或者布局变化的时候调用，参数为：&lt;/p&gt;
+&lt;p&gt;{nativeEvent: { layout: {x, y, width, height}}}&lt;/p&gt;
+&lt;p&gt;这个事件会在布局计算完成后立即调用一次，不过收到此事件时新的布局可能还没有在屏幕上呈现，尤其是一个布局动画正在进行中的时候。    &lt;/p&gt;
+&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;onLayout=&amp;#123;(event) =&amp;gt; &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;          var layout = event.nativeEvent.layout;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;          this.setState(&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;              listHeight : layout.height&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;          &amp;#125;);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      &amp;#125;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;对于ListView来说，滑动的过程中不会重新调用onLayout，所以这里的listHeight始终不变，不能用来监控滑动。&lt;/p&gt;
+&lt;h2 id=&quot;5-this-setState&quot;&gt;&lt;a href=&quot;#5-this-setState&quot; class=&quot;headerlink&quot; title=&quot;5. this.setState&quot;&gt;&lt;/a&gt;5. this.setState&lt;/h2&gt;&lt;p&gt;this.setState设置一个参数形式如下：&lt;/p&gt;
+&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&amp;lt;CategoryMenu&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;                    key=&amp;#123;&amp;apos;category_menu&amp;apos;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;                    categories=&amp;#123;this.state.newsCategories&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;                    fetchNewsList=&amp;#123;(category) =&amp;gt; &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;                        this.setState(&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;                            currentCategory: category,&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;                            isRefreshing: true,&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;                        &amp;#125;,  function() &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;                            this._fetchNewsList();&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;                        &amp;#125;);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;                    &amp;#125;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;                /&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;在CategoryMenu中传入key（默认的props属性），categories获取的分类，已经方法fetchNewsList，而fetchNewList方法主要是更新自身的state，并发送请求，更新state属性，并调用某个方法。因为上述要点1中说过，setState并不会立即生效，调用this.state可能还是就的数据，既可以通过这种方式立即出发自己的某些操作。比如此处的_fetchNewsList，如果currentCategory没有生效，可以把catetory当做参数传递过去。&lt;/p&gt;
 </content>
     
     <summary type="html">
