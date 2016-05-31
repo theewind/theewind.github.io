@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://theewind.github.io/"/>
-  <updated>2016-05-30T06:20:24.000Z</updated>
+  <updated>2016-05-31T07:43:08.000Z</updated>
   <id>http://theewind.github.io/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="http://theewind.github.io/2016/05/26/ReactNative%20%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
     <id>http://theewind.github.io/2016/05/26/ReactNative 学习笔记/</id>
     <published>2016-05-26T06:36:44.000Z</published>
-    <updated>2016-05-30T06:20:24.000Z</updated>
+    <updated>2016-05-31T07:43:08.000Z</updated>
     
     <content type="html">&lt;p&gt;在学习react Native的过程中，对一些知识的记录，不定期更新。。。&lt;/p&gt;
 &lt;h2 id=&quot;1-React-里直接修改-this-state-和调用-setState-修改-state-的值有什么区别？&quot;&gt;&lt;a href=&quot;#1-React-里直接修改-this-state-和调用-setState-修改-state-的值有什么区别？&quot; class=&quot;headerlink&quot; title=&quot;1. React 里直接修改 this.state 和调用 setState() 修改 state 的值有什么区别？&quot;&gt;&lt;/a&gt;1. React 里直接修改 this.state 和调用 setState() 修改 state 的值有什么区别？&lt;/h2&gt;&lt;p&gt;&lt;a href=&quot;https://segmentfault.com/q/1010000002958584&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://segmentfault.com/q/1010000002958584&lt;/a&gt;&lt;/p&gt;
@@ -87,7 +87,12 @@ import IconFA from &amp;apos;react-native-vector-icons/FontAwesome&amp;apos;;
   render方法里面调用：
   {elem.isFA? &amp;lt;IconFA size={elem.size} name={elem.icon} style={[styles.boxIcon,{color:elem.color}]}&amp;gt;&amp;lt;/IconFA&amp;gt;:
           &amp;lt;Icon size={elem.size} name={elem.icon} style={[styles.boxIcon,{color:elem.color}]}&amp;gt;&amp;lt;/Icon&amp;gt;}
-&lt;/code&gt;&lt;/pre&gt;</content>
+&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&quot;8-如何从listView中获取scrollView的属性&quot;&gt;&lt;a href=&quot;#8-如何从listView中获取scrollView的属性&quot; class=&quot;headerlink&quot; title=&quot;8. 如何从listView中获取scrollView的属性&quot;&gt;&lt;/a&gt;8. 如何从listView中获取scrollView的属性&lt;/h2&gt;&lt;p&gt;需要定义ref&lt;/p&gt;
+&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&amp;lt;ListView&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        ref=&amp;quot;listView&amp;quot;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        dataSource=&amp;#123;this.state.dataSource&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        renderRow=&amp;#123;this._renderRow&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        /&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      &amp;lt;/View&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;然后&lt;/p&gt;
+&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;      var scrollProperties = this.refs.listView.scrollProperties;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      console.log(scrollProperties);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      console.log(scrollProperties.offset);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      手动滚动到某处&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;componentDidUpdate() &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    let scrollResponder = this.refs.listView.getScrollResponder();&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    scrollResponder.scrollResponderScrollTo(&amp;#123;x: 0, y:this.pscroll(), animated: true&amp;#125;);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;通过scrollProperties，然后就可以获取offset了。&lt;/p&gt;
+</content>
     
     <summary type="html">
     

@@ -16,7 +16,7 @@
 <meta property="og:description" content="在学习react Native的过程中，对一些知识的记录，不定期更新。。。
 1. React 里直接修改 this.state 和调用 setState() 修改 state 的值有什么区别？https://segmentfault.com/q/1010000002958584
 使用对this.state赋值并没有什么作用，官方提醒，应该把this.state当成不可变变量。而使用this.set">
-<meta property="og:updated_time" content="2016-05-30T06:20:24.000Z">
+<meta property="og:updated_time" content="2016-05-31T07:43:08.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="React Native学习笔记">
 <meta name="twitter:description" content="在学习react Native的过程中，对一些知识的记录，不定期更新。。。
@@ -286,7 +286,12 @@ import IconFA from &apos;react-native-vector-icons/FontAwesome&apos;;
   render方法里面调用：
   {elem.isFA? &lt;IconFA size={elem.size} name={elem.icon} style={[styles.boxIcon,{color:elem.color}]}&gt;&lt;/IconFA&gt;:
           &lt;Icon size={elem.size} name={elem.icon} style={[styles.boxIcon,{color:elem.color}]}&gt;&lt;/Icon&gt;}
-</code></pre>
+</code></pre><h2 id="8-如何从listView中获取scrollView的属性"><a href="#8-如何从listView中获取scrollView的属性" class="headerlink" title="8. 如何从listView中获取scrollView的属性"></a>8. 如何从listView中获取scrollView的属性</h2><p>需要定义ref</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;ListView</span><br><span class="line">        ref=&quot;listView&quot;</span><br><span class="line">        dataSource=&#123;this.state.dataSource&#125;</span><br><span class="line">        renderRow=&#123;this._renderRow&#125;</span><br><span class="line">        /&gt;</span><br><span class="line">      &lt;/View&gt;</span><br></pre></td></tr></table></figure>
+<p>然后</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">      var scrollProperties = this.refs.listView.scrollProperties;</span><br><span class="line">      console.log(scrollProperties);</span><br><span class="line">      console.log(scrollProperties.offset);</span><br><span class="line">      </span><br><span class="line">      手动滚动到某处</span><br><span class="line">componentDidUpdate() &#123;</span><br><span class="line">    let scrollResponder = this.refs.listView.getScrollResponder();</span><br><span class="line">    scrollResponder.scrollResponderScrollTo(&#123;x: 0, y:this.pscroll(), animated: true&#125;);</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+<p>通过scrollProperties，然后就可以获取offset了。</p>
+
       
     </div>
     
