@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+  <title>rac_willDeallocSignal的加载时机 | sanfeng’s blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="今天看了下RAC的rac_willDeallocSignal的方法实现。我最初的猜测是NSObject (RACDeallocating)添加load方法，然后在里面进行method swzziling，添加dealloc方法，但是发现源码不是这样的。他只是通过常用的category 添加 associated 来进行的。先看他的简单实现：">
+<meta property="og:type" content="article">
+<meta property="og:title" content="rac_willDeallocSignal的加载时机">
+<meta property="og:url" content="http://theewind.github.io/2016/06/06/rac-willDeallocSignal/index.html">
+<meta property="og:site_name" content="sanfeng’s blog">
+<meta property="og:description" content="今天看了下RAC的rac_willDeallocSignal的方法实现。我最初的猜测是NSObject (RACDeallocating)添加load方法，然后在里面进行method swzziling，添加dealloc方法，但是发现源码不是这样的。他只是通过常用的category 添加 associated 来进行的。先看他的简单实现：">
+<meta property="og:updated_time" content="2016-06-06T07:20:08.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="rac_willDeallocSignal的加载时机">
+<meta name="twitter:description" content="今天看了下RAC的rac_willDeallocSignal的方法实现。我最初的猜测是NSObject (RACDeallocating)添加load方法，然后在里面进行method swzziling，添加dealloc方法，但是发现源码不是这样的。他只是通过常用的category 添加 associated 来进行的。先看他的简单实现：">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="http://7xthb9.com2.z0.glb.clouddn.com/8d04d7630ea03c7524cff3437f48e009.jpg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">sanfeng.li</a></h1>
+		</hgroup>
+
+		
+		<p class="header-subtitle">sanfengflying</p>
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						
+						<div class="icon-wrap icon-me hide" data-idx="3">
+							<div class="user"></div>
+							<div class="shoulder"></div>
+						</div>
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>标签</li>
+						
+						
+						<li>关于我</li>
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+							<li><a href="/tags/">标签云</a></li>
+				        
+							<li><a href="/tags/swift">swift</a></li>
+				        
+							<li><a href="/about">关于</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="https://github.com/theewind" title="github">github</a>
+					        
+								<a class="mail" target="_blank" href="/sanfengflying@126.com" title="mail">mail</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/JavaScript/" style="font-size: 10px;">JavaScript</a> <a href="/tags/RAC/" style="font-size: 10px;">RAC</a> <a href="/tags/React-Native/" style="font-size: 10px;">React Native</a> <a href="/tags/hexo/" style="font-size: 15px;">hexo</a> <a href="/tags/iOS/" style="font-size: 20px;">iOS</a> <a href="/tags/react-native/" style="font-size: 10px;">react native</a> <a href="/tags/shell/" style="font-size: 15px;">shell</a> <a href="/tags/swift/" style="font-size: 10px;">swift</a> <a href="/tags/代码检测/" style="font-size: 10px;">代码检测</a> <a href="/tags/测试/" style="font-size: 10px;">测试</a> <a href="/tags/缓存/" style="font-size: 10px;">缓存</a> <a href="/tags/脚本/" style="font-size: 10px;">脚本</a>
+					</div>
+				</section>
+				
+				
+				
+
+				
+				
+				<section class="switch-part switch-part3">
+				
+					<div id="js-aboutme">三风，江湖人称风风子，我就是是我，不一样的烟火~~~</div>
+				</section>
+				
+			</div>
+		</div>
+	</header>				
+</div>
+
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">sanfeng.li</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+			
+				<img lazy-src="http://7xthb9.com2.z0.glb.clouddn.com/8d04d7630ea03c7524cff3437f48e009.jpg" class="js-avatar">
+			
+			</div>
+			<hgroup>
+			  <h1 class="header-author">sanfeng.li</h1>
+			</hgroup>
+			
+			<p class="header-subtitle">sanfengflying</p>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+					<li><a href="/tags/">标签云</a></li>
+		        
+					<li><a href="/tags/swift">swift</a></li>
+		        
+					<li><a href="/about">关于</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/theewind" title="github">github</a>
+			        
+						<a class="mail" target="_blank" href="/sanfengflying@126.com" title="mail">mail</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+
+      <div class="body-wrap"><article id="post-rac-willDeallocSignal" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/06/06/rac-willDeallocSignal/" class="article-date">
+  	<time datetime="2016-06-06T06:46:23.000Z" itemprop="datePublished">2016-06-06</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      rac_willDeallocSignal的加载时机
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/RAC/">RAC</a></li></ul>
+	</div>
+
+        
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>今天看了下RAC的rac_willDeallocSignal的方法实现。我最初的猜测是NSObject (RACDeallocating)添加load方法，然后在里面进行method swzziling，添加dealloc方法，但是发现源码不是这样的。他只是通过常用的category 添加 associated 来进行的。先看他的简单实现：</p>
+<a id="more"></a>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">- (RACSignal *)rac_willDeallocSignal &#123;</span><br><span class="line">	RACSignal *signal = objc_getAssociatedObject(self, _cmd);</span><br><span class="line">	if (signal != nil) return signal;</span><br><span class="line"></span><br><span class="line">	RACReplaySubject *subject = [RACReplaySubject subject];</span><br><span class="line"></span><br><span class="line">	[self.rac_deallocDisposable addDisposable:[RACDisposable disposableWithBlock:^&#123;</span><br><span class="line">		[subject sendCompleted];</span><br><span class="line">	&#125;]];</span><br><span class="line"></span><br><span class="line">	objc_setAssociatedObject(self, _cmd, subject, OBJC_ASSOCIATION_RETAIN);</span><br><span class="line"></span><br><span class="line">	return subject;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>每次我们调用一个object的rac_willDeallocSignal，先判断这个是否已经添加过了rac_willDeallocSignal的_cmd对应的关联对象，如果添加了就直接返回，如果没有添加，则生成一个subject，然后调用self.rac_deallocDisposable，在这个里面进行方法替换，如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">- (RACCompoundDisposable *)rac_deallocDisposable &#123;</span><br><span class="line">	@synchronized (self) &#123;</span><br><span class="line">		RACCompoundDisposable *compoundDisposable = objc_getAssociatedObject(self, RACObjectCompoundDisposable);</span><br><span class="line">		if (compoundDisposable != nil) return compoundDisposable;</span><br><span class="line"></span><br><span class="line">		swizzleDeallocIfNeeded(self.class);</span><br><span class="line"></span><br><span class="line">		compoundDisposable = [RACCompoundDisposable compoundDisposable];</span><br><span class="line">		objc_setAssociatedObject(self, RACObjectCompoundDisposable, compoundDisposable, OBJC_ASSOCIATION_RETAIN_NONATOMIC);</span><br><span class="line"></span><br><span class="line">		return compoundDisposable;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>里面的重点是swizzleDeallocIfNeeded方法。如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line">static NSMutableSet *swizzledClasses() &#123;</span><br><span class="line">	static dispatch_once_t onceToken;</span><br><span class="line">	static NSMutableSet *swizzledClasses = nil;</span><br><span class="line">	dispatch_once(&amp;onceToken, ^&#123;</span><br><span class="line">		swizzledClasses = [[NSMutableSet alloc] init];</span><br><span class="line">	&#125;);</span><br><span class="line">	</span><br><span class="line">	return swizzledClasses;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">static void swizzleDeallocIfNeeded(Class classToSwizzle) &#123;</span><br><span class="line">	@synchronized (swizzledClasses()) &#123;</span><br><span class="line">		NSString *className = NSStringFromClass(classToSwizzle);</span><br><span class="line">		if ([swizzledClasses() containsObject:className]) return;</span><br><span class="line"></span><br><span class="line">		SEL deallocSelector = sel_registerName(&quot;dealloc&quot;);</span><br><span class="line"></span><br><span class="line">		__block void (*originalDealloc)(__unsafe_unretained id, SEL) = NULL;</span><br><span class="line"></span><br><span class="line">		id newDealloc = ^(__unsafe_unretained id self) &#123;</span><br><span class="line">			RACCompoundDisposable *compoundDisposable = objc_getAssociatedObject(self, RACObjectCompoundDisposable);</span><br><span class="line">			[compoundDisposable dispose];</span><br><span class="line"></span><br><span class="line">			if (originalDealloc == NULL) &#123;</span><br><span class="line">				struct objc_super superInfo = &#123;</span><br><span class="line">					.receiver = self,</span><br><span class="line">					.super_class = class_getSuperclass(classToSwizzle)</span><br><span class="line">				&#125;;</span><br><span class="line"></span><br><span class="line">				void (*msgSend)(struct objc_super *, SEL) = (__typeof__(msgSend))objc_msgSendSuper;</span><br><span class="line">				msgSend(&amp;superInfo, deallocSelector);</span><br><span class="line">			&#125; else &#123;</span><br><span class="line">				originalDealloc(self, deallocSelector);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;;</span><br><span class="line">		</span><br><span class="line">		IMP newDeallocIMP = imp_implementationWithBlock(newDealloc);</span><br><span class="line">		</span><br><span class="line">		if (!class_addMethod(classToSwizzle, deallocSelector, newDeallocIMP, &quot;v@:&quot;)) &#123;</span><br><span class="line">			// The class already contains a method implementation.</span><br><span class="line">			Method deallocMethod = class_getInstanceMethod(classToSwizzle, deallocSelector);</span><br><span class="line">			</span><br><span class="line">			// We need to store original implementation before setting new implementation</span><br><span class="line">			// in case method is called at the time of setting.</span><br><span class="line">			originalDealloc = (__typeof__(originalDealloc))method_getImplementation(deallocMethod);</span><br><span class="line">			</span><br><span class="line">			// We need to store original implementation again, in case it just changed.</span><br><span class="line">			originalDealloc = (__typeof__(originalDealloc))method_setImplementation(deallocMethod, newDeallocIMP);</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		[swizzledClasses() addObject:className];</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>此swizziling方法，跟我们平时常用的写法不一致，但是总体思路都是通过runtime进行替换。</p>
+<p>###总结<br>通过这样的形式，可以达到动态配置swizzling method的形式，如果采用+load()方法，那么进行替换的方法，不管有没有用都会执行，其实算是一种强制替换，而通过associated的形式，可以达到懒替换的效果，只在你调用的时候才进行替换，使用更方便。</p>
+<p>###后记<br>对某个类的方法进行监控，可以通过method swizzling的方式，也可以采用RAC的方法，比如对NSNotificationCenter进行监控，也可以通过如下方法</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">self.addObserverDisposable = [[center rac_signalForSelector:@selector(addObserver:selector:name:object:)]</span><br><span class="line"> subscribeNext:^(RACTuple *args) &#123;&#125;</span><br><span class="line"> </span><br><span class="line">     self.removeNotificationsDisposable = [[center rac_signalForSelector:@selector(removeObserver:)]</span><br><span class="line"> subscribeNext:^(RACTuple *args) &#123;&#125;</span><br><span class="line"></span><br><span class="line">self.removeSingleNotificationDisposable = [[center rac_signalForSelector:@selector(removeObserver:name:object:)]</span><br><span class="line"> subscribeNext:^(RACTuple *args) &#123;&#125;</span><br></pre></td></tr></table></figure>
+<p>通过RAC的方式，监控某个方法，只需要在某个必执行的方法里面调用监控就可以了，当被调用的方法发现被掉哦那个，就会执行自己的{}方法。<br>至于他是如何执行，可以参考他的实现及解释。</p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2016/06/03/doubleListViewDemo/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">React Native 双listView交互动画</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<div class="share_jia">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">分享到: &nbsp; </span>
+		<a class="jiathis_button_facebook"></a> 
+    <a class="jiathis_button_twitter"></a>
+    <a class="jiathis_button_plus"></a> 
+    <a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+    <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2016 sanfeng.li
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: true
+	}
+</script>
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  </div>
+</body>
+</html>
