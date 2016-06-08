@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
   <title>sanfeng’s blog</title>
   <subtitle>sanfengflying</subtitle>
-  <link href="//atom.xml" rel="self"/>
+  <link href="/atom.xml" rel="self"/>
   
   <link href="http://theewind.github.io/"/>
-  <updated>2016-06-07T15:20:34.000Z</updated>
+  <updated>2016-06-06T07:20:08.000Z</updated>
   <id>http://theewind.github.io/</id>
   
   <author>
@@ -14,39 +14,6 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
-  
-  <entry>
-    <title>study</title>
-    <link href="http://theewind.github.io/2016/06/07/study_f8app/"/>
-    <id>http://theewind.github.io/2016/06/07/study_f8app/</id>
-    <published>2016-06-07T15:04:01.000Z</published>
-    <updated>2016-06-07T15:20:34.000Z</updated>
-    
-    <content type="html">&lt;p&gt;主要是先参考如下篇文章：&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;&lt;a href=&quot;http://www.open-open.com/lib/view/open1461512056952.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://www.open-open.com/lib/view/open1461512056952.html&lt;/a&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;第一次接触redux，概念还比较模糊，同时js开发水平也一般，对一些语法学习还不是很懂，这里做个记录：&lt;br&gt;代码中的很多function func(): type的用法，我之前接触的基本都是无返回值类型的，这里添加一个 &lt;code&gt;:Action&lt;/code&gt;类型，貌似就是确定了返回值类型的，不知道理解的对不对。&lt;/p&gt;
-&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
-&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;/* from js/actions/filter.js */&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;function applyTopicsFilter(topics): Action &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  return &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    type: &amp;apos;APPLY_TOPICS_FILTER&amp;apos;,&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    topics,&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &amp;#125;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;p&gt;redux的这个流程图不错&lt;br&gt;&lt;img src=&quot;http://static.open-open.com/lib/uploadImg/20160424/20160424233655_731.png&quot; alt=&quot;组件&quot;&gt;&lt;/p&gt;
-&lt;p&gt;越看越不懂，任重而道远&lt;/p&gt;
-</content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;主要是先参考如下篇文章：&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;&lt;a href=&quot;http://www.open-open.com/lib/view/open1461512056952.html&quot;&gt;http://www.open-open.com/lib/view/open1461512056952.html&lt;/a&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;第一次接触redux，概念还比较模糊，同时js开发水平也一般，对一些语法学习还不是很懂，这里做个记录：&lt;br&gt;代码中的很多function func(): type的用法，我之前接触的基本都是无返回值类型的，这里添加一个 &lt;code&gt;:Action&lt;/code&gt;类型，貌似就是确定了返回值类型的，不知道理解的对不对。&lt;/p&gt;
-    
-    </summary>
-    
-    
-      <category term="React Native" scheme="http://theewind.github.io/tags/React-Native/"/>
-    
-  </entry>
   
   <entry>
     <title>rac_willDeallocSignal的加载时机</title>
@@ -85,17 +52,17 @@
     <link href="http://theewind.github.io/2016/06/03/doubleListViewDemo/"/>
     <id>http://theewind.github.io/2016/06/03/doubleListViewDemo/</id>
     <published>2016-06-03T03:41:01.000Z</published>
-    <updated>2016-06-03T05:53:38.000Z</updated>
+    <updated>2016-06-08T09:47:11.000Z</updated>
     
-    <content type="html">&lt;p&gt;此demo算是自己学习React Natvie的一个小例子的。&lt;/p&gt;
+    <content type="html">&lt;p&gt;此demo算是自己学习React Natvie的一个小例子的。&lt;img src=&quot;../img/doubleListViewdemo.gif&quot; alt=&quot;效果如下&quot;&gt;&lt;/p&gt;
 &lt;p&gt;因为开发过程中，经常需要使用两个ListView进行交互，具体实现参考&lt;a href=&quot;https://github.com/theewind/RCTDoubleListViewDemo&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;DEMO&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;可以通过点击左边的菜品分类，切换到对应的section中，也可以通过滑动右边的菜品，同步更新到左边的分类。&lt;br&gt;主要思路是：&lt;/p&gt;
 &lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;14&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;15&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;16&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;17&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;18&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;19&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;20&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;21&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;22&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;23&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;24&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;25&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;26&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;27&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;28&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;29&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;30&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;31&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;32&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;33&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;34&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;35&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;36&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;37&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;38&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;39&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;40&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;41&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;42&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;43&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;44&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;componentDidUpdate() &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  let scrollResponder = this.refs.listView.getScrollResponder();&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  scrollResponder.scrollResponderScrollTo(&amp;#123;x: 0, y:this.pscroll(), animated: true&amp;#125;);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;shouldComponentUpdate(nextProps, nextState) &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  return nextProps.needUpdate;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;pscroll() &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  console.log(this.props.section);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;   var height = 0;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;   for (var x in spuMenuItemList) &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;     if (parseInt(x) &amp;lt; parseInt(this.props.section)) &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;       height += spuMenuItemList[x].length * 100;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;       height += 20;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;     &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;   &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;   return height;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt; &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt; &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  _onScroll(event: Object) &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    var scrollProperties = this.refs.listView.scrollProperties;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    // console.log(scrollProperties);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    // console.log(scrollProperties.offset);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    // console.log(this.props.section)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    if (this.props.fromLeftTouched) &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      return;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    var height = 0;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    for (var x in spuMenuItemList) &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      height += spuMenuItemList[x].length * 100;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      height += 20;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      if (height &amp;gt; scrollProperties.offset) &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        if (x != this.state.currentIndex) &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;          this.props.needChangeSection(parseInt(x));&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;          this.state.currentIndex = parseInt(x);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        break;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;</content>
     
     <summary type="html">
     
-      &lt;p&gt;此demo算是自己学习React Natvie的一个小例子的。&lt;/p&gt;
-&lt;p&gt;因为开发过程中，经常需要使用两个ListView进行交互，具体实现参考&lt;a href=&quot;https://github.com/theewind/RCTDoubleListViewDemo&quot; tar
+      &lt;p&gt;此demo算是自己学习React Natvie的一个小例子的。&lt;img src=&quot;../img/doubleListViewdemo.gif&quot; alt=&quot;效果如下&quot;&gt;&lt;/p&gt;
+&lt;p&gt;因为开发过程中，经常需要使用两个ListView进行交互，具体实现参考&lt;a href=&quot;ht
     
     </summary>
     
