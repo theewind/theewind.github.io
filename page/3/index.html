@@ -4,12 +4,12 @@
   <meta charset="utf-8">
   
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
-  <title>Archives: 2016/6 | sanfeng’s blog</title>
+  <title>sanfeng’s blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="这是我的三风的博客">
 <meta property="og:type" content="website">
 <meta property="og:title" content="sanfeng’s blog">
-<meta property="og:url" content="http://theewind.github.io/archives/2016/06/index.html">
+<meta property="og:url" content="http://theewind.github.io/page/3/index.html">
 <meta property="og:site_name" content="sanfeng’s blog">
 <meta property="og:description" content="这是我的三风的博客">
 <meta name="twitter:card" content="summary">
@@ -187,114 +187,264 @@
 
       <div class="body-wrap">
   
+    <article id="post-今天好兴奋" class="article article-type-post" itemscope itemprop="blogPost">
   
+    <div class="article-meta">
+      <a href="/2016/04/28/今天好兴奋/" class="article-date">
+  	<time datetime="2016-04-28T09:58:08.000Z" itemprop="datePublished">2016-04-28</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
     
     
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/04/28/今天好兴奋/">JS == 与 ===的区别</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h4 id="1、对于string-number等基础类型，-和-是有区别的"><a href="#1、对于string-number等基础类型，-和-是有区别的" class="headerlink" title="1、对于string,number等基础类型，==和===是有区别的"></a>1、对于string,number等基础类型，==和===是有区别的</h4><ul>
+<li>1）不同类型间比较，==之比较“转化成同一类型后的值”看“值”是否相等，===如果类型不同，其结果就是不等</li>
+<li>2）同类型比较，直接进行“值”比较，两者结果一样</li>
+</ul>
+<h4 id="2、对于Array-Object等高级类型，-和-是没有区别的"><a href="#2、对于Array-Object等高级类型，-和-是没有区别的" class="headerlink" title="2、对于Array,Object等高级类型，==和===是没有区别的"></a>2、对于Array,Object等高级类型，==和===是没有区别的</h4><ul>
+<li>进行“指针地址”比较</li>
+</ul>
+<h4 id="3、基础类型与高级类型，-和-是有区别的"><a href="#3、基础类型与高级类型，-和-是有区别的" class="headerlink" title="3、基础类型与高级类型，==和===是有区别的"></a>3、基础类型与高级类型，==和===是有区别的</h4><ul>
+<li>1）对于==，将高级转化为基础类型，进行“值”比较</li>
+<li>2）因为类型不同，===结果为false</li>
+</ul>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
       
       
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2016" class="archive-year">2016</a>
-        </div>
-        <div class="archives">
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/">JavaScript</a></li></ul>
+	</div>
+
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
     
-    <article class="archive-article archive-type-React Native 学习之F8app代码阅读">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2016/06/07/study_f8app/" class="archive-article-date">
-  	<time datetime="2016-06-07T15:04:01.000Z" itemprop="datePublished">Jun 7</time>
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-hexo-study" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/04/28/hexo-study/" class="article-date">
+  	<time datetime="2016-04-28T09:44:20.000Z" itemprop="datePublished">2016-04-28</time>
 </a>
-        </div>
-    	 
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
   
     <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/06/07/study_f8app/">study</a>
+      <a class="article-title" href="/2016/04/28/hexo-study/">hexo 基础</a>
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="tags的用法"><a href="#tags的用法" class="headerlink" title="tags的用法"></a>tags的用法</h3><p>基本使用方法是：</p>
+<pre><code>tags: hexo
+</code></pre><p>如果一行多个标签，使用</p>
+<pre><code>tags: [hexo, hexo1, hexo2, ...]
+</code></pre><p>如果一篇文章属于多个标签</p>
+<pre><code>tags: 
+- hexo
+- hexo2
+- hexo3
+</code></pre><h3 id="new-和-new-page"><a href="#new-和-new-page" class="headerlink" title="new 和 new page"></a>new 和 new page</h3><p>最终生成的静态文档都在public下</p>
+<ul>
+<li>new: 统一在归档目录 archive下</li>
+<li>new page: 新建一个目录，比如about，然后在theme/yilia/_config.yml 的 menu下可以添加新的模块，比如 about: /about    </li>
+</ul>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/React-Native/">React Native</a></li></ul>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hexo/">hexo</a></li></ul>
 	</div>
 
-          
+      
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
+      
+      <div class="clearfix"></div>
+    </div>
+    
   </div>
-</article>
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2016/06/06/rac-willDeallocSignal/" class="archive-article-date">
-  	<time datetime="2016-06-06T06:46:23.000Z" itemprop="datePublished">Jun 6</time>
+</article>
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-swift" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/04/28/swift/" class="article-date">
+  	<time datetime="2016-04-28T09:39:06.000Z" itemprop="datePublished">2016-04-28</time>
 </a>
-        </div>
-    	 
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
   
     <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/06/06/rac-willDeallocSignal/">rac_willDeallocSignal的加载时机</a>
+      <a class="article-title" href="/2016/04/28/swift/">swift 学习计划</a>
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/RAC/">RAC</a></li></ul>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/swift/">swift</a></li></ul>
 	</div>
 
-          
+      
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
+      
+      <div class="clearfix"></div>
+    </div>
+    
   </div>
-</article>
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2016/06/03/doubleListViewDemo/" class="archive-article-date">
-  	<time datetime="2016-06-03T03:41:01.000Z" itemprop="datePublished">Jun 3</time>
+</article>
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-hexo-first" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/04/28/hexo-first/" class="article-date">
+  	<time datetime="2016-04-28T02:55:40.000Z" itemprop="datePublished">2016-04-28</time>
 </a>
-        </div>
-    	 
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
   
     <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/06/03/doubleListViewDemo/">React Native 双listView交互动画</a>
+      <a class="article-title" href="/2016/04/28/hexo-first/">Hexo 学习</a>
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/react-native/">react native</a></li></ul>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hexo/">hexo</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/测试/">测试</a></li></ul>
 	</div>
 
-          
+      
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
-
+      
+        <p class="article-more-link">
+          <a  href="/2016/04/28/hexo-first/#more">more >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
     
+  </div>
+  
+</article>
 
+
+
+
+
+
+
+
+
+  
+  
+    <nav id="page-nav">
+      <a class="extend prev" rel="prev" href="/page/2/">&laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span>
+    </nav>
+  
 </div>
       <footer id="footer">
   <div class="outer">
@@ -318,9 +468,9 @@
 		fancybox: true,
 		mathjax: true,
 		animate: true,
-		isHome: false,
+		isHome: true,
 		isPost: false,
-		isArchive: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: flase

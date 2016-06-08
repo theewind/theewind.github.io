@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
   <title>sanfeng’s blog</title>
   <subtitle>sanfengflying</subtitle>
-  <link href="/atom.xml" rel="self"/>
+  <link href="//atom.xml" rel="self"/>
   
   <link href="http://theewind.github.io/"/>
-  <updated>2016-06-06T07:20:08.000Z</updated>
+  <updated>2016-06-07T15:20:34.000Z</updated>
   <id>http://theewind.github.io/</id>
   
   <author>
@@ -14,6 +14,39 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>study</title>
+    <link href="http://theewind.github.io/2016/06/07/study_f8app/"/>
+    <id>http://theewind.github.io/2016/06/07/study_f8app/</id>
+    <published>2016-06-07T15:04:01.000Z</published>
+    <updated>2016-06-07T15:20:34.000Z</updated>
+    
+    <content type="html">&lt;p&gt;主要是先参考如下篇文章：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;a href=&quot;http://www.open-open.com/lib/view/open1461512056952.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://www.open-open.com/lib/view/open1461512056952.html&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;第一次接触redux，概念还比较模糊，同时js开发水平也一般，对一些语法学习还不是很懂，这里做个记录：&lt;br&gt;代码中的很多function func(): type的用法，我之前接触的基本都是无返回值类型的，这里添加一个 &lt;code&gt;:Action&lt;/code&gt;类型，貌似就是确定了返回值类型的，不知道理解的对不对。&lt;/p&gt;
+&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
+&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;/* from js/actions/filter.js */&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;function applyTopicsFilter(topics): Action &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  return &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    type: &amp;apos;APPLY_TOPICS_FILTER&amp;apos;,&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    topics,&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &amp;#125;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;redux的这个流程图不错&lt;br&gt;&lt;img src=&quot;http://static.open-open.com/lib/uploadImg/20160424/20160424233655_731.png&quot; alt=&quot;组件&quot;&gt;&lt;/p&gt;
+&lt;p&gt;越看越不懂，任重而道远&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;主要是先参考如下篇文章：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;a href=&quot;http://www.open-open.com/lib/view/open1461512056952.html&quot;&gt;http://www.open-open.com/lib/view/open1461512056952.html&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;第一次接触redux，概念还比较模糊，同时js开发水平也一般，对一些语法学习还不是很懂，这里做个记录：&lt;br&gt;代码中的很多function func(): type的用法，我之前接触的基本都是无返回值类型的，这里添加一个 &lt;code&gt;:Action&lt;/code&gt;类型，貌似就是确定了返回值类型的，不知道理解的对不对。&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="React Native" scheme="http://theewind.github.io/tags/React-Native/"/>
+    
+  </entry>
   
   <entry>
     <title>rac_willDeallocSignal的加载时机</title>
