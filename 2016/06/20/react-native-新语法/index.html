@@ -4,21 +4,30 @@
   <meta charset="utf-8">
   
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
-  <title>shell命令学习 | sanfeng’s blog</title>
+  <title>react native 新语法 | sanfeng’s blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="提交Jenkins的时候，会用到部分命令：
-1234567df -hFilesystem      Size   Used  Avail Capacity  iused   ifree %iused  Mounted on/dev/disk1     233Gi  199Gi   33Gi    86% 52321616 8659602   86%   /devfs          187Ki">
+  <meta name="description" content="最新的RN，已经全部转移到ES6，所以很多之前老的写法，会报错，比如在react-native中引用React的做法发生了变更（在当前版本老的做法会报错）：
+之前
+import React, { Component, View } from &amp;apos;react-native&amp;apos;;
+现在
+import React, { Component } from &amp;apos;react&amp;apos;">
 <meta property="og:type" content="article">
-<meta property="og:title" content="shell命令学习">
-<meta property="og:url" content="http://theewind.github.io/2016/05/03/shell命令学习/index.html">
+<meta property="og:title" content="react native 新语法">
+<meta property="og:url" content="http://theewind.github.io/2016/06/20/react-native-新语法/index.html">
 <meta property="og:site_name" content="sanfeng’s blog">
-<meta property="og:description" content="提交Jenkins的时候，会用到部分命令：
-1234567df -hFilesystem      Size   Used  Avail Capacity  iused   ifree %iused  Mounted on/dev/disk1     233Gi  199Gi   33Gi    86% 52321616 8659602   86%   /devfs          187Ki">
-<meta property="og:updated_time" content="2016-05-03T07:35:43.000Z">
+<meta property="og:description" content="最新的RN，已经全部转移到ES6，所以很多之前老的写法，会报错，比如在react-native中引用React的做法发生了变更（在当前版本老的做法会报错）：
+之前
+import React, { Component, View } from &amp;apos;react-native&amp;apos;;
+现在
+import React, { Component } from &amp;apos;react&amp;apos;">
+<meta property="og:updated_time" content="2016-06-20T05:16:17.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="shell命令学习">
-<meta name="twitter:description" content="提交Jenkins的时候，会用到部分命令：
-1234567df -hFilesystem      Size   Used  Avail Capacity  iused   ifree %iused  Mounted on/dev/disk1     233Gi  199Gi   33Gi    86% 52321616 8659602   86%   /devfs          187Ki">
+<meta name="twitter:title" content="react native 新语法">
+<meta name="twitter:description" content="最新的RN，已经全部转移到ES6，所以很多之前老的写法，会报错，比如在react-native中引用React的做法发生了变更（在当前版本老的做法会报错）：
+之前
+import React, { Component, View } from &amp;apos;react-native&amp;apos;;
+现在
+import React, { Component } from &amp;apos;react&amp;apos;">
   
   
     <link rel="icon" href="/favicon.png">
@@ -189,11 +198,11 @@
 	</div>
 </nav>
 
-      <div class="body-wrap"><article id="post-shell命令学习" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="react-react-native-新语法" class="article article-type-react" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2016/05/03/shell命令学习/" class="article-date">
-  	<time datetime="2016-05-03T06:49:51.000Z" itemprop="datePublished">2016-05-03</time>
+      <a href="/2016/06/20/react-native-新语法/" class="article-date">
+  	<time datetime="2016-06-20T05:12:08.000Z" itemprop="datePublished">2016-06-20</time>
 </a>
     </div>
   
@@ -206,7 +215,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      shell命令学习
+      react native 新语法
     </h1>
   
 
@@ -215,7 +224,7 @@
       <div class="article-info article-info-post">
         
 	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/shell/">shell</a></li></ul>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/react-native/">react native</a></li></ul>
 	</div>
 
         
@@ -226,24 +235,15 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>提交Jenkins的时候，会用到部分命令：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">df -h</span><br><span class="line"></span><br><span class="line">Filesystem      Size   Used  Avail Capacity  iused   ifree %iused  Mounted on</span><br><span class="line">/dev/disk1     233Gi  199Gi   33Gi    86% 52321616 8659602   86%   /</span><br><span class="line">devfs          187Ki  187Ki    0Bi   100%      648       0  100%   /dev</span><br><span class="line">map -hosts       0Bi    0Bi    0Bi   100%        0       0  100%   /net</span><br><span class="line">map auto_home    0Bi    0Bi    0Bi   100%        0       0  100%   /home</span><br></pre></td></tr></table></figure>
-<ul>
-<li><p><strong><em>df 命令：</em></strong><br>linux中df命令的功能是用来检查linux服务器的文件系统的磁盘空间占用情况。可以利用该命令来获取硬盘被占用了多少空间，目前还剩下多少空间等信息。</p>
-</li>
-<li><p><strong><em>date命令</em></strong><br>修改linux的时间可以使用date指令 </p>
-</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">date</span><br><span class="line">Tue May  3 14:53:22 CST 2016</span><br><span class="line">➜  _posts git:(master) ✗ date &apos;+Current time: %H:%M:%S&apos;</span><br><span class="line">Current time: 14:53:24 //可见这里会自定义输出date的格式</span><br><span class="line"></span><br><span class="line">修改日期： </span><br><span class="line">时间设定成2009年5月10日的命令如下：</span><br><span class="line">date -s 05/10/2009 </span><br><span class="line"></span><br><span class="line">修改时间： </span><br><span class="line">将系统时间设定成上午10点18分0秒的命令如下。 </span><br><span class="line">date -s 10:18:00</span><br></pre></td></tr></table></figure>
-<ul>
-<li><strong>git命令**</strong></li>
-</ul>
-<p>git branch newBranch   创建新分支 git br </p>
-<p>git checkout newBranch    切换到新分支 git co</p>
-<p>合并： git checkout -b newBranch<br>简写： git co -b newBranch</p>
-<p>git br nnew [commit] 以某次commit创建分支</p>
-<p>git checkout -B <branch></branch></p>
-<p>这个命令，可以强制创建新的分支，为什么加-B呢？如果当前仓库中，已经存在一个跟你新建分支同名的分支，那么使用普通的git checkout -b <branch>这个命令，是会报错的，且同名分支无法创建。如果使用-B参数，那么就可以强制创建新的分支，并会覆盖掉原来的分支。</branch></p>
+        <p>最新的RN，已经全部转移到ES6，所以很多之前老的写法，会报错，比如<br>在react-native中引用React的做法发生了变更（在当前版本老的做法会报错）：</p>
+<p>之前</p>
+<pre><code>import React, { Component, View } from &apos;react-native&apos;;
+</code></pre><p>现在</p>
+<pre><code>import React, { Component } from &apos;react&apos;;
+import { View } from &apos;react-native&apos;;
+</code></pre><p>具体有很多，可以参考<a href="https://www.facebook.com/groups/reactnativeoss/permalink/1540818949548067/" target="_blank" rel="external">这篇文章</a> 科学上网。</p>
+<p>具体就是：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">n React 0.14 for Web we started splitting up the React package into two packages `react` and `react-dom`. Now I&apos;d like to make this consistent in React Native. The new package structure would be...</span><br><span class="line">&quot;react&quot;:</span><br><span class="line">Children</span><br><span class="line">Component</span><br><span class="line">PropTypes</span><br><span class="line">createElement</span><br><span class="line">cloneElement</span><br><span class="line">isValidElement</span><br><span class="line">createClass</span><br><span class="line">createFactory</span><br><span class="line">createMixin</span><br><span class="line">&quot;react-native&quot;:</span><br><span class="line">hasReactNativeInitialized</span><br><span class="line">findNodeHandle</span><br><span class="line">render</span><br><span class="line">unmountComponentAtNode</span><br><span class="line">unmountComponentAtNodeAndRemoveContainer</span><br><span class="line">unstable_batchedUpdates</span><br><span class="line">View</span><br><span class="line">Text</span><br><span class="line">ListView</span><br><span class="line">...</span><br><span class="line">and all the other native components.</span><br><span class="line">So for a lot of components you actually have to import both packages.</span><br><span class="line">var React = require(&apos;react&apos;);</span><br><span class="line">var &#123; View &#125; = require(&apos;react-native&apos;);</span><br><span class="line">var Foo = React.createClass(&#123;</span><br><span class="line">render() &#123; return &lt;View /&gt;; &#125;</span><br><span class="line">&#125;);</span><br><span class="line">However, for components that doesn&apos;t know anything about their rendering environment just need the `react` package as a dependency.</span><br><span class="line">Currently a lot of these are accessible from both packages but we&apos;d start issuing warnings if you use the wrong one.</span><br><span class="line">This would be a little spammy so ideally we would have a simple codemod script that you can run on your imports to clean them up.</span><br><span class="line">E.g. something that translates existing patterns like:</span><br><span class="line">var React = require(&apos;react-native&apos;);</span><br><span class="line">var &#123; View &#125; = React;</span><br><span class="line">into:</span><br><span class="line">var React = require(&apos;react&apos;);</span><br><span class="line">var &#123; View &#125; = require(&apos;react-native&apos;);</span><br><span class="line">If anyone wants to write and share that script with the community, that would be highly appreciated. We can start promoting it right now before we deprecate it.</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -253,18 +253,9 @@
     
 <nav id="article-nav">
   
-    <a href="/2016/05/03/命令行解释括号说明/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption"><</strong>
-      <div class="article-nav-title">
-        
-          命令行解释括号说明
-        
-      </div>
-    </a>
   
-  
-    <a href="/2016/04/29/thrift-study/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">thrift学习</div>
+    <a href="/2016/06/13/批量生成二维码/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">批量生成二维码</div>
       <strong class="article-nav-caption">></strong>
     </a>
   
@@ -299,7 +290,7 @@
 
 <div class="duoshuo">
 	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="shell命令学习" data-title="shell命令学习" data-url="http://theewind.github.io/2016/05/03/shell命令学习/"></div>
+	<div class="ds-thread" data-thread-key="react-native-新语法" data-title="react native 新语法" data-url="http://theewind.github.io/2016/06/20/react-native-新语法/"></div>
 	<!-- 多说评论框 end -->
 	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 	<script type="text/javascript">

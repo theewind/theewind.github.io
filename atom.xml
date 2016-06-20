@@ -5,7 +5,7 @@
   <link href="//atom.xml" rel="self"/>
   
   <link href="http://theewind.github.io/"/>
-  <updated>2016-06-13T07:35:05.000Z</updated>
+  <updated>2016-06-20T05:16:17.000Z</updated>
   <id>http://theewind.github.io/</id>
   
   <author>
@@ -14,6 +14,37 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>react native 新语法</title>
+    <link href="http://theewind.github.io/2016/06/20/react-native-%E6%96%B0%E8%AF%AD%E6%B3%95/"/>
+    <id>http://theewind.github.io/2016/06/20/react-native-新语法/</id>
+    <published>2016-06-20T05:12:08.000Z</published>
+    <updated>2016-06-20T05:16:17.000Z</updated>
+    
+    <content type="html">&lt;p&gt;最新的RN，已经全部转移到ES6，所以很多之前老的写法，会报错，比如&lt;br&gt;在react-native中引用React的做法发生了变更（在当前版本老的做法会报错）：&lt;/p&gt;
+&lt;p&gt;之前&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;import React, { Component, View } from &amp;apos;react-native&amp;apos;;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;现在&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;import React, { Component } from &amp;apos;react&amp;apos;;
+import { View } from &amp;apos;react-native&amp;apos;;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;具体有很多，可以参考&lt;a href=&quot;https://www.facebook.com/groups/reactnativeoss/permalink/1540818949548067/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;这篇文章&lt;/a&gt; 科学上网。&lt;/p&gt;
+&lt;p&gt;具体就是：&lt;/p&gt;
+&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;14&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;15&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;16&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;17&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;18&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;19&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;20&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;21&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;22&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;23&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;24&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;25&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;26&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;27&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;28&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;29&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;30&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;31&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;32&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;33&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;34&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;35&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;36&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;37&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;38&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;39&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;n React 0.14 for Web we started splitting up the React package into two packages `react` and `react-dom`. Now I&amp;apos;d like to make this consistent in React Native. The new package structure would be...&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;quot;react&amp;quot;:&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;Children&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;Component&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;PropTypes&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;createElement&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;cloneElement&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;isValidElement&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;createClass&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;createFactory&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;createMixin&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;quot;react-native&amp;quot;:&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;hasReactNativeInitialized&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;findNodeHandle&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;render&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;unmountComponentAtNode&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;unmountComponentAtNodeAndRemoveContainer&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;unstable_batchedUpdates&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;View&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;Text&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;ListView&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;...&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;and all the other native components.&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;So for a lot of components you actually have to import both packages.&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;var React = require(&amp;apos;react&amp;apos;);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;var &amp;#123; View &amp;#125; = require(&amp;apos;react-native&amp;apos;);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;var Foo = React.createClass(&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;render() &amp;#123; return &amp;lt;View /&amp;gt;; &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;However, for components that doesn&amp;apos;t know anything about their rendering environment just need the `react` package as a dependency.&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;Currently a lot of these are accessible from both packages but we&amp;apos;d start issuing warnings if you use the wrong one.&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;This would be a little spammy so ideally we would have a simple codemod script that you can run on your imports to clean them up.&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;E.g. something that translates existing patterns like:&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;var React = require(&amp;apos;react-native&amp;apos;);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;var &amp;#123; View &amp;#125; = React;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;into:&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;var React = require(&amp;apos;react&amp;apos;);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;var &amp;#123; View &amp;#125; = require(&amp;apos;react-native&amp;apos;);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;If anyone wants to write and share that script with the community, that would be highly appreciated. We can start promoting it right now before we deprecate it.&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;最新的RN，已经全部转移到ES6，所以很多之前老的写法，会报错，比如&lt;br&gt;在react-native中引用React的做法发生了变更（在当前版本老的做法会报错）：&lt;/p&gt;
+&lt;p&gt;之前&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;import React, { Component, Vi
+    
+    </summary>
+    
+    
+      <category term="react native" scheme="http://theewind.github.io/tags/react-native/"/>
+    
+  </entry>
   
   <entry>
     <title>批量生成二维码</title>
