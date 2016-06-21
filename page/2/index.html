@@ -113,7 +113,7 @@
 				
 				<section class="switch-part switch-part2">
 					<div class="widget tagcloud" id="js-tagcloud">
-						<a href="/tags/JavaScript/" style="font-size: 10px;">JavaScript</a> <a href="/tags/RAC/" style="font-size: 10px;">RAC</a> <a href="/tags/React-Native/" style="font-size: 15px;">React Native</a> <a href="/tags/hexo/" style="font-size: 15px;">hexo</a> <a href="/tags/iOS/" style="font-size: 20px;">iOS</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/qrcode/" style="font-size: 10px;">qrcode</a> <a href="/tags/react-native/" style="font-size: 15px;">react native</a> <a href="/tags/shell/" style="font-size: 15px;">shell</a> <a href="/tags/swift/" style="font-size: 10px;">swift</a> <a href="/tags/代码检测/" style="font-size: 10px;">代码检测</a> <a href="/tags/正则表达式/" style="font-size: 10px;">正则表达式</a> <a href="/tags/测试/" style="font-size: 10px;">测试</a> <a href="/tags/缓存/" style="font-size: 10px;">缓存</a> <a href="/tags/脚本/" style="font-size: 10px;">脚本</a>
+						<a href="/tags/JavaScript/" style="font-size: 10px;">JavaScript</a> <a href="/tags/RAC/" style="font-size: 10px;">RAC</a> <a href="/tags/React-Native/" style="font-size: 15px;">React Native</a> <a href="/tags/WKWebView/" style="font-size: 10px;">WKWebView</a> <a href="/tags/hexo/" style="font-size: 15px;">hexo</a> <a href="/tags/iOS/" style="font-size: 20px;">iOS</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/qrcode/" style="font-size: 10px;">qrcode</a> <a href="/tags/react-native/" style="font-size: 15px;">react native</a> <a href="/tags/shell/" style="font-size: 15px;">shell</a> <a href="/tags/swift/" style="font-size: 10px;">swift</a> <a href="/tags/代码检测/" style="font-size: 10px;">代码检测</a> <a href="/tags/正则表达式/" style="font-size: 10px;">正则表达式</a> <a href="/tags/测试/" style="font-size: 10px;">测试</a> <a href="/tags/缓存/" style="font-size: 10px;">缓存</a> <a href="/tags/脚本/" style="font-size: 10px;">脚本</a>
 					</div>
 				</section>
 				
@@ -186,6 +186,65 @@
 </nav>
 
       <div class="body-wrap">
+  
+    <article id="post-doubleListViewDemo" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/06/03/doubleListViewDemo/" class="article-date">
+  	<time datetime="2016-06-03T03:41:01.000Z" itemprop="datePublished">2016-06-03</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/06/03/doubleListViewDemo/">React Native 双listView交互动画</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>此demo算是自己学习React Natvie的一个小例子的。<img src="../img/doubleListViewdemo.gif" alt="效果如下"></p>
+<p>因为开发过程中，经常需要使用两个ListView进行交互，具体实现参考<a href="https://github.com/theewind/RCTDoubleListViewDemo" target="_blank" rel="external">DEMO</a></p>
+<p>可以通过点击左边的菜品分类，切换到对应的section中，也可以通过滑动右边的菜品，同步更新到左边的分类。<br>主要思路是：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line">componentDidUpdate() &#123;</span><br><span class="line">  let scrollResponder = this.refs.listView.getScrollResponder();</span><br><span class="line">  scrollResponder.scrollResponderScrollTo(&#123;x: 0, y:this.pscroll(), animated: true&#125;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">shouldComponentUpdate(nextProps, nextState) &#123;</span><br><span class="line">  return nextProps.needUpdate;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">pscroll() &#123;</span><br><span class="line">  console.log(this.props.section);</span><br><span class="line">   var height = 0;</span><br><span class="line">   for (var x in spuMenuItemList) &#123;</span><br><span class="line">     if (parseInt(x) &lt; parseInt(this.props.section)) &#123;</span><br><span class="line">       height += spuMenuItemList[x].length * 100;</span><br><span class="line">       height += 20;</span><br><span class="line">     &#125;</span><br><span class="line">   &#125;</span><br><span class="line">   return height;</span><br><span class="line"> &#125;</span><br><span class="line"> </span><br><span class="line">  _onScroll(event: Object) &#123;</span><br><span class="line">    var scrollProperties = this.refs.listView.scrollProperties;</span><br><span class="line">    // console.log(scrollProperties);</span><br><span class="line">    // console.log(scrollProperties.offset);</span><br><span class="line">    // console.log(this.props.section)</span><br><span class="line"></span><br><span class="line">    if (this.props.fromLeftTouched) &#123;</span><br><span class="line">      return;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    var height = 0;</span><br><span class="line">    for (var x in spuMenuItemList) &#123;</span><br><span class="line">      height += spuMenuItemList[x].length * 100;</span><br><span class="line">      height += 20;</span><br><span class="line">      if (height &gt; scrollProperties.offset) &#123;</span><br><span class="line">        if (x != this.state.currentIndex) &#123;</span><br><span class="line">          this.props.needChangeSection(parseInt(x));</span><br><span class="line">          this.state.currentIndex = parseInt(x);</span><br><span class="line">        &#125;</span><br><span class="line">        break;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/react-native/">react native</a></li></ul>
+	</div>
+
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
   
     <article id="post-ReactNative 学习笔记" class="article article-type-post" itemscope itemprop="blogPost">
   
@@ -516,64 +575,6 @@
 
       
 
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-thrift-study" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2016/04/29/thrift-study/" class="article-date">
-  	<time datetime="2016-04-29T09:44:20.000Z" itemprop="datePublished">2016-04-29</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/04/29/thrift-study/">thrift学习</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><strong>其实thrift和点评的nvobject蛮像的，其中，TBinaryProtocol都是二进制传输，然后将属性的字段进行压缩，较少网络传输的数据。<br>比如点评是采用hash值，每个对象的属性都有个hash值，然后传输此hash值，客户端根据hash值对应属性，而thrift是采用编号的方式，在idl描述文件中，就已经设置好了编号，然后传输编号到服务端，客户端根据编号对应属性。
-</strong></p>
-<p><strong>thrift -gen cocoa <em>**</em></strong>.thrift 生成.h.m文件，然后添加工程，然后调用方法如下：**</p>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a  href="/2016/04/29/thrift-study/#more">more >></a>
-        </p>
       
       <div class="clearfix"></div>
     </div>

@@ -5,7 +5,7 @@
   <link href="//atom.xml" rel="self"/>
   
   <link href="http://theewind.github.io/"/>
-  <updated>2016-06-20T05:16:17.000Z</updated>
+  <updated>2016-06-21T10:08:35.000Z</updated>
   <id>http://theewind.github.io/</id>
   
   <author>
@@ -14,6 +14,37 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>wkwebview同步获取返回结果</title>
+    <link href="http://theewind.github.io/2016/06/21/wkwebview%E5%90%8C%E6%AD%A5%E8%8E%B7%E5%8F%96%E8%BF%94%E5%9B%9E%E7%BB%93%E6%9E%9C/"/>
+    <id>http://theewind.github.io/2016/06/21/wkwebview同步获取返回结果/</id>
+    <published>2016-06-21T09:46:50.000Z</published>
+    <updated>2016-06-21T10:08:35.000Z</updated>
+    
+    <content type="html">&lt;p&gt;今天在测试UIWebView和WKWebView的时候，发现如下区别&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;UIWebView执行stringByEvaluatingJavaScriptFromString方法，因为直接返回结果，所以是&lt;code&gt;同步&lt;/code&gt;的。&lt;br&gt;WKWebView执行evaluateJavaScript：completionHandler是在block中获取执行结果的，所以他是&lt;code&gt;异步&lt;/code&gt;进行的，&lt;br&gt;这样在进行性能测试的时候，发现如果不将WKWebView他修改为同步，是无法进行对比的，然后自己就通过如下方法&lt;/p&gt;
+&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;14&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;   - (NSString *)stringByEvaluatingJavaScriptFromString:(NSString *)javascript &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    __block NSString *res = nil;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    __block BOOL finish = NO;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    [self.webView evaluateJavaScript:javascript completionHandler:^(NSString *result, NSError *error)&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        res = result;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        finish = YES;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &amp;#125;];&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    while(!finish) &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate distantFuture]];&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    return res;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;将WKWebView修改为同步状态，然后进行对比，主要是测试JavaScript函数执行100，300，500，1000，3000次，统计时间，可以发现在相同JS功能情况下，WKWebView的效率还没有UIWebView的效率高，如&lt;img src=&quot;../img/aaa.png&quot; alt=&quot;下图&quot;&gt;&lt;br&gt;可以看出，JavascriptCore的效率是最高的，而WKWebView改成同步以后，实际效果是最差的，分析原因也可能是因为，WKWebView不是这样用的，毕竟在无限等待中，结果是错的也有可能。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;今天在测试UIWebView和WKWebView的时候，发现如下区别&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;UIWebView执行stringByEvaluatingJavaScriptFromString方法，因为直接返回结果，所以是&lt;code&gt;同步&lt;/code&gt;的。&lt;br&gt;W
+    
+    </summary>
+    
+    
+      <category term="iOS" scheme="http://theewind.github.io/tags/iOS/"/>
+    
+      <category term="WKWebView" scheme="http://theewind.github.io/tags/WKWebView/"/>
+    
+  </entry>
   
   <entry>
     <title>react native 新语法</title>
