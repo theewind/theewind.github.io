@@ -113,7 +113,7 @@
 				
 				<section class="switch-part switch-part2">
 					<div class="widget tagcloud" id="js-tagcloud">
-						<a href="/tags/JavaScript/" style="font-size: 10px;">JavaScript</a> <a href="/tags/RAC/" style="font-size: 10px;">RAC</a> <a href="/tags/React-Native/" style="font-size: 15px;">React Native</a> <a href="/tags/WKWebView/" style="font-size: 10px;">WKWebView</a> <a href="/tags/css/" style="font-size: 10px;">css</a> <a href="/tags/hexo/" style="font-size: 15px;">hexo</a> <a href="/tags/iOS/" style="font-size: 20px;">iOS</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/qrcode/" style="font-size: 10px;">qrcode</a> <a href="/tags/react-native/" style="font-size: 15px;">react native</a> <a href="/tags/shell/" style="font-size: 15px;">shell</a> <a href="/tags/swift/" style="font-size: 10px;">swift</a> <a href="/tags/代码检测/" style="font-size: 10px;">代码检测</a> <a href="/tags/前端/" style="font-size: 10px;">前端</a> <a href="/tags/正则表达式/" style="font-size: 10px;">正则表达式</a> <a href="/tags/测试/" style="font-size: 10px;">测试</a> <a href="/tags/缓存/" style="font-size: 10px;">缓存</a> <a href="/tags/脚本/" style="font-size: 10px;">脚本</a>
+						<a href="/tags/JavaScript/" style="font-size: 10px;">JavaScript</a> <a href="/tags/RAC/" style="font-size: 10px;">RAC</a> <a href="/tags/React-Native/" style="font-size: 15px;">React Native</a> <a href="/tags/WKWebView/" style="font-size: 10px;">WKWebView</a> <a href="/tags/css/" style="font-size: 10px;">css</a> <a href="/tags/hexo/" style="font-size: 15px;">hexo</a> <a href="/tags/iOS/" style="font-size: 20px;">iOS</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/qrcode/" style="font-size: 10px;">qrcode</a> <a href="/tags/react-native/" style="font-size: 15px;">react native</a> <a href="/tags/shell/" style="font-size: 15px;">shell</a> <a href="/tags/swift/" style="font-size: 10px;">swift</a> <a href="/tags/代码检测/" style="font-size: 10px;">代码检测</a> <a href="/tags/前端/" style="font-size: 15px;">前端</a> <a href="/tags/正则表达式/" style="font-size: 10px;">正则表达式</a> <a href="/tags/测试/" style="font-size: 10px;">测试</a> <a href="/tags/缓存/" style="font-size: 10px;">缓存</a> <a href="/tags/脚本/" style="font-size: 10px;">脚本</a>
 					</div>
 				</section>
 				
@@ -186,6 +186,100 @@
 </nav>
 
       <div class="body-wrap">
+  
+    <article id="post-命令行解释括号说明" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/05/03/命令行解释括号说明/" class="article-date">
+  	<time datetime="2016-05-03T07:37:24.000Z" itemprop="datePublished">2016-05-03</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/05/03/命令行解释括号说明/">命令行解释括号说明</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>命令行解释括号的作用：</p>
+<table>
+<thead>
+<tr>
+<th>表示法</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>不带方括号或大括号的文本</td>
+<td>您必须键入如下所示的项目</td>
+<td></td>
+</tr>
+<tr>
+<td>&lt;尖括号内的文本&gt;</td>
+<td>您必须为其提供的占位符</td>
+<td></td>
+</tr>
+<tr>
+<td>[方括号内的文本]</td>
+<td>可选的项目</td>
+<td></td>
+</tr>
+<tr>
+<td>{大括号内的文本}</td>
+<td>一组所需的项目，选择一个</td>
+<td></td>
+</tr>
+<tr>
+<td>竖线（\</td>
+<td>）</td>
+<td>互斥项</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>比如</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">git [--version] [--help] [-C &lt;path&gt;] [-c name=value]</span><br><span class="line">           [--exec-path[=&lt;path&gt;]] [--html-path] [--man-path] [--info-path]</span><br><span class="line">           [-p | --paginate | --no-pager] [--no-replace-objects] [--bare]</span><br><span class="line">           [--git-dir=&lt;path&gt;] [--work-tree=&lt;path&gt;] [--namespace=&lt;name&gt;]</span><br><span class="line">           &lt;command&gt; [&lt;args&gt;]</span><br><span class="line"></span><br><span class="line">NAME</span><br><span class="line">       git-checkout - Switch branches or restore working tree files</span><br><span class="line"></span><br><span class="line">SYNOPSIS</span><br><span class="line">       git checkout [-q] [-f] [-m] [&lt;branch&gt;]</span><br><span class="line">       git checkout [-q] [-f] [-m] --detach [&lt;branch&gt;]</span><br><span class="line">       git checkout [-q] [-f] [-m] [--detach] &lt;commit&gt;</span><br><span class="line">       git checkout [-q] [-f] [-m] [[-b|-B|--orphan] &lt;new_branch&gt;] [&lt;start_point&gt;]</span><br><span class="line">       git checkout [-f|--ours|--theirs|-m|--conflict=&lt;style&gt;] [&lt;tree-ish&gt;] [--] &lt;paths&gt;...</span><br><span class="line">       git checkout [-p|--patch] [&lt;tree-ish&gt;] [--] [&lt;paths&gt;...]</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/shell/">shell</a></li></ul>
+	</div>
+
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
   
     <article id="post-shell命令学习" class="article article-type-post" itemscope itemprop="blogPost">
   
@@ -477,73 +571,6 @@
       
 	<div class="article-tag tagcloud">
 		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS/">iOS</a></li></ul>
-	</div>
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-今天好兴奋" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2016/04/28/今天好兴奋/" class="article-date">
-  	<time datetime="2016-04-28T09:58:08.000Z" itemprop="datePublished">2016-04-28</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/04/28/今天好兴奋/">JS == 与 ===的区别</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h4 id="1、对于string-number等基础类型，-和-是有区别的"><a href="#1、对于string-number等基础类型，-和-是有区别的" class="headerlink" title="1、对于string,number等基础类型，==和===是有区别的"></a>1、对于string,number等基础类型，==和===是有区别的</h4><ul>
-<li>1）不同类型间比较，==之比较“转化成同一类型后的值”看“值”是否相等，===如果类型不同，其结果就是不等</li>
-<li>2）同类型比较，直接进行“值”比较，两者结果一样</li>
-</ul>
-<h4 id="2、对于Array-Object等高级类型，-和-是没有区别的"><a href="#2、对于Array-Object等高级类型，-和-是没有区别的" class="headerlink" title="2、对于Array,Object等高级类型，==和===是没有区别的"></a>2、对于Array,Object等高级类型，==和===是没有区别的</h4><ul>
-<li>进行“指针地址”比较</li>
-</ul>
-<h4 id="3、基础类型与高级类型，-和-是有区别的"><a href="#3、基础类型与高级类型，-和-是有区别的" class="headerlink" title="3、基础类型与高级类型，==和===是有区别的"></a>3、基础类型与高级类型，==和===是有区别的</h4><ul>
-<li>1）对于==，将高级转化为基础类型，进行“值”比较</li>
-<li>2）因为类型不同，===结果为false</li>
-</ul>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/">JavaScript</a></li></ul>
 	</div>
 
       

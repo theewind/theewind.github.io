@@ -4,17 +4,21 @@
   <meta charset="utf-8">
   
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
-  <title>Archives: 2016 | sanfeng’s blog</title>
+  <title>如何在自己的网页中添加ga分析 | sanfeng’s blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="这是我的三风的博客">
-<meta property="og:type" content="website">
-<meta property="og:title" content="sanfeng’s blog">
-<meta property="og:url" content="http://theewind.github.io/archives/2016/page/2/index.html">
+  <meta name="description" content="在学习前端的过程中，自己都想统计用户的访问量，下面代码可以做到最轻量级的追踪：
+1234567891011121314/*&amp;lt;script type=&amp;quot;text/javascript&amp;quot;&amp;gt;  var _gaq = _gaq || [];  _gaq.push([&amp;apos;_setAccount&amp;apos;, &amp;apos;UA-XXXXX-X&amp;apos;]);  _ga">
+<meta property="og:type" content="article">
+<meta property="og:title" content="如何在自己的网页中添加ga分析">
+<meta property="og:url" content="http://theewind.github.io/2016/06/23/如何在自己的网页中添加ga分析/index.html">
 <meta property="og:site_name" content="sanfeng’s blog">
-<meta property="og:description" content="这是我的三风的博客">
+<meta property="og:description" content="在学习前端的过程中，自己都想统计用户的访问量，下面代码可以做到最轻量级的追踪：
+1234567891011121314/*&amp;lt;script type=&amp;quot;text/javascript&amp;quot;&amp;gt;  var _gaq = _gaq || [];  _gaq.push([&amp;apos;_setAccount&amp;apos;, &amp;apos;UA-XXXXX-X&amp;apos;]);  _ga">
+<meta property="og:updated_time" content="2016-06-23T10:26:48.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="sanfeng’s blog">
-<meta name="twitter:description" content="这是我的三风的博客">
+<meta name="twitter:title" content="如何在自己的网页中添加ga分析">
+<meta name="twitter:description" content="在学习前端的过程中，自己都想统计用户的访问量，下面代码可以做到最轻量级的追踪：
+1234567891011121314/*&amp;lt;script type=&amp;quot;text/javascript&amp;quot;&amp;gt;  var _gaq = _gaq || [];  _gaq.push([&amp;apos;_setAccount&amp;apos;, &amp;apos;UA-XXXXX-X&amp;apos;]);  _ga">
   
   
     <link rel="icon" href="/favicon.png">
@@ -185,212 +189,114 @@
 	</div>
 </nav>
 
-      <div class="body-wrap">
+      <div class="body-wrap"><article id="post-如何在自己的网页中添加ga分析" class="article article-type-post" itemscope itemprop="blogPost">
   
+    <div class="article-meta">
+      <a href="/2016/06/23/如何在自己的网页中添加ga分析/" class="article-date">
+  	<time datetime="2016-06-23T08:58:54.000Z" itemprop="datePublished">2016-06-23</time>
+</a>
+    </div>
   
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
     
     
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      如何在自己的网页中添加ga分析
+    </h1>
+  
+
+      </header>
       
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/前端/">前端</a></li></ul>
+	</div>
+
+        
+
+        <div class="clearfix"></div>
+      </div>
       
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2016" class="archive-year">2016</a>
-        </div>
-        <div class="archives">
     
-    <article class="archive-article archive-type-React Native 学习之F8app代码阅读">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2016/06/07/study_f8app/" class="archive-article-date">
-  	<time datetime="2016-06-07T15:04:01.000Z" itemprop="datePublished">Jun 7</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/06/07/study_f8app/">study</a>
-    </h1>
-  
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>在学习前端的过程中，自己都想统计用户的访问量，下面代码可以做到最轻量级的追踪：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">/*&lt;script type=&quot;text/javascript&quot;&gt;</span><br><span class="line"></span><br><span class="line">  var _gaq = _gaq || [];</span><br><span class="line">  _gaq.push([&apos;_setAccount&apos;, &apos;UA-XXXXX-X&apos;]);</span><br><span class="line">  _gaq.push([&apos;_trackPageview&apos;]);</span><br><span class="line"></span><br><span class="line">  (function() &#123;</span><br><span class="line">    var ga = document.createElement(&apos;script&apos;); ga.type = &apos;text/javascript&apos;; ga.async = true;</span><br><span class="line">    ga.src = (&apos;https:&apos; == document.location.protocol ? &apos;https://ssl&apos; : &apos;http://www&apos;) + &apos;.google-analytics.com/ga.js&apos;;</span><br><span class="line">    var s = document.getElementsByTagName(&apos;script&apos;)[0]; s.parentNode.insertBefore(ga, s);</span><br><span class="line">  &#125;)();</span><br><span class="line"></span><br><span class="line">&lt;/script&gt;</span><br><span class="line">*/</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>具体可以参考如下<br> <a href="https://developers.google.com/analytics/devguides/collection/gajs/" target="_blank" rel="external">https://developers.google.com/analytics/devguides/collection/gajs/</a></p>
+</blockquote>
+<p> 此处是测试<br> 连接到自己html<a href="../cloudy-spiral/index.html">html</a></p>
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/React-Native/">React Native</a></li></ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
+      
+    </div>
+    
   </div>
-</article>
   
     
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2016/06/06/rac-willDeallocSignal/" class="archive-article-date">
-  	<time datetime="2016-06-06T06:46:23.000Z" itemprop="datePublished">Jun 6</time>
-</a>
-        </div>
-    	 
+<nav id="article-nav">
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/06/06/rac-willDeallocSignal/">rac_willDeallocSignal的加载时机</a>
-    </h1>
   
+    <a href="/2016/06/22/前端代码学习之scss/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">前端代码学习之scss</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/RAC/">RAC</a></li></ul>
+  
+</article>
+
+
+<div class="share_jia">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">分享到: &nbsp; </span>
+		<a class="jiathis_button_facebook"></a> 
+    <a class="jiathis_button_twitter"></a>
+    <a class="jiathis_button_plus"></a> 
+    <a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+    <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
 	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
 
-          
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2016/06/03/doubleListViewDemo/" class="archive-article-date">
-  	<time datetime="2016-06-03T03:41:01.000Z" itemprop="datePublished">Jun 3</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/06/03/doubleListViewDemo/">React Native 双listView交互动画</a>
-    </h1>
-  
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/react-native/">react native</a></li></ul>
-	</div>
 
-          
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2016/05/26/ReactNative 学习笔记/" class="archive-article-date">
-  	<time datetime="2016-05-26T06:36:44.000Z" itemprop="datePublished">May 26</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/05/26/ReactNative 学习笔记/">React Native学习笔记</a>
-    </h1>
-  
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/React-Native/">React Native</a></li></ul>
-	</div>
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="如何在自己的网页中添加ga分析" data-title="如何在自己的网页中添加ga分析" data-url="http://theewind.github.io/2016/06/23/如何在自己的网页中添加ga分析/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"theewind"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
 
-          
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2016/05/26/iOS下载内容保存在document中需要设置不同步/" class="archive-article-date">
-  	<time datetime="2016-05-26T03:26:03.000Z" itemprop="datePublished">May 26</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/05/26/iOS下载内容保存在document中需要设置不同步/">iOS下载内容保存在document中需要设置不同步</a>
-    </h1>
-  
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS/">iOS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/缓存/">缓存</a></li></ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2016/05/14/iOS横屏应用旋转无动画/" class="archive-article-date">
-  	<time datetime="2016-05-14T06:43:33.000Z" itemprop="datePublished">May 14</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/05/14/iOS横屏应用旋转无动画/">iOS横屏应用旋转无动画</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS/">iOS</a></li></ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
-
-    
-    <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/archives/2016/">&laquo; Prev</a><a class="page-number" href="/archives/2016/">1</a><span class="page-number current">2</span><a class="page-number" href="/archives/2016/page/3/">3</a><a class="page-number" href="/archives/2016/page/4/">4</a><a class="extend next" rel="next" href="/archives/2016/page/3/">Next &raquo;</a>
-    </nav>
-  
 
 </div>
       <footer id="footer">
@@ -416,8 +322,8 @@
 		mathjax: true,
 		animate: true,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: flase
