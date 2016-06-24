@@ -113,7 +113,7 @@
 				
 				<section class="switch-part switch-part2">
 					<div class="widget tagcloud" id="js-tagcloud">
-						<a href="/tags/JavaScript/" style="font-size: 10px;">JavaScript</a> <a href="/tags/RAC/" style="font-size: 10px;">RAC</a> <a href="/tags/React-Native/" style="font-size: 15px;">React Native</a> <a href="/tags/WKWebView/" style="font-size: 10px;">WKWebView</a> <a href="/tags/css/" style="font-size: 10px;">css</a> <a href="/tags/hexo/" style="font-size: 15px;">hexo</a> <a href="/tags/iOS/" style="font-size: 20px;">iOS</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/qrcode/" style="font-size: 10px;">qrcode</a> <a href="/tags/react-native/" style="font-size: 15px;">react native</a> <a href="/tags/shell/" style="font-size: 15px;">shell</a> <a href="/tags/swift/" style="font-size: 10px;">swift</a> <a href="/tags/代码检测/" style="font-size: 10px;">代码检测</a> <a href="/tags/前端/" style="font-size: 15px;">前端</a> <a href="/tags/正则表达式/" style="font-size: 10px;">正则表达式</a> <a href="/tags/测试/" style="font-size: 10px;">测试</a> <a href="/tags/缓存/" style="font-size: 10px;">缓存</a> <a href="/tags/脚本/" style="font-size: 10px;">脚本</a>
+						<a href="/tags/JavaScript/" style="font-size: 10px;">JavaScript</a> <a href="/tags/RAC/" style="font-size: 10px;">RAC</a> <a href="/tags/React-Native/" style="font-size: 15px;">React Native</a> <a href="/tags/WKWebView/" style="font-size: 10px;">WKWebView</a> <a href="/tags/css/" style="font-size: 10px;">css</a> <a href="/tags/hexo/" style="font-size: 15px;">hexo</a> <a href="/tags/iOS/" style="font-size: 20px;">iOS</a> <a href="/tags/javascript-前端/" style="font-size: 10px;">javascript 前端</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/qrcode/" style="font-size: 10px;">qrcode</a> <a href="/tags/react-native/" style="font-size: 15px;">react native</a> <a href="/tags/shell/" style="font-size: 15px;">shell</a> <a href="/tags/swift/" style="font-size: 10px;">swift</a> <a href="/tags/代码检测/" style="font-size: 10px;">代码检测</a> <a href="/tags/前端/" style="font-size: 15px;">前端</a> <a href="/tags/正则表达式/" style="font-size: 10px;">正则表达式</a> <a href="/tags/测试/" style="font-size: 10px;">测试</a> <a href="/tags/缓存/" style="font-size: 10px;">缓存</a> <a href="/tags/脚本/" style="font-size: 10px;">脚本</a>
 					</div>
 				</section>
 				
@@ -186,6 +186,69 @@
 </nav>
 
       <div class="body-wrap">
+  
+    <article id="post-ios归档需要注意" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/04/29/ios归档需要注意/" class="article-date">
+  	<time datetime="2016-04-29T06:01:52.000Z" itemprop="datePublished">2016-04-29</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/04/29/ios归档需要注意/">iOS归档之NSKeyedArchiver</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>如果对象是NSString、NSDictionary、NSArray、NSData、NSNumber等类型，可以直接用NSKeyedArchiver进行归档和恢复。</p>
+<p>不是所有的对象都可以直接用这种方法进行归档，只有遵守了NSCoding协议的对象才可以。</p>
+<p>NSCoding协议有2个方法：</p>
+<pre><code>encodeWithCoder:
+</code></pre><p>每次归档对象时，都会调用这个方法。一般在这个方法里面指定如何归档对象中的每个实例变量，可以使用encodeObject:forKey:方法归档实例变量</p>
+<pre><code>initWithCoder:
+</code></pre><p>每次从文件中恢复(解码)对象时，都会调用这个方法。一般在这个方法里面指定如何解码文件中的数据为对象的实例变量，可以使用decodeObject:forKey方法解码实例变量</p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS/">iOS</a></li></ul>
+	</div>
+
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
   
     <article id="post-今天好兴奋" class="article article-type-post" itemscope itemprop="blogPost">
   
