@@ -4,32 +4,17 @@
   <meta charset="utf-8">
   
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
-  <title>study | sanfeng’s blog</title>
+  <title>sanfeng’s blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="主要是先参考如下篇文章：
-
-http://www.open-open.com/lib/view/open1461512056952.html
-
-第一次接触redux，概念还比较模糊，同时js开发水平也一般，对一些语法学习还不是很懂，这里做个记录：代码中的很多function func(): type的用法，我之前接触的基本都是无返回值类型的，这里添加一个 :Action类型，貌似就是确定了返回值类">
-<meta property="og:type" content="article">
-<meta property="og:title" content="study">
-<meta property="og:url" content="http://theewind.github.io/2016/06/07/study_f8app/index.html">
+  <meta name="description" content="这是我的三风的博客">
+<meta property="og:type" content="website">
+<meta property="og:title" content="sanfeng’s blog">
+<meta property="og:url" content="http://theewind.github.io/page/5/index.html">
 <meta property="og:site_name" content="sanfeng’s blog">
-<meta property="og:description" content="主要是先参考如下篇文章：
-
-http://www.open-open.com/lib/view/open1461512056952.html
-
-第一次接触redux，概念还比较模糊，同时js开发水平也一般，对一些语法学习还不是很懂，这里做个记录：代码中的很多function func(): type的用法，我之前接触的基本都是无返回值类型的，这里添加一个 :Action类型，貌似就是确定了返回值类">
-<meta property="og:image" content="http://static.open-open.com/lib/uploadImg/20160424/20160424233655_731.png">
-<meta property="og:updated_time" content="2016-06-08T09:59:01.000Z">
+<meta property="og:description" content="这是我的三风的博客">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="study">
-<meta name="twitter:description" content="主要是先参考如下篇文章：
-
-http://www.open-open.com/lib/view/open1461512056952.html
-
-第一次接触redux，概念还比较模糊，同时js开发水平也一般，对一些语法学习还不是很懂，这里做个记录：代码中的很多function func(): type的用法，我之前接触的基本都是无返回值类型的，这里添加一个 :Action类型，貌似就是确定了返回值类">
-<meta name="twitter:image" content="http://static.open-open.com/lib/uploadImg/20160424/20160424233655_731.png">
+<meta name="twitter:title" content="sanfeng’s blog">
+<meta name="twitter:description" content="这是我的三风的博客">
   
   
     <link rel="icon" href="/favicon.png">
@@ -200,11 +185,13 @@ http://www.open-open.com/lib/view/open1461512056952.html
 	</div>
 </nav>
 
-      <div class="body-wrap"><article id="React Native 学习之F8app代码阅读-study_f8app" class="article article-type-React Native 学习之F8app代码阅读" itemscope itemprop="blogPost">
+      <div class="body-wrap">
+  
+    <article id="post-hexo-first" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2016/06/07/study_f8app/" class="article-date">
-  	<time datetime="2016-06-07T15:04:01.000Z" itemprop="datePublished">2016-06-07</time>
+      <a href="/2016/04/28/hexo-first/" class="article-date">
+  	<time datetime="2016-04-28T02:55:40.000Z" itemprop="datePublished">2016-04-28</time>
 </a>
     </div>
   
@@ -216,111 +203,55 @@ http://www.open-open.com/lib/view/open1461512056952.html
       <header class="article-header">
         
   
-    <h1 class="article-title" itemprop="name">
-      study
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/04/28/hexo-first/">Hexo 学习</a>
     </h1>
   
 
       </header>
       
-      <div class="article-info article-info-post">
-        
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/React-Native/">React Native</a></li></ul>
-	</div>
-
-        
-
-        <div class="clearfix"></div>
-      </div>
-      
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>主要是先参考如下篇文章：</p>
-<blockquote>
-<p><a href="http://www.open-open.com/lib/view/open1461512056952.html" target="_blank" rel="external">http://www.open-open.com/lib/view/open1461512056952.html</a></p>
-</blockquote>
-<p>第一次接触redux，概念还比较模糊，同时js开发水平也一般，对一些语法学习还不是很懂，这里做个记录：<br>代码中的很多function func(): type的用法，我之前接触的基本都是无返回值类型的，这里添加一个 <code>:Action</code>类型，貌似就是确定了返回值类型的，不知道理解的对不对。</p>
-<a id="more"></a>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">/* from js/actions/filter.js */</span><br><span class="line">function applyTopicsFilter(topics): Action &#123;</span><br><span class="line">  return &#123;</span><br><span class="line">    type: &apos;APPLY_TOPICS_FILTER&apos;,</span><br><span class="line">    topics,</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>redux的这个流程图不错<br><img src="http://static.open-open.com/lib/uploadImg/20160424/20160424233655_731.png" alt="组件"></p>
-<p>越看越不懂，任重而道远</p>
+        <p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hexo/">hexo</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/测试/">测试</a></li></ul>
+	</div>
 
       
+
+      
+        <p class="article-more-link">
+          <a  href="/2016/04/28/hexo-first/#more">more >></a>
+        </p>
+      
+      <div class="clearfix"></div>
     </div>
     
   </div>
   
-    
-<nav id="article-nav">
-  
-    <a href="/2016/06/12/正则表达式的学习/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption"><</strong>
-      <div class="article-nav-title">
-        
-          正则表达式的学习
-        
-      </div>
-    </a>
-  
-  
-    <a href="/2016/06/06/rac-willDeallocSignal/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">rac_willDeallocSignal的加载时机</div>
-      <strong class="article-nav-caption">></strong>
-    </a>
-  
-</nav>
-
-  
 </article>
 
 
-<div class="share_jia">
-	<!-- JiaThis Button BEGIN -->
-	<div class="jiathis_style">
-		<span class="jiathis_txt">分享到: &nbsp; </span>
-		<a class="jiathis_button_facebook"></a> 
-    <a class="jiathis_button_twitter"></a>
-    <a class="jiathis_button_plus"></a> 
-    <a class="jiathis_button_tsina"></a>
-		<a class="jiathis_button_cqq"></a>
-		<a class="jiathis_button_douban"></a>
-		<a class="jiathis_button_weixin"></a>
-		<a class="jiathis_button_tumblr"></a>
-    <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
-	</div>
-	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
-	<!-- JiaThis Button END -->
-</div>
 
 
 
 
 
 
-<div class="duoshuo">
-	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="study_f8app" data-title="study" data-url="http://theewind.github.io/2016/06/07/study_f8app/"></div>
-	<!-- 多说评论框 end -->
-	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
-	<script type="text/javascript">
-	var duoshuoQuery = {short_name:"theewind"};
-	(function() {
-		var ds = document.createElement('script');
-		ds.type = 'text/javascript';ds.async = true;
-		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
-		ds.charset = 'UTF-8';
-		(document.getElementsByTagName('head')[0] 
-		 || document.getElementsByTagName('body')[0]).appendChild(ds);
-	})();
-	</script>
-	<!-- 多说公共JS代码 end -->
-</div>
 
-
-
-
+  
+  
+    <nav id="page-nav">
+      <a class="extend prev" rel="prev" href="/page/4/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span>
+    </nav>
+  
 </div>
       <footer id="footer">
   <div class="outer">
@@ -344,8 +275,8 @@ http://www.open-open.com/lib/view/open1461512056952.html
 		fancybox: true,
 		mathjax: true,
 		animate: true,
-		isHome: false,
-		isPost: true,
+		isHome: true,
+		isPost: false,
 		isArchive: false,
 		isTag: false,
 		isCategory: false,
