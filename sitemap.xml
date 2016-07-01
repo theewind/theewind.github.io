@@ -2,6 +2,20 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://theewind.github.io/2016/06/30/FBRetainCycleDetector%E4%BB%A3%E7%A0%81%E5%AD%A6%E4%B9%A0/</loc>
+    
+    <lastmod>2016-07-01T11:11:34.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://theewind.github.io/2016/07/01/shadowsocket%E6%97%A0%E6%B3%95%E6%9B%B4%E6%96%B0pac/</loc>
+    
+    <lastmod>2016-07-01T05:16:40.000Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://theewind.github.io/2016/06/30/%E5%89%8D%E7%AB%AF%E4%BB%A3%E7%A0%81%E5%AD%A6%E4%B9%A0%E4%B9%8B%E5%B8%83%E5%B1%80/</loc>
     
     <lastmod>2016-06-30T07:03:42.000Z</lastmod>
@@ -100,7 +114,7 @@
   </url>
   
   <url>
-    <loc>http://theewind.github.io/2016/04/28/%E4%BB%8A%E5%A4%A9%E5%A5%BD%E5%85%B4%E5%A5%8B/</loc>
+    <loc>http://theewind.github.io/2016/04/28/JS%20==%20%E4%B8%8E%20===%E7%9A%84%E5%8C%BA%E5%88%AB/</loc>
     
     <lastmod>2016-05-26T07:26:39.000Z</lastmod>
     
