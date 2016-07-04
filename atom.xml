@@ -5,7 +5,7 @@
   <link href="//atom.xml" rel="self"/>
   
   <link href="http://theewind.github.io/"/>
-  <updated>2016-07-01T05:16:40.000Z</updated>
+  <updated>2016-07-04T02:01:32.000Z</updated>
   <id>http://theewind.github.io/</id>
   
   <author>
@@ -14,6 +14,90 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>YYModel源码分析</title>
+    <link href="http://theewind.github.io/2016/07/02/YYModel%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/"/>
+    <id>http://theewind.github.io/2016/07/02/YYModel源码分析/</id>
+    <published>2016-07-02T07:22:47.000Z</published>
+    <updated>2016-07-04T02:01:32.000Z</updated>
+    
+    <content type="html">&lt;p&gt;根据JSON生成Model是一个iOS开发经常用到的内容，这方面开源的也很多，比如我们公司用的Mantel，但其实效率很一般，最近看了&lt;a href=&quot;https://github.com/ibireme/YYModel&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;YYModel&lt;/a&gt;，区区五个文件，功能简单且高效，于是就认真学习一下人家是怎么实现的。&lt;/p&gt;
+&lt;p&gt;在我想来，主要就是通过runtime方法获取property和ivar就可以了，通过判断每个ivar的类型，然后根据不同的类型给每个property赋值，应该算是不太难的。在网上看到了&lt;a href=&quot;http://blog.csdn.net/woaifen3344/article/details/39301203&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;这篇文章&lt;/a&gt;，就是我想的这个样子，但是YYModel的作者可不是这么认为的。&lt;/p&gt;
+&lt;p&gt;作者首先通过runtime方法，生成YYClassInfo，其中YYClassInfo主要是取了YYClassIvarInfo，YYClassMethodInfo，YYClassPropertyInfo。然后通过YYClassInfo构造YYModelMeta。&lt;/p&gt;
+&lt;p&gt;YYModelMeta里面包括YYModelPropertyMeta&lt;br&gt;这个过程中，我还有些疑问的，为啥一定要构造这么多中间类呢？咱们继续往下看。&lt;/p&gt;
+&lt;p&gt;实际的操作过程中，YYClassIvarInfo和YYClassMethodInfo都没有用到，主要就是用到了YYClassPropertyInfo，由此构造YYModelPropertyMeta，再生成YYModelMeta。&lt;/p&gt;
+&lt;p&gt;作者都采用了CoreFoundition类型，比如CFStringRef，CFArrayRef等的操作，相对于 Foundation 的方法来说，CoreFoundation 的方法有更高的性能，用 CFArrayApplyFunction() 和 CFDictionaryApplyFunction() 方法来遍历容器类能带来不少性能提升，以及赋值也是采用objc_sendMsg的方法，就是为了快，省去很多OC方法的查找，这就不难理解，作者为什么用那么多的中间类来记录Method，Ivar，property的setter和getter了。&lt;/p&gt;
+&lt;p&gt;作者在&lt;a href=&quot;http://blog.ibireme.com/2015/10/23/ios_model_framework_benchmark/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;文章中&lt;/a&gt;对各个开源库进行了对比，图文声茂，功底了得，膜拜一把。&lt;/p&gt;
+&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
+&lt;h2 id=&quot;其他知识点：&quot;&gt;&lt;a href=&quot;#其他知识点：&quot; class=&quot;headerlink&quot; title=&quot;其他知识点：&quot;&gt;&lt;/a&gt;其他知识点：&lt;/h2&gt;&lt;h3 id=&quot;1-nonnull&quot;&gt;&lt;a href=&quot;#1-nonnull&quot; class=&quot;headerlink&quot; title=&quot;1. nonnull&quot;&gt;&lt;/a&gt;1. nonnull&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;NS_ASSUME_NONNULL_BEGIN&lt;/li&gt;
+&lt;li&gt;NS_ASSUME_NONNULL_END&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;在这两个宏之间的代码，所有简单指针对象都被假定为nonnull，因此我们只需要去指定那些nullable的指针&lt;/p&gt;
+&lt;h3 id=&quot;2-零依赖&quot;&gt;&lt;a href=&quot;#2-零依赖&quot; class=&quot;headerlink&quot; title=&quot;2. 零依赖&quot;&gt;&lt;/a&gt;2. 零依赖&lt;/h3&gt;&lt;p&gt;自己的类甚至都不用添加&lt;yymodel&gt;的协议，怎么做到呢，其实就是先用respondersToSelector判断是否有&lt;yymodel&gt;协议里面的函数，如果有就通过(id&lt;yymodel&gt;)cls 来调用，如果不这样写，而是直接cls来调用，编译器会有warning的提示，同时也可以采用performSelector来实现。&lt;/yymodel&gt;&lt;/yymodel&gt;&lt;/yymodel&gt;&lt;/p&gt;
+&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;4&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;5&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;6&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;7&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;8&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;// Get black list&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    NSSet *blacklist = nil;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    if ([cls respondsToSelector:@selector(modelPropertyBlacklist)]) &amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        NSArray *properties = [(id&amp;lt;YYModel&amp;gt;)cls modelPropertyBlacklist];&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        if (properties) &amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;            blacklist = [NSSet setWithArray:properties];&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        &amp;#125;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &amp;#125;&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;h3 id=&quot;3-copy记得释放&quot;&gt;&lt;a href=&quot;#3-copy记得释放&quot; class=&quot;headerlink&quot; title=&quot;3. copy记得释放&quot;&gt;&lt;/a&gt;3. copy记得释放&lt;/h3&gt;&lt;pre&gt;&lt;code&gt;Method *methods = class_copyMethodList(cls, &amp;amp;methodCount);
+free(methods);
+objc_property_t *properties = class_copyPropertyList(cls, &amp;amp;propertyCount);
+free(properties);
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&quot;4-信号量-读写锁&quot;&gt;&lt;a href=&quot;#4-信号量-读写锁&quot; class=&quot;headerlink&quot; title=&quot;4. 信号量-读写锁&quot;&gt;&lt;/a&gt;4. 信号量-读写锁&lt;/h3&gt;&lt;pre&gt;&lt;code&gt;static dispatch_semaphore_t lock;
+lock = dispatch_semaphore_create(1);
+
+if (!info) {
+    info = [[YYClassInfo alloc] initWithClass:cls];
+    if (info) {
+        dispatch_semaphore_wait(lock, DISPATCH_TIME_FOREVER);
+        CFDictionarySetValue(info.isMeta ? metaCache : classCache, (__bridge const void *)(cls), (__bridge const void *)(info));
+        dispatch_semaphore_signal(lock);
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&amp;gt;&lt;br&gt;附: YYModel 性能优化的几个 Tip：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;缓存&lt;br&gt;Model JSON 转换过程中需要很多类的元数据，如果数据足够小，则全部缓存到内存中。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;查表&lt;br&gt;当遇到多项选择的条件时，要尽量使用查表法实现，比如 switch/case，C Array，如果查表条件是对象，则可以用 NSDictionary 来实现。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;避免 KVC&lt;br&gt;Key-Value Coding 使用起来非常方便，但性能上要差于直接调用 Getter/Setter，所以如果能避免 KVC 而用 Getter/Setter 代替，性能会有较大提升。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;避免 Getter/Setter 调用&lt;br&gt;如果能直接访问 ivar，则尽量使用 ivar 而不要使用 Getter/Setter 这样也能节省一部分开销。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;避免多余的内存管理方法&lt;br&gt;在 ARC 条件下，默认声明的对象是 &lt;strong&gt;strong 类型的，赋值时有可能会产生 retain/release 调用，如果一个变量在其生命周期内不会被释放，则使用 &lt;/strong&gt;unsafe_unretained 会节省很大的开销。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;访问具有 &lt;strong&gt;weak 属性的变量时，实际上会调用 objc_loadWeak() 和 objc_storeWeak() 来完成，这也会带来很大的开销，所以要避免使用 &lt;/strong&gt;weak 属性。&lt;/p&gt;
+&lt;p&gt;创建和使用对象时，要尽量避免对象进入 autoreleasepool，以避免额外的资源开销。&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;遍历容器类时，选择更高效的方法&lt;br&gt;相对于 Foundation 的方法来说，CoreFoundation 的方法有更高的性能，用 CFArrayApplyFunction() 和 CFDictionaryApplyFunction() 方法来遍历容器类能带来不少性能提升，但代码写起来会非常麻烦。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;尽量用纯 C 函数、内联函数&lt;br&gt;使用纯 C 函数可以避免 ObjC 的消息发送带来的开销。如果 C 函数比较小，使用 inline 可以避免一部分压栈弹栈等函数调用的开销。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;减少遍历的循环次数&lt;br&gt;在 JSON 和 Model 转换前，Model 的属性个数和 JSON 的属性个数都是已知的，这时选择数量较少的那一方进行遍历，会节省很多时间。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;a href=&quot;http://www.cnblogs.com/develop-SZT/p/5348364.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;runtime之玩转成员变量&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;http://blog.csdn.net/woaifen3344/article/details/50505808&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;runtime Method&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;http://blog.ibireme.com/2015/10/23/ios_model_framework_benchmark/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;iOS JSON 模型转换库评测&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;根据JSON生成Model是一个iOS开发经常用到的内容，这方面开源的也很多，比如我们公司用的Mantel，但其实效率很一般，最近看了&lt;a href=&quot;https://github.com/ibireme/YYModel&quot;&gt;YYModel&lt;/a&gt;，区区五个文件，功能简单且高效，于是就认真学习一下人家是怎么实现的。&lt;/p&gt;
+&lt;p&gt;在我想来，主要就是通过runtime方法获取property和ivar就可以了，通过判断每个ivar的类型，然后根据不同的类型给每个property赋值，应该算是不太难的。在网上看到了&lt;a href=&quot;http://blog.csdn.net/woaifen3344/article/details/39301203&quot;&gt;这篇文章&lt;/a&gt;，就是我想的这个样子，但是YYModel的作者可不是这么认为的。&lt;/p&gt;
+&lt;p&gt;作者首先通过runtime方法，生成YYClassInfo，其中YYClassInfo主要是取了YYClassIvarInfo，YYClassMethodInfo，YYClassPropertyInfo。然后通过YYClassInfo构造YYModelMeta。&lt;/p&gt;
+&lt;p&gt;YYModelMeta里面包括YYModelPropertyMeta&lt;br&gt;这个过程中，我还有些疑问的，为啥一定要构造这么多中间类呢？咱们继续往下看。&lt;/p&gt;
+&lt;p&gt;实际的操作过程中，YYClassIvarInfo和YYClassMethodInfo都没有用到，主要就是用到了YYClassPropertyInfo，由此构造YYModelPropertyMeta，再生成YYModelMeta。&lt;/p&gt;
+&lt;p&gt;作者都采用了CoreFoundition类型，比如CFStringRef，CFArrayRef等的操作，相对于 Foundation 的方法来说，CoreFoundation 的方法有更高的性能，用 CFArrayApplyFunction() 和 CFDictionaryApplyFunction() 方法来遍历容器类能带来不少性能提升，以及赋值也是采用objc_sendMsg的方法，就是为了快，省去很多OC方法的查找，这就不难理解，作者为什么用那么多的中间类来记录Method，Ivar，property的setter和getter了。&lt;/p&gt;
+&lt;p&gt;作者在&lt;a href=&quot;http://blog.ibireme.com/2015/10/23/ios_model_framework_benchmark/&quot;&gt;文章中&lt;/a&gt;对各个开源库进行了对比，图文声茂，功底了得，膜拜一把。&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="iOS" scheme="http://theewind.github.io/tags/iOS/"/>
+    
+  </entry>
   
   <entry>
     <title>shadowsocks无法更新pac</title>
@@ -49,7 +133,7 @@ sh update_gfwlist.sh
     <link href="http://theewind.github.io/2016/06/30/FBRetainCycleDetector%E4%BB%A3%E7%A0%81%E5%AD%A6%E4%B9%A0/"/>
     <id>http://theewind.github.io/2016/06/30/FBRetainCycleDetector代码学习/</id>
     <published>2016-06-30T09:39:28.000Z</published>
-    <updated>2016-07-01T11:11:34.000Z</updated>
+    <updated>2016-07-02T09:10:40.000Z</updated>
     
     <content type="html">&lt;p&gt;&lt;a href=&quot;https://github.com/facebook/FBMemoryProfiler&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;FBMemoryProfiler&lt;/a&gt;是Facebook开源的一款用于分析iOS内存使用和检测循环引用的工具库，可以让你在应用程序内运行循环应用检测。底层主要由&lt;a href=&quot;https://github.com/facebook/FBAllocationTracker&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;FBAllocationTracker&lt;/a&gt;和&lt;a href=&quot;https://github.com/facebook/FBRetainCycleDetector#filters&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;FBRetainCycleDetector&lt;/a&gt;两块来实现功能。&lt;/p&gt;
 &lt;h2 id=&quot;FBAllocationTracker&quot;&gt;&lt;a href=&quot;#FBAllocationTracker&quot; class=&quot;headerlink&quot; title=&quot;FBAllocationTracker&quot;&gt;&lt;/a&gt;FBAllocationTracker&lt;/h2&gt;&lt;p&gt;通过在main.m中添加&lt;/p&gt;
@@ -81,6 +165,7 @@ fb_originalAlloc--&amp;gt;alloc的IMP
 &lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;4&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;5&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;6&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;7&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;8&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;9&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;10&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;11&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;12&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;13&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;14&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;15&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;16&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;17&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;18&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;19&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;20&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;21&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;22&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;23&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;24&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;25&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;26&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;27&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;- (NSSet *)allRetainedObjects&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;  NSArray *unfiltered = [self _unfilteredRetainedObjects];&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;  return [self filterObjects:unfiltered];&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&amp;#125;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;- (NSArray *)_unfilteredRetainedObjects&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;  Class aCls = object_getClass(self.object);&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;  if (!self.object || !aCls) &amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    return nil;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;  &amp;#125;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;  NSArray *strongIvars = FBGetObjectStrongReferences(self.object, self.configuration.layoutCache);&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;  NSMutableArray *retainedObjects = [[[super allRetainedObjects] allObjects] mutableCopy];&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;  for (id&amp;lt;FBObjectReference&amp;gt; ref in strongIvars) &amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    id referencedObject = [ref objectReferenceFromObject:self.object];&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    if (referencedObject) &amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;      NSArray&amp;lt;NSString *&amp;gt; *namePath = [ref namePath];&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;      [retainedObjects addObject:FBWrapObjectGraphElementWithContext(referencedObject,&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;                                                                     self.configuration,&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;                                                                     namePath)];&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &amp;#125;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;  &amp;#125;&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
 &lt;h1 id=&quot;其他代码学习&quot;&gt;&lt;a href=&quot;#其他代码学习&quot; class=&quot;headerlink&quot; title=&quot;其他代码学习&quot;&gt;&lt;/a&gt;其他代码学习&lt;/h1&gt;&lt;p&gt;判断一个对象实例的iVar的类型&lt;/p&gt;
 &lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;4&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;5&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;6&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;7&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;8&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;9&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;10&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;11&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;12&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;13&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;14&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;15&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;16&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;17&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;18&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;19&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;20&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;21&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;22&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;23&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;24&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;25&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;26&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;- (FBType)_convertEncodingToType:(const char *)typeEncoding&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;  if (typeEncoding[0] == &amp;apos;&amp;#123;&amp;apos;) &amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    return FBStructType;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;  &amp;#125;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;  if (typeEncoding[0] == &amp;apos;@&amp;apos;) &amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    // It&amp;apos;s an object or block&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    // Let&amp;apos;s try to determine if it&amp;apos;s a block. Blocks tend to have&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    // @? typeEncoding. Docs state that it&amp;apos;s undefined type, so&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    // we should still verify that ivar with that type is a block&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    if (strncmp(typeEncoding, &amp;quot;@?&amp;quot;, 2) == 0) &amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;      return FBBlockType;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &amp;#125;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    return FBObjectType;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;  &amp;#125;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;  return FBUnknownType;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&amp;#125;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;以及对ivar的操作&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    _name = @(ivar_getName(ivar));&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    _type = [self _convertEncodingToType:ivar_getTypeEncoding(ivar)];&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    _offset = ivar_getOffset(ivar);&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;&lt;code&gt;日常我们写一个property时，系统会默认给我们生成一个对应的_property的ivar，如果property前面添加了_,或者__呢，经试验系统还是会默认在这些前面继续加_的&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;那如何区分那些是weak，那些是strong呢，这里就需要对Class的 Ivar Layout有一定的了解&lt;/p&gt;
 &lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;4&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;5&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;6&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;7&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;8&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;9&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;10&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;11&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;12&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;13&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;14&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;15&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;16&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;17&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;struct class_ro_t &amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    uint32_t flags;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    uint32_t instanceStart;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    uint32_t instanceSize;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;#ifdef __LP64__&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    uint32_t reserved;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;#endif&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    const uint8_t * ivarLayout; // &amp;lt;- 记录了哪些是 strong 的 ivar&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    const char * name;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    const method_list_t * baseMethods;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    const protocol_list_t * baseProtocols;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    const ivar_list_t * ivars;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    const uint8_t * weakIvarLayout; // &amp;lt;- 记录了哪些是 weak 的 ivar&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    const property_list_t *baseProperties;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&amp;#125;;&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
 &lt;p&gt;所以FBRetainCycleDetector中是通过取 &lt;/p&gt;
@@ -897,81 +982,6 @@ import IconFA from &amp;apos;react-native-vector-icons/FontAwesome&amp;apos;;
     
     
       <category term="shell" scheme="http://theewind.github.io/tags/shell/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>thrift学习</title>
-    <link href="http://theewind.github.io/2016/04/29/thrift-study/"/>
-    <id>http://theewind.github.io/2016/04/29/thrift-study/</id>
-    <published>2016-04-29T09:44:20.000Z</published>
-    <updated>2016-04-28T09:58:58.000Z</updated>
-    
-    <content type="html">&lt;p&gt;&lt;strong&gt;其实thrift和点评的nvobject蛮像的，其中，TBinaryProtocol都是二进制传输，然后将属性的字段进行压缩，较少网络传输的数据。&lt;br&gt;比如点评是采用hash值，每个对象的属性都有个hash值，然后传输此hash值，客户端根据hash值对应属性，而thrift是采用编号的方式，在idl描述文件中，就已经设置好了编号，然后传输编号到服务端，客户端根据编号对应属性。
-&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;thrift -gen cocoa &lt;em&gt;**&lt;/em&gt;&lt;/strong&gt;.thrift 生成.h.m文件，然后添加工程，然后调用方法如下：**&lt;/p&gt;
-&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
-&lt;p&gt;##例如：&lt;br&gt;METMemberCardServiceClient是最终发送请求的类，而他依赖TBinaryProtocol&lt;tportocol&gt;&lt;/tportocol&gt;&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;- (void)getDisplayTypefinished:(void(^)(METMineMembercardExhibitionType result, SAKError *error))finished
-{
-NSDictionary *headerParams = @{@&amp;quot;token&amp;quot; : kUserToken, @&amp;quot;userId&amp;quot; : kUserID, @&amp;quot;clientKey&amp;quot; :  @&amp;quot;group&amp;quot;};
-TBinaryProtocol *binaryProtocol = [self createThriftProtocol:kMemberCardServiceURLString headerParameters:headerParams];
-METMemberCardServiceClient *memberCardService = [[METMemberCardServiceClient alloc] initWithProtocol:binaryProtocol];
-[memberCardService getDisplayTypefinished:^(int result, SAKError *error) {
-    if (error) {
-        if (finished) {
-            @within_main_thread(finished, 0, error);
-        }
-        return;
-    }
-    if (finished) {
-        @within_main_thread(finished, result, error);
-    }
-}];
-}
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;TBinaryProtocol的构造需要SAKMascoTransport&lt;ttransport&gt;，而SAKMascoTransport&lt;ttransport&gt;的构造需要：THTTPClient&lt;ttransport&gt;，其中SAKMascoTransport是对THTTPClient的封装。&lt;br&gt;THTTPClient的概念比较简单，主要是read，write及flush（发送网络请求），不管数据的意义，而SAKMascoTransport是有数据概念的，比如header，body，元数据等，将有意义的数据进行组合后，然后掉用THTTPClient的read，write等。&lt;/ttransport&gt;&lt;/ttransport&gt;&lt;/ttransport&gt;&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;- (TBinaryProtocol *)createThriftProtocol:(NSString *)serviceURLString headerParameters:(NSDictionary *)headerParameters
-{
-NSString *commonParameterString = [[[SAKEnvironment environment] commonParameter] queryStringEncoded];
-NSString *serviceURLStringWithCommonParameter = [NSString stringWithFormat:@&amp;quot;%@?%@&amp;quot;, serviceURLString, commonParameterString];
-THTTPClient *httpClient = [[THTTPClient alloc] initWithURL:[NSURL URLWithString:serviceURLStringWithCommonParameter]];
-SAKMascoTransport *mascoTransport = [[SAKMascoTransport alloc] initWithTransport:httpClient andSerialID:1];
-
-[headerParameters enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
-    NSString *keyString = (NSString *)key;
-    if (keyString.length) {
-        [mascoTransport appendHeaderData:[keyString dataUsingEncoding:NSUTF8StringEncoding]];
-    }
-
-    // Replace user id and user token
-    NSString *valueString = (NSString *)obj;
-    if ([valueString isEqualToString:kUserID]) {
-        valueString = [valueString stringByReplacingOccurrencesOfString:kUserID withString:(self.user ? [self.user.userID stringValue] : @&amp;quot;&amp;quot;)];
-    }
-    else if ([valueString isEqualToString:kUserToken]) {
-        valueString = [valueString stringByReplacingOccurrencesOfString:kUserToken withString:(self.user ? self.user.token : @&amp;quot;&amp;quot;)];
-    } else {
-        // Do nothing
-    }
-
-    if (valueString.length) {
-        [mascoTransport appendHeaderData:[valueString dataUsingEncoding:NSUTF8StringEncoding]];
-    }
-}];
-
-    TBinaryProtocol *customProtocol = [[TBinaryProtocol alloc] initWithTransport:mascoTransport strictRead:NO strictWrite:YES];
-    return customProtocol;
-}
-&lt;/code&gt;&lt;/pre&gt;</content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;&lt;strong&gt;其实thrift和点评的nvobject蛮像的，其中，TBinaryProtocol都是二进制传输，然后将属性的字段进行压缩，较少网络传输的数据。&lt;br&gt;比如点评是采用hash值，每个对象的属性都有个hash值，然后传输此hash值，客户端根据hash值对应属性，而thrift是采用编号的方式，在idl描述文件中，就已经设置好了编号，然后传输编号到服务端，客户端根据编号对应属性。
-&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;thrift -gen cocoa &lt;em&gt;**&lt;/em&gt;&lt;/strong&gt;.thrift 生成.h.m文件，然后添加工程，然后调用方法如下：**&lt;/p&gt;
-    
-    </summary>
-    
     
   </entry>
   

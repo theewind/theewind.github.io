@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+  <title>YYModel源码分析 | sanfeng’s blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="根据JSON生成Model是一个iOS开发经常用到的内容，这方面开源的也很多，比如我们公司用的Mantel，但其实效率很一般，最近看了YYModel，区区五个文件，功能简单且高效，于是就认真学习一下人家是怎么实现的。
+在我想来，主要就是通过runtime方法获取property和ivar就可以了，通过判断每个ivar的类型，然后根据不同的类型给每个property赋值，应该算是不太难的。在网上看到">
+<meta property="og:type" content="article">
+<meta property="og:title" content="YYModel源码分析">
+<meta property="og:url" content="http://theewind.github.io/2016/07/02/YYModel源码分析/index.html">
+<meta property="og:site_name" content="sanfeng’s blog">
+<meta property="og:description" content="根据JSON生成Model是一个iOS开发经常用到的内容，这方面开源的也很多，比如我们公司用的Mantel，但其实效率很一般，最近看了YYModel，区区五个文件，功能简单且高效，于是就认真学习一下人家是怎么实现的。
+在我想来，主要就是通过runtime方法获取property和ivar就可以了，通过判断每个ivar的类型，然后根据不同的类型给每个property赋值，应该算是不太难的。在网上看到">
+<meta property="og:updated_time" content="2016-07-04T02:01:32.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="YYModel源码分析">
+<meta name="twitter:description" content="根据JSON生成Model是一个iOS开发经常用到的内容，这方面开源的也很多，比如我们公司用的Mantel，但其实效率很一般，最近看了YYModel，区区五个文件，功能简单且高效，于是就认真学习一下人家是怎么实现的。
+在我想来，主要就是通过runtime方法获取property和ivar就可以了，通过判断每个ivar的类型，然后根据不同的类型给每个property赋值，应该算是不太难的。在网上看到">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="http://7xthb9.com2.z0.glb.clouddn.com/8d04d7630ea03c7524cff3437f48e009.jpg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">sanfeng.li</a></h1>
+		</hgroup>
+
+		
+		<p class="header-subtitle">sanfengflying</p>
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						
+						<div class="icon-wrap icon-me hide" data-idx="3">
+							<div class="user"></div>
+							<div class="shoulder"></div>
+						</div>
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>标签</li>
+						
+						
+						<li>关于我</li>
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+							<li><a href="/tags/">标签云</a></li>
+				        
+							<li><a href="/tags/swift">swift</a></li>
+				        
+							<li><a href="/about">关于</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="https://github.com/theewind" title="github">github</a>
+					        
+								<a class="mail" target="_blank" href="mailto:sanfengflying@126.com" title="mail">mail</a>
+					        
+								<a class="rss" target="_blank" href="/atom.xml" title="rss">rss</a>
+					        
+								<a class="Sitemap" target="_blank" href="/sitemap.xml" title="Sitemap">Sitemap</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/CSS/" style="font-size: 10px;">CSS</a> <a href="/tags/JavaScript/" style="font-size: 10px;">JavaScript</a> <a href="/tags/RAC/" style="font-size: 10px;">RAC</a> <a href="/tags/React-Native/" style="font-size: 13.33px;">React Native</a> <a href="/tags/WKWebView/" style="font-size: 10px;">WKWebView</a> <a href="/tags/css/" style="font-size: 13.33px;">css</a> <a href="/tags/hexo/" style="font-size: 13.33px;">hexo</a> <a href="/tags/iOS/" style="font-size: 20px;">iOS</a> <a href="/tags/javascript-前端/" style="font-size: 10px;">javascript 前端</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/qrcode/" style="font-size: 10px;">qrcode</a> <a href="/tags/react-native/" style="font-size: 13.33px;">react native</a> <a href="/tags/shadowsocks/" style="font-size: 10px;">shadowsocks</a> <a href="/tags/shell/" style="font-size: 13.33px;">shell</a> <a href="/tags/swift/" style="font-size: 10px;">swift</a> <a href="/tags/代码检测/" style="font-size: 10px;">代码检测</a> <a href="/tags/内存检测/" style="font-size: 10px;">内存检测</a> <a href="/tags/前端/" style="font-size: 16.67px;">前端</a> <a href="/tags/正则表达式/" style="font-size: 10px;">正则表达式</a> <a href="/tags/测试/" style="font-size: 10px;">测试</a> <a href="/tags/缓存/" style="font-size: 10px;">缓存</a> <a href="/tags/脚本/" style="font-size: 10px;">脚本</a>
+					</div>
+				</section>
+				
+				
+				
+
+				
+				
+				<section class="switch-part switch-part3">
+				
+					<div id="js-aboutme">三风，江湖人称风风子，我就是是我，不一样的烟火~~~</div>
+				</section>
+				
+			</div>
+		</div>
+	</header>				
+</div>
+
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">sanfeng.li</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+			
+				<img lazy-src="http://7xthb9.com2.z0.glb.clouddn.com/8d04d7630ea03c7524cff3437f48e009.jpg" class="js-avatar">
+			
+			</div>
+			<hgroup>
+			  <h1 class="header-author">sanfeng.li</h1>
+			</hgroup>
+			
+			<p class="header-subtitle">sanfengflying</p>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+					<li><a href="/tags/">标签云</a></li>
+		        
+					<li><a href="/tags/swift">swift</a></li>
+		        
+					<li><a href="/about">关于</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/theewind" title="github">github</a>
+			        
+						<a class="mail" target="_blank" href="mailto:sanfengflying@126.com" title="mail">mail</a>
+			        
+						<a class="rss" target="_blank" href="/atom.xml" title="rss">rss</a>
+			        
+						<a class="Sitemap" target="_blank" href="/sitemap.xml" title="Sitemap">Sitemap</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+
+      <div class="body-wrap"><article id="post-YYModel源码分析" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/07/02/YYModel源码分析/" class="article-date">
+  	<time datetime="2016-07-02T07:22:47.000Z" itemprop="datePublished">2016-07-02</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      YYModel源码分析
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS/">iOS</a></li></ul>
+	</div>
+
+        
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>根据JSON生成Model是一个iOS开发经常用到的内容，这方面开源的也很多，比如我们公司用的Mantel，但其实效率很一般，最近看了<a href="https://github.com/ibireme/YYModel" target="_blank" rel="external">YYModel</a>，区区五个文件，功能简单且高效，于是就认真学习一下人家是怎么实现的。</p>
+<p>在我想来，主要就是通过runtime方法获取property和ivar就可以了，通过判断每个ivar的类型，然后根据不同的类型给每个property赋值，应该算是不太难的。在网上看到了<a href="http://blog.csdn.net/woaifen3344/article/details/39301203" target="_blank" rel="external">这篇文章</a>，就是我想的这个样子，但是YYModel的作者可不是这么认为的。</p>
+<p>作者首先通过runtime方法，生成YYClassInfo，其中YYClassInfo主要是取了YYClassIvarInfo，YYClassMethodInfo，YYClassPropertyInfo。然后通过YYClassInfo构造YYModelMeta。</p>
+<p>YYModelMeta里面包括YYModelPropertyMeta<br>这个过程中，我还有些疑问的，为啥一定要构造这么多中间类呢？咱们继续往下看。</p>
+<p>实际的操作过程中，YYClassIvarInfo和YYClassMethodInfo都没有用到，主要就是用到了YYClassPropertyInfo，由此构造YYModelPropertyMeta，再生成YYModelMeta。</p>
+<p>作者都采用了CoreFoundition类型，比如CFStringRef，CFArrayRef等的操作，相对于 Foundation 的方法来说，CoreFoundation 的方法有更高的性能，用 CFArrayApplyFunction() 和 CFDictionaryApplyFunction() 方法来遍历容器类能带来不少性能提升，以及赋值也是采用objc_sendMsg的方法，就是为了快，省去很多OC方法的查找，这就不难理解，作者为什么用那么多的中间类来记录Method，Ivar，property的setter和getter了。</p>
+<p>作者在<a href="http://blog.ibireme.com/2015/10/23/ios_model_framework_benchmark/" target="_blank" rel="external">文章中</a>对各个开源库进行了对比，图文声茂，功底了得，膜拜一把。</p>
+<a id="more"></a>
+<h2 id="其他知识点："><a href="#其他知识点：" class="headerlink" title="其他知识点："></a>其他知识点：</h2><h3 id="1-nonnull"><a href="#1-nonnull" class="headerlink" title="1. nonnull"></a>1. nonnull</h3><ul>
+<li>NS_ASSUME_NONNULL_BEGIN</li>
+<li>NS_ASSUME_NONNULL_END</li>
+</ul>
+<p>在这两个宏之间的代码，所有简单指针对象都被假定为nonnull，因此我们只需要去指定那些nullable的指针</p>
+<h3 id="2-零依赖"><a href="#2-零依赖" class="headerlink" title="2. 零依赖"></a>2. 零依赖</h3><p>自己的类甚至都不用添加<yymodel>的协议，怎么做到呢，其实就是先用respondersToSelector判断是否有<yymodel>协议里面的函数，如果有就通过(id<yymodel>)cls 来调用，如果不这样写，而是直接cls来调用，编译器会有warning的提示，同时也可以采用performSelector来实现。</yymodel></yymodel></yymodel></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">// Get black list</div><div class="line">    NSSet *blacklist = nil;</div><div class="line">    if ([cls respondsToSelector:@selector(modelPropertyBlacklist)]) &#123;</div><div class="line">        NSArray *properties = [(id&lt;YYModel&gt;)cls modelPropertyBlacklist];</div><div class="line">        if (properties) &#123;</div><div class="line">            blacklist = [NSSet setWithArray:properties];</div><div class="line">        &#125;</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
+<h3 id="3-copy记得释放"><a href="#3-copy记得释放" class="headerlink" title="3. copy记得释放"></a>3. copy记得释放</h3><pre><code>Method *methods = class_copyMethodList(cls, &amp;methodCount);
+free(methods);
+objc_property_t *properties = class_copyPropertyList(cls, &amp;propertyCount);
+free(properties);
+</code></pre><h3 id="4-信号量-读写锁"><a href="#4-信号量-读写锁" class="headerlink" title="4. 信号量-读写锁"></a>4. 信号量-读写锁</h3><pre><code>static dispatch_semaphore_t lock;
+lock = dispatch_semaphore_create(1);
+
+if (!info) {
+    info = [[YYClassInfo alloc] initWithClass:cls];
+    if (info) {
+        dispatch_semaphore_wait(lock, DISPATCH_TIME_FOREVER);
+        CFDictionarySetValue(info.isMeta ? metaCache : classCache, (__bridge const void *)(cls), (__bridge const void *)(info));
+        dispatch_semaphore_signal(lock);
+    }
+}
+</code></pre><p>&gt;<br>附: YYModel 性能优化的几个 Tip：</p>
+<ol>
+<li><p>缓存<br>Model JSON 转换过程中需要很多类的元数据，如果数据足够小，则全部缓存到内存中。</p>
+</li>
+<li><p>查表<br>当遇到多项选择的条件时，要尽量使用查表法实现，比如 switch/case，C Array，如果查表条件是对象，则可以用 NSDictionary 来实现。</p>
+</li>
+<li><p>避免 KVC<br>Key-Value Coding 使用起来非常方便，但性能上要差于直接调用 Getter/Setter，所以如果能避免 KVC 而用 Getter/Setter 代替，性能会有较大提升。</p>
+</li>
+<li><p>避免 Getter/Setter 调用<br>如果能直接访问 ivar，则尽量使用 ivar 而不要使用 Getter/Setter 这样也能节省一部分开销。</p>
+</li>
+<li><p>避免多余的内存管理方法<br>在 ARC 条件下，默认声明的对象是 <strong>strong 类型的，赋值时有可能会产生 retain/release 调用，如果一个变量在其生命周期内不会被释放，则使用 </strong>unsafe_unretained 会节省很大的开销。</p>
+</li>
+</ol>
+<p>访问具有 <strong>weak 属性的变量时，实际上会调用 objc_loadWeak() 和 objc_storeWeak() 来完成，这也会带来很大的开销，所以要避免使用 </strong>weak 属性。</p>
+<p>创建和使用对象时，要尽量避免对象进入 autoreleasepool，以避免额外的资源开销。</p>
+<ol>
+<li><p>遍历容器类时，选择更高效的方法<br>相对于 Foundation 的方法来说，CoreFoundation 的方法有更高的性能，用 CFArrayApplyFunction() 和 CFDictionaryApplyFunction() 方法来遍历容器类能带来不少性能提升，但代码写起来会非常麻烦。</p>
+</li>
+<li><p>尽量用纯 C 函数、内联函数<br>使用纯 C 函数可以避免 ObjC 的消息发送带来的开销。如果 C 函数比较小，使用 inline 可以避免一部分压栈弹栈等函数调用的开销。</p>
+</li>
+<li><p>减少遍历的循环次数<br>在 JSON 和 Model 转换前，Model 的属性个数和 JSON 的属性个数都是已知的，这时选择数量较少的那一方进行遍历，会节省很多时间。</p>
+</li>
+</ol>
+<blockquote>
+<p><a href="http://www.cnblogs.com/develop-SZT/p/5348364.html" target="_blank" rel="external">runtime之玩转成员变量</a></p>
+<p><a href="http://blog.csdn.net/woaifen3344/article/details/50505808" target="_blank" rel="external">runtime Method</a></p>
+<p><a href="http://blog.ibireme.com/2015/10/23/ios_model_framework_benchmark/" target="_blank" rel="external">iOS JSON 模型转换库评测</a></p>
+</blockquote>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2016/07/01/shadowsocket无法更新pac/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">shadowsocks无法更新pac</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<div class="share_jia">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">分享到: &nbsp; </span>
+		<a class="jiathis_button_facebook"></a> 
+    <a class="jiathis_button_twitter"></a>
+    <a class="jiathis_button_plus"></a> 
+    <a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+    <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="YYModel源码分析" data-title="YYModel源码分析" data-url="http://theewind.github.io/2016/07/02/YYModel源码分析/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"theewind"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2016 sanfeng.li
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: flase
+	}
+</script>
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  </div>
+</body>
+</html>
