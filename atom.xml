@@ -5,7 +5,7 @@
   <link href="//atom.xml" rel="self"/>
   
   <link href="http://theewind.github.io/"/>
-  <updated>2016-07-04T02:01:32.000Z</updated>
+  <updated>2016-07-14T08:35:58.000Z</updated>
   <id>http://theewind.github.io/</id>
   
   <author>
@@ -14,6 +14,64 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>FlatBuffers</title>
+    <link href="http://theewind.github.io/2016/07/14/FlatBuffers/"/>
+    <id>http://theewind.github.io/2016/07/14/FlatBuffers/</id>
+    <published>2016-07-14T08:32:46.000Z</published>
+    <updated>2016-07-14T08:35:58.000Z</updated>
+    
+    <content type="html">&lt;p&gt;继Protocol Buffers 之后Google开源的一个新的数据传输框架，FaltBuffers。先占个坑&lt;/p&gt;
+&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
+&lt;p&gt;&amp;gt;&lt;br&gt;&lt;a href=&quot;https://code.facebook.com/posts/872547912839369/improving-facebook-s-performance-on-android-with-flatbuffers/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Improving Facebook’s performance on Android with FlatBuffers&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;http://www.csdn.net/article/2015-08-31/2825579&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;开源、高效、跨平台：深剖Google FlatBuffers工作原理&lt;/a&gt;&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;继Protocol Buffers 之后Google开源的一个新的数据传输框架，FaltBuffers。先占个坑&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="互联网" scheme="http://theewind.github.io/tags/%E4%BA%92%E8%81%94%E7%BD%91/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>互联网协议相关内容资料</title>
+    <link href="http://theewind.github.io/2016/07/14/%E7%BD%91%E7%BB%9C%E5%AD%A6%E4%B9%A0%E6%96%87%E7%AB%A0/"/>
+    <id>http://theewind.github.io/2016/07/14/网络学习文章/</id>
+    <published>2016-07-14T08:30:21.000Z</published>
+    <updated>2016-07-14T08:31:55.000Z</updated>
+    
+    <content type="html">&lt;p&gt;下面的文章都是对网络介绍比较深入和有趣的，持续更新。。。&lt;/p&gt;
+&lt;h2 id=&quot;阮一峰&quot;&gt;&lt;a href=&quot;#阮一峰&quot; class=&quot;headerlink&quot; title=&quot;阮一峰&quot;&gt;&lt;/a&gt;阮一峰&lt;/h2&gt;&lt;p&gt;&lt;a href=&quot;http://www.ruanyifeng.com/blog/2013/06/rsa_algorithm_part_one.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;RSA算法原理（一）&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;http://www.ruanyifeng.com/blog/2013/07/rsa_algorithm_part_two.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;RSA算法原理（二）&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;http://www.ruanyifeng.com/blog/2011/08/what_is_a_digital_signature.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;数字签名是什么？&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;http://www.ruanyifeng.com/blog/2012/05/internet_protocol_suite_part_i.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;互联网协议入门（一）&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;http://www.ruanyifeng.com/blog/2012/06/internet_protocol_suite_part_ii.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;互联网协议入门（二）&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;http://www.ruanyifeng.com/blog/2016/06/dns.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;DNS 原理入门&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;http://www.ruanyifeng.com/blog/2014/02/ssl_tls.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;SSL/TLS协议运行机制的概述&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;http://www.ruanyifeng.com/blog/2014/09/illustration-ssl.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;图解SSL/TLS协议&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;http://www.360doc.com/content/14/0725/20/1073512_397054861.shtml&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;TCP/IP的三次握手与四次挥手详解&lt;/a&gt;  &lt;code&gt;渣渣360doc，还要登陆才能复制&lt;/code&gt;&lt;/p&gt;
+&lt;h2 id=&quot;公众号：码农翻身&quot;&gt;&lt;a href=&quot;#公众号：码农翻身&quot; class=&quot;headerlink&quot; title=&quot;公众号：码农翻身&quot;&gt;&lt;/a&gt;公众号：码农翻身&lt;/h2&gt;&lt;p&gt;&lt;a href=&quot;http://mp.weixin.qq.com/s?__biz=MzAxOTc0NzExNg==&amp;amp;mid=2665513017&amp;amp;idx=1&amp;amp;sn=5550ee714abd36d0b580713f673e670b&amp;amp;scene=21#wechat_redirect&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;CPU阿甘&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;http://toutiao.com/i6301559248492954113/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;我是一个路由器（我是一个网卡姊妹篇）&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;http://toutiao.com/i6301233473227063810/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;我是一个网卡&lt;/a&gt;&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;下面的文章都是对网络介绍比较深入和有趣的，持续更新。。。&lt;/p&gt;
+&lt;h2 id=&quot;阮一峰&quot;&gt;&lt;a href=&quot;#阮一峰&quot; class=&quot;headerlink&quot; title=&quot;阮一峰&quot;&gt;&lt;/a&gt;阮一峰&lt;/h2&gt;&lt;p&gt;&lt;a href=&quot;http://www.ruanyifeng
+    
+    </summary>
+    
+    
+      <category term="互联网" scheme="http://theewind.github.io/tags/%E4%BA%92%E8%81%94%E7%BD%91/"/>
+    
+  </entry>
   
   <entry>
     <title>YYModel源码分析</title>
@@ -873,115 +931,6 @@ import IconFA from &amp;apos;react-native-vector-icons/FontAwesome&amp;apos;;
     
     
       <category term="iOS" scheme="http://theewind.github.io/tags/iOS/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>命令行解释括号说明</title>
-    <link href="http://theewind.github.io/2016/05/03/%E5%91%BD%E4%BB%A4%E8%A1%8C%E8%A7%A3%E9%87%8A%E6%8B%AC%E5%8F%B7%E8%AF%B4%E6%98%8E/"/>
-    <id>http://theewind.github.io/2016/05/03/命令行解释括号说明/</id>
-    <published>2016-05-03T07:37:24.000Z</published>
-    <updated>2016-05-03T07:46:35.000Z</updated>
-    
-    <content type="html">&lt;p&gt;命令行解释括号的作用：&lt;/p&gt;
-&lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th&gt;表示法&lt;/th&gt;
-&lt;th&gt;说明&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td&gt;不带方括号或大括号的文本&lt;/td&gt;
-&lt;td&gt;您必须键入如下所示的项目&lt;/td&gt;
-&lt;td&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&amp;lt;尖括号内的文本&amp;gt;&lt;/td&gt;
-&lt;td&gt;您必须为其提供的占位符&lt;/td&gt;
-&lt;td&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;[方括号内的文本]&lt;/td&gt;
-&lt;td&gt;可选的项目&lt;/td&gt;
-&lt;td&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;{大括号内的文本}&lt;/td&gt;
-&lt;td&gt;一组所需的项目，选择一个&lt;/td&gt;
-&lt;td&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;竖线（\&lt;/td&gt;
-&lt;td&gt;）&lt;/td&gt;
-&lt;td&gt;互斥项&lt;/td&gt;
-&lt;td&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-&lt;p&gt;比如&lt;/p&gt;
-&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;4&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;5&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;6&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;7&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;8&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;9&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;10&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;11&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;12&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;13&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;14&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;15&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;16&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;git [--version] [--help] [-C &amp;lt;path&amp;gt;] [-c name=value]&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;           [--exec-path[=&amp;lt;path&amp;gt;]] [--html-path] [--man-path] [--info-path]&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;           [-p | --paginate | --no-pager] [--no-replace-objects] [--bare]&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;           [--git-dir=&amp;lt;path&amp;gt;] [--work-tree=&amp;lt;path&amp;gt;] [--namespace=&amp;lt;name&amp;gt;]&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;           &amp;lt;command&amp;gt; [&amp;lt;args&amp;gt;]&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;NAME&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;       git-checkout - Switch branches or restore working tree files&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;SYNOPSIS&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;       git checkout [-q] [-f] [-m] [&amp;lt;branch&amp;gt;]&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;       git checkout [-q] [-f] [-m] --detach [&amp;lt;branch&amp;gt;]&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;       git checkout [-q] [-f] [-m] [--detach] &amp;lt;commit&amp;gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;       git checkout [-q] [-f] [-m] [[-b|-B|--orphan] &amp;lt;new_branch&amp;gt;] [&amp;lt;start_point&amp;gt;]&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;       git checkout [-f|--ours|--theirs|-m|--conflict=&amp;lt;style&amp;gt;] [&amp;lt;tree-ish&amp;gt;] [--] &amp;lt;paths&amp;gt;...&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;       git checkout [-p|--patch] [&amp;lt;tree-ish&amp;gt;] [--] [&amp;lt;paths&amp;gt;...]&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;</content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;命令行解释括号的作用：&lt;/p&gt;
-&lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th&gt;表示法&lt;/th&gt;
-&lt;th&gt;说明&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td&gt;不带方括号或大括号的文本&lt;/td&gt;
-&lt;td&gt;您必须键入如下所示的项目&lt;/td&gt;
-&lt;td
-    
-    </summary>
-    
-    
-      <category term="shell" scheme="http://theewind.github.io/tags/shell/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>shell命令学习</title>
-    <link href="http://theewind.github.io/2016/05/03/shell%E5%91%BD%E4%BB%A4%E5%AD%A6%E4%B9%A0/"/>
-    <id>http://theewind.github.io/2016/05/03/shell命令学习/</id>
-    <published>2016-05-03T06:49:51.000Z</published>
-    <updated>2016-05-03T07:35:43.000Z</updated>
-    
-    <content type="html">&lt;p&gt;提交Jenkins的时候，会用到部分命令：&lt;/p&gt;
-&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;4&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;5&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;6&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;7&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;df -h&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;Filesystem      Size   Used  Avail Capacity  iused   ifree %iused  Mounted on&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;/dev/disk1     233Gi  199Gi   33Gi    86% 52321616 8659602   86%   /&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;devfs          187Ki  187Ki    0Bi   100%      648       0  100%   /dev&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;map -hosts       0Bi    0Bi    0Bi   100%        0       0  100%   /net&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;map auto_home    0Bi    0Bi    0Bi   100%        0       0  100%   /home&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;&lt;strong&gt;&lt;em&gt;df 命令：&lt;/em&gt;&lt;/strong&gt;&lt;br&gt;linux中df命令的功能是用来检查linux服务器的文件系统的磁盘空间占用情况。可以利用该命令来获取硬盘被占用了多少空间，目前还剩下多少空间等信息。&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;&lt;strong&gt;&lt;em&gt;date命令&lt;/em&gt;&lt;/strong&gt;&lt;br&gt;修改linux的时间可以使用date指令 &lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;4&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;5&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;6&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;7&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;8&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;9&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;10&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;11&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;12&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;date&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;Tue May  3 14:53:22 CST 2016&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;➜  _posts git:(master) ✗ date &amp;apos;+Current time: %H:%M:%S&amp;apos;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;Current time: 14:53:24 //可见这里会自定义输出date的格式&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;修改日期： &lt;/div&gt;&lt;div class=&quot;line&quot;&gt;时间设定成2009年5月10日的命令如下：&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;date -s 05/10/2009 &lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;修改时间： &lt;/div&gt;&lt;div class=&quot;line&quot;&gt;将系统时间设定成上午10点18分0秒的命令如下。 &lt;/div&gt;&lt;div class=&quot;line&quot;&gt;date -s 10:18:00&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;git命令**&lt;/strong&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;git branch newBranch   创建新分支 git br &lt;/p&gt;
-&lt;p&gt;git checkout newBranch    切换到新分支 git co&lt;/p&gt;
-&lt;p&gt;合并： git checkout -b newBranch&lt;br&gt;简写： git co -b newBranch&lt;/p&gt;
-&lt;p&gt;git br nnew [commit] 以某次commit创建分支&lt;/p&gt;
-&lt;p&gt;git checkout -B &lt;branch&gt;&lt;/branch&gt;&lt;/p&gt;
-&lt;p&gt;这个命令，可以强制创建新的分支，为什么加-B呢？如果当前仓库中，已经存在一个跟你新建分支同名的分支，那么使用普通的git checkout -b &lt;branch&gt;这个命令，是会报错的，且同名分支无法创建。如果使用-B参数，那么就可以强制创建新的分支，并会覆盖掉原来的分支。&lt;/branch&gt;&lt;/p&gt;
-</content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;提交Jenkins的时候，会用到部分命令：&lt;/p&gt;
-&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2
-    
-    </summary>
-    
-    
-      <category term="shell" scheme="http://theewind.github.io/tags/shell/"/>
     
   </entry>
   
