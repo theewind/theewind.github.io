@@ -5,7 +5,7 @@
   <link href="//atom.xml" rel="self"/>
   
   <link href="http://theewind.github.io/"/>
-  <updated>2016-07-18T03:40:30.000Z</updated>
+  <updated>2016-07-18T03:44:06.000Z</updated>
   <id>http://theewind.github.io/</id>
   
   <author>
@@ -20,15 +20,14 @@
     <link href="http://theewind.github.io/2016/07/18/UIKit%E4%B8%BB%E7%BA%BF%E7%A8%8B%E6%A3%80%E6%9F%A5/"/>
     <id>http://theewind.github.io/2016/07/18/UIKit主线程检查/</id>
     <published>2016-07-18T02:57:04.000Z</published>
-    <updated>2016-07-18T03:40:30.000Z</updated>
+    <updated>2016-07-18T03:44:06.000Z</updated>
     
     <content type="html">&lt;p&gt;iOS开发过程中，很多时候都会使用GCD及NSOperation等涉及到多线程的操作，这样就算是一个老手，也可能会遇到非主线程刷新UI的操作，而结果就是遇到各种不确定的问题，&lt;a href=&quot;https://www.objccn.io/issue-2-4/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;这篇文章:线程安全类的设计&lt;/a&gt;向我们解释了为什么UIKit是非线程安全的，然后也介绍了一个&lt;a href=&quot;https://gist.github.com/steipete/5664345&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;UIKit主线程检查的机制&lt;/a&gt;，今天自己又复习下这个内容。&lt;/p&gt;
 &lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
-&lt;p&gt;###method swizzle&lt;/p&gt;
-&lt;p&gt;主要原理就是采用：method swizzle 方法，替换系统的&lt;code&gt;-setNeedsLayout, -setNeedDisplay, -setNeedsDisplayInRect&lt;/code&gt;,三个方法，确保他们是在主线程进行的。&lt;a href=&quot;http://wereadteam.github.io/2016/05/03/WeRead-Performance/?from=groupmessage&amp;amp;isappinstalled=0&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;微信读书&lt;/a&gt;的优化方案里面也是这样用的，但是自己重新看了下Main thread guard之后，还是重新发现了一些新的东西。&lt;/p&gt;
+&lt;h1 id=&quot;method-swizzle&quot;&gt;&lt;a href=&quot;#method-swizzle&quot; class=&quot;headerlink&quot; title=&quot;method swizzle&quot;&gt;&lt;/a&gt;method swizzle&lt;/h1&gt;&lt;p&gt;主要原理就是采用：method swizzle 方法，替换系统的&lt;code&gt;-setNeedsLayout, -setNeedDisplay, -setNeedsDisplayInRect&lt;/code&gt;,三个方法，确保他们是在主线程进行的。&lt;a href=&quot;http://wereadteam.github.io/2016/05/03/WeRead-Performance/?from=groupmessage&amp;amp;isappinstalled=0&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;微信读书&lt;/a&gt;的优化方案里面也是这样用的，但是自己重新看了下Main thread guard之后，还是重新发现了一些新的东西。&lt;/p&gt;
 &lt;p&gt;首先，之前替换方法都是采用orginSel，newSel就可以了，因为可以通过SEL获取到IMP，那如果是一个blcok呢，其实也是可以的，因为block最终都算是一个function，可以根据获取到IMP，后续操作节本都差不多&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;IMP impl = imp_implementationWithBlock(block);
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;###__attribute&lt;strong&gt;((constructor))&lt;br&gt;解释一下：&lt;/strong&gt;attribute&lt;strong&gt;((constructor)) 在main() 之前执行,&lt;/strong&gt;attribute&lt;strong&gt;((destructor)) 在main()执行结束之后执行.&lt;br&gt;这些是属于黑魔法的范围，一般我是是采用在+（load）方法进行替换，而这里是曹永&lt;/strong&gt;attribute__((constructor))的方式，在函数main之前就执行的。    &lt;/p&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;h1 id=&quot;attribute-constructor&quot;&gt;&lt;a href=&quot;#attribute-constructor&quot; class=&quot;headerlink&quot; title=&quot;__attribute__((constructor))&quot;&gt;&lt;/a&gt;__attribute__((constructor))&lt;/h1&gt;&lt;p&gt;解释一下：&lt;strong&gt;attribute&lt;/strong&gt;((constructor)) 在main() 之前执行,&lt;strong&gt;attribute&lt;/strong&gt;((destructor)) 在main()执行结束之后执行.&lt;br&gt;这些是属于黑魔法的范围，一般我是是采用在+（load）方法进行替换，而这里是曹永&lt;strong&gt;attribute&lt;/strong&gt;((constructor))的方式，在函数main之前就执行的。    &lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;这里自己无耻的贴下代码，本身没什么难度，只需要在替换的函数里面进行thread的判断：是否是主线程。&lt;/p&gt;
 &lt;/blockquote&gt;

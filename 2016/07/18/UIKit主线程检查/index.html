@@ -12,7 +12,7 @@
 <meta property="og:url" content="http://theewind.github.io/2016/07/18/UIKit主线程检查/index.html">
 <meta property="og:site_name" content="sanfeng’s blog">
 <meta property="og:description" content="iOS开发过程中，很多时候都会使用GCD及NSOperation等涉及到多线程的操作，这样就算是一个老手，也可能会遇到非主线程刷新UI的操作，而结果就是遇到各种不确定的问题，这篇文章:线程安全类的设计向我们解释了为什么UIKit是非线程安全的，然后也介绍了一个UIKit主线程检查的机制，今天自己又复习下这个内容。">
-<meta property="og:updated_time" content="2016-07-18T03:40:30.000Z">
+<meta property="og:updated_time" content="2016-07-18T03:44:06.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="UIKit主线程检查">
 <meta name="twitter:description" content="iOS开发过程中，很多时候都会使用GCD及NSOperation等涉及到多线程的操作，这样就算是一个老手，也可能会遇到非主线程刷新UI的操作，而结果就是遇到各种不确定的问题，这篇文章:线程安全类的设计向我们解释了为什么UIKit是非线程安全的，然后也介绍了一个UIKit主线程检查的机制，今天自己又复习下这个内容。">
@@ -225,11 +225,10 @@
       
         <p>iOS开发过程中，很多时候都会使用GCD及NSOperation等涉及到多线程的操作，这样就算是一个老手，也可能会遇到非主线程刷新UI的操作，而结果就是遇到各种不确定的问题，<a href="https://www.objccn.io/issue-2-4/" target="_blank" rel="external">这篇文章:线程安全类的设计</a>向我们解释了为什么UIKit是非线程安全的，然后也介绍了一个<a href="https://gist.github.com/steipete/5664345" target="_blank" rel="external">UIKit主线程检查的机制</a>，今天自己又复习下这个内容。</p>
 <a id="more"></a>
-<p>###method swizzle</p>
-<p>主要原理就是采用：method swizzle 方法，替换系统的<code>-setNeedsLayout, -setNeedDisplay, -setNeedsDisplayInRect</code>,三个方法，确保他们是在主线程进行的。<a href="http://wereadteam.github.io/2016/05/03/WeRead-Performance/?from=groupmessage&amp;isappinstalled=0" target="_blank" rel="external">微信读书</a>的优化方案里面也是这样用的，但是自己重新看了下Main thread guard之后，还是重新发现了一些新的东西。</p>
+<h1 id="method-swizzle"><a href="#method-swizzle" class="headerlink" title="method swizzle"></a>method swizzle</h1><p>主要原理就是采用：method swizzle 方法，替换系统的<code>-setNeedsLayout, -setNeedDisplay, -setNeedsDisplayInRect</code>,三个方法，确保他们是在主线程进行的。<a href="http://wereadteam.github.io/2016/05/03/WeRead-Performance/?from=groupmessage&amp;isappinstalled=0" target="_blank" rel="external">微信读书</a>的优化方案里面也是这样用的，但是自己重新看了下Main thread guard之后，还是重新发现了一些新的东西。</p>
 <p>首先，之前替换方法都是采用orginSel，newSel就可以了，因为可以通过SEL获取到IMP，那如果是一个blcok呢，其实也是可以的，因为block最终都算是一个function，可以根据获取到IMP，后续操作节本都差不多</p>
 <pre><code>IMP impl = imp_implementationWithBlock(block);
-</code></pre><p>###__attribute<strong>((constructor))<br>解释一下：</strong>attribute<strong>((constructor)) 在main() 之前执行,</strong>attribute<strong>((destructor)) 在main()执行结束之后执行.<br>这些是属于黑魔法的范围，一般我是是采用在+（load）方法进行替换，而这里是曹永</strong>attribute__((constructor))的方式，在函数main之前就执行的。    </p>
+</code></pre><h1 id="attribute-constructor"><a href="#attribute-constructor" class="headerlink" title="__attribute__((constructor))"></a>__attribute__((constructor))</h1><p>解释一下：<strong>attribute</strong>((constructor)) 在main() 之前执行,<strong>attribute</strong>((destructor)) 在main()执行结束之后执行.<br>这些是属于黑魔法的范围，一般我是是采用在+（load）方法进行替换，而这里是曹永<strong>attribute</strong>((constructor))的方式，在函数main之前就执行的。    </p>
 <blockquote>
 <p>这里自己无耻的贴下代码，本身没什么难度，只需要在替换的函数里面进行thread的判断：是否是主线程。</p>
 </blockquote>
