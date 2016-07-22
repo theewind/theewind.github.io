@@ -4,17 +4,24 @@
   <meta charset="utf-8">
   
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
-  <title>Archives | sanfeng’s blog</title>
+  <title>atomic使用 | sanfeng’s blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="这是我的三风的博客">
-<meta property="og:type" content="website">
-<meta property="og:title" content="sanfeng’s blog">
-<meta property="og:url" content="http://theewind.github.io/archives/index.html">
+  <meta name="description" content="平时我们使用atomic的时候，是希望对一个porperty的操作进行一个原子操作，但是这里的原子操作应该是仅仅对应于Setter和Getter方法，如果property是一个array，比如
+
+(void)setProp:(NSString )newValue {  [_prop lock];  _prop = newValue;  [_prop unlock];}按我理解：1.此处的线程安全是">
+<meta property="og:type" content="article">
+<meta property="og:title" content="atomic使用">
+<meta property="og:url" content="http://theewind.github.io/2016/07/18/atomic使用/index.html">
 <meta property="og:site_name" content="sanfeng’s blog">
-<meta property="og:description" content="这是我的三风的博客">
+<meta property="og:description" content="平时我们使用atomic的时候，是希望对一个porperty的操作进行一个原子操作，但是这里的原子操作应该是仅仅对应于Setter和Getter方法，如果property是一个array，比如
+
+(void)setProp:(NSString )newValue {  [_prop lock];  _prop = newValue;  [_prop unlock];}按我理解：1.此处的线程安全是">
+<meta property="og:updated_time" content="2016-07-18T07:43:32.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="sanfeng’s blog">
-<meta name="twitter:description" content="这是我的三风的博客">
+<meta name="twitter:title" content="atomic使用">
+<meta name="twitter:description" content="平时我们使用atomic的时候，是希望对一个porperty的操作进行一个原子操作，但是这里的原子操作应该是仅仅对应于Setter和Getter方法，如果property是一个array，比如
+
+(void)setProp:(NSString )newValue {  [_prop lock];  _prop = newValue;  [_prop unlock];}按我理解：1.此处的线程安全是">
   
   
     <link rel="icon" href="/favicon.png">
@@ -185,208 +192,117 @@
 	</div>
 </nav>
 
-      <div class="body-wrap">
+      <div class="body-wrap"><article id="post-atomic使用" class="article article-type-post" itemscope itemprop="blogPost">
   
+    <div class="article-meta">
+      <a href="/2016/07/18/atomic使用/" class="article-date">
+  	<time datetime="2016-07-18T07:41:32.000Z" itemprop="datePublished">2016-07-18</time>
+</a>
+    </div>
   
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
     
     
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      atomic使用
+    </h1>
+  
+
+      </header>
       
+      <div class="article-info article-info-post">
+        
+        
+
+        <div class="clearfix"></div>
+      </div>
       
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2016" class="archive-year">2016</a>
-        </div>
-        <div class="archives">
     
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2016/07/22/ios7下UIScrollView和滑动返回/" class="archive-article-date">
-  	<time datetime="2016-07-22T06:21:40.000Z" itemprop="datePublished">Jul 22</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/07/22/ios7下UIScrollView和滑动返回/">ios7下UIScrollView和滑动返回</a>
-    </h1>
-  
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>平时我们使用atomic的时候，是希望对一个porperty的操作进行一个原子操作，但是这里的原子操作应该是仅仅对应于Setter和Getter方法，如果property是一个array，比如</p>
+<ul>
+<li>(void)setProp:(NSString <em>)newValue {<br>  [_prop lock];<br>  _prop = newValue;<br>  [_prop unlock];<br>}<br>按我理解：<br>1.此处的线程安全是就getter,setter而言的。比如对于@property(nonatomic,copy)NSString </em>str; 当调用self.str = @”HELLO,GUY”;如果是多线程，在一个线程执行setter方法的时候，会涉及到字符串拷贝，另一个线程去读取，很可能读到一半的数据，也就是garbage数据。<br>2.另外的话，它也仅限于getter,setter时的线程安全。比如@property(atomic,strong)NSMutableArray *arr;如果一个线程循环读数据，一个线程循环写数据，肯定会产生内存问题。因为它和setter,getter没有关系。 </li>
+</ul>
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS/">iOS</a></li></ul>
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2016/07/22/ios7下UIScrollView和滑动返回/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          ios7下UIScrollView和滑动返回
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/07/18/UIKit主线程检查/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">UIKit主线程检查</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<div class="share_jia">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">分享到: &nbsp; </span>
+		<a class="jiathis_button_facebook"></a> 
+    <a class="jiathis_button_twitter"></a>
+    <a class="jiathis_button_plus"></a> 
+    <a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+    <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
 	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
 
-          
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2016/07/18/atomic使用/" class="archive-article-date">
-  	<time datetime="2016-07-18T07:41:32.000Z" itemprop="datePublished">Jul 18</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/07/18/atomic使用/">atomic使用</a>
-    </h1>
-  
 
-        <div class="article-info info-on-right">
-          
-          
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2016/07/18/UIKit主线程检查/" class="archive-article-date">
-  	<time datetime="2016-07-18T02:57:04.000Z" itemprop="datePublished">Jul 18</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/07/18/UIKit主线程检查/">UIKit主线程检查</a>
-    </h1>
-  
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS/">iOS</a></li></ul>
-	</div>
 
-          
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="atomic使用" data-title="atomic使用" data-url="http://theewind.github.io/2016/07/18/atomic使用/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"theewind"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2016/07/14/FlatBuffers/" class="archive-article-date">
-  	<time datetime="2016-07-14T08:32:46.000Z" itemprop="datePublished">Jul 14</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/07/14/FlatBuffers/">FlatBuffers</a>
-    </h1>
-  
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/互联网/">互联网</a></li></ul>
-	</div>
 
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2016/07/14/网络学习文章/" class="archive-article-date">
-  	<time datetime="2016-07-14T08:30:21.000Z" itemprop="datePublished">Jul 14</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/07/14/网络学习文章/">互联网协议相关内容资料</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/互联网/">互联网</a></li></ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2016/07/02/YYModel源码分析/" class="archive-article-date">
-  	<time datetime="2016-07-02T07:22:47.000Z" itemprop="datePublished">Jul 2</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/07/02/YYModel源码分析/">YYModel源码分析</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS/">iOS</a></li></ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
-
-    
-    <nav id="page-nav">
-      <span class="page-number current">1</span><a class="page-number" href="/archives/page/2/">2</a><a class="page-number" href="/archives/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/archives/page/6/">6</a><a class="extend next" rel="next" href="/archives/page/2/">Next &raquo;</a>
-    </nav>
-  
 
 </div>
       <footer id="footer">
@@ -412,8 +328,8 @@
 		mathjax: true,
 		animate: true,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: flase
