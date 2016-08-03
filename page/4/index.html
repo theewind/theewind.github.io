@@ -187,6 +187,219 @@
 
       <div class="body-wrap">
   
+    <article id="post-正则表达式的学习" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/06/12/正则表达式的学习/" class="article-date">
+  	<time datetime="2016-06-12T08:26:37.000Z" itemprop="datePublished">2016-06-12</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/06/12/正则表达式的学习/">正则表达式的学习</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>本文主要记录了自己在工作中用到的部分正则表达式的零星点碎的内容。</p>
+<ol>
+<li><p><code>\\.</code>，<code>\\|</code> 等<code>\\</code>操作。 <code>\\|</code>这是转义的意思 “\” “|” 都是特殊字符所以需要转义，第二个反斜杠 \ 转义 |</p>
+</li>
+<li><p><a href="http://www.imkevinyang.com/2009/08/使用正则表达式找出不包含特定字符串的条目.html" target="_blank" rel="external">前瞻后顾</a> 学习 <code>!?</code>操作</p>
+</li>
+<li><p>贪婪与非贪婪 <code>?</code> 当正则表达式中包含能接受重复的限定符时，通常的行为是（在使整个表达式能得到匹配的前提下）匹配尽可能多的字符。以这个表达式为例<code>a.*b，它将会匹配最长的以a开始，以b结束的字符串。如果用它来搜索aabab的话，它会匹配整个字符串aabab。这被称为贪婪匹配。
+有时，我们更需要懒惰匹配，也就是匹配尽可能少的字符。前面给出的限定符都可以被转化为懒惰匹配模式，只要在它后面加上一个问号?。这样.*?</code>就意味着匹配任意数量的重复，但是在能使整个匹配成功的前提下使用最少的重复。现在看看懒惰版的例子吧：<br>a.*?b匹配最短的，以a开始，以b结束的字符串。如果把它应用于aabab的话，它会匹配aab（第一到第三个字符）和ab（第四到第五个字符）。</p>
+</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">\d+：匹配数字一次或者多次</div><div class="line">\d.*：先匹配一位数字，剩下匹配任意字符零次或者多次</div><div class="line">\d.*?：*?这个表示非贪婪模式，表示匹配最少的数量匹配</div><div class="line"></div><div class="line">例子：&lt;DIV&gt;123&lt;DIV&gt;456&lt;DIV&gt;</div><div class="line">贪婪：&lt;DIV&gt;.*&lt;DIV&gt; ====&gt; &lt;DIV&gt;123&lt;DIV&gt;456&lt;DIV&gt;</div><div class="line">非贪婪：&lt;DIV&gt;.*?&lt;DIV&gt;====&gt; &lt;DIV&gt;123&lt;DIV&gt;</div></pre></td></tr></table></figure>
+<p>在我们闪惠的输入限制里面，有如下的正则：   </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">NSString *regex = @&quot;^(?!0[^\\.])\\d+\\.?\\d&#123;0,2&#125;$&quot;;</div><div class="line">解析下来就是如下，比使用代码一个一个判断条件过滤要好太多了。</div><div class="line">	 /**</div><div class="line">     *  (?!0[^\.])  第一个数字为0的时，后面只能输入小数点</div><div class="line">     *  \d+\.?      小数点前（若有）只能为数字</div><div class="line">     *  \d&#123;0,2&#125;     小数点后最多输入两位数字</div><div class="line">     **/</div></pre></td></tr></table></figure>
+<ol>
+<li>范围  / rex /gmi  g–global, m–multiline, i–ignore</li>
+<li>常用的元字符</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th>代码</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>.</td>
+<td>匹配除换行符以外的任意字符</td>
+</tr>
+<tr>
+<td>\w</td>
+<td>匹配字母或数字或下划线或汉字</td>
+</tr>
+<tr>
+<td>\s</td>
+<td>匹配任意的空白符,空格，tab，换行，中文全角空格等</td>
+</tr>
+<tr>
+<td>\d</td>
+<td>匹配数字</td>
+</tr>
+<tr>
+<td>\b</td>
+<td>匹配单词的开始或结束</td>
+</tr>
+<tr>
+<td>^</td>
+<td>匹配字符串的开始</td>
+</tr>
+<tr>
+<td>$</td>
+<td>匹配字符串的结束</td>
+</tr>
+</tbody>
+</table>
+<p>常用的限定符</p>
+<table>
+<thead>
+<tr>
+<th>代码</th>
+<th>语法    说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>*</td>
+<td>重复零次或更多次</td>
+</tr>
+<tr>
+<td>+</td>
+<td>重复一次或更多次</td>
+</tr>
+<tr>
+<td>?</td>
+<td>重复零次或一次</td>
+</tr>
+<tr>
+<td>{n}</td>
+<td>重复n次</td>
+</tr>
+<tr>
+<td>{n,}</td>
+<td>重复n次或更多次</td>
+</tr>
+<tr>
+<td>{n,m}</td>
+<td>重复n到m次</td>
+</tr>
+</tbody>
+</table>
+<ol>
+<li>[]里面的不要转义，比如 [aeiou]匹配每一个元音，[.*?]匹配标点符号(.?!)</li>
+</ol>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/正则表达式/">正则表达式</a></li></ul>
+	</div>
+
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
+    <article id="React Native 学习之F8app代码阅读-study_f8app" class="article article-type-React Native 学习之F8app代码阅读" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/06/07/study_f8app/" class="article-date">
+  	<time datetime="2016-06-07T15:04:01.000Z" itemprop="datePublished">2016-06-07</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/06/07/study_f8app/">study</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>主要是先参考如下篇文章：</p>
+<blockquote>
+<p><a href="http://www.open-open.com/lib/view/open1461512056952.html">http://www.open-open.com/lib/view/open1461512056952.html</a></p>
+</blockquote>
+<p>第一次接触redux，概念还比较模糊，同时js开发水平也一般，对一些语法学习还不是很懂，这里做个记录：<br>代码中的很多function func(): type的用法，我之前接触的基本都是无返回值类型的，这里添加一个 <code>:Action</code>类型，貌似就是确定了返回值类型的，不知道理解的对不对。</p>
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/React-Native/">React Native</a></li></ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a  href="/2016/06/07/study_f8app/#more">more >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
     <article id="post-rac-willDeallocSignal" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -405,158 +618,6 @@
       
 	<div class="article-tag tagcloud">
 		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS/">iOS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/缓存/">缓存</a></li></ul>
-	</div>
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-iOS横屏应用旋转无动画" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2016/05/14/iOS横屏应用旋转无动画/" class="article-date">
-  	<time datetime="2016-05-14T06:43:33.000Z" itemprop="datePublished">2016-05-14</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/05/14/iOS横屏应用旋转无动画/">iOS横屏应用旋转无动画</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>最近开发一个仅支持横屏的应用，发现进行180°旋转的时候没有动画，Google也没有找到有用的信息，显示的情况跟下面链接中的比较像<a href="http://stackoverflow.com/questions/32848456/ios-9-orientation-auto-rotation-animation-not-working-but-always-on-main-thread/37222383#37222383" target="_blank" rel="external">无动画效果</a>. 最后在苹果的官网资料上找到了灵感：<a href="https://developer.apple.com/library/ios/technotes/tn2244/_index.html" target="_blank" rel="external">https://developer.apple.com/library/ios/technotes/tn2244/_index.html</a><br>自己就是根据这个里面的内容，全部进行了操作，最后发现是LaunchScreen.stroyboard的问题，在<br><img src="http://7xthb9.com1.z0.glb.clouddn.com/launchScreen.png" alt="设置"> 中对Main Interface 和 Launch Screen File都设置成了空，将Launch Images Source 另外指定了图片，然后就解决了此问题。</p>
-<p>我的解决方案不一定完全使用所有的情况，这里仅仅是做一个记录，有需要的可以试一下。</p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS/">iOS</a></li></ul>
-	</div>
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-命令行解释括号说明" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2016/05/03/命令行解释括号说明/" class="article-date">
-  	<time datetime="2016-05-03T07:37:24.000Z" itemprop="datePublished">2016-05-03</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/05/03/命令行解释括号说明/">命令行解释括号说明</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>命令行解释括号的作用：</p>
-<table>
-<thead>
-<tr>
-<th>表示法</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>不带方括号或大括号的文本</td>
-<td>您必须键入如下所示的项目</td>
-<td></td>
-</tr>
-<tr>
-<td>&lt;尖括号内的文本&gt;</td>
-<td>您必须为其提供的占位符</td>
-<td></td>
-</tr>
-<tr>
-<td>[方括号内的文本]</td>
-<td>可选的项目</td>
-<td></td>
-</tr>
-<tr>
-<td>{大括号内的文本}</td>
-<td>一组所需的项目，选择一个</td>
-<td></td>
-</tr>
-<tr>
-<td>竖线（\</td>
-<td>）</td>
-<td>互斥项</td>
-<td></td>
-</tr>
-</tbody>
-</table>
-<p>比如</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">git [--version] [--help] [-C &lt;path&gt;] [-c name=value]</div><div class="line">           [--exec-path[=&lt;path&gt;]] [--html-path] [--man-path] [--info-path]</div><div class="line">           [-p | --paginate | --no-pager] [--no-replace-objects] [--bare]</div><div class="line">           [--git-dir=&lt;path&gt;] [--work-tree=&lt;path&gt;] [--namespace=&lt;name&gt;]</div><div class="line">           &lt;command&gt; [&lt;args&gt;]</div><div class="line"></div><div class="line">NAME</div><div class="line">       git-checkout - Switch branches or restore working tree files</div><div class="line"></div><div class="line">SYNOPSIS</div><div class="line">       git checkout [-q] [-f] [-m] [&lt;branch&gt;]</div><div class="line">       git checkout [-q] [-f] [-m] --detach [&lt;branch&gt;]</div><div class="line">       git checkout [-q] [-f] [-m] [--detach] &lt;commit&gt;</div><div class="line">       git checkout [-q] [-f] [-m] [[-b|-B|--orphan] &lt;new_branch&gt;] [&lt;start_point&gt;]</div><div class="line">       git checkout [-f|--ours|--theirs|-m|--conflict=&lt;style&gt;] [&lt;tree-ish&gt;] [--] &lt;paths&gt;...</div><div class="line">       git checkout [-p|--patch] [&lt;tree-ish&gt;] [--] [&lt;paths&gt;...]</div></pre></td></tr></table></figure>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/shell/">shell</a></li></ul>
 	</div>
 
       

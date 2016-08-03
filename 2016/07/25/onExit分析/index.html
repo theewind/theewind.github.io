@@ -4,17 +4,27 @@
   <meta charset="utf-8">
   
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
-  <title>Archives | sanfeng’s blog</title>
+  <title>onExit分析 | sanfeng’s blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="这是我的三风的博客">
-<meta property="og:type" content="website">
-<meta property="og:title" content="sanfeng’s blog">
-<meta property="og:url" content="http://theewind.github.io/archives/page/4/index.html">
+  <meta name="description" content="defer引发的OnExit
+在swift中，是经常用到defer的，在作用域结束的时候，执行defer的命令，但是在Objective C中是无法使用的，不过有个宏 onExit可以达到这样的效果，比如
+12345if (1) &amp;#123;	@onExit &amp;#123; 		NSLog(@&amp;quot;ffffff&amp;quot;);	&amp;#125;;&amp;#125;
+就会在if作用域之后打印fffffff">
+<meta property="og:type" content="article">
+<meta property="og:title" content="onExit分析">
+<meta property="og:url" content="http://theewind.github.io/2016/07/25/onExit分析/index.html">
 <meta property="og:site_name" content="sanfeng’s blog">
-<meta property="og:description" content="这是我的三风的博客">
+<meta property="og:description" content="defer引发的OnExit
+在swift中，是经常用到defer的，在作用域结束的时候，执行defer的命令，但是在Objective C中是无法使用的，不过有个宏 onExit可以达到这样的效果，比如
+12345if (1) &amp;#123;	@onExit &amp;#123; 		NSLog(@&amp;quot;ffffff&amp;quot;);	&amp;#125;;&amp;#125;
+就会在if作用域之后打印fffffff">
+<meta property="og:updated_time" content="2016-07-25T05:25:55.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="sanfeng’s blog">
-<meta name="twitter:description" content="这是我的三风的博客">
+<meta name="twitter:title" content="onExit分析">
+<meta name="twitter:description" content="defer引发的OnExit
+在swift中，是经常用到defer的，在作用域结束的时候，执行defer的命令，但是在Objective C中是无法使用的，不过有个宏 onExit可以达到这样的效果，比如
+12345if (1) &amp;#123;	@onExit &amp;#123; 		NSLog(@&amp;quot;ffffff&amp;quot;);	&amp;#125;;&amp;#125;
+就会在if作用域之后打印fffffff">
   
   
     <link rel="icon" href="/favicon.png">
@@ -185,212 +195,137 @@
 	</div>
 </nav>
 
-      <div class="body-wrap">
+      <div class="body-wrap"><article id="post-onExit分析" class="article article-type-post" itemscope itemprop="blogPost">
   
+    <div class="article-meta">
+      <a href="/2016/07/25/onExit分析/" class="article-date">
+  	<time datetime="2016-07-25T04:01:47.000Z" itemprop="datePublished">2016-07-25</time>
+</a>
+    </div>
   
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
     
     
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      onExit分析
+    </h1>
+  
+
+      </header>
       
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS/">iOS</a></li></ul>
+	</div>
+
+        
+
+        <div class="clearfix"></div>
+      </div>
       
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2016" class="archive-year">2016</a>
-        </div>
-        <div class="archives">
     
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2016/06/12/正则表达式的学习/" class="archive-article-date">
-  	<time datetime="2016-06-12T08:26:37.000Z" itemprop="datePublished">Jun 12</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/06/12/正则表达式的学习/">正则表达式的学习</a>
-    </h1>
-  
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>defer引发的OnExit</p>
+<p>在swift中，是经常用到defer的，在作用域结束的时候，执行defer的命令，但是在Objective C中是无法使用的，不过有个宏 <code>onExit</code>可以达到这样的效果，比如</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">if (1) &#123;</div><div class="line">	@onExit &#123;</div><div class="line"> 		NSLog(@&quot;ffffff&quot;);</div><div class="line">	&#125;;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>就会在if作用域之后打印fffffff，那么他是怎么实现的呢，主要是用到了 <code>__attribute__</code>变量属性，具体的onExit的定义如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">#ifndef onExit</div><div class="line">#define onExit \</div><div class="line">ext_keywordify \</div><div class="line">__strong ext_cleanupBlock_t metamacro_concat(ext_exitBlock_, __LINE__) __attribute__((cleanup(ext_executeCleanupBlock), unused)) = ^</div><div class="line">#endif</div></pre></td></tr></table></figure>
+<ol>
+<li>ext_keywordify </li>
+<li>ext_clearupBlock_t</li>
+<li>metamacro_concat</li>
+<li>clearup</li>
+</ol>
+<p>其中ext_keywordify 在debug下就是一个@autoreleasepool, release下是@try..cache…finally<br>这里强制要求添加一个@，否则编译器会报错</p>
+<p>ext_clearupBlock_t 是一个typedef void (^ext_cleanupBlock_t)();</p>
+<p>metamacro_concat(A, B) 就是 metamacro_concat(A, B) A ## B ，将AB连接起来，例如</p>
+<pre><code>metamacro_concat(ext_exitBlock_, __LINE__)
+拼接为：ext_exitBlock_19
+</code></pre><p>clearup </p>
+<blockquote>
+<p><a href="http://draveness.me/defer/" target="_blank" rel="external">http://draveness.me/defer/</a></p>
+</blockquote>
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/正则表达式/">正则表达式</a></li></ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
+      
+    </div>
+    
   </div>
-</article>
   
     
-    
-    <article class="archive-article archive-type-React Native 学习之F8app代码阅读">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2016/06/07/study_f8app/" class="archive-article-date">
-  	<time datetime="2016-06-07T15:04:01.000Z" itemprop="datePublished">Jun 7</time>
-</a>
-        </div>
-    	 
+<nav id="article-nav">
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/06/07/study_f8app/">study</a>
-    </h1>
+    <a href="/2016/08/03/dispatch-after使用注意/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          dispatch_after使用注意
+        
+      </div>
+    </a>
   
+  
+    <a href="/2016/07/22/ios7下UIScrollView和滑动返回/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">ios7下UIScrollView和滑动返回</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/React-Native/">React Native</a></li></ul>
+  
+</article>
+
+
+<div class="share_jia">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">分享到: &nbsp; </span>
+		<a class="jiathis_button_facebook"></a> 
+    <a class="jiathis_button_twitter"></a>
+    <a class="jiathis_button_plus"></a> 
+    <a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+    <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
 	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
 
-          
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2016/06/06/rac-willDeallocSignal/" class="archive-article-date">
-  	<time datetime="2016-06-06T06:46:23.000Z" itemprop="datePublished">Jun 6</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/06/06/rac-willDeallocSignal/">rac_willDeallocSignal的加载时机</a>
-    </h1>
-  
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/RAC/">RAC</a></li></ul>
-	</div>
 
-          
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2016/06/03/doubleListViewDemo/" class="archive-article-date">
-  	<time datetime="2016-06-03T03:41:01.000Z" itemprop="datePublished">Jun 3</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/06/03/doubleListViewDemo/">React Native 双listView交互动画</a>
-    </h1>
-  
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/react-native/">react native</a></li></ul>
-	</div>
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="onExit分析" data-title="onExit分析" data-url="http://theewind.github.io/2016/07/25/onExit分析/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"theewind"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
 
-          
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2016/05/26/ReactNative 学习笔记/" class="archive-article-date">
-  	<time datetime="2016-05-26T06:36:44.000Z" itemprop="datePublished">May 26</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/05/26/ReactNative 学习笔记/">React Native学习笔记</a>
-    </h1>
-  
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/React-Native/">React Native</a></li></ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2016/05/26/iOS下载内容保存在document中需要设置不同步/" class="archive-article-date">
-  	<time datetime="2016-05-26T03:26:03.000Z" itemprop="datePublished">May 26</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/05/26/iOS下载内容保存在document中需要设置不同步/">iOS下载内容保存在document中需要设置不同步</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS/">iOS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/缓存/">缓存</a></li></ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
-
-    
-    <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/archives/page/3/">&laquo; Prev</a><a class="page-number" href="/archives/">1</a><a class="page-number" href="/archives/page/2/">2</a><a class="page-number" href="/archives/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/archives/page/5/">5</a><a class="page-number" href="/archives/page/6/">6</a><a class="extend next" rel="next" href="/archives/page/5/">Next &raquo;</a>
-    </nav>
-  
 
 </div>
       <footer id="footer">
@@ -416,8 +351,8 @@
 		mathjax: true,
 		animate: true,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: flase
