@@ -4,18 +4,27 @@
   <meta charset="utf-8">
   
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
-  <title>dispatch_after使用注意 | sanfeng’s blog</title>
+  <title>iOS代码编译速度优化 | sanfeng’s blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="注意开发中，经常需要dispatch_after进行延迟处理，dispatch_after能让我们添加进队列的任务延时执行，该函数并不是在指定时间后执行处理，而只是在指定时间追加处理到dispatch_queue该方法的第一个参数是time，第二个参数是dispatch_queue，第三个参数是要执行的block。dispatch_time_t有两种形式的构造方式，第一种相对时间：DISPATCH">
+  <meta name="description" content="cleaner源码编译速度优化方案
+参考最新的cleaner，主要是清理头文件之间的依赖，尽量都采取直接依赖，而不是通过间接依赖，比A依赖B，B依赖C。而A如果依赖C的时候，最好是直接通过采用A依赖C的操作，而不是A-&amp;gt;B-&amp;gt;C的操作。
+
+cleaner要求，在所有的.h文件中，基本都采用@class，@protocol的形式添加声明，然后在.m文件中添加#import的操作，这样是可">
 <meta property="og:type" content="article">
-<meta property="og:title" content="dispatch_after使用注意">
-<meta property="og:url" content="http://theewind.github.io/2016/08/03/dispatch-after使用注意/index.html">
+<meta property="og:title" content="iOS代码编译速度优化">
+<meta property="og:url" content="http://theewind.github.io/2016/08/11/iOS代码编译速度优化/index.html">
 <meta property="og:site_name" content="sanfeng’s blog">
-<meta property="og:description" content="注意开发中，经常需要dispatch_after进行延迟处理，dispatch_after能让我们添加进队列的任务延时执行，该函数并不是在指定时间后执行处理，而只是在指定时间追加处理到dispatch_queue该方法的第一个参数是time，第二个参数是dispatch_queue，第三个参数是要执行的block。dispatch_time_t有两种形式的构造方式，第一种相对时间：DISPATCH">
-<meta property="og:updated_time" content="2016-08-03T02:03:18.000Z">
+<meta property="og:description" content="cleaner源码编译速度优化方案
+参考最新的cleaner，主要是清理头文件之间的依赖，尽量都采取直接依赖，而不是通过间接依赖，比A依赖B，B依赖C。而A如果依赖C的时候，最好是直接通过采用A依赖C的操作，而不是A-&amp;gt;B-&amp;gt;C的操作。
+
+cleaner要求，在所有的.h文件中，基本都采用@class，@protocol的形式添加声明，然后在.m文件中添加#import的操作，这样是可">
+<meta property="og:updated_time" content="2016-08-11T03:14:47.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="dispatch_after使用注意">
-<meta name="twitter:description" content="注意开发中，经常需要dispatch_after进行延迟处理，dispatch_after能让我们添加进队列的任务延时执行，该函数并不是在指定时间后执行处理，而只是在指定时间追加处理到dispatch_queue该方法的第一个参数是time，第二个参数是dispatch_queue，第三个参数是要执行的block。dispatch_time_t有两种形式的构造方式，第一种相对时间：DISPATCH">
+<meta name="twitter:title" content="iOS代码编译速度优化">
+<meta name="twitter:description" content="cleaner源码编译速度优化方案
+参考最新的cleaner，主要是清理头文件之间的依赖，尽量都采取直接依赖，而不是通过间接依赖，比A依赖B，B依赖C。而A如果依赖C的时候，最好是直接通过采用A依赖C的操作，而不是A-&amp;gt;B-&amp;gt;C的操作。
+
+cleaner要求，在所有的.h文件中，基本都采用@class，@protocol的形式添加声明，然后在.m文件中添加#import的操作，这样是可">
   
   
     <link rel="icon" href="/favicon.png">
@@ -186,11 +195,11 @@
 	</div>
 </nav>
 
-      <div class="body-wrap"><article id="post-dispatch-after使用注意" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-iOS代码编译速度优化" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2016/08/03/dispatch-after使用注意/" class="article-date">
-  	<time datetime="2016-08-03T01:42:50.000Z" itemprop="datePublished">2016-08-03</time>
+      <a href="/2016/08/11/iOS代码编译速度优化/" class="article-date">
+  	<time datetime="2016-08-11T02:26:29.000Z" itemprop="datePublished">2016-08-11</time>
 </a>
     </div>
   
@@ -203,7 +212,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      dispatch_after使用注意
+      iOS代码编译速度优化
     </h1>
   
 
@@ -223,12 +232,48 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h2><p>开发中，经常需要dispatch_after进行延迟处理，dispatch_after能让我们添加进队列的任务延时执行，该函数并不是在指定时间后执行处理，而只是在指定时间追加处理到dispatch_queue该方法的第一个参数是time，第二个参数是dispatch_queue，第三个参数是要执行的block。dispatch_time_t有两种形式的构造方式，第一种相对时间：DISPATCH_TIME_NOW表示现在，NSEC_PER_SEC表示的是秒数，它还提供了NSEC_PER_MSEC表示毫秒。<br>第二种是绝对时间，通过dispatch_walltime函数来获取，dispatch_walltime需要使用一个timespec的结构体来得到dispatch_time_t。</p>
-<p><strong>注意：不是一定在给定时间后执行相关的任务，而是在一定时间后，将执行的操作加入到队列中，然后队列里面再分配执行的时间，所以即使给了个 <code>0秒</code> 也不会立即执行，而是会追加一个Runloop的时间，一般是1/60s</strong></p>
-<h2 id="测试代码如下"><a href="#测试代码如下" class="headerlink" title="测试代码如下"></a>测试代码如下</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^&#123;</div><div class="line">        NSLog(@&quot;in after&quot;);</div><div class="line">    &#125;);</div><div class="line">    </div><div class="line">    NSLog(@&quot;viewDidLoad&quot;);</div><div class="line">    </div><div class="line">打印的顺序是这样：</div><div class="line">2016-08-03 09:41:06.237 testDispatchAfter[29364:9056216] viewDidLoad</div><div class="line">2016-08-03 09:41:06.244 testDispatchAfter[29364:9056216] in after</div></pre></td></tr></table></figure>
-<h2 id="那有什么问题呢？"><a href="#那有什么问题呢？" class="headerlink" title="那有什么问题呢？"></a>那有什么问题呢？</h2><p>所以如果我们在使用dispatch_after的时候，比如有时候需要判断条件，特别是有些针对版本的判断，比如&lt;= iOS7上，需要进行一定的延迟处理：<br>比如</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">NSString *string = @&quot;测试&quot;;</div><div class="line">dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^&#123;</div><div class="line">    NSString *afterString = [@&quot;name in after&quot; stringByAppendingString:string];</div><div class="line">    NSLog(@&quot;%@&quot;, afterString);</div><div class="line">&#125;);</div><div class="line"></div><div class="line">NSLog(@&quot;%@&quot;, string);</div><div class="line">string = nil;</div></pre></td></tr></table></figure>
-<p>虽然测试的过程中，没有crash。但是我们在代码逻辑里还是要避免这样的操作，<strong>因为是有可能，在dispatch_after的block执行之前，释放了某些变量，导致block出错的。</strong></p>
+        <h2 id="cleaner源码编译速度优化方案"><a href="#cleaner源码编译速度优化方案" class="headerlink" title="cleaner源码编译速度优化方案"></a>cleaner源码编译速度优化方案</h2><ol>
+<li>参考最新的cleaner，主要是清理头文件之间的依赖，尽量都采取直接依赖，而不是通过间接依赖，比A依赖B，B依赖C。而A如果依赖C的时候，最好是直接通过采用A依赖C的操作，而不是A-&gt;B-&gt;C的操作。</li>
+</ol>
+<p>cleaner要求，在所有的.h文件中，基本都采用@class，@protocol的形式添加声明，然后在.m文件中添加#import的操作，这样是可以最小限度的减少依赖环节，但是也是有弊端的：</p>
+<p>比如常用的model嵌套，如果采用@class的声明的方式，在vm或者v中使用model的时候，都要将他的子model的头文件也添加上，还是比较繁琐的。但是采用这样的操作，可以最大限度的降低头文件依赖和编译时间，所以平台也是在大力推广。</p>
+<ol>
+<li><p>同时为了解决各个模块混乱依赖的问题，公司也要求将prefix.h文件给去掉，但是个人感觉还是可以添加一最常用的，比如 UIKit，NSFoundation等</p>
+</li>
+<li><p>pch的，苹果在xcode6中已经不建议使用了，原因可能是，大家总是把一些头文件都放到prefix中，就导致各个头文件都会包含所有prefix中所包含的，每个文件依赖增多，编译时间也会增加。参考<a href="http://qualitycoding.org/objective-c-code-smells/" target="_blank" rel="external">Code Smells in Objective-C</a></p>
+</li>
+</ol>
+<a id="more"></a>
+<h2 id="其他优化"><a href="#其他优化" class="headerlink" title="其他优化"></a>其他优化</h2><ol>
+<li>将Debug Information Format改为DWARF</li>
+</ol>
+<p>在工程对应Target的Build Settings中，找到Debug Information Format这一项，将Debug时的DWARF with dSYM file改为DWARF。</p>
+<p>这一项设置的是是否将调试信息加入到可执行文件中，改为DWARF后，如果程序崩溃，将无法输出崩溃位置对应的函数堆栈，但由于Debug模式下可以在XCode中查看调试信息，所以改为DWARF影响并不大。这一项更改完之后，可以大幅提升编译速度。</p>
+<ol>
+<li>将Build Active Architecture Only改为Yes</li>
+</ol>
+<p>在工程对应Target的Build Settings中，找到Build Active Architecture Only这一项，将Debug时的No改为Yes。</p>
+<p>这一项设置的是是否仅编译当前架构的版本，如果为No，会编译所有架构的版本。需要注意的是，此选项在Release模式下必须为Yes，否则发布的ipa在部分设备上将不能运行。这一项更改完之后，可以显著提高编译速度。</p>
+<ol>
+<li>Enable Modules (C and Objective-C) 改为YES<br>打开Modules之后，可以采用@improt的形式导入依赖，但是这个功能主要是对系统的framework和library启作用，而对于我们常用的cocoapod继承的库是不生效的。</li>
+</ol>
+<h2 id="延伸阅读"><a href="#延伸阅读" class="headerlink" title="延伸阅读"></a>延伸阅读</h2><p>关于DWARF与dSYM</p>
+<p>DWARF is a debugging file format used by many compilers and debuggers to support source level debugging. It addresses the requirements of a number of procedural languages, such as C, C++, and Fortran, and is designed to be extensible to other languages. DWARF is architecture independent and applicable to any processor or operating system. It is widely used on Unix, Linux and other operating systems, as well as in stand-alone environments.</p>
+<p>DWARF与dSYM的关系是，DWARF是文件格式，而dSYM往往指一个单独的文件。在Xcode中如果不做特殊制定，debug information是被保存在executable文件中，可以使用dsymutil从executable中提取dSYM文件。</p>
+<p>dsymutil</p>
+<p>dsymutil is a tool to manipulate archived DWARF debug symbol files. 使用dsymutil可以对dSYM文件进行如下操作：从exe_path中提取成dSYM文件、将executable或者object文件中的symbol table dump出来、更新dSYM文件以让dSYM文件包含最新的accelerator tables and other DWARF optimizations。</p>
+<p>Debug Info Format</p>
+<p>在Xcode中可以选择DWARF和DWARF with dSYM file，推荐的设置是Debug用DWARF；Release使用DWARF with dSYM file。</p>
+<p>使用dSYM file</p>
+<p>如果我们有若干的build，有若干dSYM文件，而名字又有点乱，想知道哪个dSYM跟哪个build匹配，从而可以使用它们呢？办法就是查看UUID。</p>
+<p>下面就是看怎么加载dSYM file了</p>
+<p>关于dSYM和debug，这里有更多的信息。 </p>
+<blockquote>
+<p><a href="http://www.cnblogs.com/whyandinside/archive/2013/04/28/3048366.html" target="_blank" rel="external">http://www.cnblogs.com/whyandinside/archive/2013/04/28/3048366.html</a></p>
+<p><a href="https://tech.zalando.de/blog/speeding-up-xcode-builds/" target="_blank" rel="external">Speeding up Xcode Builds</a></p>
+<p><a href="http://useyourloaf.com/blog/modules-and-precompiled-headers/" target="_blank" rel="external">Modules and Precompiled Headers</a></p>
+<p><a href="http://qualitycoding.org/objective-c-code-smells/" target="_blank" rel="external">Code Smells in Objective-C</a></p>
+</blockquote>
 
       
     </div>
@@ -238,18 +283,9 @@
     
 <nav id="article-nav">
   
-    <a href="/2016/08/04/carthage初入/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption"><</strong>
-      <div class="article-nav-title">
-        
-          carthage初入
-        
-      </div>
-    </a>
   
-  
-    <a href="/2016/07/25/onExit分析/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">onExit分析</div>
+    <a href="/2016/08/04/carthage初入/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">carthage初入</div>
       <strong class="article-nav-caption">></strong>
     </a>
   
@@ -284,7 +320,7 @@
 
 <div class="duoshuo">
 	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="dispatch-after使用注意" data-title="dispatch_after使用注意" data-url="http://theewind.github.io/2016/08/03/dispatch-after使用注意/"></div>
+	<div class="ds-thread" data-thread-key="iOS代码编译速度优化" data-title="iOS代码编译速度优化" data-url="http://theewind.github.io/2016/08/11/iOS代码编译速度优化/"></div>
 	<!-- 多说评论框 end -->
 	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 	<script type="text/javascript">

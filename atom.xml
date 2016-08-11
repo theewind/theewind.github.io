@@ -5,7 +5,7 @@
   <link href="//atom.xml" rel="self"/>
   
   <link href="http://theewind.github.io/"/>
-  <updated>2016-08-03T02:03:18.000Z</updated>
+  <updated>2016-08-11T03:14:47.000Z</updated>
   <id>http://theewind.github.io/</id>
   
   <author>
@@ -14,6 +14,118 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>iOS代码编译速度优化</title>
+    <link href="http://theewind.github.io/2016/08/11/iOS%E4%BB%A3%E7%A0%81%E7%BC%96%E8%AF%91%E9%80%9F%E5%BA%A6%E4%BC%98%E5%8C%96/"/>
+    <id>http://theewind.github.io/2016/08/11/iOS代码编译速度优化/</id>
+    <published>2016-08-11T02:26:29.000Z</published>
+    <updated>2016-08-11T03:14:47.000Z</updated>
+    
+    <content type="html">&lt;h2 id=&quot;cleaner源码编译速度优化方案&quot;&gt;&lt;a href=&quot;#cleaner源码编译速度优化方案&quot; class=&quot;headerlink&quot; title=&quot;cleaner源码编译速度优化方案&quot;&gt;&lt;/a&gt;cleaner源码编译速度优化方案&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;参考最新的cleaner，主要是清理头文件之间的依赖，尽量都采取直接依赖，而不是通过间接依赖，比A依赖B，B依赖C。而A如果依赖C的时候，最好是直接通过采用A依赖C的操作，而不是A-&amp;gt;B-&amp;gt;C的操作。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;cleaner要求，在所有的.h文件中，基本都采用@class，@protocol的形式添加声明，然后在.m文件中添加#import的操作，这样是可以最小限度的减少依赖环节，但是也是有弊端的：&lt;/p&gt;
+&lt;p&gt;比如常用的model嵌套，如果采用@class的声明的方式，在vm或者v中使用model的时候，都要将他的子model的头文件也添加上，还是比较繁琐的。但是采用这样的操作，可以最大限度的降低头文件依赖和编译时间，所以平台也是在大力推广。&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;同时为了解决各个模块混乱依赖的问题，公司也要求将prefix.h文件给去掉，但是个人感觉还是可以添加一最常用的，比如 UIKit，NSFoundation等&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;pch的，苹果在xcode6中已经不建议使用了，原因可能是，大家总是把一些头文件都放到prefix中，就导致各个头文件都会包含所有prefix中所包含的，每个文件依赖增多，编译时间也会增加。参考&lt;a href=&quot;http://qualitycoding.org/objective-c-code-smells/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Code Smells in Objective-C&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
+&lt;h2 id=&quot;其他优化&quot;&gt;&lt;a href=&quot;#其他优化&quot; class=&quot;headerlink&quot; title=&quot;其他优化&quot;&gt;&lt;/a&gt;其他优化&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;将Debug Information Format改为DWARF&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;在工程对应Target的Build Settings中，找到Debug Information Format这一项，将Debug时的DWARF with dSYM file改为DWARF。&lt;/p&gt;
+&lt;p&gt;这一项设置的是是否将调试信息加入到可执行文件中，改为DWARF后，如果程序崩溃，将无法输出崩溃位置对应的函数堆栈，但由于Debug模式下可以在XCode中查看调试信息，所以改为DWARF影响并不大。这一项更改完之后，可以大幅提升编译速度。&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;将Build Active Architecture Only改为Yes&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;在工程对应Target的Build Settings中，找到Build Active Architecture Only这一项，将Debug时的No改为Yes。&lt;/p&gt;
+&lt;p&gt;这一项设置的是是否仅编译当前架构的版本，如果为No，会编译所有架构的版本。需要注意的是，此选项在Release模式下必须为Yes，否则发布的ipa在部分设备上将不能运行。这一项更改完之后，可以显著提高编译速度。&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Enable Modules (C and Objective-C) 改为YES&lt;br&gt;打开Modules之后，可以采用@improt的形式导入依赖，但是这个功能主要是对系统的framework和library启作用，而对于我们常用的cocoapod继承的库是不生效的。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&quot;延伸阅读&quot;&gt;&lt;a href=&quot;#延伸阅读&quot; class=&quot;headerlink&quot; title=&quot;延伸阅读&quot;&gt;&lt;/a&gt;延伸阅读&lt;/h2&gt;&lt;p&gt;关于DWARF与dSYM&lt;/p&gt;
+&lt;p&gt;DWARF is a debugging file format used by many compilers and debuggers to support source level debugging. It addresses the requirements of a number of procedural languages, such as C, C++, and Fortran, and is designed to be extensible to other languages. DWARF is architecture independent and applicable to any processor or operating system. It is widely used on Unix, Linux and other operating systems, as well as in stand-alone environments.&lt;/p&gt;
+&lt;p&gt;DWARF与dSYM的关系是，DWARF是文件格式，而dSYM往往指一个单独的文件。在Xcode中如果不做特殊制定，debug information是被保存在executable文件中，可以使用dsymutil从executable中提取dSYM文件。&lt;/p&gt;
+&lt;p&gt;dsymutil&lt;/p&gt;
+&lt;p&gt;dsymutil is a tool to manipulate archived DWARF debug symbol files. 使用dsymutil可以对dSYM文件进行如下操作：从exe_path中提取成dSYM文件、将executable或者object文件中的symbol table dump出来、更新dSYM文件以让dSYM文件包含最新的accelerator tables and other DWARF optimizations。&lt;/p&gt;
+&lt;p&gt;Debug Info Format&lt;/p&gt;
+&lt;p&gt;在Xcode中可以选择DWARF和DWARF with dSYM file，推荐的设置是Debug用DWARF；Release使用DWARF with dSYM file。&lt;/p&gt;
+&lt;p&gt;使用dSYM file&lt;/p&gt;
+&lt;p&gt;如果我们有若干的build，有若干dSYM文件，而名字又有点乱，想知道哪个dSYM跟哪个build匹配，从而可以使用它们呢？办法就是查看UUID。&lt;/p&gt;
+&lt;p&gt;下面就是看怎么加载dSYM file了&lt;/p&gt;
+&lt;p&gt;关于dSYM和debug，这里有更多的信息。 &lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;a href=&quot;http://www.cnblogs.com/whyandinside/archive/2013/04/28/3048366.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://www.cnblogs.com/whyandinside/archive/2013/04/28/3048366.html&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://tech.zalando.de/blog/speeding-up-xcode-builds/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Speeding up Xcode Builds&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;http://useyourloaf.com/blog/modules-and-precompiled-headers/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Modules and Precompiled Headers&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;http://qualitycoding.org/objective-c-code-smells/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Code Smells in Objective-C&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;cleaner源码编译速度优化方案&quot;&gt;&lt;a href=&quot;#cleaner源码编译速度优化方案&quot; class=&quot;headerlink&quot; title=&quot;cleaner源码编译速度优化方案&quot;&gt;&lt;/a&gt;cleaner源码编译速度优化方案&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;参考最新的cleaner，主要是清理头文件之间的依赖，尽量都采取直接依赖，而不是通过间接依赖，比A依赖B，B依赖C。而A如果依赖C的时候，最好是直接通过采用A依赖C的操作，而不是A-&amp;gt;B-&amp;gt;C的操作。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;cleaner要求，在所有的.h文件中，基本都采用@class，@protocol的形式添加声明，然后在.m文件中添加#import的操作，这样是可以最小限度的减少依赖环节，但是也是有弊端的：&lt;/p&gt;
+&lt;p&gt;比如常用的model嵌套，如果采用@class的声明的方式，在vm或者v中使用model的时候，都要将他的子model的头文件也添加上，还是比较繁琐的。但是采用这样的操作，可以最大限度的降低头文件依赖和编译时间，所以平台也是在大力推广。&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;同时为了解决各个模块混乱依赖的问题，公司也要求将prefix.h文件给去掉，但是个人感觉还是可以添加一最常用的，比如 UIKit，NSFoundation等&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;pch的，苹果在xcode6中已经不建议使用了，原因可能是，大家总是把一些头文件都放到prefix中，就导致各个头文件都会包含所有prefix中所包含的，每个文件依赖增多，编译时间也会增加。参考&lt;a href=&quot;http://qualitycoding.org/objective-c-code-smells/&quot;&gt;Code Smells in Objective-C&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+    
+    </summary>
+    
+    
+      <category term="iOS" scheme="http://theewind.github.io/tags/iOS/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>carthage初入</title>
+    <link href="http://theewind.github.io/2016/08/04/carthage%E5%88%9D%E5%85%A5/"/>
+    <id>http://theewind.github.io/2016/08/04/carthage初入/</id>
+    <published>2016-08-04T07:11:34.000Z</published>
+    <updated>2016-08-11T02:45:12.000Z</updated>
+    
+    <content type="html">&lt;h1 id=&quot;carthage是什么&quot;&gt;&lt;a href=&quot;#carthage是什么&quot; class=&quot;headerlink&quot; title=&quot;carthage是什么&quot;&gt;&lt;/a&gt;carthage是什么&lt;/h1&gt;&lt;blockquote&gt;
+&lt;p&gt;Carthage&lt;br&gt;英 [ˈkɑ:θidʒ]  美 [ˈkɑrθɪdʒ]&lt;br&gt;n.&lt;br&gt;迦太基（非洲北部，今突尼斯的奴隶制城邦，腓尼基人所建，公元146年被罗马帝国所灭，见Punic Wars）&lt;br&gt;网络&lt;br&gt;迦太基古城;  迦太基遗址;  迦太基城&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;carthage是一个iOS的包依赖管理工具，相对于CocoaPods，他的目标是去中心化的依赖管理器。&lt;br&gt;它没有总项目的列表，这能够减少维护工作并且避免任何中心化带来的问题（如中央服务器宕机）。不过，这样也有一些缺点，就是项目的发现将更困难，用户将依赖于Github的趋势页面或者类似的代码库来寻找项目。&lt;/p&gt;
+&lt;h1 id=&quot;carthage和-CocoaPods&quot;&gt;&lt;a href=&quot;#carthage和-CocoaPods&quot; class=&quot;headerlink&quot; title=&quot;carthage和 CocoaPods&quot;&gt;&lt;/a&gt;carthage和 CocoaPods&lt;/h1&gt;&lt;p&gt;CocoaPods默认会自动创建并更新你的应用程序和所有依赖的Xcode workspace。Carthage使用xcodebuild来编译框架的二进制文件，但如何集成它们将交由用户自己判断。CocoaPods的方法更易于使用，但Carthage更灵活并且是非侵入性的。&lt;/p&gt;
+&lt;p&gt;CocoaPods的目标在它的README文件描述如下：&lt;/p&gt;
+&lt;p&gt;…为提高第三方开源库的可见性和参与度，创建一个更中心化的生态系统。&lt;/p&gt;
+&lt;p&gt;与之对照，Carthage创建的是去中心化的依赖管理器。它没有总项目的列表，这能够减少维护工作并且避免任何中心化带来的问题（如中央服务器宕机）。不过，这样也有一些缺点，就是项目的发现将更困难，用户将依赖于Github的趋势页面或者类似的代码库来寻找项目。&lt;/p&gt;
+&lt;p&gt;CocoaPods项目同时还必须包含一个podspec文件，里面是项目的一些元数据，以及确定项目的编译方式。Carthage使用xcodebuild来编译依赖，而不是将他们集成进一个workspace，因此无需类似的设定文件。不过依赖需要包含自己的Xcode工程文件来描述如何编译。&lt;/p&gt;
+&lt;p&gt;最后，我们创建Carthage的原因是想要一种尽可能简单的工具——一个只关心本职工作的依赖管理器，而不是取代部分Xcode的功能，或者需要 让框架作者做一些额外的工作。CocoaPods提供的一些特性很棒，但由于附加的复杂性，它们将不会被包含在Carthage当中。&lt;/p&gt;
+&lt;h1 id=&quot;使用&quot;&gt;&lt;a href=&quot;#使用&quot; class=&quot;headerlink&quot; title=&quot;使用&quot;&gt;&lt;/a&gt;使用&lt;/h1&gt;&lt;p&gt;1 安装&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;brew install carthage
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;2 创建cartfile文件&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;vim Cartfile
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;3 添加依赖&lt;/p&gt;
+&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;4&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;5&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;#Require version 2.5 or later&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;github &amp;quot;ReactiveCocoa/ReactiveCocoa&amp;quot; &amp;gt;= 2.5&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;#Require version 1.x&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;github &amp;quot;Mantle/Mantle&amp;quot; ~&amp;gt; 1.0&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;4 执行&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;carthage update
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;5 添加framework到project中&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;在Build目录下会生成对应的iOS， Mac， tvOS，watchOS四个平台的各自framework集合，以及他们的dSYM文件，后续的添加到工程中使用即可。
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;6 支持版本iOS8&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;carthage是什么&quot;&gt;&lt;a href=&quot;#carthage是什么&quot; class=&quot;headerlink&quot; title=&quot;carthage是什么&quot;&gt;&lt;/a&gt;carthage是什么&lt;/h1&gt;&lt;blockquote&gt;
+&lt;p&gt;Carthage&lt;br&gt;英 [ˈkɑ:θi
+    
+    </summary>
+    
+    
+  </entry>
   
   <entry>
     <title>dispatch_after使用注意</title>
@@ -759,154 +871,6 @@ import { View } from &amp;apos;react-native&amp;apos;;
       <category term="qrcode" scheme="http://theewind.github.io/tags/qrcode/"/>
     
       <category term="python" scheme="http://theewind.github.io/tags/python/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>正则表达式的学习</title>
-    <link href="http://theewind.github.io/2016/06/12/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E7%9A%84%E5%AD%A6%E4%B9%A0/"/>
-    <id>http://theewind.github.io/2016/06/12/正则表达式的学习/</id>
-    <published>2016-06-12T08:26:37.000Z</published>
-    <updated>2016-06-12T10:15:21.000Z</updated>
-    
-    <content type="html">&lt;p&gt;本文主要记录了自己在工作中用到的部分正则表达式的零星点碎的内容。&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;&lt;p&gt;&lt;code&gt;\\.&lt;/code&gt;，&lt;code&gt;\\|&lt;/code&gt; 等&lt;code&gt;\\&lt;/code&gt;操作。 &lt;code&gt;\\|&lt;/code&gt;这是转义的意思 “\” “|” 都是特殊字符所以需要转义，第二个反斜杠 \ 转义 |&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;&lt;a href=&quot;http://www.imkevinyang.com/2009/08/使用正则表达式找出不包含特定字符串的条目.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;前瞻后顾&lt;/a&gt; 学习 &lt;code&gt;!?&lt;/code&gt;操作&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;贪婪与非贪婪 &lt;code&gt;?&lt;/code&gt; 当正则表达式中包含能接受重复的限定符时，通常的行为是（在使整个表达式能得到匹配的前提下）匹配尽可能多的字符。以这个表达式为例&lt;code&gt;a.*b，它将会匹配最长的以a开始，以b结束的字符串。如果用它来搜索aabab的话，它会匹配整个字符串aabab。这被称为贪婪匹配。
-有时，我们更需要懒惰匹配，也就是匹配尽可能少的字符。前面给出的限定符都可以被转化为懒惰匹配模式，只要在它后面加上一个问号?。这样.*?&lt;/code&gt;就意味着匹配任意数量的重复，但是在能使整个匹配成功的前提下使用最少的重复。现在看看懒惰版的例子吧：&lt;br&gt;a.*?b匹配最短的，以a开始，以b结束的字符串。如果把它应用于aabab的话，它会匹配aab（第一到第三个字符）和ab（第四到第五个字符）。&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
-&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;4&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;5&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;6&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;7&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;\d+：匹配数字一次或者多次&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;\d.*：先匹配一位数字，剩下匹配任意字符零次或者多次&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;\d.*?：*?这个表示非贪婪模式，表示匹配最少的数量匹配&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;例子：&amp;lt;DIV&amp;gt;123&amp;lt;DIV&amp;gt;456&amp;lt;DIV&amp;gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;贪婪：&amp;lt;DIV&amp;gt;.*&amp;lt;DIV&amp;gt; ====&amp;gt; &amp;lt;DIV&amp;gt;123&amp;lt;DIV&amp;gt;456&amp;lt;DIV&amp;gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;非贪婪：&amp;lt;DIV&amp;gt;.*?&amp;lt;DIV&amp;gt;====&amp;gt; &amp;lt;DIV&amp;gt;123&amp;lt;DIV&amp;gt;&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;p&gt;在我们闪惠的输入限制里面，有如下的正则：   &lt;/p&gt;
-&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;4&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;5&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;6&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;7&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;NSString *regex = @&amp;quot;^(?!0[^\\.])\\d+\\.?\\d&amp;#123;0,2&amp;#125;$&amp;quot;;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;解析下来就是如下，比使用代码一个一个判断条件过滤要好太多了。&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;	 /**&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;     *  (?!0[^\.])  第一个数字为0的时，后面只能输入小数点&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;     *  \d+\.?      小数点前（若有）只能为数字&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;     *  \d&amp;#123;0,2&amp;#125;     小数点后最多输入两位数字&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;     **/&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;ol&gt;
-&lt;li&gt;范围  / rex /gmi  g–global, m–multiline, i–ignore&lt;/li&gt;
-&lt;li&gt;常用的元字符&lt;/li&gt;
-&lt;/ol&gt;
-&lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th&gt;代码&lt;/th&gt;
-&lt;th&gt;说明&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td&gt;.&lt;/td&gt;
-&lt;td&gt;匹配除换行符以外的任意字符&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;\w&lt;/td&gt;
-&lt;td&gt;匹配字母或数字或下划线或汉字&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;\s&lt;/td&gt;
-&lt;td&gt;匹配任意的空白符,空格，tab，换行，中文全角空格等&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;\d&lt;/td&gt;
-&lt;td&gt;匹配数字&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;\b&lt;/td&gt;
-&lt;td&gt;匹配单词的开始或结束&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;^&lt;/td&gt;
-&lt;td&gt;匹配字符串的开始&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;$&lt;/td&gt;
-&lt;td&gt;匹配字符串的结束&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-&lt;p&gt;常用的限定符&lt;/p&gt;
-&lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th&gt;代码&lt;/th&gt;
-&lt;th&gt;语法    说明&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td&gt;*&lt;/td&gt;
-&lt;td&gt;重复零次或更多次&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;+&lt;/td&gt;
-&lt;td&gt;重复一次或更多次&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;?&lt;/td&gt;
-&lt;td&gt;重复零次或一次&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;{n}&lt;/td&gt;
-&lt;td&gt;重复n次&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;{n,}&lt;/td&gt;
-&lt;td&gt;重复n次或更多次&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;{n,m}&lt;/td&gt;
-&lt;td&gt;重复n到m次&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-&lt;ol&gt;
-&lt;li&gt;[]里面的不要转义，比如 [aeiou]匹配每一个元音，[.*?]匹配标点符号(.?!)&lt;/li&gt;
-&lt;/ol&gt;
-</content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;本文主要记录了自己在工作中用到的部分正则表达式的零星点碎的内容。&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;&lt;p&gt;&lt;code&gt;\\.&lt;/code&gt;，&lt;code&gt;\\|&lt;/code&gt; 等&lt;code&gt;\\&lt;/code&gt;操作。 &lt;code&gt;\\|&lt;/code&gt;这是转义的意思 “\” “|” 都是
-    
-    </summary>
-    
-    
-      <category term="正则表达式" scheme="http://theewind.github.io/tags/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>study</title>
-    <link href="http://theewind.github.io/2016/06/07/study_f8app/"/>
-    <id>http://theewind.github.io/2016/06/07/study_f8app/</id>
-    <published>2016-06-07T15:04:01.000Z</published>
-    <updated>2016-06-08T09:59:01.000Z</updated>
-    
-    <content type="html">&lt;p&gt;主要是先参考如下篇文章：&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;&lt;a href=&quot;http://www.open-open.com/lib/view/open1461512056952.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://www.open-open.com/lib/view/open1461512056952.html&lt;/a&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;第一次接触redux，概念还比较模糊，同时js开发水平也一般，对一些语法学习还不是很懂，这里做个记录：&lt;br&gt;代码中的很多function func(): type的用法，我之前接触的基本都是无返回值类型的，这里添加一个 &lt;code&gt;:Action&lt;/code&gt;类型，貌似就是确定了返回值类型的，不知道理解的对不对。&lt;/p&gt;
-&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
-&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;4&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;5&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;6&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;7&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;/* from js/actions/filter.js */&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;function applyTopicsFilter(topics): Action &amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;  return &amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    type: &amp;apos;APPLY_TOPICS_FILTER&amp;apos;,&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    topics,&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;  &amp;#125;;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&amp;#125;&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;p&gt;redux的这个流程图不错&lt;br&gt;&lt;img src=&quot;http://static.open-open.com/lib/uploadImg/20160424/20160424233655_731.png&quot; alt=&quot;组件&quot;&gt;&lt;/p&gt;
-&lt;p&gt;越看越不懂，任重而道远&lt;/p&gt;
-</content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;主要是先参考如下篇文章：&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;&lt;a href=&quot;http://www.open-open.com/lib/view/open1461512056952.html&quot;&gt;http://www.open-open.com/lib/view/open1461512056952.html&lt;/a&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;第一次接触redux，概念还比较模糊，同时js开发水平也一般，对一些语法学习还不是很懂，这里做个记录：&lt;br&gt;代码中的很多function func(): type的用法，我之前接触的基本都是无返回值类型的，这里添加一个 &lt;code&gt;:Action&lt;/code&gt;类型，貌似就是确定了返回值类型的，不知道理解的对不对。&lt;/p&gt;
-    
-    </summary>
-    
-    
-      <category term="React Native" scheme="http://theewind.github.io/tags/React-Native/"/>
     
   </entry>
   

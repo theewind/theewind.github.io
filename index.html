@@ -187,6 +187,149 @@
 
       <div class="body-wrap">
   
+    <article id="post-iOS代码编译速度优化" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/08/11/iOS代码编译速度优化/" class="article-date">
+  	<time datetime="2016-08-11T02:26:29.000Z" itemprop="datePublished">2016-08-11</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/08/11/iOS代码编译速度优化/">iOS代码编译速度优化</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="cleaner源码编译速度优化方案"><a href="#cleaner源码编译速度优化方案" class="headerlink" title="cleaner源码编译速度优化方案"></a>cleaner源码编译速度优化方案</h2><ol>
+<li>参考最新的cleaner，主要是清理头文件之间的依赖，尽量都采取直接依赖，而不是通过间接依赖，比A依赖B，B依赖C。而A如果依赖C的时候，最好是直接通过采用A依赖C的操作，而不是A-&gt;B-&gt;C的操作。</li>
+</ol>
+<p>cleaner要求，在所有的.h文件中，基本都采用@class，@protocol的形式添加声明，然后在.m文件中添加#import的操作，这样是可以最小限度的减少依赖环节，但是也是有弊端的：</p>
+<p>比如常用的model嵌套，如果采用@class的声明的方式，在vm或者v中使用model的时候，都要将他的子model的头文件也添加上，还是比较繁琐的。但是采用这样的操作，可以最大限度的降低头文件依赖和编译时间，所以平台也是在大力推广。</p>
+<ol>
+<li><p>同时为了解决各个模块混乱依赖的问题，公司也要求将prefix.h文件给去掉，但是个人感觉还是可以添加一最常用的，比如 UIKit，NSFoundation等</p>
+</li>
+<li><p>pch的，苹果在xcode6中已经不建议使用了，原因可能是，大家总是把一些头文件都放到prefix中，就导致各个头文件都会包含所有prefix中所包含的，每个文件依赖增多，编译时间也会增加。参考<a href="http://qualitycoding.org/objective-c-code-smells/">Code Smells in Objective-C</a></p>
+</li>
+</ol>
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS/">iOS</a></li></ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a  href="/2016/08/11/iOS代码编译速度优化/#more">more >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-carthage初入" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/08/04/carthage初入/" class="article-date">
+  	<time datetime="2016-08-04T07:11:34.000Z" itemprop="datePublished">2016-08-04</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/08/04/carthage初入/">carthage初入</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="carthage是什么"><a href="#carthage是什么" class="headerlink" title="carthage是什么"></a>carthage是什么</h1><blockquote>
+<p>Carthage<br>英 [ˈkɑ:θidʒ]  美 [ˈkɑrθɪdʒ]<br>n.<br>迦太基（非洲北部，今突尼斯的奴隶制城邦，腓尼基人所建，公元146年被罗马帝国所灭，见Punic Wars）<br>网络<br>迦太基古城;  迦太基遗址;  迦太基城</p>
+</blockquote>
+<p>carthage是一个iOS的包依赖管理工具，相对于CocoaPods，他的目标是去中心化的依赖管理器。<br>它没有总项目的列表，这能够减少维护工作并且避免任何中心化带来的问题（如中央服务器宕机）。不过，这样也有一些缺点，就是项目的发现将更困难，用户将依赖于Github的趋势页面或者类似的代码库来寻找项目。</p>
+<h1 id="carthage和-CocoaPods"><a href="#carthage和-CocoaPods" class="headerlink" title="carthage和 CocoaPods"></a>carthage和 CocoaPods</h1><p>CocoaPods默认会自动创建并更新你的应用程序和所有依赖的Xcode workspace。Carthage使用xcodebuild来编译框架的二进制文件，但如何集成它们将交由用户自己判断。CocoaPods的方法更易于使用，但Carthage更灵活并且是非侵入性的。</p>
+<p>CocoaPods的目标在它的README文件描述如下：</p>
+<p>…为提高第三方开源库的可见性和参与度，创建一个更中心化的生态系统。</p>
+<p>与之对照，Carthage创建的是去中心化的依赖管理器。它没有总项目的列表，这能够减少维护工作并且避免任何中心化带来的问题（如中央服务器宕机）。不过，这样也有一些缺点，就是项目的发现将更困难，用户将依赖于Github的趋势页面或者类似的代码库来寻找项目。</p>
+<p>CocoaPods项目同时还必须包含一个podspec文件，里面是项目的一些元数据，以及确定项目的编译方式。Carthage使用xcodebuild来编译依赖，而不是将他们集成进一个workspace，因此无需类似的设定文件。不过依赖需要包含自己的Xcode工程文件来描述如何编译。</p>
+<p>最后，我们创建Carthage的原因是想要一种尽可能简单的工具——一个只关心本职工作的依赖管理器，而不是取代部分Xcode的功能，或者需要 让框架作者做一些额外的工作。CocoaPods提供的一些特性很棒，但由于附加的复杂性，它们将不会被包含在Carthage当中。</p>
+<h1 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h1><p>1 安装</p>
+<pre><code>brew install carthage
+</code></pre><p>2 创建cartfile文件</p>
+<pre><code>vim Cartfile
+</code></pre><p>3 添加依赖</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">#Require version 2.5 or later</div><div class="line">github &quot;ReactiveCocoa/ReactiveCocoa&quot; &gt;= 2.5</div><div class="line"></div><div class="line">#Require version 1.x</div><div class="line">github &quot;Mantle/Mantle&quot; ~&gt; 1.0</div></pre></td></tr></table></figure>
+<p>4 执行</p>
+<pre><code>carthage update
+</code></pre><p>5 添加framework到project中</p>
+<pre><code>在Build目录下会生成对应的iOS， Mac， tvOS，watchOS四个平台的各自framework集合，以及他们的dSYM文件，后续的添加到工程中使用即可。
+</code></pre><p>6 支持版本iOS8</p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
     <article id="post-dispatch-after使用注意" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -444,129 +587,9 @@
 
 
   
-    <article id="post-UIKit主线程检查" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2016/07/18/UIKit主线程检查/" class="article-date">
-  	<time datetime="2016-07-18T02:57:04.000Z" itemprop="datePublished">2016-07-18</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/07/18/UIKit主线程检查/">UIKit主线程检查</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>iOS开发过程中，很多时候都会使用GCD及NSOperation等涉及到多线程的操作，这样就算是一个老手，也可能会遇到非主线程刷新UI的操作，而结果就是遇到各种不确定的问题，<a href="https://www.objccn.io/issue-2-4/">这篇文章:线程安全类的设计</a>向我们解释了为什么UIKit是非线程安全的，然后也介绍了一个<a href="https://gist.github.com/steipete/5664345">UIKit主线程检查的机制</a>，今天自己又复习下这个内容。</p>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS/">iOS</a></li></ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a  href="/2016/07/18/UIKit主线程检查/#more">more >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-FlatBuffers" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2016/07/14/FlatBuffers/" class="article-date">
-  	<time datetime="2016-07-14T08:32:46.000Z" itemprop="datePublished">2016-07-14</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/07/14/FlatBuffers/">FlatBuffers</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>继Protocol Buffers 之后Google开源的一个新的数据传输框架，FaltBuffers。先占个坑</p>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/互联网/">互联网</a></li></ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a  href="/2016/07/14/FlatBuffers/#more">more >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
   
     <nav id="page-nav">
-      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
+      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
     </nav>
   
 </div>
