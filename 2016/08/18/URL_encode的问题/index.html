@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+  <title>url encode的问题 | sanfeng’s blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="URL参数encode的问题外卖下单时，会先检测用户是否绑定了手机号，如果没有绑定，preview会提示进行绑定，跳转到绑定手机页面，如果绑定成功，就继续回到preview页面。
+这就需要将preview的URLAction传递给绑定手机页面，它再进行一个透传。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="url encode的问题">
+<meta property="og:url" content="http://theewind.github.io/2016/08/18/URL_encode的问题/index.html">
+<meta property="og:site_name" content="sanfeng’s blog">
+<meta property="og:description" content="URL参数encode的问题外卖下单时，会先检测用户是否绑定了手机号，如果没有绑定，preview会提示进行绑定，跳转到绑定手机页面，如果绑定成功，就继续回到preview页面。
+这就需要将preview的URLAction传递给绑定手机页面，它再进行一个透传。">
+<meta property="og:updated_time" content="2016-08-18T11:42:23.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="url encode的问题">
+<meta name="twitter:description" content="URL参数encode的问题外卖下单时，会先检测用户是否绑定了手机号，如果没有绑定，preview会提示进行绑定，跳转到绑定手机页面，如果绑定成功，就继续回到preview页面。
+这就需要将preview的URLAction传递给绑定手机页面，它再进行一个透传。">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="http://7xthb9.com2.z0.glb.clouddn.com/8d04d7630ea03c7524cff3437f48e009.jpg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">sanfeng.li</a></h1>
+		</hgroup>
+
+		
+		<p class="header-subtitle">sanfengflying</p>
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						
+						<div class="icon-wrap icon-me hide" data-idx="3">
+							<div class="user"></div>
+							<div class="shoulder"></div>
+						</div>
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>标签</li>
+						
+						
+						<li>关于我</li>
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+							<li><a href="/tags/">标签云</a></li>
+				        
+							<li><a href="/tags/swift">swift</a></li>
+				        
+							<li><a href="/about">关于</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="https://github.com/theewind" title="github">github</a>
+					        
+								<a class="mail" target="_blank" href="mailto:sanfengflying@126.com" title="mail">mail</a>
+					        
+								<a class="rss" target="_blank" href="/atom.xml" title="rss">rss</a>
+					        
+								<a class="Sitemap" target="_blank" href="/sitemap.xml" title="Sitemap">Sitemap</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/CSS/" style="font-size: 10px;">CSS</a> <a href="/tags/JavaScript/" style="font-size: 10px;">JavaScript</a> <a href="/tags/RAC/" style="font-size: 10px;">RAC</a> <a href="/tags/React-Native/" style="font-size: 13.33px;">React Native</a> <a href="/tags/URL/" style="font-size: 10px;">URL</a> <a href="/tags/WKWebView/" style="font-size: 10px;">WKWebView</a> <a href="/tags/css/" style="font-size: 13.33px;">css</a> <a href="/tags/hexo/" style="font-size: 13.33px;">hexo</a> <a href="/tags/iOS/" style="font-size: 20px;">iOS</a> <a href="/tags/javascript-前端/" style="font-size: 10px;">javascript 前端</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/qrcode/" style="font-size: 10px;">qrcode</a> <a href="/tags/react-native/" style="font-size: 13.33px;">react native</a> <a href="/tags/shadowsocks/" style="font-size: 10px;">shadowsocks</a> <a href="/tags/shell/" style="font-size: 13.33px;">shell</a> <a href="/tags/swift/" style="font-size: 10px;">swift</a> <a href="/tags/互联网/" style="font-size: 13.33px;">互联网</a> <a href="/tags/代码检测/" style="font-size: 10px;">代码检测</a> <a href="/tags/内存检测/" style="font-size: 10px;">内存检测</a> <a href="/tags/前端/" style="font-size: 16.67px;">前端</a> <a href="/tags/正则表达式/" style="font-size: 10px;">正则表达式</a> <a href="/tags/测试/" style="font-size: 10px;">测试</a> <a href="/tags/缓存/" style="font-size: 10px;">缓存</a> <a href="/tags/脚本/" style="font-size: 10px;">脚本</a>
+					</div>
+				</section>
+				
+				
+				
+
+				
+				
+				<section class="switch-part switch-part3">
+				
+					<div id="js-aboutme">三风，江湖人称风风子，我就是是我，不一样的烟火~~~</div>
+				</section>
+				
+			</div>
+		</div>
+	</header>				
+</div>
+
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">sanfeng.li</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+			
+				<img lazy-src="http://7xthb9.com2.z0.glb.clouddn.com/8d04d7630ea03c7524cff3437f48e009.jpg" class="js-avatar">
+			
+			</div>
+			<hgroup>
+			  <h1 class="header-author">sanfeng.li</h1>
+			</hgroup>
+			
+			<p class="header-subtitle">sanfengflying</p>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+					<li><a href="/tags/">标签云</a></li>
+		        
+					<li><a href="/tags/swift">swift</a></li>
+		        
+					<li><a href="/about">关于</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/theewind" title="github">github</a>
+			        
+						<a class="mail" target="_blank" href="mailto:sanfengflying@126.com" title="mail">mail</a>
+			        
+						<a class="rss" target="_blank" href="/atom.xml" title="rss">rss</a>
+			        
+						<a class="Sitemap" target="_blank" href="/sitemap.xml" title="Sitemap">Sitemap</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+
+      <div class="body-wrap"><article id="url-URL_encode的问题" class="article article-type-url" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/08/18/URL_encode的问题/" class="article-date">
+  	<time datetime="2016-08-18T11:39:46.000Z" itemprop="datePublished">2016-08-18</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      url encode的问题
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/URL/">URL</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS/">iOS</a></li></ul>
+	</div>
+
+        
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="URL参数encode的问题"><a href="#URL参数encode的问题" class="headerlink" title="URL参数encode的问题"></a>URL参数encode的问题</h1><p>外卖下单时，会先检测用户是否绑定了手机号，如果没有绑定，preview会提示进行绑定，跳转到绑定手机页面，如果绑定成功，就继续回到preview页面。</p>
+<p>这就需要将preview的URLAction传递给绑定手机页面，它再进行一个透传。</p>
+<a id="more"></a>
+<h2 id="正确流程"><a href="#正确流程" class="headerlink" title="正确流程"></a>正确流程</h2><p>这个过程就会有encode的问题，因为原则上，对URL里面的每一参数都需要记性encode，如果不含有特殊字符，encode之后结果不变，所以我们这里需要对参数<br>trolleyarr进行encode，因为他是一个类似1294711,1,0#4639,4688|1294710,2,0#4643,4647,4690|1294901,1,0这样的字符串，因此encode的结果是：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">trolleyarr=1294711,1,0#4639,4688|1294710,2,0#4643,4647,4690|1294901,1,0</div><div class="line"></div><div class="line">encode之后：</div><div class="line"></div><div class="line">trolleyarr=1294711%2C1%2C0%234639%2C4688%7C1294710%2C2%2C0%234643%2C4647%2C4690%7C1294901%2C1%2C0</div></pre></td></tr></table></figure>
+<p>之后trolleyarr及lat，lng，shopid等组成一个重定向的URL，即redir，需要再对redir进行一次encode</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">redir=</div><div class="line">dianping://takeawayorder?trolleyarr=1294711%2C1%2C0%234639%2C4688%7C1294710%2C2%2C0%234643%2C4647%2C4690%7C1294901%2C1%2C0%0A&amp;initiallat=31.214027&amp;initiallng=121.423747&amp;shopid=2724613&amp;mtwmpoiid=90939&amp;mdcid=0&amp;queryid=b15f2df1-a008-4e96-af45-5eaa3efe0110&amp;phoneBinded=1</div><div class="line"></div><div class="line">encode之后：</div><div class="line"></div><div class="line">redir=</div><div class="line">dianping%3A%2F%2Ftakeawayorder%3Ftrolleyarr%3D1294711%252C1%252C0%25234639%252C4688%257C1294710%252C2%252C0%25234643%252C4647%252C4690%257C1294901%252C1%252C0%250A%26initiallat%3D31.214027%26initiallng%3D121.423747%26shopid%3D2724613%26mtwmpoiid%3D90939%26mdcid%3D0%26queryid%3Db15f2df1-a008-4e96-af45-5eaa3efe0110%26phoneBinded%3D1%0A</div></pre></td></tr></table></figure>
+<p>而绑定手机号页面的整个URL是：</p>
+<pre><code>NSString * const TABindPhoneURL = @&quot;http://m.dianping.com/account/getBindPageAfterLogin?redir=%@&amp;necessary=true&quot;;
+</code></pre><p>redir作为其中的一个参数，需要继续进行一次encode，所以绑定页面的url为：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">url = </div><div class="line">http://m.dianping.com/account/getBindPageAfterLogin?redir=dianping%3A%2F%2Ftakeawayorder%3Ftrolleyarr%3D1294711%252C1%252C0%25234639%252C4688%257C1294710%252C2%252C0%25234643%252C4647%252C4690%257C1294901%252C1%252C0%250A%26initiallat%3D31.214027%26initiallng%3D121.423747%26shopid%3D2724613%26mtwmpoiid%3D90939%26mdcid%3D0%26queryid%3Db15f2df1-a008-4e96-af45-5eaa3efe0110%26phoneBinded%3D1%0A&amp;necessary=true</div><div class="line"></div><div class="line">encode之后：</div><div class="line"></div><div class="line">url = </div><div class="line">http%3A%2F%2Fm.dianping.com%2Faccount%2FgetBindPageAfterLogin%3Fredir%3Ddianping%253A%252F%252Ftakeawayorder%253Ftrolleyarr%253D1294711%25252C1%25252C0%2525234639%25252C4688%25257C1294710%25252C2%25252C0%2525234643%25252C4647%25252C4690%25257C1294901%25252C1%25252C0%25250A%2526initiallat%253D31.214027%2526initiallng%253D121.423747%2526shopid%253D2724613%2526mtwmpoiid%253D90939%2526mdcid%253D0%2526queryid%253Db15f2df1-a008-4e96-af45-5eaa3efe0110%2526phoneBinded%253D1%250A%26necessary%3Dtrue</div></pre></td></tr></table></figure>
+<p>dianping://takeawayorder?trolleyarr=1294711,1,0#4639,4688|1294710,2,0#4643,4647,4690|1294901,1,0&amp;initiallat=31.214027&amp;initiallng=121.423747&amp;shopid=2724613&amp;mtwmpoiid=90939&amp;mdcid=0&amp;queryid=b15f2df1-a008-4e96-af45-5eaa3efe0110&amp;phoneBinded=1</p>
+<p>到这里就告一段落，我们只需要通过：</p>
+<pre><code>dianping://web?url=%@ 去打开绑定手机页面就可以了。
+</code></pre><h2 id="遇到问题"><a href="#遇到问题" class="headerlink" title="遇到问题"></a>遇到问题</h2><p>####iOS 坑一<br>iOS之前因为没有对trolleyarr的值进行decode，所以会出现绑定手机号之后，preview页面提示<code>“缺少必要”</code>的错误提示。这是因为服务端对传入的redir进行decode，这样redir就会变成类似：</p>
+<pre><code>dianping://takeawayorder?trolleyarr=1294711,1,0#4639,4688|1294710,2,0#4643,4647,4690|1294901,1,0&amp;initiallat=31.214027&amp;initiallng=121.423747&amp;shopid=2724613&amp;mtwmpoiid=90939&amp;mdcid=0&amp;queryid=b15f2df1-a008-4e96-af45-5eaa3efe0110&amp;phoneBinded=1
+</code></pre><p>之后再把这样的url通过点评的openURL的方式打开，就会出现解析错误问题：<br>因为框架会对这样的url进行解析，其中NVURLAction的一部分代码是</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div></pre></td><td class="code"><pre><div class="line">- (id)initWithURL:(NSURL *)url &#123;</div><div class="line">	if (self = [super init]) &#123;</div><div class="line">        _url = url;</div><div class="line">        </div><div class="line">        NSDictionary *dic = [url parseQuery];</div><div class="line">        _params = [NSMutableDictionary dictionary];</div><div class="line">        for (NSString *key in [dic allKeys]) &#123;</div><div class="line">            id value = [dic objectForKey:key];</div><div class="line">            [_params setObject:value forKey:[key lowercaseString]];</div><div class="line">        &#125;</div><div class="line">	&#125;</div><div class="line">	return self;</div><div class="line">&#125;</div><div class="line"></div><div class="line">NSURL的parseQuery方法如下：</div><div class="line">- (NSDictionary *)parseQuery &#123;</div><div class="line">    NSString *query = [self query];</div><div class="line">    NSMutableDictionary *dict = [[NSMutableDictionary alloc] initWithCapacity:6];</div><div class="line">    NSArray *pairs = [query componentsSeparatedByString:@&quot;&amp;&quot;];</div><div class="line">    </div><div class="line">    for (NSString *pair in pairs) &#123;</div><div class="line">        NSArray *elements = [pair componentsSeparatedByString:@&quot;=&quot;];</div><div class="line">		</div><div class="line">		if ([elements count] &lt;= 1) &#123;</div><div class="line">			continue;</div><div class="line">		&#125;</div><div class="line">		</div><div class="line">        NSString *key = [[elements objectAtIndex:0] stringByRemovingPercentEncoding];</div><div class="line">        CFStringRef originValue = CFURLCreateStringByReplacingPercentEscapes(NULL, (CFStringRef)([elements objectAtIndex:1]),  CFSTR(&quot;&quot;));</div><div class="line">        NSString *oriValue = (__bridge NSString*)originValue;</div><div class="line">        NSAssert(oriValue != nil, @&quot;url is invalid&quot;);</div><div class="line">        if (oriValue) &#123;</div><div class="line">            [dict setObject:oriValue forKey:key];</div><div class="line">        &#125;</div><div class="line">        CFRelease(originValue);</div><div class="line">    &#125;</div><div class="line">    return dict;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><strong>NSURL的query方法，NSString *query = [self query]会直接截取<code>#</code>符号，因为#在url是一个合法字符</strong>。所以就出现了URLAction的url实际变为了    </p>
+<pre><code>dianping://takeawayorder?trolleyarr=1294711,1,0#
+</code></pre><p>把这样的url丢给preview页面，结果就是上面的各种搞错，缺少各种必要参数。</p>
+<p>#####如何解决这个问题？<br>原则上，对trolleyarr参数进行一次decode就应该可以的。这样返会到preview页面的url就是：</p>
+<pre><code>dianping://takeawayorder?trolleyarr=1294711%2C1%2C0%234639%2C4688%7C1294710%2C2%2C0%234643%2C4647%2C4690%7C1294901%2C1%2C0%0A&amp;initiallat=31.214027&amp;initiallng=121.423747&amp;shopid=2724613&amp;mtwmpoiid=90939&amp;mdcid=0&amp;queryid=b15f2df1-a008-4e96-af45-5eaa3efe0110&amp;phoneBinded=1
+</code></pre><p>客户端自己对trolleyarr进行一次decode，获取正确的内容就可以了。满心欢喜，以为就此可以解决问题的，但是，但是。。。。</p>
+<p><strong>其实外卖不需要再进行decode了，因为从NVURLAction取数据的时候，比如getString等，就是已经decode过的，因为<code>parseQuery</code>方法
+</strong></p>
+<p>####坑二<br>没有想到，服务端会对传入的redir进行<code>两次decode</code>,注意是两次，<strong>(合理的操作应该是一次就可以了)</strong>，导致上述的trolleyarr又被冲洗decode了，变成了类似<em>1294711,1,0#4639,4688|1294710,2,0#4643,4647,4690|1294901,1,0</em>的一坨东西，客户端继续出现问题。但神奇是，android竟然是正确的。他是怎么做到的呢。<br>可以看到android的URL是这样的</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">http://m.51ping.com/account/getBindPageAfterLogin?redir=dianping%3A%2F%2Ftakeawayorder%3Fshopid%3D2724613%26mtwmpoiid%3D90939%26mdcid%3D0%26queryid%3Dde133485-6bea-4a5e-a2fc-8532463af336%26initiallat%3D31.21756%26initiallng%3D121.41558%26carrier%3Dnull%26v%3D1%26cartcontents%3D%25255B%25257B%252522curPrice%252522%25253A1%25252C%252522selectedNum%252522%25253A1%25252C%252522name%252522%25253A%252522%252522%25252C%252522cartcontents%252522%25253A%2525221294901%25252C1%25252C0%252522%25257D%25252C%25257B%252522curPrice%252522%25253A10%25252C%252522selectedNum%252522%25253A1%25252C%252522name%252522%25253A%252522%252522%25252C%252522cartcontents%252522%25253A%2525221294711%25252C1%25252C0%2525234639%25252C4688%252522%25257D%25252C%25257B%252522curPrice%252522%25253A2.2%25252C%252522selectedNum%252522%25253A2%25252C%252522name%252522%25253A%252522%252522%25252C%252522cartcontents%252522%25253A%2525221294710%25252C2%25252C0%2525234643%25252C4647%25252C4690%252522%25257D%25255D&amp;necessary=true&amp;product=dpapp</div><div class="line"></div><div class="line">不懂，decode一次：</div><div class="line">http://m.51ping.com/account/getBindPageAfterLogin?redir=dianping://takeawayorder?shopid=2724613&amp;mtwmpoiid=90939&amp;mdcid=0&amp;queryid=de133485-6bea-4a5e-a2fc-8532463af336&amp;initiallat=31.21756&amp;initiallng=121.41558&amp;carrier=null&amp;v=1&amp;cartcontents=%255B%257B%2522curPrice%2522%253A1%252C%2522selectedNum%2522%253A1%252C%2522name%2522%253A%2522%2522%252C%2522cartcontents%2522%253A%25221294901%252C1%252C0%2522%257D%252C%257B%2522curPrice%2522%253A10%252C%2522selectedNum%2522%253A1%252C%2522name%2522%253A%2522%2522%252C%2522cartcontents%2522%253A%25221294711%252C1%252C0%25234639%252C4688%2522%257D%252C%257B%2522curPrice%2522%253A2.2%252C%2522selectedNum%2522%253A2%252C%2522name%2522%253A%2522%2522%252C%2522cartcontents%2522%253A%25221294710%252C2%252C0%25234643%252C4647%252C4690%2522%257D%255D&amp;necessary=true&amp;product=dpapp</div><div class="line"></div><div class="line">还不懂，decode两次：</div><div class="line">http://m.51ping.com/account/getBindPageAfterLogin?redir=dianping://takeawayorder?shopid=2724613&amp;mtwmpoiid=90939&amp;mdcid=0&amp;queryid=de133485-6bea-4a5e-a2fc-8532463af336&amp;initiallat=31.21756&amp;initiallng=121.41558&amp;carrier=null&amp;v=1&amp;cartcontents=%5B%7B%22curPrice%22%3A1%2C%22selectedNum%22%3A1%2C%22name%22%3A%22%22%2C%22cartcontents%22%3A%221294901%2C1%2C0%22%7D%2C%7B%22curPrice%22%3A10%2C%22selectedNum%22%3A1%2C%22name%22%3A%22%22%2C%22cartcontents%22%3A%221294711%2C1%2C0%234639%2C4688%22%7D%2C%7B%22curPrice%22%3A2.2%2C%22selectedNum%22%3A2%2C%22name%22%3A%22%22%2C%22cartcontents%22%3A%221294710%2C2%2C0%234643%2C4647%2C4690%22%7D%5D&amp;necessary=true&amp;product=dpapp</div><div class="line"></div><div class="line">仍不懂，decode三次：</div><div class="line">http://m.51ping.com/account/getBindPageAfterLogin?redir=dianping://takeawayorder?shopid=2724613&amp;mtwmpoiid=90939&amp;mdcid=0&amp;queryid=de133485-6bea-4a5e-a2fc-8532463af336&amp;initiallat=31.21756&amp;initiallng=121.41558&amp;carrier=null&amp;v=1&amp;cartcontents=[&#123;&quot;curPrice&quot;:1,&quot;selectedNum&quot;:1,&quot;name&quot;:&quot;&quot;,&quot;cartcontents&quot;:&quot;1294901,1,0&quot;&#125;,&#123;&quot;curPrice&quot;:10,&quot;selectedNum&quot;:1,&quot;name&quot;:&quot;&quot;,&quot;cartcontents&quot;:&quot;1294711,1,0#4639,4688&quot;&#125;,&#123;&quot;curPrice&quot;:2.2,&quot;selectedNum&quot;:2,&quot;name&quot;:&quot;&quot;,&quot;cartcontents&quot;:&quot;1294710,2,0#4643,4647,4690&quot;&#125;]&amp;necessary=true&amp;product=dpapp</div><div class="line"></div><div class="line">原来他们对购物车的数据进行了两次decode，再加上redir，总共decode了三次，刚好服务端decode两次，自己再decode一次，妥妥的，完美/(ㄒoㄒ)/~~</div></pre></td></tr></table></figure>
+<p>再加上对dianping://web?url=<a href="http://m.51" target="_blank" rel="external">http://m.51</a>………. 进行的一次decode，总共是四次，而iOS只有三次，所以iOS肯定有问题。闪开，让我哭一会~~~</p>
+<p>####其它坑</p>
+<ul>
+<li>为什么之前没有遇到这样的问题呢，一种说法是，之前的URL里面都没有<code>#</code>符号，因为没有选规格菜品。</li>
+<li><p>为什么iOS会遇到userid==0，然后反复跳转的情况呢，因为H5从cookie中取到的newtoken为空，所以iOS有添加了一个newtoken=!的占位符。</p>
+</li>
+<li><p>在调试的过程中，会发现 po NVURLAction的时候，发现encode过的url会被decode，这是因为po object实际上是调用object的description方法，而NVURLAction重写了description方法，部分代码如下：</p>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&#125; else if ([value isKindOfClass:[NSString class]]) &#123;</div><div class="line">    [paramsDesc addObject:[NSString stringWithFormat:@&quot;%@=%@&quot;, [key lowercaseString], [value stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]]];</div></pre></td></tr></table></figure>
+<p>打印的时候，输出decode的内容，所以如果URL有过encode，实际po的结果跟真实的内容是不一样的。</p>
+<ul>
+<li>NVWebViewController取出url的时候，会得到decode后的内容，如下：</li>
+</ul>
+<p>[urlAction stringForKey:@”url”]; 而stringForKey是从_params里面取的。参上最上面的<code>parseQuery</code>方法，他会对url=之后的内容进行decode。这就是对应我们上面的最后一次encode了，即iOS的第三次，android的第四次，decode后，得到打开h5的URL，如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">http://m.dianping.com/account/getBindPageAfterLogin?redir=dianping%3A%2F%2Ftakeawayorder%3Ftrolleyarr%3D1294711%252C1%252C0%25234639%252C4688%257C1294710%252C2%252C0%25234643%252C4647%252C4690%257C1294901%252C1%252C0%26initiallat%3D31.214027%26initiallng%3D121.423747%26shopid%3D2724613%26mtwmpoiid%3D90939%26mdcid%3D0%26queryid%3Db15f2df1-a008-4e96-af45-5eaa3efe0110%26phoneBinded%3D1&amp;necessary=true</div></pre></td></tr></table></figure>
+<ul>
+<li>urlAction的url实际是下面，但是通过po出来查看，就是错误的：<br>_url    NSURL <em>    @”dianping://takeawayorder?trolleyarr=1294895%2C1%2C0%7C1294714%2C2%2C0%234489%7C1314261%2C1%2C0%7C1294711%2C1%2C0%234639%2C4688&amp;initiallat=31.214027&amp;initiallng=121.423747&amp;shopid=2724613&amp;mtwmpoiid=90939&amp;mdcid=0&amp;queryid=fc2ff9f9-ff00-4c78-ab95-04d278774ee4&amp;phoneBinded=1”    0x00007fb02486a7d0<br>_clients    __NSCFString </em>    @”dianping://takeawayorder?trolleyarr=1294895%2C1%2C0%7C1294714%2C2%2C0%234489%7C1314261%2C1%2C0%7C1294711%2C1%2C0%234639%2C4688&amp;initiallat=31.214027&amp;initiallng=121.423747&amp;shopid=2724613&amp;mtwmpoiid=90939&amp;mdcid=0&amp;queryid=fc2ff9f9-ff00-4c78-ab95-04d278774ee4&amp;phoneBinded=1”    0x00007fb024891ea0</li>
+</ul>
+<p>(lldb) po urlAction<br>dianping://takeawayorder?shopid=2724613&amp;trolleyarr=1294895,1,0%7C1294714,2,0%234489%7C1314261,1,0%7C1294711,1,0%234639,4688&amp;mtwmpoiid=90939&amp;queryid=fc2ff9f9-ff00-4c78-ab95-04d278774ee4&amp;initiallat=31.214027&amp;mdcid=0&amp;initiallng=121.423747&amp;phonebinded=1</p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2016/08/11/iOS代码编译速度优化/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">iOS代码编译速度优化</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<div class="share_jia">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">分享到: &nbsp; </span>
+		<a class="jiathis_button_facebook"></a> 
+    <a class="jiathis_button_twitter"></a>
+    <a class="jiathis_button_plus"></a> 
+    <a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+    <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="URL_encode的问题" data-title="url encode的问题" data-url="http://theewind.github.io/2016/08/18/URL_encode的问题/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"theewind"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2016 sanfeng.li
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: flase
+	}
+</script>
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  </div>
+</body>
+</html>

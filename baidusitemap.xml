@@ -4,8 +4,27 @@
 
     
   <url>
+    <loc>http://theewind.github.io/2016/08/18/URL_encode%E7%9A%84%E9%97%AE%E9%A2%98/</loc>
+    <lastmod>2016-08-18T11:42:23.000Z</lastmod>
+    <data>
+        <display>
+        <title>url encode的问题</title>
+        <pubTime>2016-08-18T11:39:46.000Z</pubTime>
+        
+        <tag>iOS</tag>
+         
+        <tag>URL</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://theewind.github.io/2016/08/11/iOS%E4%BB%A3%E7%A0%81%E7%BC%96%E8%AF%91%E9%80%9F%E5%BA%A6%E4%BC%98%E5%8C%96/</loc>
-    <lastmod>2016-08-11T03:14:47.000Z</lastmod>
+    <lastmod>2016-08-11T09:28:44.000Z</lastmod>
     <data>
         <display>
         <title>iOS代码编译速度优化</title>
@@ -22,7 +41,7 @@
     
   <url>
     <loc>http://theewind.github.io/2016/08/04/carthage%E5%88%9D%E5%85%A5/</loc>
-    <lastmod>2016-08-11T02:45:12.000Z</lastmod>
+    <lastmod>2016-08-11T04:22:15.000Z</lastmod>
     <data>
         <display>
         <title>carthage初入</title>

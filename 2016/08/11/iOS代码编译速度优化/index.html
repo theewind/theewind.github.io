@@ -18,7 +18,7 @@ cleaner要求，在所有的.h文件中，基本都采用@class，@protocol的�
 参考最新的cleaner，主要是清理头文件之间的依赖，尽量都采取直接依赖，而不是通过间接依赖，比A依赖B，B依赖C。而A如果依赖C的时候，最好是直接通过采用A依赖C的操作，而不是A-&amp;gt;B-&amp;gt;C的操作。
 
 cleaner要求，在所有的.h文件中，基本都采用@class，@protocol的形式添加声明，然后在.m文件中添加#import的操作，这样是可">
-<meta property="og:updated_time" content="2016-08-11T03:14:47.000Z">
+<meta property="og:updated_time" content="2016-08-11T09:28:44.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="iOS代码编译速度优化">
 <meta name="twitter:description" content="cleaner源码编译速度优化方案
@@ -123,7 +123,7 @@ cleaner要求，在所有的.h文件中，基本都采用@class，@protocol的�
 				
 				<section class="switch-part switch-part2">
 					<div class="widget tagcloud" id="js-tagcloud">
-						<a href="/tags/CSS/" style="font-size: 10px;">CSS</a> <a href="/tags/JavaScript/" style="font-size: 10px;">JavaScript</a> <a href="/tags/RAC/" style="font-size: 10px;">RAC</a> <a href="/tags/React-Native/" style="font-size: 13.33px;">React Native</a> <a href="/tags/WKWebView/" style="font-size: 10px;">WKWebView</a> <a href="/tags/css/" style="font-size: 13.33px;">css</a> <a href="/tags/hexo/" style="font-size: 13.33px;">hexo</a> <a href="/tags/iOS/" style="font-size: 20px;">iOS</a> <a href="/tags/javascript-前端/" style="font-size: 10px;">javascript 前端</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/qrcode/" style="font-size: 10px;">qrcode</a> <a href="/tags/react-native/" style="font-size: 13.33px;">react native</a> <a href="/tags/shadowsocks/" style="font-size: 10px;">shadowsocks</a> <a href="/tags/shell/" style="font-size: 13.33px;">shell</a> <a href="/tags/swift/" style="font-size: 10px;">swift</a> <a href="/tags/互联网/" style="font-size: 13.33px;">互联网</a> <a href="/tags/代码检测/" style="font-size: 10px;">代码检测</a> <a href="/tags/内存检测/" style="font-size: 10px;">内存检测</a> <a href="/tags/前端/" style="font-size: 16.67px;">前端</a> <a href="/tags/正则表达式/" style="font-size: 10px;">正则表达式</a> <a href="/tags/测试/" style="font-size: 10px;">测试</a> <a href="/tags/缓存/" style="font-size: 10px;">缓存</a> <a href="/tags/脚本/" style="font-size: 10px;">脚本</a>
+						<a href="/tags/CSS/" style="font-size: 10px;">CSS</a> <a href="/tags/JavaScript/" style="font-size: 10px;">JavaScript</a> <a href="/tags/RAC/" style="font-size: 10px;">RAC</a> <a href="/tags/React-Native/" style="font-size: 13.33px;">React Native</a> <a href="/tags/URL/" style="font-size: 10px;">URL</a> <a href="/tags/WKWebView/" style="font-size: 10px;">WKWebView</a> <a href="/tags/css/" style="font-size: 13.33px;">css</a> <a href="/tags/hexo/" style="font-size: 13.33px;">hexo</a> <a href="/tags/iOS/" style="font-size: 20px;">iOS</a> <a href="/tags/javascript-前端/" style="font-size: 10px;">javascript 前端</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/qrcode/" style="font-size: 10px;">qrcode</a> <a href="/tags/react-native/" style="font-size: 13.33px;">react native</a> <a href="/tags/shadowsocks/" style="font-size: 10px;">shadowsocks</a> <a href="/tags/shell/" style="font-size: 13.33px;">shell</a> <a href="/tags/swift/" style="font-size: 10px;">swift</a> <a href="/tags/互联网/" style="font-size: 13.33px;">互联网</a> <a href="/tags/代码检测/" style="font-size: 10px;">代码检测</a> <a href="/tags/内存检测/" style="font-size: 10px;">内存检测</a> <a href="/tags/前端/" style="font-size: 16.67px;">前端</a> <a href="/tags/正则表达式/" style="font-size: 10px;">正则表达式</a> <a href="/tags/测试/" style="font-size: 10px;">测试</a> <a href="/tags/缓存/" style="font-size: 10px;">缓存</a> <a href="/tags/脚本/" style="font-size: 10px;">脚本</a>
 					</div>
 				</section>
 				
@@ -255,7 +255,10 @@ cleaner要求，在所有的.h文件中，基本都采用@class，@protocol的�
 <p>在工程对应Target的Build Settings中，找到Build Active Architecture Only这一项，将Debug时的No改为Yes。</p>
 <p>这一项设置的是是否仅编译当前架构的版本，如果为No，会编译所有架构的版本。需要注意的是，此选项在Release模式下必须为Yes，否则发布的ipa在部分设备上将不能运行。这一项更改完之后，可以显著提高编译速度。</p>
 <ol>
-<li>Enable Modules (C and Objective-C) 改为YES<br>打开Modules之后，可以采用@improt的形式导入依赖，但是这个功能主要是对系统的framework和library启作用，而对于我们常用的cocoapod继承的库是不生效的。</li>
+<li><p>Enable Modules (C and Objective-C) 改为YES<br>打开Modules之后，可以采用@improt的形式导入依赖，但是这个功能主要是对系统的framework和library启作用，而对于我们常用的cocoapod继承的库是不生效的。</p>
+</li>
+<li><p>Don’t compile your project code or use static libraries compiled with -O4 since it tells Clang to enable Link Time Optimizations (LTO) making the linking stage much slower. Use -O3 at most.</p>
+</li>
 </ol>
 <h2 id="延伸阅读"><a href="#延伸阅读" class="headerlink" title="延伸阅读"></a>延伸阅读</h2><p>关于DWARF与dSYM</p>
 <p>DWARF is a debugging file format used by many compilers and debuggers to support source level debugging. It addresses the requirements of a number of procedural languages, such as C, C++, and Fortran, and is designed to be extensible to other languages. DWARF is architecture independent and applicable to any processor or operating system. It is widely used on Unix, Linux and other operating systems, as well as in stand-alone environments.</p>
@@ -273,6 +276,8 @@ cleaner要求，在所有的.h文件中，基本都采用@class，@protocol的�
 <p><a href="https://tech.zalando.de/blog/speeding-up-xcode-builds/" target="_blank" rel="external">Speeding up Xcode Builds</a></p>
 <p><a href="http://useyourloaf.com/blog/modules-and-precompiled-headers/" target="_blank" rel="external">Modules and Precompiled Headers</a></p>
 <p><a href="http://qualitycoding.org/objective-c-code-smells/" target="_blank" rel="external">Code Smells in Objective-C</a></p>
+<p><a href="https://stoneofarc.wordpress.com/2013/06/25/introduction-to-objective-c-modules/" target="_blank" rel="external">Introduction to Objective-C Modules</a></p>
+<p><a href="https://labs.spotify.com/2013/11/04/shaving-off-time-from-the-ios-edit-build-test-cycle/" target="_blank" rel="external">Shaving off 50% waiting time from the iOS Edit-Build-Test cycle</a></p>
 </blockquote>
 
       
@@ -282,6 +287,15 @@ cleaner要求，在所有的.h文件中，基本都采用@class，@protocol的�
   
     
 <nav id="article-nav">
+  
+    <a href="/2016/08/18/URL_encode的问题/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          url encode的问题
+        
+      </div>
+    </a>
   
   
     <a href="/2016/08/04/carthage初入/" id="article-nav-older" class="article-nav-link-wrap">
