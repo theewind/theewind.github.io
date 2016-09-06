@@ -113,7 +113,7 @@
 				
 				<section class="switch-part switch-part2">
 					<div class="widget tagcloud" id="js-tagcloud">
-						<a href="/tags/CSS/" style="font-size: 10px;">CSS</a> <a href="/tags/JavaScript/" style="font-size: 10px;">JavaScript</a> <a href="/tags/RAC/" style="font-size: 10px;">RAC</a> <a href="/tags/React-Native/" style="font-size: 13.33px;">React Native</a> <a href="/tags/URL/" style="font-size: 10px;">URL</a> <a href="/tags/WKWebView/" style="font-size: 10px;">WKWebView</a> <a href="/tags/css/" style="font-size: 13.33px;">css</a> <a href="/tags/hexo/" style="font-size: 13.33px;">hexo</a> <a href="/tags/iOS/" style="font-size: 20px;">iOS</a> <a href="/tags/javascript-前端/" style="font-size: 10px;">javascript 前端</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/qrcode/" style="font-size: 10px;">qrcode</a> <a href="/tags/react-native/" style="font-size: 13.33px;">react native</a> <a href="/tags/shadowsocks/" style="font-size: 10px;">shadowsocks</a> <a href="/tags/shell/" style="font-size: 13.33px;">shell</a> <a href="/tags/swift/" style="font-size: 10px;">swift</a> <a href="/tags/互联网/" style="font-size: 13.33px;">互联网</a> <a href="/tags/代码检测/" style="font-size: 10px;">代码检测</a> <a href="/tags/内存检测/" style="font-size: 10px;">内存检测</a> <a href="/tags/前端/" style="font-size: 16.67px;">前端</a> <a href="/tags/正则表达式/" style="font-size: 10px;">正则表达式</a> <a href="/tags/测试/" style="font-size: 10px;">测试</a> <a href="/tags/缓存/" style="font-size: 10px;">缓存</a> <a href="/tags/脚本/" style="font-size: 10px;">脚本</a>
+						<a href="/tags/CSS/" style="font-size: 10px;">CSS</a> <a href="/tags/JavaScript/" style="font-size: 10px;">JavaScript</a> <a href="/tags/RAC/" style="font-size: 10px;">RAC</a> <a href="/tags/React-Native/" style="font-size: 13.33px;">React Native</a> <a href="/tags/TCP/" style="font-size: 10px;">TCP</a> <a href="/tags/URL/" style="font-size: 10px;">URL</a> <a href="/tags/WKWebView/" style="font-size: 10px;">WKWebView</a> <a href="/tags/css/" style="font-size: 13.33px;">css</a> <a href="/tags/hexo/" style="font-size: 13.33px;">hexo</a> <a href="/tags/iOS/" style="font-size: 20px;">iOS</a> <a href="/tags/javascript-前端/" style="font-size: 10px;">javascript 前端</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/qrcode/" style="font-size: 10px;">qrcode</a> <a href="/tags/react-native/" style="font-size: 13.33px;">react native</a> <a href="/tags/shadowsocks/" style="font-size: 10px;">shadowsocks</a> <a href="/tags/shell/" style="font-size: 13.33px;">shell</a> <a href="/tags/swift/" style="font-size: 10px;">swift</a> <a href="/tags/互联网/" style="font-size: 13.33px;">互联网</a> <a href="/tags/代码检测/" style="font-size: 10px;">代码检测</a> <a href="/tags/内存检测/" style="font-size: 10px;">内存检测</a> <a href="/tags/前端/" style="font-size: 16.67px;">前端</a> <a href="/tags/正则表达式/" style="font-size: 10px;">正则表达式</a> <a href="/tags/测试/" style="font-size: 10px;">测试</a> <a href="/tags/缓存/" style="font-size: 10px;">缓存</a> <a href="/tags/脚本/" style="font-size: 10px;">脚本</a> <a href="/tags/自动化/" style="font-size: 10px;">自动化</a>
 					</div>
 				</section>
 				
@@ -186,6 +186,208 @@
 </nav>
 
       <div class="body-wrap">
+  
+    <article id="post-创建一个显示FPS的label" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/09/06/创建一个显示FPS的label/" class="article-date">
+  	<time datetime="2016-09-06T07:40:57.000Z" itemprop="datePublished">2016-09-06</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/09/06/创建一个显示FPS的label/">创建一个显示FPS的label</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>如何创建一个实时显示FPS的Label呢，看了Nova的代码，发现是主要是采用CADisplayLink实现，至于CADisplayLink主要作用是什么，这里简单介绍下：</p>
+<p>CADisplayLink是一个能让我们以和屏幕刷新率同步的频率将特定的内容画到屏幕上的定时器类。CADisplayLink以特定模式注册到runloop后，每当屏幕显示内容刷新结束的时候，runloop就会向CADisplayLink指定的target发送一次指定的selector消息， CADisplayLink类对应的selector就会被调用一次。所以通常情况下，按照iOS设备屏幕的刷新率60次/秒。</p>
+<p>延迟：iOS设备的屏幕刷新频率是固定的，CADisplayLink在正常情况下会在每次刷新结束都被调用，精确度相当高。但如果调用的方法比较耗时，超过了屏幕刷新周期，就会导致跳过若干次回调调用机会。<br>             如果CPU过于繁忙，无法保证屏幕60次/秒的刷新率，就会导致跳过若干次调用回调方法的机会，跳过次数取决CPU的忙碌程度。</p>
+<p>使用场景：从原理上可以看出，CADisplayLink适合做界面的不停重绘，比如视频播放的时候需要不停地获取下一帧用于界面渲染。</p>
+<p><code>可以看到：CADisplayLink也不是绝对60次/秒刷新的，如果遇到屏幕刷新率降低，也是会有延迟和跳过的场景</code></p>
+<p>但是刚好可以通过此途径来计算FPS，因为每次刷新屏幕都会调用CADisplayLink注册的selecotor。</p>
+<p>具体代码可以参考<a href="https://github.com/ibireme/YYText/blob/master/Demo/YYTextDemo/YYFPSLabel.m" target="_blank" rel="external">YY系类之YYFPSLable</a></p>
+<blockquote>
+<p><a href="http://www.cnblogs.com/ioriwellings/p/5011993.html" target="_blank" rel="external">如何让iOS 保持界面流畅？这些技巧你知道吗</a></p>
+</blockquote>
+<p>最后无耻的放上了代码</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div></pre></td><td class="code"><pre><div class="line">//</div><div class="line">//  YYFPSLabel.m</div><div class="line">//  YYKitExample</div><div class="line">//</div><div class="line">//  Created by ibireme on 15/9/3.</div><div class="line">//  Copyright (c) 2015 ibireme. All rights reserved.</div><div class="line">//</div><div class="line"></div><div class="line">#import &quot;YYFPSLabel.h&quot;</div><div class="line">//#import &lt;YYKit/YYKit.h&gt;</div><div class="line">#import &quot;YYText.h&quot;</div><div class="line">#import &quot;YYWeakProxy.h&quot;</div><div class="line"></div><div class="line">#define kSize CGSizeMake(55, 20)</div><div class="line"></div><div class="line">@implementation YYFPSLabel &#123;</div><div class="line">    CADisplayLink *_link;</div><div class="line">    NSUInteger _count;</div><div class="line">    NSTimeInterval _lastTime;</div><div class="line">    UIFont *_font;</div><div class="line">    UIFont *_subFont;</div><div class="line">    </div><div class="line">    NSTimeInterval _llll;</div><div class="line">&#125;</div><div class="line"></div><div class="line">- (instancetype)initWithFrame:(CGRect)frame &#123;</div><div class="line">    if (frame.size.width == 0 &amp;&amp; frame.size.height == 0) &#123;</div><div class="line">        frame.size = kSize;</div><div class="line">    &#125;</div><div class="line">    self = [super initWithFrame:frame];</div><div class="line">    </div><div class="line">    self.layer.cornerRadius = 5;</div><div class="line">    self.clipsToBounds = YES;</div><div class="line">    self.textAlignment = NSTextAlignmentCenter;</div><div class="line">    self.userInteractionEnabled = NO;</div><div class="line">    self.backgroundColor = [UIColor colorWithWhite:0.000 alpha:0.700];</div><div class="line">    </div><div class="line">    _font = [UIFont fontWithName:@&quot;Menlo&quot; size:14];</div><div class="line">    if (_font) &#123;</div><div class="line">        _subFont = [UIFont fontWithName:@&quot;Menlo&quot; size:4];</div><div class="line">    &#125; else &#123;</div><div class="line">        _font = [UIFont fontWithName:@&quot;Courier&quot; size:14];</div><div class="line">        _subFont = [UIFont fontWithName:@&quot;Courier&quot; size:4];</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    _link = [CADisplayLink displayLinkWithTarget:[YYWeakProxy proxyWithTarget:self] selector:@selector(tick:)];</div><div class="line">    [_link addToRunLoop:[NSRunLoop mainRunLoop] forMode:NSRunLoopCommonModes];</div><div class="line">    return self;</div><div class="line">&#125;</div><div class="line"></div><div class="line">- (void)dealloc &#123;</div><div class="line">    [_link invalidate];</div><div class="line">&#125;</div><div class="line"></div><div class="line">- (CGSize)sizeThatFits:(CGSize)size &#123;</div><div class="line">    return kSize;</div><div class="line">&#125;</div><div class="line"></div><div class="line">- (void)tick:(CADisplayLink *)link &#123;</div><div class="line">    if (_lastTime == 0) &#123;</div><div class="line">        _lastTime = link.timestamp;</div><div class="line">        return;</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    _count++;</div><div class="line">    NSTimeInterval delta = link.timestamp - _lastTime;</div><div class="line">    if (delta &lt; 1) return;</div><div class="line">    _lastTime = link.timestamp;</div><div class="line">    float fps = _count / delta;</div><div class="line">    _count = 0;</div><div class="line">    </div><div class="line">    CGFloat progress = fps / 60.0;</div><div class="line">    UIColor *color = [UIColor colorWithHue:0.27 * (progress - 0.2) saturation:1 brightness:0.9 alpha:1];</div><div class="line">    </div><div class="line">    NSMutableAttributedString *text = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@&quot;%d FPS&quot;,(int)round(fps)]];</div><div class="line">    [text yy_setColor:color range:NSMakeRange(0, text.length - 3)];</div><div class="line">    [text yy_setColor:[UIColor whiteColor] range:NSMakeRange(text.length - 3, 3)];</div><div class="line">    text.yy_font = _font;</div><div class="line">    [text yy_setFont:_subFont range:NSMakeRange(text.length - 4, 1)];</div><div class="line">    </div><div class="line">    self.attributedText = text;</div><div class="line">&#125;</div><div class="line"></div><div class="line">@end</div></pre></td></tr></table></figure>
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS/">iOS</a></li></ul>
+	</div>
+
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-ios自动化测试部分知识" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/09/05/ios自动化测试部分知识/" class="article-date">
+  	<time datetime="2016-09-05T03:06:59.000Z" itemprop="datePublished">2016-09-05</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/09/05/ios自动化测试部分知识/">ios自动化测试部分知识</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>最近在看关于iOS自动化测试的内容，其中比较常用的有KIF等，然后自己看他的实现时，发现有个beforeAll和AfterAll的方法，因为在当初写case的时候，不能知道所有case开始，和结束的时机，于是就对它比较好奇，看了他的实现。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div></pre></td><td class="code"><pre><div class="line">- (void)beforeAll</div><div class="line">&#123;</div><div class="line">    [system simulateDeviceRotationToOrientation:UIDeviceOrientationLandscapeLeft];</div><div class="line">    [[viewTester usingIdentifier:@&quot;Test Suite TableView&quot;] scrollByFractionOfSizeHorizontal:0 vertical:-0.2];</div><div class="line">&#125;</div><div class="line"></div><div class="line">- (void)afterAll</div><div class="line">&#123;</div><div class="line">    [system simulateDeviceRotationToOrientation:UIDeviceOrientationPortrait];</div><div class="line">    [viewTester waitForTimeInterval:0.5];</div><div class="line">&#125;</div><div class="line"></div><div class="line">+ (void)setUp</div><div class="line">&#123;</div><div class="line">    KIFEnableAccessibility();</div><div class="line">    [self performSetupTearDownWithSelector:@selector(beforeAll)];</div><div class="line">&#125;</div><div class="line"></div><div class="line">+ (void)tearDown</div><div class="line">&#123;</div><div class="line">    [self performSetupTearDownWithSelector:@selector(afterAll)];</div><div class="line">&#125;</div><div class="line"></div><div class="line">+ (void)performSetupTearDownWithSelector:(SEL)selector</div><div class="line">&#123;</div><div class="line">    KIFTestCase *testCase = [self testCaseWithSelector:selector];</div><div class="line">    if ([testCase respondsToSelector:selector]) &#123;</div><div class="line">#pragma clang diagnostic push</div><div class="line">#pragma clang diagnostic ignored &quot;-Warc-performSelector-leaks&quot;</div><div class="line">        [testCase performSelector:selector];</div><div class="line">#pragma clang diagnostic pop</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    if (testCase-&gt;_stoppingException) &#123;</div><div class="line">        [testCase-&gt;_stoppingException raise];</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>总体是一个，beforeAll调用performSetupTearDownWithSelector然后调用setUp方法。<br>于是自己就很困惑，记得之前看setUp方法是每个case开始都会调用，这跟beforeAll的时机是不吻合的。</p>
+<p>但是如果自己对比你会发现：有两个方法</p>
+<pre><code>- (void)setUp
++ (void)setUp
+</code></pre><p>由此，自己才明白，原理，类方法，是只运行一一次，在所有的测试执行前执行一次，实例方法是所有的case执行前都会执行一次</p>
+<blockquote>
+<p>The class method (+ (void)setUp) is only run once during the entire test run.<br>The instance method (- (void)setUp) is the one in the default template; it’s run before every single test. Hopefully, in a hypothetical future version of Xcode, this comment will have been changed to // Put setup code here. This method is called before the invocation of each test method in the class.</p>
+<p><a href="http://stackoverflow.com/questions/21038375/what-is-the-purpose-of-xctestcases-setup-method" target="_blank" rel="external">What is the purpose of XCTestCase’s setUp method?</a></p>
+<p><a href="https://www.raywenderlich.com/61419/ios-ui-testing-with-kif" target="_blank" rel="external">iOS UI Testing with KIF</a></p>
+<p><a href="http://tech.meituan.com/iOS-UITest-KIF.html" target="_blank" rel="external">基于 KIF 的 iOS UI 自动化测试和持续集成</a></p>
+</blockquote>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS/">iOS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/自动化/">自动化</a></li></ul>
+	</div>
+
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-socket连接池的实现探索" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/08/19/socket连接池的实现探索/" class="article-date">
+  	<time datetime="2016-08-19T10:27:16.000Z" itemprop="datePublished">2016-08-19</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/08/19/socket连接池的实现探索/">socket连接池的实现探索</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>点评长连接的是建立一个TCP连接，然后发送一定策略的心跳检测，保持套接字（TCP+port）socket的连接不断开。</p>
+<p>然后看到携程关于网络优化的[文章]</p>
+<blockquote>
+<p>Native模块是携程的核心业务模块（酒店、机票、火车票、攻略等），Native模块的网络服务主要通过TCP连接实现，而非常见的Restful HTTP API那种HTTP连接，只有少数轻量级服务使用HTTP接口作为补充。</p>
+<p>TCP连接网络服务模块使用了长连接+短连接机制，即有一个长连接池保持一定数目长连接，用于减少每次服务额外的连接，服务完成后会将该连接Socket放回长连接池，继续保持连接状态（一段时间空闲后会被回收）；短连接作为补充，每次服务完成后便会主动关闭连接。</p>
+</blockquote>
+<p>点评默认的是一个Socket连接，所有还比较简单，但是如果让实现一个连接池的话，应该怎么做到呢，这个池是如何表示的？</p>
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/TCP/">TCP</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS/">iOS</a></li></ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a  href="/2016/08/19/socket连接池的实现探索/#more">more >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
   
     <article id="url-URL_encode的问题" class="article article-type-url" itemscope itemprop="blogPost">
   
@@ -359,207 +561,6 @@
       
         <p class="article-more-link">
           <a  href="/2016/08/04/carthage初入/#more">more >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-dispatch-after使用注意" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2016/08/03/dispatch-after使用注意/" class="article-date">
-  	<time datetime="2016-08-03T01:42:50.000Z" itemprop="datePublished">2016-08-03</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/08/03/dispatch-after使用注意/">dispatch_after使用注意</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h2><p>开发中，经常需要dispatch_after进行延迟处理，dispatch_after能让我们添加进队列的任务延时执行，该函数并不是在指定时间后执行处理，而只是在指定时间追加处理到dispatch_queue该方法的第一个参数是time，第二个参数是dispatch_queue，第三个参数是要执行的block。dispatch_time_t有两种形式的构造方式，第一种相对时间：DISPATCH_TIME_NOW表示现在，NSEC_PER_SEC表示的是秒数，它还提供了NSEC_PER_MSEC表示毫秒。<br>第二种是绝对时间，通过dispatch_walltime函数来获取，dispatch_walltime需要使用一个timespec的结构体来得到dispatch_time_t。</p>
-<p><strong>注意：不是一定在给定时间后执行相关的任务，而是在一定时间后，将执行的操作加入到队列中，然后队列里面再分配执行的时间，所以即使给了个 <code>0秒</code> 也不会立即执行，而是会追加一个Runloop的时间，一般是1/60s</strong></p>
-<h2 id="测试代码如下"><a href="#测试代码如下" class="headerlink" title="测试代码如下"></a>测试代码如下</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^&#123;</div><div class="line">        NSLog(@&quot;in after&quot;);</div><div class="line">    &#125;);</div><div class="line">    </div><div class="line">    NSLog(@&quot;viewDidLoad&quot;);</div><div class="line">    </div><div class="line">打印的顺序是这样：</div><div class="line">2016-08-03 09:41:06.237 testDispatchAfter[29364:9056216] viewDidLoad</div><div class="line">2016-08-03 09:41:06.244 testDispatchAfter[29364:9056216] in after</div></pre></td></tr></table></figure>
-<h2 id="那有什么问题呢？"><a href="#那有什么问题呢？" class="headerlink" title="那有什么问题呢？"></a>那有什么问题呢？</h2><p>所以如果我们在使用dispatch_after的时候，比如有时候需要判断条件，特别是有些针对版本的判断，比如&lt;= iOS7上，需要进行一定的延迟处理：<br>比如</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">NSString *string = @&quot;测试&quot;;</div><div class="line">dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^&#123;</div><div class="line">    NSString *afterString = [@&quot;name in after&quot; stringByAppendingString:string];</div><div class="line">    NSLog(@&quot;%@&quot;, afterString);</div><div class="line">&#125;);</div><div class="line"></div><div class="line">NSLog(@&quot;%@&quot;, string);</div><div class="line">string = nil;</div></pre></td></tr></table></figure>
-<p>虽然测试的过程中，没有crash。但是我们在代码逻辑里还是要避免这样的操作，<strong>因为是有可能，在dispatch_after的block执行之前，释放了某些变量，导致block出错的。</strong></p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS/">iOS</a></li></ul>
-	</div>
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-onExit分析" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2016/07/25/onExit分析/" class="article-date">
-  	<time datetime="2016-07-25T04:01:47.000Z" itemprop="datePublished">2016-07-25</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/07/25/onExit分析/">onExit分析</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>defer引发的OnExit</p>
-<p>在swift中，是经常用到defer的，在作用域结束的时候，执行defer的命令，但是在Objective C中是无法使用的，不过有个宏 <code>onExit</code>可以达到这样的效果，比如</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">if (1) &#123;</div><div class="line">	@onExit &#123;</div><div class="line"> 		NSLog(@&quot;ffffff&quot;);</div><div class="line">	&#125;;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>就会在if作用域之后打印fffffff，那么他是怎么实现的呢，主要是用到了 <code>__attribute__</code>变量属性，具体的onExit的定义如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">#ifndef onExit</div><div class="line">#define onExit \</div><div class="line">ext_keywordify \</div><div class="line">__strong ext_cleanupBlock_t metamacro_concat(ext_exitBlock_, __LINE__) __attribute__((cleanup(ext_executeCleanupBlock), unused)) = ^</div><div class="line">#endif</div></pre></td></tr></table></figure>
-<ol>
-<li>ext_keywordify </li>
-<li>ext_clearupBlock_t</li>
-<li>metamacro_concat</li>
-<li>clearup</li>
-</ol>
-<p>其中ext_keywordify 在debug下就是一个@autoreleasepool, release下是@try..cache…finally<br>这里强制要求添加一个@，否则编译器会报错</p>
-<p>ext_clearupBlock_t 是一个typedef void (^ext_cleanupBlock_t)();</p>
-<p>metamacro_concat(A, B) 就是 metamacro_concat(A, B) A ## B ，将AB连接起来，例如</p>
-<pre><code>metamacro_concat(ext_exitBlock_, __LINE__)
-拼接为：ext_exitBlock_19
-</code></pre><p>clearup </p>
-<blockquote>
-<p><a href="http://draveness.me/defer/" target="_blank" rel="external">http://draveness.me/defer/</a></p>
-</blockquote>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS/">iOS</a></li></ul>
-	</div>
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-ios7下UIScrollView和滑动返回" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2016/07/22/ios7下UIScrollView和滑动返回/" class="article-date">
-  	<time datetime="2016-07-22T06:21:40.000Z" itemprop="datePublished">2016-07-22</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/07/22/ios7下UIScrollView和滑动返回/">ios7下UIScrollView和滑动返回</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h1><p>之前因为某些历史原因，外卖基本禁止了所有的滑动返回手势，这次产品过来说需要开发一些正常流程的返回操作，于是在修复菜单页的过程中遇到了一些问题。菜单页可以说是整个外卖最复杂的页面，如下图<img src="http://o981ibvmi.bkt.clouddn.com/QQ20160722-2@2x.png" alt="菜单页"></p>
-<p>图中有p1,p2,p3,p4,p5，整个菜单页的结构是：<br>P5 最底层，UIScrollView<br>P4 标题，UIView<br>P3 内容, UIView<br>P2 tab, UIScrollView<br>P1 page, UIScrollView</p>
-<p>层次是：p1 + p2 –&gt; p3 + p4 –&gt; p5</p>
-<p>这样就有了问题，左右滑P1，其实是UIScrollView的页面切换，分别显示，菜单，点评和商家详情。<br><code>在整个P3区域进行滑动返回操作，是不起效果的。</code></p>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS/">iOS</a></li></ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a  href="/2016/07/22/ios7下UIScrollView和滑动返回/#more">more >></a>
         </p>
       
       <div class="clearfix"></div>

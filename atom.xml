@@ -5,7 +5,7 @@
   <link href="//atom.xml" rel="self"/>
   
   <link href="http://theewind.github.io/"/>
-  <updated>2016-08-18T11:42:23.000Z</updated>
+  <updated>2016-09-06T07:53:09.000Z</updated>
   <id>http://theewind.github.io/</id>
   
   <author>
@@ -14,6 +14,117 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>创建一个显示FPS的label</title>
+    <link href="http://theewind.github.io/2016/09/06/%E5%88%9B%E5%BB%BA%E4%B8%80%E4%B8%AA%E6%98%BE%E7%A4%BAFPS%E7%9A%84label/"/>
+    <id>http://theewind.github.io/2016/09/06/创建一个显示FPS的label/</id>
+    <published>2016-09-06T07:40:57.000Z</published>
+    <updated>2016-09-06T07:53:09.000Z</updated>
+    
+    <content type="html">&lt;p&gt;如何创建一个实时显示FPS的Label呢，看了Nova的代码，发现是主要是采用CADisplayLink实现，至于CADisplayLink主要作用是什么，这里简单介绍下：&lt;/p&gt;
+&lt;p&gt;CADisplayLink是一个能让我们以和屏幕刷新率同步的频率将特定的内容画到屏幕上的定时器类。CADisplayLink以特定模式注册到runloop后，每当屏幕显示内容刷新结束的时候，runloop就会向CADisplayLink指定的target发送一次指定的selector消息， CADisplayLink类对应的selector就会被调用一次。所以通常情况下，按照iOS设备屏幕的刷新率60次/秒。&lt;/p&gt;
+&lt;p&gt;延迟：iOS设备的屏幕刷新频率是固定的，CADisplayLink在正常情况下会在每次刷新结束都被调用，精确度相当高。但如果调用的方法比较耗时，超过了屏幕刷新周期，就会导致跳过若干次回调调用机会。&lt;br&gt;             如果CPU过于繁忙，无法保证屏幕60次/秒的刷新率，就会导致跳过若干次调用回调方法的机会，跳过次数取决CPU的忙碌程度。&lt;/p&gt;
+&lt;p&gt;使用场景：从原理上可以看出，CADisplayLink适合做界面的不停重绘，比如视频播放的时候需要不停地获取下一帧用于界面渲染。&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;可以看到：CADisplayLink也不是绝对60次/秒刷新的，如果遇到屏幕刷新率降低，也是会有延迟和跳过的场景&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;但是刚好可以通过此途径来计算FPS，因为每次刷新屏幕都会调用CADisplayLink注册的selecotor。&lt;/p&gt;
+&lt;p&gt;具体代码可以参考&lt;a href=&quot;https://github.com/ibireme/YYText/blob/master/Demo/YYTextDemo/YYFPSLabel.m&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;YY系类之YYFPSLable&lt;/a&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;a href=&quot;http://www.cnblogs.com/ioriwellings/p/5011993.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;如何让iOS 保持界面流畅？这些技巧你知道吗&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;最后无耻的放上了代码&lt;/p&gt;
+&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;4&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;5&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;6&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;7&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;8&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;9&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;10&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;11&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;12&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;13&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;14&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;15&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;16&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;17&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;18&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;19&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;20&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;21&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;22&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;23&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;24&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;25&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;26&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;27&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;28&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;29&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;30&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;31&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;32&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;33&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;34&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;35&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;36&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;37&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;38&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;39&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;40&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;41&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;42&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;43&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;44&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;45&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;46&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;47&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;48&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;49&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;50&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;51&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;52&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;53&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;54&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;55&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;56&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;57&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;58&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;59&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;60&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;61&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;62&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;63&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;64&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;65&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;66&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;67&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;68&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;69&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;70&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;71&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;72&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;73&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;74&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;75&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;76&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;77&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;78&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;79&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;80&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;81&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;82&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;83&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;84&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;//&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;//  YYFPSLabel.m&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;//  YYKitExample&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;//&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;//  Created by ibireme on 15/9/3.&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;//  Copyright (c) 2015 ibireme. All rights reserved.&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;//&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;#import &amp;quot;YYFPSLabel.h&amp;quot;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;//#import &amp;lt;YYKit/YYKit.h&amp;gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;#import &amp;quot;YYText.h&amp;quot;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;#import &amp;quot;YYWeakProxy.h&amp;quot;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;#define kSize CGSizeMake(55, 20)&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;@implementation YYFPSLabel &amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    CADisplayLink *_link;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    NSUInteger _count;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    NSTimeInterval _lastTime;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    UIFont *_font;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    UIFont *_subFont;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    NSTimeInterval _llll;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&amp;#125;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;- (instancetype)initWithFrame:(CGRect)frame &amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    if (frame.size.width == 0 &amp;amp;&amp;amp; frame.size.height == 0) &amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        frame.size = kSize;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &amp;#125;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    self = [super initWithFrame:frame];&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    self.layer.cornerRadius = 5;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    self.clipsToBounds = YES;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    self.textAlignment = NSTextAlignmentCenter;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    self.userInteractionEnabled = NO;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    self.backgroundColor = [UIColor colorWithWhite:0.000 alpha:0.700];&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    _font = [UIFont fontWithName:@&amp;quot;Menlo&amp;quot; size:14];&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    if (_font) &amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        _subFont = [UIFont fontWithName:@&amp;quot;Menlo&amp;quot; size:4];&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &amp;#125; else &amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        _font = [UIFont fontWithName:@&amp;quot;Courier&amp;quot; size:14];&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        _subFont = [UIFont fontWithName:@&amp;quot;Courier&amp;quot; size:4];&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &amp;#125;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    _link = [CADisplayLink displayLinkWithTarget:[YYWeakProxy proxyWithTarget:self] selector:@selector(tick:)];&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    [_link addToRunLoop:[NSRunLoop mainRunLoop] forMode:NSRunLoopCommonModes];&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    return self;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&amp;#125;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;- (void)dealloc &amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    [_link invalidate];&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&amp;#125;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;- (CGSize)sizeThatFits:(CGSize)size &amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    return kSize;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&amp;#125;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;- (void)tick:(CADisplayLink *)link &amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    if (_lastTime == 0) &amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        _lastTime = link.timestamp;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        return;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &amp;#125;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    _count++;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    NSTimeInterval delta = link.timestamp - _lastTime;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    if (delta &amp;lt; 1) return;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    _lastTime = link.timestamp;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    float fps = _count / delta;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    _count = 0;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    CGFloat progress = fps / 60.0;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    UIColor *color = [UIColor colorWithHue:0.27 * (progress - 0.2) saturation:1 brightness:0.9 alpha:1];&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    NSMutableAttributedString *text = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@&amp;quot;%d FPS&amp;quot;,(int)round(fps)]];&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    [text yy_setColor:color range:NSMakeRange(0, text.length - 3)];&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    [text yy_setColor:[UIColor whiteColor] range:NSMakeRange(text.length - 3, 3)];&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    text.yy_font = _font;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    [text yy_setFont:_subFont range:NSMakeRange(text.length - 4, 1)];&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    self.attributedText = text;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&amp;#125;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;@end&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;如何创建一个实时显示FPS的Label呢，看了Nova的代码，发现是主要是采用CADisplayLink实现，至于CADisplayLink主要作用是什么，这里简单介绍下：&lt;/p&gt;
+&lt;p&gt;CADisplayLink是一个能让我们以和屏幕刷新率同步的频率将特定的内容画到屏幕上
+    
+    </summary>
+    
+    
+      <category term="iOS" scheme="http://theewind.github.io/tags/iOS/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>ios自动化测试部分知识</title>
+    <link href="http://theewind.github.io/2016/09/05/ios%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95%E9%83%A8%E5%88%86%E7%9F%A5%E8%AF%86/"/>
+    <id>http://theewind.github.io/2016/09/05/ios自动化测试部分知识/</id>
+    <published>2016-09-05T03:06:59.000Z</published>
+    <updated>2016-09-05T03:21:19.000Z</updated>
+    
+    <content type="html">&lt;p&gt;最近在看关于iOS自动化测试的内容，其中比较常用的有KIF等，然后自己看他的实现时，发现有个beforeAll和AfterAll的方法，因为在当初写case的时候，不能知道所有case开始，和结束的时机，于是就对它比较好奇，看了他的实现。&lt;/p&gt;
+&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;4&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;5&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;6&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;7&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;8&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;9&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;10&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;11&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;12&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;13&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;14&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;15&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;16&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;17&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;18&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;19&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;20&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;21&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;22&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;23&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;24&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;25&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;26&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;27&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;28&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;29&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;30&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;31&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;32&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;33&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;34&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;35&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;36&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;37&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;- (void)beforeAll&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    [system simulateDeviceRotationToOrientation:UIDeviceOrientationLandscapeLeft];&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    [[viewTester usingIdentifier:@&amp;quot;Test Suite TableView&amp;quot;] scrollByFractionOfSizeHorizontal:0 vertical:-0.2];&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&amp;#125;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;- (void)afterAll&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    [system simulateDeviceRotationToOrientation:UIDeviceOrientationPortrait];&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    [viewTester waitForTimeInterval:0.5];&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&amp;#125;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;+ (void)setUp&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    KIFEnableAccessibility();&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    [self performSetupTearDownWithSelector:@selector(beforeAll)];&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&amp;#125;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;+ (void)tearDown&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    [self performSetupTearDownWithSelector:@selector(afterAll)];&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&amp;#125;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;+ (void)performSetupTearDownWithSelector:(SEL)selector&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    KIFTestCase *testCase = [self testCaseWithSelector:selector];&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    if ([testCase respondsToSelector:selector]) &amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;#pragma clang diagnostic push&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;#pragma clang diagnostic ignored &amp;quot;-Warc-performSelector-leaks&amp;quot;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        [testCase performSelector:selector];&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;#pragma clang diagnostic pop&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &amp;#125;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    if (testCase-&amp;gt;_stoppingException) &amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        [testCase-&amp;gt;_stoppingException raise];&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &amp;#125;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&amp;#125;&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;总体是一个，beforeAll调用performSetupTearDownWithSelector然后调用setUp方法。&lt;br&gt;于是自己就很困惑，记得之前看setUp方法是每个case开始都会调用，这跟beforeAll的时机是不吻合的。&lt;/p&gt;
+&lt;p&gt;但是如果自己对比你会发现：有两个方法&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;- (void)setUp
++ (void)setUp
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;由此，自己才明白，原理，类方法，是只运行一一次，在所有的测试执行前执行一次，实例方法是所有的case执行前都会执行一次&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;The class method (+ (void)setUp) is only run once during the entire test run.&lt;br&gt;The instance method (- (void)setUp) is the one in the default template; it’s run before every single test. Hopefully, in a hypothetical future version of Xcode, this comment will have been changed to // Put setup code here. This method is called before the invocation of each test method in the class.&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;http://stackoverflow.com/questions/21038375/what-is-the-purpose-of-xctestcases-setup-method&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;What is the purpose of XCTestCase’s setUp method?&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://www.raywenderlich.com/61419/ios-ui-testing-with-kif&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;iOS UI Testing with KIF&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;http://tech.meituan.com/iOS-UITest-KIF.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;基于 KIF 的 iOS UI 自动化测试和持续集成&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;最近在看关于iOS自动化测试的内容，其中比较常用的有KIF等，然后自己看他的实现时，发现有个beforeAll和AfterAll的方法，因为在当初写case的时候，不能知道所有case开始，和结束的时机，于是就对它比较好奇，看了他的实现。&lt;/p&gt;
+&lt;figure class
+    
+    </summary>
+    
+    
+      <category term="iOS" scheme="http://theewind.github.io/tags/iOS/"/>
+    
+      <category term="自动化" scheme="http://theewind.github.io/tags/%E8%87%AA%E5%8A%A8%E5%8C%96/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>socket连接池的实现探索</title>
+    <link href="http://theewind.github.io/2016/08/19/socket%E8%BF%9E%E6%8E%A5%E6%B1%A0%E7%9A%84%E5%AE%9E%E7%8E%B0%E6%8E%A2%E7%B4%A2/"/>
+    <id>http://theewind.github.io/2016/08/19/socket连接池的实现探索/</id>
+    <published>2016-08-19T10:27:16.000Z</published>
+    <updated>2016-08-23T01:34:35.000Z</updated>
+    
+    <content type="html">&lt;p&gt;点评长连接的是建立一个TCP连接，然后发送一定策略的心跳检测，保持套接字（TCP+port）socket的连接不断开。&lt;/p&gt;
+&lt;p&gt;然后看到携程关于网络优化的[文章]&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Native模块是携程的核心业务模块（酒店、机票、火车票、攻略等），Native模块的网络服务主要通过TCP连接实现，而非常见的Restful HTTP API那种HTTP连接，只有少数轻量级服务使用HTTP接口作为补充。&lt;/p&gt;
+&lt;p&gt;TCP连接网络服务模块使用了长连接+短连接机制，即有一个长连接池保持一定数目长连接，用于减少每次服务额外的连接，服务完成后会将该连接Socket放回长连接池，继续保持连接状态（一段时间空闲后会被回收）；短连接作为补充，每次服务完成后便会主动关闭连接。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;点评默认的是一个Socket连接，所有还比较简单，但是如果让实现一个连接池的话，应该怎么做到呢，这个池是如何表示的？&lt;/p&gt;
+&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
+&lt;p&gt;之前考虑过线程池，只知道有一个线程管理器。其实自己刚开始对这个池的概念有点畏惧，感觉是一个很高大上的内容，但是其实想通了以后，一般来说一个池，就是一个队列吧，可以用vector实现，也可以用array实现，就是把很多线程或者socket都放到一个队列里面，如果队列有回收，销毁，创建等功能。&lt;/p&gt;
+&lt;p&gt;简单来说，池的定义，可以通过两个方式来实现，一个是定义两个队列：&lt;/p&gt;
+&lt;p&gt;比如TCP连接池的实现，可以定义两个队列，一个是使用中的队列，一个是未使用的队列，每次建立新的连接时，就把这个连接放到使用中去，完成后，就放到未使用中。&lt;/p&gt;
+&lt;p&gt;另一个是，一般也是通用的，实现一个manager，负责管理所有的连接，常用的线程池就基本采用这种方式。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;简单的双队列SOCKET连接池，参考&lt;a href=&quot;http://www.cnblogs.com/HopeGi/archive/2013/04/25/3042238.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://www.cnblogs.com/HopeGi/archive/2013/04/25/3042238.html&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;点评长连接的是建立一个TCP连接，然后发送一定策略的心跳检测，保持套接字（TCP+port）socket的连接不断开。&lt;/p&gt;
+&lt;p&gt;然后看到携程关于网络优化的[文章]&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Native模块是携程的核心业务模块（酒店、机票、火车票、攻略等），Native模块的网络服务主要通过TCP连接实现，而非常见的Restful HTTP API那种HTTP连接，只有少数轻量级服务使用HTTP接口作为补充。&lt;/p&gt;
+&lt;p&gt;TCP连接网络服务模块使用了长连接+短连接机制，即有一个长连接池保持一定数目长连接，用于减少每次服务额外的连接，服务完成后会将该连接Socket放回长连接池，继续保持连接状态（一段时间空闲后会被回收）；短连接作为补充，每次服务完成后便会主动关闭连接。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;点评默认的是一个Socket连接，所有还比较简单，但是如果让实现一个连接池的话，应该怎么做到呢，这个池是如何表示的？&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="iOS" scheme="http://theewind.github.io/tags/iOS/"/>
+    
+      <category term="TCP" scheme="http://theewind.github.io/tags/TCP/"/>
+    
+  </entry>
   
   <entry>
     <title>url encode的问题</title>
@@ -809,115 +920,6 @@ fb_originalAlloc--&amp;gt;alloc的IMP
     
     
       <category term="前端" scheme="http://theewind.github.io/tags/%E5%89%8D%E7%AB%AF/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>前端代码学习之scss</title>
-    <link href="http://theewind.github.io/2016/06/22/%E5%89%8D%E7%AB%AF%E4%BB%A3%E7%A0%81%E5%AD%A6%E4%B9%A0%E4%B9%8Bscss/"/>
-    <id>http://theewind.github.io/2016/06/22/前端代码学习之scss/</id>
-    <published>2016-06-22T10:39:03.000Z</published>
-    <updated>2016-06-22T11:03:32.000Z</updated>
-    
-    <content type="html">&lt;p&gt;今天看到一个网站，主要都是前端动画&lt;a href=&quot;http://hakim.se&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://hakim.se&lt;/a&gt;,刚好自己最近对前端比较好奇，然后就学习了其中一个demo, &lt;a href=&quot;http://codepen.io/hakimel/full/aIhkf&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;cloudy-spiral&lt;/a&gt;,然后这里主要记录自己在学习前端过程中的一些小的知识点，不断更新中。。。&lt;/p&gt;
-&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
-&lt;h1 id=&quot;scss是什么&quot;&gt;&lt;a href=&quot;#scss是什么&quot; class=&quot;headerlink&quot; title=&quot;scss是什么&quot;&gt;&lt;/a&gt;scss是什么&lt;/h1&gt;&lt;p&gt;sass是css3的一个扩展，增加了规则嵌套、变量、混合、选择器集成等。通过使用命令行的工具或WEB框架插件，可以把它转成标准的、格式良好的css代码。&lt;/p&gt;
-&lt;p&gt;scss即使sass的新语法，是Sassy css的简写，是css3语法的超集，也就是说所有有效的CSS3样式也同样适合于SASS。&lt;/p&gt;
-&lt;h4 id=&quot;一、什么是SASS&quot;&gt;&lt;a href=&quot;#一、什么是SASS&quot; class=&quot;headerlink&quot; title=&quot;一、什么是SASS&quot;&gt;&lt;/a&gt;一、什么是SASS&lt;/h4&gt;&lt;p&gt;SASS是一种CSS的开发工具，提供了许多便利的写法，大大节省了设计者的时间，使得CSS的开发，变得简单和可维护。&lt;br&gt;本文总结了SASS的主要用法。我的目标是，有了这篇文章，日常的一般使用就不需要去看官方文档了。&lt;/p&gt;
-&lt;p&gt;####二、安装和使用&lt;/p&gt;
-&lt;p&gt;#####2.1 安装&lt;br&gt;SASS是Ruby语言写的，但是两者的语法没有关系。不懂Ruby，照样使用。只是必须先安装Ruby，然后再安装SASS。&lt;br&gt;假定你已经安装好了Ruby，接着在命令行输入下面的命令：&lt;br&gt;gem install sass&lt;br&gt;然后，就可以使用了。&lt;/p&gt;
-&lt;p&gt;#####2.2 使用&lt;br&gt;SASS文件就是普通的文本文件，里面可以直接使用CSS语法。文件后缀名是.scss，意思为Sassy CSS。&lt;br&gt;下面的命令，可以在屏幕上显示.scss文件转化的css代码。（假设文件名为test。）&lt;br&gt;sass test.scss&lt;br&gt;如果要将显示结果保存成文件，后面再跟一个.css文件名。&lt;br&gt;sass test.scss test.css&lt;br&gt;SASS提供四个编译风格的选项：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;nested：嵌套缩进的css代码，它是默认值。&lt;/li&gt;
-&lt;li&gt;expanded：没有缩进的、扩展的css代码。&lt;/li&gt;
-&lt;li&gt;compact：简洁格式的css代码。&lt;/li&gt;
-&lt;li&gt;compressed：压缩后的css代码。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;生产环境当中，一般使用最后一个选项。&lt;br&gt;sass –style compressed test.sass test.css&lt;br&gt;你也可以让SASS监听某个文件或目录，一旦源文件有变动，就自动生成编译后的版本。&lt;br&gt;// watch a file&lt;br&gt;sass –watch input.scss:output.css&lt;br&gt;// watch a directory&lt;br&gt;sass –watch app/sass:public/stylesheets&lt;br&gt;SASS的官方网站，提供了一个&lt;a href=&quot;http://sass-lang.com/try.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;在线转换器。你可以在那里，试运行下面的各种例子。&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;#####2.3 基本用法&lt;br&gt;具体可以参考：&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;&lt;a href=&quot;http://www.frostsky.com/2014/07/sass-scss/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://www.frostsky.com/2014/07/sass-scss/&lt;/a&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;h1 id=&quot;sass-和-scss的区别呢&quot;&gt;&lt;a href=&quot;#sass-和-scss的区别呢&quot; class=&quot;headerlink&quot; title=&quot;sass 和 scss的区别呢&quot;&gt;&lt;/a&gt;sass 和 scss的区别呢&lt;/h1&gt;&lt;p&gt;Sass 和 SCSS 其实是同一种东西，我们平时都称之为 Sass，两者之间不同之处有以下两点：&lt;br&gt;文件扩展名不同，Sass 是以“.sass”后缀为扩展名，而 SCSS 是以“.scss”后缀为扩展名&lt;/p&gt;
-&lt;p&gt;语法书写方式不同，Sass 是以严格的缩进式语法规则来书写，不带大括号({})和分号(;)，而 SCSS 的语法书写和我们的 CSS 语法书写方式非常类似。&lt;/p&gt;
-&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;4&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;5&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;6&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;7&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;8&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;9&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;10&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;11&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;12&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;13&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;14&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;15&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;16&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;17&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;18&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;19&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;20&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;21&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;22&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;23&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;24&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;先来看一个示例：&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;Sass 语法&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;$font-stack: Helvetica, sans-serif  //定义变量&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;$primary-color: #333 //定义变量&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;body&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;  font: 100% $font-stack&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;  color: $primary-color	 &lt;/div&gt;&lt;div class=&quot;line&quot;&gt;  &lt;/div&gt;&lt;div class=&quot;line&quot;&gt;SCSS语法&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;$font-stack: Helvetica, sans-seri;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;$primary-color: #333;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;body &amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;  font: 100% $font-stack;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;  color: $primary-color;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&amp;#125;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;编译出来的 CSS&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;body &amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;  font: 100% Helvetica, sans-serif;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;  color: #333;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&amp;#125;&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-</content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;今天看到一个网站，主要都是前端动画&lt;a href=&quot;http://hakim.se&quot;&gt;http://hakim.se&lt;/a&gt;,刚好自己最近对前端比较好奇，然后就学习了其中一个demo, &lt;a href=&quot;http://codepen.io/hakimel/full/aIhkf&quot;&gt;cloudy-spiral&lt;/a&gt;,然后这里主要记录自己在学习前端过程中的一些小的知识点，不断更新中。。。&lt;/p&gt;
-    
-    </summary>
-    
-    
-      <category term="前端" scheme="http://theewind.github.io/tags/%E5%89%8D%E7%AB%AF/"/>
-    
-      <category term="css" scheme="http://theewind.github.io/tags/css/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>wkwebview同步获取返回结果</title>
-    <link href="http://theewind.github.io/2016/06/21/wkwebview%E5%90%8C%E6%AD%A5%E8%8E%B7%E5%8F%96%E8%BF%94%E5%9B%9E%E7%BB%93%E6%9E%9C/"/>
-    <id>http://theewind.github.io/2016/06/21/wkwebview同步获取返回结果/</id>
-    <published>2016-06-21T09:46:50.000Z</published>
-    <updated>2016-06-30T03:19:32.000Z</updated>
-    
-    <content type="html">&lt;p&gt;今天在测试UIWebView和WKWebView的时候，发现如下区别&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;&lt;p&gt;UIWebView执行stringByEvaluatingJavaScriptFromString方法，因为直接返回结果，所以是&lt;code&gt;同步&lt;/code&gt;的。&lt;br&gt;WKWebView执行evaluateJavaScript：completionHandler是在block中获取执行结果的，所以他是&lt;code&gt;异步&lt;/code&gt;进行的，&lt;br&gt;这样在进行性能测试的时候，发现如果不将WKWebView他修改为同步，是无法进行对比的，然后自己就通过如下方法&lt;/p&gt;
-&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;4&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;5&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;6&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;7&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;8&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;9&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;10&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;11&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;12&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;13&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;14&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;   - (NSString *)stringByEvaluatingJavaScriptFromString:(NSString *)javascript &amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    __block NSString *res = nil;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    __block BOOL finish = NO;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    [self.webView evaluateJavaScript:javascript completionHandler:^(NSString *result, NSError *error)&amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        res = result;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        finish = YES;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &amp;#125;];&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    while(!finish) &amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate distantFuture]];&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &amp;#125;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    return res;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&amp;#125;&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;p&gt;将WKWebView修改为同步状态，然后进行对比，主要是测试JavaScript函数执行100，300，500，1000，3000次，统计时间，可以发现在相同JS功能情况下，WKWebView的效率还没有UIWebView的效率高，如&lt;img src=&quot;http://o981ibvmi.bkt.clouddn.com/uiwebview_wkwebview_jscore.png&quot; alt=&quot;下图&quot;&gt;&lt;br&gt;可以看出，JavascriptCore的效率是最高的，而WKWebView改成同步以后，实际效果是最差的，分析原因也可能是因为，WKWebView不是这样用的，毕竟在无限等待中，所以结果也可能是受影响的。&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;&lt;a href=&quot;http://www.jianshu.com/p/3a59107aa2d2&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://www.jianshu.com/p/3a59107aa2d2&lt;/a&gt;&lt;br&gt;&lt;a href=&quot;http://stackoverflow.com/questions/26778955/wkwebview-evaluate-javascript-return-value&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://stackoverflow.com/questions/26778955/wkwebview-evaluate-javascript-return-value&lt;/a&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
-</content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;今天在测试UIWebView和WKWebView的时候，发现如下区别&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;&lt;p&gt;UIWebView执行stringByEvaluatingJavaScriptFromString方法，因为直接返回结果，所以是&lt;code&gt;同步&lt;/code&gt;的。&lt;br&gt;W
-    
-    </summary>
-    
-    
-      <category term="iOS" scheme="http://theewind.github.io/tags/iOS/"/>
-    
-      <category term="WKWebView" scheme="http://theewind.github.io/tags/WKWebView/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>react native 新语法</title>
-    <link href="http://theewind.github.io/2016/06/20/react-native-%E6%96%B0%E8%AF%AD%E6%B3%95/"/>
-    <id>http://theewind.github.io/2016/06/20/react-native-新语法/</id>
-    <published>2016-06-20T05:12:08.000Z</published>
-    <updated>2016-06-20T05:16:17.000Z</updated>
-    
-    <content type="html">&lt;p&gt;最新的RN，已经全部转移到ES6，所以很多之前老的写法，会报错，比如&lt;br&gt;在react-native中引用React的做法发生了变更（在当前版本老的做法会报错）：&lt;/p&gt;
-&lt;p&gt;之前&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;import React, { Component, View } from &amp;apos;react-native&amp;apos;;
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;现在&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;import React, { Component } from &amp;apos;react&amp;apos;;
-import { View } from &amp;apos;react-native&amp;apos;;
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;具体有很多，可以参考&lt;a href=&quot;https://www.facebook.com/groups/reactnativeoss/permalink/1540818949548067/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;这篇文章&lt;/a&gt; 科学上网。&lt;/p&gt;
-&lt;p&gt;具体就是：&lt;/p&gt;
-&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;4&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;5&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;6&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;7&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;8&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;9&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;10&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;11&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;12&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;13&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;14&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;15&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;16&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;17&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;18&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;19&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;20&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;21&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;22&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;23&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;24&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;25&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;26&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;27&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;28&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;29&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;30&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;31&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;32&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;33&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;34&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;35&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;36&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;37&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;38&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;39&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;n React 0.14 for Web we started splitting up the React package into two packages `react` and `react-dom`. Now I&amp;apos;d like to make this consistent in React Native. The new package structure would be...&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&amp;quot;react&amp;quot;:&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;Children&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;Component&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;PropTypes&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;createElement&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;cloneElement&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;isValidElement&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;createClass&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;createFactory&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;createMixin&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&amp;quot;react-native&amp;quot;:&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;hasReactNativeInitialized&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;findNodeHandle&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;render&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;unmountComponentAtNode&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;unmountComponentAtNodeAndRemoveContainer&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;unstable_batchedUpdates&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;View&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;Text&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;ListView&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;...&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;and all the other native components.&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;So for a lot of components you actually have to import both packages.&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;var React = require(&amp;apos;react&amp;apos;);&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;var &amp;#123; View &amp;#125; = require(&amp;apos;react-native&amp;apos;);&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;var Foo = React.createClass(&amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;render() &amp;#123; return &amp;lt;View /&amp;gt;; &amp;#125;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&amp;#125;);&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;However, for components that doesn&amp;apos;t know anything about their rendering environment just need the `react` package as a dependency.&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;Currently a lot of these are accessible from both packages but we&amp;apos;d start issuing warnings if you use the wrong one.&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;This would be a little spammy so ideally we would have a simple codemod script that you can run on your imports to clean them up.&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;E.g. something that translates existing patterns like:&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;var React = require(&amp;apos;react-native&amp;apos;);&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;var &amp;#123; View &amp;#125; = React;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;into:&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;var React = require(&amp;apos;react&amp;apos;);&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;var &amp;#123; View &amp;#125; = require(&amp;apos;react-native&amp;apos;);&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;If anyone wants to write and share that script with the community, that would be highly appreciated. We can start promoting it right now before we deprecate it.&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-</content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;最新的RN，已经全部转移到ES6，所以很多之前老的写法，会报错，比如&lt;br&gt;在react-native中引用React的做法发生了变更（在当前版本老的做法会报错）：&lt;/p&gt;
-&lt;p&gt;之前&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;import React, { Component, Vi
-    
-    </summary>
-    
-    
-      <category term="react native" scheme="http://theewind.github.io/tags/react-native/"/>
     
   </entry>
   

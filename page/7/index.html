@@ -113,7 +113,7 @@
 				
 				<section class="switch-part switch-part2">
 					<div class="widget tagcloud" id="js-tagcloud">
-						<a href="/tags/CSS/" style="font-size: 10px;">CSS</a> <a href="/tags/JavaScript/" style="font-size: 10px;">JavaScript</a> <a href="/tags/RAC/" style="font-size: 10px;">RAC</a> <a href="/tags/React-Native/" style="font-size: 13.33px;">React Native</a> <a href="/tags/URL/" style="font-size: 10px;">URL</a> <a href="/tags/WKWebView/" style="font-size: 10px;">WKWebView</a> <a href="/tags/css/" style="font-size: 13.33px;">css</a> <a href="/tags/hexo/" style="font-size: 13.33px;">hexo</a> <a href="/tags/iOS/" style="font-size: 20px;">iOS</a> <a href="/tags/javascript-前端/" style="font-size: 10px;">javascript 前端</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/qrcode/" style="font-size: 10px;">qrcode</a> <a href="/tags/react-native/" style="font-size: 13.33px;">react native</a> <a href="/tags/shadowsocks/" style="font-size: 10px;">shadowsocks</a> <a href="/tags/shell/" style="font-size: 13.33px;">shell</a> <a href="/tags/swift/" style="font-size: 10px;">swift</a> <a href="/tags/互联网/" style="font-size: 13.33px;">互联网</a> <a href="/tags/代码检测/" style="font-size: 10px;">代码检测</a> <a href="/tags/内存检测/" style="font-size: 10px;">内存检测</a> <a href="/tags/前端/" style="font-size: 16.67px;">前端</a> <a href="/tags/正则表达式/" style="font-size: 10px;">正则表达式</a> <a href="/tags/测试/" style="font-size: 10px;">测试</a> <a href="/tags/缓存/" style="font-size: 10px;">缓存</a> <a href="/tags/脚本/" style="font-size: 10px;">脚本</a>
+						<a href="/tags/CSS/" style="font-size: 10px;">CSS</a> <a href="/tags/JavaScript/" style="font-size: 10px;">JavaScript</a> <a href="/tags/RAC/" style="font-size: 10px;">RAC</a> <a href="/tags/React-Native/" style="font-size: 13.33px;">React Native</a> <a href="/tags/TCP/" style="font-size: 10px;">TCP</a> <a href="/tags/URL/" style="font-size: 10px;">URL</a> <a href="/tags/WKWebView/" style="font-size: 10px;">WKWebView</a> <a href="/tags/css/" style="font-size: 13.33px;">css</a> <a href="/tags/hexo/" style="font-size: 13.33px;">hexo</a> <a href="/tags/iOS/" style="font-size: 20px;">iOS</a> <a href="/tags/javascript-前端/" style="font-size: 10px;">javascript 前端</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/qrcode/" style="font-size: 10px;">qrcode</a> <a href="/tags/react-native/" style="font-size: 13.33px;">react native</a> <a href="/tags/shadowsocks/" style="font-size: 10px;">shadowsocks</a> <a href="/tags/shell/" style="font-size: 13.33px;">shell</a> <a href="/tags/swift/" style="font-size: 10px;">swift</a> <a href="/tags/互联网/" style="font-size: 13.33px;">互联网</a> <a href="/tags/代码检测/" style="font-size: 10px;">代码检测</a> <a href="/tags/内存检测/" style="font-size: 10px;">内存检测</a> <a href="/tags/前端/" style="font-size: 16.67px;">前端</a> <a href="/tags/正则表达式/" style="font-size: 10px;">正则表达式</a> <a href="/tags/测试/" style="font-size: 10px;">测试</a> <a href="/tags/缓存/" style="font-size: 10px;">缓存</a> <a href="/tags/脚本/" style="font-size: 10px;">脚本</a> <a href="/tags/自动化/" style="font-size: 10px;">自动化</a>
 					</div>
 				</section>
 				
@@ -186,6 +186,206 @@
 </nav>
 
       <div class="body-wrap">
+  
+    <article id="post-ios归档需要注意" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/04/29/ios归档需要注意/" class="article-date">
+  	<time datetime="2016-04-29T06:01:52.000Z" itemprop="datePublished">2016-04-29</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/04/29/ios归档需要注意/">iOS归档之NSKeyedArchiver</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>如果对象是NSString、NSDictionary、NSArray、NSData、NSNumber等类型，可以直接用NSKeyedArchiver进行归档和恢复。</p>
+<p>不是所有的对象都可以直接用这种方法进行归档，只有遵守了NSCoding协议的对象才可以。</p>
+<p>NSCoding协议有2个方法：</p>
+<pre><code>encodeWithCoder:
+</code></pre><p>每次归档对象时，都会调用这个方法。一般在这个方法里面指定如何归档对象中的每个实例变量，可以使用encodeObject:forKey:方法归档实例变量</p>
+<pre><code>initWithCoder:
+</code></pre><p>每次从文件中恢复(解码)对象时，都会调用这个方法。一般在这个方法里面指定如何解码文件中的数据为对象的实例变量，可以使用decodeObject:forKey方法解码实例变量</p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS/">iOS</a></li></ul>
+	</div>
+
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-JS == 与 ===的区别" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/04/28/JS == 与 ===的区别/" class="article-date">
+  	<time datetime="2016-04-28T09:58:08.000Z" itemprop="datePublished">2016-04-28</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/04/28/JS == 与 ===的区别/">JS == 与 ===的区别</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h4 id="1、对于string-number等基础类型，-和-是有区别的"><a href="#1、对于string-number等基础类型，-和-是有区别的" class="headerlink" title="1、对于string,number等基础类型，==和===是有区别的"></a>1、对于string,number等基础类型，==和===是有区别的</h4><ul>
+<li>1）不同类型间比较，==之比较“转化成同一类型后的值”看“值”是否相等，===如果类型不同，其结果就是不等</li>
+<li>2）同类型比较，直接进行“值”比较，两者结果一样</li>
+</ul>
+<h4 id="2、对于Array-Object等高级类型，-和-是没有区别的"><a href="#2、对于Array-Object等高级类型，-和-是没有区别的" class="headerlink" title="2、对于Array,Object等高级类型，==和===是没有区别的"></a>2、对于Array,Object等高级类型，==和===是没有区别的</h4><ul>
+<li>进行“指针地址”比较</li>
+</ul>
+<h4 id="3、基础类型与高级类型，-和-是有区别的"><a href="#3、基础类型与高级类型，-和-是有区别的" class="headerlink" title="3、基础类型与高级类型，==和===是有区别的"></a>3、基础类型与高级类型，==和===是有区别的</h4><ul>
+<li>1）对于==，将高级转化为基础类型，进行“值”比较</li>
+<li>2）因为类型不同，===结果为false</li>
+</ul>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/">JavaScript</a></li></ul>
+	</div>
+
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-hexo-study" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/04/28/hexo-study/" class="article-date">
+  	<time datetime="2016-04-28T09:44:20.000Z" itemprop="datePublished">2016-04-28</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/04/28/hexo-study/">hexo 基础</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="tags的用法"><a href="#tags的用法" class="headerlink" title="tags的用法"></a>tags的用法</h3><p>基本使用方法是：</p>
+<pre><code>tags: hexo
+</code></pre><p>如果一行多个标签，使用</p>
+<pre><code>tags: [hexo, hexo1, hexo2, ...]
+</code></pre><p>如果一篇文章属于多个标签</p>
+<pre><code>tags: 
+- hexo
+- hexo2
+- hexo3
+</code></pre><h3 id="new-和-new-page"><a href="#new-和-new-page" class="headerlink" title="new 和 new page"></a>new 和 new page</h3><p>最终生成的静态文档都在public下</p>
+<ul>
+<li>new: 统一在归档目录 archive下</li>
+<li>new page: 新建一个目录，比如about，然后在theme/yilia/_config.yml 的 menu下可以添加新的模块，比如 about: /about    </li>
+</ul>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hexo/">hexo</a></li></ul>
+	</div>
+
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
   
     <article id="post-swift" class="article article-type-post" itemscope itemprop="blogPost">
   
