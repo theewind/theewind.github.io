@@ -14,7 +14,7 @@ CADisplayLink是一个能让我们以和屏幕刷新率同步的频率将特定�
 <meta property="og:site_name" content="sanfeng’s blog">
 <meta property="og:description" content="如何创建一个实时显示FPS的Label呢，看了Nova的代码，发现是主要是采用CADisplayLink实现，至于CADisplayLink主要作用是什么，这里简单介绍下：
 CADisplayLink是一个能让我们以和屏幕刷新率同步的频率将特定的内容画到屏幕上的定时器类。CADisplayLink以特定模式注册到runloop后，每当屏幕显示内容刷新结束的时候，runloop就会向CADispla">
-<meta property="og:updated_time" content="2016-09-06T07:53:09.000Z">
+<meta property="og:updated_time" content="2016-09-06T07:54:38.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="创建一个显示FPS的label">
 <meta name="twitter:description" content="如何创建一个实时显示FPS的Label呢，看了Nova的代码，发现是主要是采用CADisplayLink实现，至于CADisplayLink主要作用是什么，这里简单介绍下：
@@ -228,6 +228,7 @@ CADisplayLink是一个能让我们以和屏幕刷新率同步的频率将特定�
       
         <p>如何创建一个实时显示FPS的Label呢，看了Nova的代码，发现是主要是采用CADisplayLink实现，至于CADisplayLink主要作用是什么，这里简单介绍下：</p>
 <p>CADisplayLink是一个能让我们以和屏幕刷新率同步的频率将特定的内容画到屏幕上的定时器类。CADisplayLink以特定模式注册到runloop后，每当屏幕显示内容刷新结束的时候，runloop就会向CADisplayLink指定的target发送一次指定的selector消息， CADisplayLink类对应的selector就会被调用一次。所以通常情况下，按照iOS设备屏幕的刷新率60次/秒。</p>
+<a id="more"></a>
 <p>延迟：iOS设备的屏幕刷新频率是固定的，CADisplayLink在正常情况下会在每次刷新结束都被调用，精确度相当高。但如果调用的方法比较耗时，超过了屏幕刷新周期，就会导致跳过若干次回调调用机会。<br>             如果CPU过于繁忙，无法保证屏幕60次/秒的刷新率，就会导致跳过若干次调用回调方法的机会，跳过次数取决CPU的忙碌程度。</p>
 <p>使用场景：从原理上可以看出，CADisplayLink适合做界面的不停重绘，比如视频播放的时候需要不停地获取下一帧用于界面渲染。</p>
 <p><code>可以看到：CADisplayLink也不是绝对60次/秒刷新的，如果遇到屏幕刷新率降低，也是会有延迟和跳过的场景</code></p>

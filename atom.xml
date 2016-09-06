@@ -5,7 +5,7 @@
   <link href="//atom.xml" rel="self"/>
   
   <link href="http://theewind.github.io/"/>
-  <updated>2016-09-06T07:53:09.000Z</updated>
+  <updated>2016-09-06T07:54:38.000Z</updated>
   <id>http://theewind.github.io/</id>
   
   <author>
@@ -20,10 +20,11 @@
     <link href="http://theewind.github.io/2016/09/06/%E5%88%9B%E5%BB%BA%E4%B8%80%E4%B8%AA%E6%98%BE%E7%A4%BAFPS%E7%9A%84label/"/>
     <id>http://theewind.github.io/2016/09/06/创建一个显示FPS的label/</id>
     <published>2016-09-06T07:40:57.000Z</published>
-    <updated>2016-09-06T07:53:09.000Z</updated>
+    <updated>2016-09-06T07:54:38.000Z</updated>
     
     <content type="html">&lt;p&gt;如何创建一个实时显示FPS的Label呢，看了Nova的代码，发现是主要是采用CADisplayLink实现，至于CADisplayLink主要作用是什么，这里简单介绍下：&lt;/p&gt;
 &lt;p&gt;CADisplayLink是一个能让我们以和屏幕刷新率同步的频率将特定的内容画到屏幕上的定时器类。CADisplayLink以特定模式注册到runloop后，每当屏幕显示内容刷新结束的时候，runloop就会向CADisplayLink指定的target发送一次指定的selector消息， CADisplayLink类对应的selector就会被调用一次。所以通常情况下，按照iOS设备屏幕的刷新率60次/秒。&lt;/p&gt;
+&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
 &lt;p&gt;延迟：iOS设备的屏幕刷新频率是固定的，CADisplayLink在正常情况下会在每次刷新结束都被调用，精确度相当高。但如果调用的方法比较耗时，超过了屏幕刷新周期，就会导致跳过若干次回调调用机会。&lt;br&gt;             如果CPU过于繁忙，无法保证屏幕60次/秒的刷新率，就会导致跳过若干次调用回调方法的机会，跳过次数取决CPU的忙碌程度。&lt;/p&gt;
 &lt;p&gt;使用场景：从原理上可以看出，CADisplayLink适合做界面的不停重绘，比如视频播放的时候需要不停地获取下一帧用于界面渲染。&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;可以看到：CADisplayLink也不是绝对60次/秒刷新的，如果遇到屏幕刷新率降低，也是会有延迟和跳过的场景&lt;/code&gt;&lt;/p&gt;
@@ -38,7 +39,7 @@
     <summary type="html">
     
       &lt;p&gt;如何创建一个实时显示FPS的Label呢，看了Nova的代码，发现是主要是采用CADisplayLink实现，至于CADisplayLink主要作用是什么，这里简单介绍下：&lt;/p&gt;
-&lt;p&gt;CADisplayLink是一个能让我们以和屏幕刷新率同步的频率将特定的内容画到屏幕上
+&lt;p&gt;CADisplayLink是一个能让我们以和屏幕刷新率同步的频率将特定的内容画到屏幕上的定时器类。CADisplayLink以特定模式注册到runloop后，每当屏幕显示内容刷新结束的时候，runloop就会向CADisplayLink指定的target发送一次指定的selector消息， CADisplayLink类对应的selector就会被调用一次。所以通常情况下，按照iOS设备屏幕的刷新率60次/秒。&lt;/p&gt;
     
     </summary>
     
@@ -52,9 +53,10 @@
     <link href="http://theewind.github.io/2016/09/05/ios%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95%E9%83%A8%E5%88%86%E7%9F%A5%E8%AF%86/"/>
     <id>http://theewind.github.io/2016/09/05/ios自动化测试部分知识/</id>
     <published>2016-09-05T03:06:59.000Z</published>
-    <updated>2016-09-05T03:21:19.000Z</updated>
+    <updated>2016-09-06T07:55:21.000Z</updated>
     
     <content type="html">&lt;p&gt;最近在看关于iOS自动化测试的内容，其中比较常用的有KIF等，然后自己看他的实现时，发现有个beforeAll和AfterAll的方法，因为在当初写case的时候，不能知道所有case开始，和结束的时机，于是就对它比较好奇，看了他的实现。&lt;/p&gt;
+&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
 &lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;4&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;5&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;6&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;7&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;8&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;9&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;10&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;11&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;12&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;13&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;14&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;15&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;16&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;17&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;18&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;19&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;20&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;21&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;22&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;23&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;24&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;25&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;26&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;27&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;28&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;29&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;30&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;31&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;32&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;33&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;34&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;35&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;36&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;37&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;- (void)beforeAll&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    [system simulateDeviceRotationToOrientation:UIDeviceOrientationLandscapeLeft];&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    [[viewTester usingIdentifier:@&amp;quot;Test Suite TableView&amp;quot;] scrollByFractionOfSizeHorizontal:0 vertical:-0.2];&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&amp;#125;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;- (void)afterAll&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    [system simulateDeviceRotationToOrientation:UIDeviceOrientationPortrait];&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    [viewTester waitForTimeInterval:0.5];&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&amp;#125;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;+ (void)setUp&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    KIFEnableAccessibility();&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    [self performSetupTearDownWithSelector:@selector(beforeAll)];&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&amp;#125;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;+ (void)tearDown&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    [self performSetupTearDownWithSelector:@selector(afterAll)];&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&amp;#125;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;+ (void)performSetupTearDownWithSelector:(SEL)selector&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    KIFTestCase *testCase = [self testCaseWithSelector:selector];&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    if ([testCase respondsToSelector:selector]) &amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;#pragma clang diagnostic push&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;#pragma clang diagnostic ignored &amp;quot;-Warc-performSelector-leaks&amp;quot;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        [testCase performSelector:selector];&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;#pragma clang diagnostic pop&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &amp;#125;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    if (testCase-&amp;gt;_stoppingException) &amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        [testCase-&amp;gt;_stoppingException raise];&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &amp;#125;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&amp;#125;&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
 &lt;p&gt;总体是一个，beforeAll调用performSetupTearDownWithSelector然后调用setUp方法。&lt;br&gt;于是自己就很困惑，记得之前看setUp方法是每个case开始都会调用，这跟beforeAll的时机是不吻合的。&lt;/p&gt;
 &lt;p&gt;但是如果自己对比你会发现：有两个方法&lt;/p&gt;
@@ -72,7 +74,6 @@
     <summary type="html">
     
       &lt;p&gt;最近在看关于iOS自动化测试的内容，其中比较常用的有KIF等，然后自己看他的实现时，发现有个beforeAll和AfterAll的方法，因为在当初写case的时候，不能知道所有case开始，和结束的时机，于是就对它比较好奇，看了他的实现。&lt;/p&gt;
-&lt;figure class
     
     </summary>
     

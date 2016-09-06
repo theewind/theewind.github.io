@@ -6,19 +6,16 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <title>ios自动化测试部分知识 | sanfeng’s blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="最近在看关于iOS自动化测试的内容，其中比较常用的有KIF等，然后自己看他的实现时，发现有个beforeAll和AfterAll的方法，因为在当初写case的时候，不能知道所有case开始，和结束的时机，于是就对它比较好奇，看了他的实现。
-12345678910111213141516171819202122232425262728293031323334353637- (void)beforeA">
+  <meta name="description" content="最近在看关于iOS自动化测试的内容，其中比较常用的有KIF等，然后自己看他的实现时，发现有个beforeAll和AfterAll的方法，因为在当初写case的时候，不能知道所有case开始，和结束的时机，于是就对它比较好奇，看了他的实现。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="ios自动化测试部分知识">
 <meta property="og:url" content="http://theewind.github.io/2016/09/05/ios自动化测试部分知识/index.html">
 <meta property="og:site_name" content="sanfeng’s blog">
-<meta property="og:description" content="最近在看关于iOS自动化测试的内容，其中比较常用的有KIF等，然后自己看他的实现时，发现有个beforeAll和AfterAll的方法，因为在当初写case的时候，不能知道所有case开始，和结束的时机，于是就对它比较好奇，看了他的实现。
-12345678910111213141516171819202122232425262728293031323334353637- (void)beforeA">
-<meta property="og:updated_time" content="2016-09-05T03:21:19.000Z">
+<meta property="og:description" content="最近在看关于iOS自动化测试的内容，其中比较常用的有KIF等，然后自己看他的实现时，发现有个beforeAll和AfterAll的方法，因为在当初写case的时候，不能知道所有case开始，和结束的时机，于是就对它比较好奇，看了他的实现。">
+<meta property="og:updated_time" content="2016-09-06T07:55:21.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ios自动化测试部分知识">
-<meta name="twitter:description" content="最近在看关于iOS自动化测试的内容，其中比较常用的有KIF等，然后自己看他的实现时，发现有个beforeAll和AfterAll的方法，因为在当初写case的时候，不能知道所有case开始，和结束的时机，于是就对它比较好奇，看了他的实现。
-12345678910111213141516171819202122232425262728293031323334353637- (void)beforeA">
+<meta name="twitter:description" content="最近在看关于iOS自动化测试的内容，其中比较常用的有KIF等，然后自己看他的实现时，发现有个beforeAll和AfterAll的方法，因为在当初写case的时候，不能知道所有case开始，和结束的时机，于是就对它比较好奇，看了他的实现。">
   
   
     <link rel="icon" href="/favicon.png">
@@ -227,6 +224,7 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p>最近在看关于iOS自动化测试的内容，其中比较常用的有KIF等，然后自己看他的实现时，发现有个beforeAll和AfterAll的方法，因为在当初写case的时候，不能知道所有case开始，和结束的时机，于是就对它比较好奇，看了他的实现。</p>
+<a id="more"></a>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div></pre></td><td class="code"><pre><div class="line">- (void)beforeAll</div><div class="line">&#123;</div><div class="line">    [system simulateDeviceRotationToOrientation:UIDeviceOrientationLandscapeLeft];</div><div class="line">    [[viewTester usingIdentifier:@&quot;Test Suite TableView&quot;] scrollByFractionOfSizeHorizontal:0 vertical:-0.2];</div><div class="line">&#125;</div><div class="line"></div><div class="line">- (void)afterAll</div><div class="line">&#123;</div><div class="line">    [system simulateDeviceRotationToOrientation:UIDeviceOrientationPortrait];</div><div class="line">    [viewTester waitForTimeInterval:0.5];</div><div class="line">&#125;</div><div class="line"></div><div class="line">+ (void)setUp</div><div class="line">&#123;</div><div class="line">    KIFEnableAccessibility();</div><div class="line">    [self performSetupTearDownWithSelector:@selector(beforeAll)];</div><div class="line">&#125;</div><div class="line"></div><div class="line">+ (void)tearDown</div><div class="line">&#123;</div><div class="line">    [self performSetupTearDownWithSelector:@selector(afterAll)];</div><div class="line">&#125;</div><div class="line"></div><div class="line">+ (void)performSetupTearDownWithSelector:(SEL)selector</div><div class="line">&#123;</div><div class="line">    KIFTestCase *testCase = [self testCaseWithSelector:selector];</div><div class="line">    if ([testCase respondsToSelector:selector]) &#123;</div><div class="line">#pragma clang diagnostic push</div><div class="line">#pragma clang diagnostic ignored &quot;-Warc-performSelector-leaks&quot;</div><div class="line">        [testCase performSelector:selector];</div><div class="line">#pragma clang diagnostic pop</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    if (testCase-&gt;_stoppingException) &#123;</div><div class="line">        [testCase-&gt;_stoppingException raise];</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>总体是一个，beforeAll调用performSetupTearDownWithSelector然后调用setUp方法。<br>于是自己就很困惑，记得之前看setUp方法是每个case开始都会调用，这跟beforeAll的时机是不吻合的。</p>
 <p>但是如果自己对比你会发现：有两个方法</p>
