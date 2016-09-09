@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+  <title>loadView踩坑 | sanfeng’s blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="昨天在开始回归的时候，发现预订的订座按钮没有显示，而且big鹏还发现从NVTableView转成NVSensibleTableView也失败，于是就会调用
+方法1：
+[((NVSensibleTableView *)self.tableView) setTouchDownTarget:self selector:@selector(touchDownTableView)];
+函数就会crash，这">
+<meta property="og:type" content="article">
+<meta property="og:title" content="loadView踩坑">
+<meta property="og:url" content="http://theewind.github.io/2016/09/09/loadView踩坑/index.html">
+<meta property="og:site_name" content="sanfeng’s blog">
+<meta property="og:description" content="昨天在开始回归的时候，发现预订的订座按钮没有显示，而且big鹏还发现从NVTableView转成NVSensibleTableView也失败，于是就会调用
+方法1：
+[((NVSensibleTableView *)self.tableView) setTouchDownTarget:self selector:@selector(touchDownTableView)];
+函数就会crash，这">
+<meta property="og:updated_time" content="2016-09-09T03:18:03.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="loadView踩坑">
+<meta name="twitter:description" content="昨天在开始回归的时候，发现预订的订座按钮没有显示，而且big鹏还发现从NVTableView转成NVSensibleTableView也失败，于是就会调用
+方法1：
+[((NVSensibleTableView *)self.tableView) setTouchDownTarget:self selector:@selector(touchDownTableView)];
+函数就会crash，这">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="http://7xthb9.com2.z0.glb.clouddn.com/8d04d7630ea03c7524cff3437f48e009.jpg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">sanfeng.li</a></h1>
+		</hgroup>
+
+		
+		<p class="header-subtitle">sanfengflying</p>
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						
+						<div class="icon-wrap icon-me hide" data-idx="3">
+							<div class="user"></div>
+							<div class="shoulder"></div>
+						</div>
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>标签</li>
+						
+						
+						<li>关于我</li>
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+							<li><a href="/tags/">标签云</a></li>
+				        
+							<li><a href="/tags/swift">swift</a></li>
+				        
+							<li><a href="/about">关于</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="https://github.com/theewind" title="github">github</a>
+					        
+								<a class="mail" target="_blank" href="mailto:sanfengflying@126.com" title="mail">mail</a>
+					        
+								<a class="rss" target="_blank" href="/atom.xml" title="rss">rss</a>
+					        
+								<a class="Sitemap" target="_blank" href="/sitemap.xml" title="Sitemap">Sitemap</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/CSS/" style="font-size: 10px;">CSS</a> <a href="/tags/JavaScript/" style="font-size: 10px;">JavaScript</a> <a href="/tags/RAC/" style="font-size: 10px;">RAC</a> <a href="/tags/React-Native/" style="font-size: 13.33px;">React Native</a> <a href="/tags/TCP/" style="font-size: 10px;">TCP</a> <a href="/tags/URL/" style="font-size: 10px;">URL</a> <a href="/tags/WKWebView/" style="font-size: 10px;">WKWebView</a> <a href="/tags/css/" style="font-size: 13.33px;">css</a> <a href="/tags/hexo/" style="font-size: 13.33px;">hexo</a> <a href="/tags/iOS/" style="font-size: 20px;">iOS</a> <a href="/tags/javascript-前端/" style="font-size: 10px;">javascript 前端</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/qrcode/" style="font-size: 10px;">qrcode</a> <a href="/tags/react-native/" style="font-size: 13.33px;">react native</a> <a href="/tags/shadowsocks/" style="font-size: 10px;">shadowsocks</a> <a href="/tags/shell/" style="font-size: 13.33px;">shell</a> <a href="/tags/swift/" style="font-size: 10px;">swift</a> <a href="/tags/互联网/" style="font-size: 13.33px;">互联网</a> <a href="/tags/代码检测/" style="font-size: 10px;">代码检测</a> <a href="/tags/内存检测/" style="font-size: 10px;">内存检测</a> <a href="/tags/前端/" style="font-size: 16.67px;">前端</a> <a href="/tags/正则表达式/" style="font-size: 10px;">正则表达式</a> <a href="/tags/测试/" style="font-size: 10px;">测试</a> <a href="/tags/缓存/" style="font-size: 10px;">缓存</a> <a href="/tags/脚本/" style="font-size: 10px;">脚本</a> <a href="/tags/自动化/" style="font-size: 10px;">自动化</a>
+					</div>
+				</section>
+				
+				
+				
+
+				
+				
+				<section class="switch-part switch-part3">
+				
+					<div id="js-aboutme">三风，江湖人称风风子，我就是是我，不一样的烟火~~~</div>
+				</section>
+				
+			</div>
+		</div>
+	</header>				
+</div>
+
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">sanfeng.li</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+			
+				<img lazy-src="http://7xthb9.com2.z0.glb.clouddn.com/8d04d7630ea03c7524cff3437f48e009.jpg" class="js-avatar">
+			
+			</div>
+			<hgroup>
+			  <h1 class="header-author">sanfeng.li</h1>
+			</hgroup>
+			
+			<p class="header-subtitle">sanfengflying</p>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+					<li><a href="/tags/">标签云</a></li>
+		        
+					<li><a href="/tags/swift">swift</a></li>
+		        
+					<li><a href="/about">关于</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/theewind" title="github">github</a>
+			        
+						<a class="mail" target="_blank" href="mailto:sanfengflying@126.com" title="mail">mail</a>
+			        
+						<a class="rss" target="_blank" href="/atom.xml" title="rss">rss</a>
+			        
+						<a class="Sitemap" target="_blank" href="/sitemap.xml" title="Sitemap">Sitemap</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+
+      <div class="body-wrap"><article id="post-loadView踩坑" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/09/09/loadView踩坑/" class="article-date">
+  	<time datetime="2016-09-09T02:00:31.000Z" itemprop="datePublished">2016-09-09</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      loadView踩坑
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS/">iOS</a></li></ul>
+	</div>
+
+        
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>昨天在开始回归的时候，发现预订的订座按钮没有显示，而且big鹏还发现从NVTableView转成NVSensibleTableView也失败，于是就会调用</p>
+<pre><code>方法1：
+[((NVSensibleTableView *)self.tableView) setTouchDownTarget:self selector:@selector(touchDownTableView)];
+</code></pre><p>函数就会crash，这个原因是：</p>
+<ol>
+<li>NVTableView有个setTouchDownTarget:selector:的Categroy，但是参数不一致</li>
+<li>NVTableView转换NVSensibleTableView失败，即tableView根本不是NVSensibleTableView子类，所以无法调用他的setTouchDownTarget:selector:方法，所以崩溃。</li>
+</ol>
+<a id="more"></a>
+<p>然后分析原因，刚开始以为是iOS10，xcode8的问题，因为之前都没有遇到这个，但是今天更新了xcode，就出现这个问题，但是因为xcode8已成事实，必须要解决，就想着是不是pod中的xib都在nova下惹的祸，于是把xib放到pod里面，也不行。然后继续看下NVTableView有没有做过修改，看了下后，发现他们有个’去除xib的‘commit，感觉就是这里出的问题。<br>真实原因如下：<br>之前NVTableViewController，有个IBOutlet的tableView属性，此tableView是从xib进行初始化的，然后继承了NVTableViewController的controller，比如BOOKOnlineBookingViewController,然后它也有个对应的BOOKOnlineBookingViewController.xib，里面有个UITableView控件，这样就把父类的tableView属性指向了子类的这个xib控件，而这个xib的控件的class是NVSensibleTableView，所以之前的[((NVSensibleTableView *)self.tableView) setTouchDownTarget:self selector:@selector(touchDownTableView)];是没有问题的，为什么这次出问题了？继续往下看<br>这次他做了一个这样的修改：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">- (void)loadView &#123;</div><div class="line">    self.view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, [UIScreen width], [UIScreen height])];</div><div class="line">    self.view.backgroundColor = [UIColor whiteColor];</div><div class="line">    self.view.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;</div><div class="line">    self.tableView = [[NVTableView alloc] initWithFrame:self.view.bounds style:[self tableViewStyle]];</div><div class="line">    self.tableView.backgroundColor = [UIColor clearColor];</div><div class="line">    self.tableView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;</div><div class="line">    self.tableView.delegate = self;</div><div class="line">    self.tableView.dataSource = self;</div><div class="line">    [self.view addSubview:self.tableView];</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>重写了loadView，而且没有调用super方法，我们知道loadView的调用时机，是在第一次访问controller的<code>self.view==nil</code>的时候被调用，那么问题就来了，因为它没有调用super方法，而是自己初始化了tableView为NVTableView的实例，所以就出现前面的问题，<strong>方法1无法调用成功</strong>，因为这个方法是NVSensibleTableView的，而现在tableView的class是NVTableView。</p>
+<p>我们看下laodView的说明：</p>
+<p>&gt;<br>Creates the view that the controller manages.<br>You should never call this method directly. The view controller calls this method when its view property is requested but is currently nil. This method loads or creates a view and assigns it to the view property.<br><strong>If the view controller has an associated nib file, this method loads the view from the nib file</strong>. A view controller has an associated nib file if the nibName property returns a non-nil value, which occurs if the view controller was instantiated from a storyboard, if you explicitly assigned it a nib file using the initWithNibName:bundle: method, or if iOS finds a nib file in the app bundle with a name based on the view controller’s class name. If the view controller does not have an associated nib file, this method creates a plain UIView object instead.<br>If you use Interface Builder to create your views and initialize the view controller, you must not override this method.<br>You can override this method in order to create your views manually. If you choose to do so, assign the root view of your view hierarchy to the view property. The views you create should be unique instances and should not be shared with any other view controller object. Your custom implementation of this method should not call super.<br>If you want to perform any additional initialization of your views, do so in the viewDidLoad method.<br>&gt;</p>
+<p>啥意思呢》？</p>
+<p><strong>总的来说，就是loadView会先判断食否有关联的xib，如果有，就会去加载xib初始化view，如果没有，就创建一个UIView。问题就出在这里，父类NVTableViewController实现了这个方法，就等于BOOKOnlineBookingViewController写了，他没有调用super，就不会去初始化xib，自己创建了NVTableView的实例，就导致我们的xib根本没有加载。</strong></p>
+<p>那么如何修改呢，我们组内基于作者的调调，修改了方法实现：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">- (void)loadView &#123;</div><div class="line">    [super loadView];</div><div class="line">    self.view.frame = CGRectMake(0, 0, [UIScreen width], [UIScreen height]);</div><div class="line">	self.view.backgroundColor = [UIColor whiteColor];</div><div class="line">    self.view.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;</div><div class="line">    </div><div class="line">    if (self.tableView == nil) &#123;</div><div class="line">        self.tableView = [[NVTableView alloc] initWithFrame:self.view.bounds style:[self tableViewStyle]];</div><div class="line">        self.tableView.backgroundColor = [UIColor clearColor];</div><div class="line">        self.tableView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;</div><div class="line">        self.tableView.delegate = self;</div><div class="line">        self.tableView.dataSource = self;</div><div class="line">        [self.view addSubview:self.tableView];</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>调用super方法，肯定会返回一个UIView，不管是从xib，还是自动创建的一个UIView。</p>
+<p>ps：</p>
+<ol>
+<li>通过方法initWithNibName进行初始化都是<code>延迟加载</code>，在调用self.view的时候才会去真正创建view:</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">- (id)init</div><div class="line">&#123;</div><div class="line">    return [self initWithNibName:@&quot;BOOKOnlineBookingViewController&quot; bundle:[NSBundle mainBundle]];</div><div class="line">&#125;</div><div class="line">- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil</div><div class="line">&#123;</div><div class="line">    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];</div><div class="line">    if (self) &#123;</div><div class="line">    ....</div><div class="line">    &#125;</div><div class="line">    return self;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ol>
+<li>如果实现了一个空的loadView</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">-（void）loadView &#123;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>就会导致死循环，因为viewDidLoad里面self.view==nil始终成立，就会无止境的调用loadView。接着循环继续。。。</p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2016/09/06/创建一个显示FPS的label/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">创建一个显示FPS的label</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<div class="share_jia">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">分享到: &nbsp; </span>
+		<a class="jiathis_button_facebook"></a> 
+    <a class="jiathis_button_twitter"></a>
+    <a class="jiathis_button_plus"></a> 
+    <a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+    <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="loadView踩坑" data-title="loadView踩坑" data-url="http://theewind.github.io/2016/09/09/loadView踩坑/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"theewind"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2016 sanfeng.li
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: flase
+	}
+</script>
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  </div>
+</body>
+</html>

@@ -5,7 +5,7 @@
   <link href="//atom.xml" rel="self"/>
   
   <link href="http://theewind.github.io/"/>
-  <updated>2016-09-06T07:54:38.000Z</updated>
+  <updated>2016-09-09T03:18:03.000Z</updated>
   <id>http://theewind.github.io/</id>
   
   <author>
@@ -14,6 +14,62 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>loadView踩坑</title>
+    <link href="http://theewind.github.io/2016/09/09/loadView%E8%B8%A9%E5%9D%91/"/>
+    <id>http://theewind.github.io/2016/09/09/loadView踩坑/</id>
+    <published>2016-09-09T02:00:31.000Z</published>
+    <updated>2016-09-09T03:18:03.000Z</updated>
+    
+    <content type="html">&lt;p&gt;昨天在开始回归的时候，发现预订的订座按钮没有显示，而且big鹏还发现从NVTableView转成NVSensibleTableView也失败，于是就会调用&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;方法1：
+[((NVSensibleTableView *)self.tableView) setTouchDownTarget:self selector:@selector(touchDownTableView)];
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;函数就会crash，这个原因是：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;NVTableView有个setTouchDownTarget:selector:的Categroy，但是参数不一致&lt;/li&gt;
+&lt;li&gt;NVTableView转换NVSensibleTableView失败，即tableView根本不是NVSensibleTableView子类，所以无法调用他的setTouchDownTarget:selector:方法，所以崩溃。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
+&lt;p&gt;然后分析原因，刚开始以为是iOS10，xcode8的问题，因为之前都没有遇到这个，但是今天更新了xcode，就出现这个问题，但是因为xcode8已成事实，必须要解决，就想着是不是pod中的xib都在nova下惹的祸，于是把xib放到pod里面，也不行。然后继续看下NVTableView有没有做过修改，看了下后，发现他们有个’去除xib的‘commit，感觉就是这里出的问题。&lt;br&gt;真实原因如下：&lt;br&gt;之前NVTableViewController，有个IBOutlet的tableView属性，此tableView是从xib进行初始化的，然后继承了NVTableViewController的controller，比如BOOKOnlineBookingViewController,然后它也有个对应的BOOKOnlineBookingViewController.xib，里面有个UITableView控件，这样就把父类的tableView属性指向了子类的这个xib控件，而这个xib的控件的class是NVSensibleTableView，所以之前的[((NVSensibleTableView *)self.tableView) setTouchDownTarget:self selector:@selector(touchDownTableView)];是没有问题的，为什么这次出问题了？继续往下看&lt;br&gt;这次他做了一个这样的修改：&lt;/p&gt;
+&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;4&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;5&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;6&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;7&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;8&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;9&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;10&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;11&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;- (void)loadView &amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    self.view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, [UIScreen width], [UIScreen height])];&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    self.view.backgroundColor = [UIColor whiteColor];&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    self.view.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    self.tableView = [[NVTableView alloc] initWithFrame:self.view.bounds style:[self tableViewStyle]];&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    self.tableView.backgroundColor = [UIColor clearColor];&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    self.tableView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    self.tableView.delegate = self;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    self.tableView.dataSource = self;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    [self.view addSubview:self.tableView];&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&amp;#125;&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;重写了loadView，而且没有调用super方法，我们知道loadView的调用时机，是在第一次访问controller的&lt;code&gt;self.view==nil&lt;/code&gt;的时候被调用，那么问题就来了，因为它没有调用super方法，而是自己初始化了tableView为NVTableView的实例，所以就出现前面的问题，&lt;strong&gt;方法1无法调用成功&lt;/strong&gt;，因为这个方法是NVSensibleTableView的，而现在tableView的class是NVTableView。&lt;/p&gt;
+&lt;p&gt;我们看下laodView的说明：&lt;/p&gt;
+&lt;p&gt;&amp;gt;&lt;br&gt;Creates the view that the controller manages.&lt;br&gt;You should never call this method directly. The view controller calls this method when its view property is requested but is currently nil. This method loads or creates a view and assigns it to the view property.&lt;br&gt;&lt;strong&gt;If the view controller has an associated nib file, this method loads the view from the nib file&lt;/strong&gt;. A view controller has an associated nib file if the nibName property returns a non-nil value, which occurs if the view controller was instantiated from a storyboard, if you explicitly assigned it a nib file using the initWithNibName:bundle: method, or if iOS finds a nib file in the app bundle with a name based on the view controller’s class name. If the view controller does not have an associated nib file, this method creates a plain UIView object instead.&lt;br&gt;If you use Interface Builder to create your views and initialize the view controller, you must not override this method.&lt;br&gt;You can override this method in order to create your views manually. If you choose to do so, assign the root view of your view hierarchy to the view property. The views you create should be unique instances and should not be shared with any other view controller object. Your custom implementation of this method should not call super.&lt;br&gt;If you want to perform any additional initialization of your views, do so in the viewDidLoad method.&lt;br&gt;&amp;gt;&lt;/p&gt;
+&lt;p&gt;啥意思呢》？&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;总的来说，就是loadView会先判断食否有关联的xib，如果有，就会去加载xib初始化view，如果没有，就创建一个UIView。问题就出在这里，父类NVTableViewController实现了这个方法，就等于BOOKOnlineBookingViewController写了，他没有调用super，就不会去初始化xib，自己创建了NVTableView的实例，就导致我们的xib根本没有加载。&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;那么如何修改呢，我们组内基于作者的调调，修改了方法实现：&lt;/p&gt;
+&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;4&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;5&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;6&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;7&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;8&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;9&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;10&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;11&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;12&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;13&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;14&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;15&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;- (void)loadView &amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    [super loadView];&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    self.view.frame = CGRectMake(0, 0, [UIScreen width], [UIScreen height]);&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;	self.view.backgroundColor = [UIColor whiteColor];&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    self.view.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    if (self.tableView == nil) &amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        self.tableView = [[NVTableView alloc] initWithFrame:self.view.bounds style:[self tableViewStyle]];&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        self.tableView.backgroundColor = [UIColor clearColor];&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        self.tableView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        self.tableView.delegate = self;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        self.tableView.dataSource = self;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        [self.view addSubview:self.tableView];&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &amp;#125;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&amp;#125;&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;调用super方法，肯定会返回一个UIView，不管是从xib，还是自动创建的一个UIView。&lt;/p&gt;
+&lt;p&gt;ps：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;通过方法initWithNibName进行初始化都是&lt;code&gt;延迟加载&lt;/code&gt;，在调用self.view的时候才会去真正创建view:&lt;/li&gt;
+&lt;/ol&gt;
+&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;4&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;5&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;6&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;7&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;8&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;9&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;10&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;11&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;12&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;- (id)init&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    return [self initWithNibName:@&amp;quot;BOOKOnlineBookingViewController&amp;quot; bundle:[NSBundle mainBundle]];&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&amp;#125;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    if (self) &amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    ....&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &amp;#125;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    return self;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&amp;#125;&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;ol&gt;
+&lt;li&gt;如果实现了一个空的loadView&lt;/li&gt;
+&lt;/ol&gt;
+&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;-（void）loadView &amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&amp;#125;&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;就会导致死循环，因为viewDidLoad里面self.view==nil始终成立，就会无止境的调用loadView。接着循环继续。。。&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;昨天在开始回归的时候，发现预订的订座按钮没有显示，而且big鹏还发现从NVTableView转成NVSensibleTableView也失败，于是就会调用&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;方法1：
+[((NVSensibleTableView *)self.tableView) setTouchDownTarget:self selector:@selector(touchDownTableView)];
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;函数就会crash，这个原因是：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;NVTableView有个setTouchDownTarget:selector:的Categroy，但是参数不一致&lt;/li&gt;
+&lt;li&gt;NVTableView转换NVSensibleTableView失败，即tableView根本不是NVSensibleTableView子类，所以无法调用他的setTouchDownTarget:selector:方法，所以崩溃。&lt;/li&gt;
+&lt;/ol&gt;
+    
+    </summary>
+    
+    
+      <category term="iOS" scheme="http://theewind.github.io/tags/iOS/"/>
+    
+  </entry>
   
   <entry>
     <title>创建一个显示FPS的label</title>
@@ -895,32 +951,6 @@ fb_originalAlloc--&amp;gt;alloc的IMP
     
     
       <category term="javascript 前端" scheme="http://theewind.github.io/tags/javascript-%E5%89%8D%E7%AB%AF/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>如何在自己的网页中添加ga分析</title>
-    <link href="http://theewind.github.io/2016/06/23/%E5%A6%82%E4%BD%95%E5%9C%A8%E8%87%AA%E5%B7%B1%E7%9A%84%E7%BD%91%E9%A1%B5%E4%B8%AD%E6%B7%BB%E5%8A%A0ga%E5%88%86%E6%9E%90/"/>
-    <id>http://theewind.github.io/2016/06/23/如何在自己的网页中添加ga分析/</id>
-    <published>2016-06-23T08:58:54.000Z</published>
-    <updated>2016-06-23T10:41:38.000Z</updated>
-    
-    <content type="html">&lt;p&gt;在学习前端的过程中，自己都想统计用户的访问量，下面代码可以做到最轻量级的追踪：&lt;/p&gt;
-&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;4&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;5&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;6&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;7&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;8&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;9&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;10&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;11&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;12&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;13&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;14&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;/*&amp;lt;script type=&amp;quot;text/javascript&amp;quot;&amp;gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;  var _gaq = _gaq || [];&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;  _gaq.push([&amp;apos;_setAccount&amp;apos;, &amp;apos;UA-XXXXX-X&amp;apos;]);&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;  _gaq.push([&amp;apos;_trackPageview&amp;apos;]);&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;  (function() &amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    var ga = document.createElement(&amp;apos;script&amp;apos;); ga.type = &amp;apos;text/javascript&amp;apos;; ga.async = true;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    ga.src = (&amp;apos;https:&amp;apos; == document.location.protocol ? &amp;apos;https://ssl&amp;apos; : &amp;apos;http://www&amp;apos;) + &amp;apos;.google-analytics.com/ga.js&amp;apos;;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    var s = document.getElementsByTagName(&amp;apos;script&amp;apos;)[0]; s.parentNode.insertBefore(ga, s);&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;  &amp;#125;)();&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&amp;lt;/script&amp;gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;*/&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;blockquote&gt;
-&lt;p&gt;具体可以参考如下&lt;br&gt; &lt;a href=&quot;https://developers.google.com/analytics/devguides/collection/gajs/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://developers.google.com/analytics/devguides/collection/gajs/&lt;/a&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-</content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;在学习前端的过程中，自己都想统计用户的访问量，下面代码可以做到最轻量级的追踪：&lt;/p&gt;
-&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;
-    
-    </summary>
-    
-    
-      <category term="前端" scheme="http://theewind.github.io/tags/%E5%89%8D%E7%AB%AF/"/>
     
   </entry>
   
