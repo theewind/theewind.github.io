@@ -113,7 +113,7 @@
 				
 				<section class="switch-part switch-part2">
 					<div class="widget tagcloud" id="js-tagcloud">
-						<a href="/tags/CSS/" style="font-size: 10px;">CSS</a> <a href="/tags/JavaScript/" style="font-size: 10px;">JavaScript</a> <a href="/tags/RAC/" style="font-size: 10px;">RAC</a> <a href="/tags/React-Native/" style="font-size: 13.33px;">React Native</a> <a href="/tags/TCP/" style="font-size: 10px;">TCP</a> <a href="/tags/URL/" style="font-size: 10px;">URL</a> <a href="/tags/WKWebView/" style="font-size: 10px;">WKWebView</a> <a href="/tags/css/" style="font-size: 13.33px;">css</a> <a href="/tags/hexo/" style="font-size: 13.33px;">hexo</a> <a href="/tags/iOS/" style="font-size: 20px;">iOS</a> <a href="/tags/javascript-前端/" style="font-size: 10px;">javascript 前端</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/qrcode/" style="font-size: 10px;">qrcode</a> <a href="/tags/react-native/" style="font-size: 13.33px;">react native</a> <a href="/tags/shadowsocks/" style="font-size: 10px;">shadowsocks</a> <a href="/tags/shell/" style="font-size: 13.33px;">shell</a> <a href="/tags/swift/" style="font-size: 10px;">swift</a> <a href="/tags/互联网/" style="font-size: 13.33px;">互联网</a> <a href="/tags/代码检测/" style="font-size: 10px;">代码检测</a> <a href="/tags/内存检测/" style="font-size: 10px;">内存检测</a> <a href="/tags/前端/" style="font-size: 16.67px;">前端</a> <a href="/tags/正则表达式/" style="font-size: 10px;">正则表达式</a> <a href="/tags/测试/" style="font-size: 10px;">测试</a> <a href="/tags/缓存/" style="font-size: 10px;">缓存</a> <a href="/tags/脚本/" style="font-size: 10px;">脚本</a> <a href="/tags/自动化/" style="font-size: 10px;">自动化</a>
+						<a href="/tags/CSS/" style="font-size: 10px;">CSS</a> <a href="/tags/JavaScript/" style="font-size: 10px;">JavaScript</a> <a href="/tags/RAC/" style="font-size: 10px;">RAC</a> <a href="/tags/React-Native/" style="font-size: 13.33px;">React Native</a> <a href="/tags/TCP/" style="font-size: 10px;">TCP</a> <a href="/tags/URL/" style="font-size: 10px;">URL</a> <a href="/tags/WKWebView/" style="font-size: 10px;">WKWebView</a> <a href="/tags/css/" style="font-size: 13.33px;">css</a> <a href="/tags/hexo/" style="font-size: 13.33px;">hexo</a> <a href="/tags/iOS/" style="font-size: 20px;">iOS</a> <a href="/tags/javascript-前端/" style="font-size: 10px;">javascript 前端</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/qrcode/" style="font-size: 10px;">qrcode</a> <a href="/tags/react-native/" style="font-size: 13.33px;">react native</a> <a href="/tags/runLoop/" style="font-size: 10px;">runLoop</a> <a href="/tags/shadowsocks/" style="font-size: 10px;">shadowsocks</a> <a href="/tags/shell/" style="font-size: 13.33px;">shell</a> <a href="/tags/swift/" style="font-size: 10px;">swift</a> <a href="/tags/互联网/" style="font-size: 13.33px;">互联网</a> <a href="/tags/代码检测/" style="font-size: 10px;">代码检测</a> <a href="/tags/内存检测/" style="font-size: 10px;">内存检测</a> <a href="/tags/前端/" style="font-size: 16.67px;">前端</a> <a href="/tags/正则表达式/" style="font-size: 10px;">正则表达式</a> <a href="/tags/测试/" style="font-size: 10px;">测试</a> <a href="/tags/缓存/" style="font-size: 10px;">缓存</a> <a href="/tags/脚本/" style="font-size: 10px;">脚本</a> <a href="/tags/自动化/" style="font-size: 10px;">自动化</a>
 					</div>
 				</section>
 				
@@ -186,6 +186,66 @@
 </nav>
 
       <div class="body-wrap">
+  
+    <article id="post-UIKit主线程检查" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/07/18/UIKit主线程检查/" class="article-date">
+  	<time datetime="2016-07-18T02:57:04.000Z" itemprop="datePublished">2016-07-18</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/07/18/UIKit主线程检查/">UIKit主线程检查</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>iOS开发过程中，很多时候都会使用GCD及NSOperation等涉及到多线程的操作，这样就算是一个老手，也可能会遇到非主线程刷新UI的操作，而结果就是遇到各种不确定的问题，<a href="https://www.objccn.io/issue-2-4/">这篇文章:线程安全类的设计</a>向我们解释了为什么UIKit是非线程安全的，然后也介绍了一个<a href="https://gist.github.com/steipete/5664345">UIKit主线程检查的机制</a>，今天自己又复习下这个内容。</p>
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS/">iOS</a></li></ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a  href="/2016/07/18/UIKit主线程检查/#more">more >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
   
     <article id="post-FlatBuffers" class="article article-type-post" itemscope itemprop="blogPost">
   
@@ -519,78 +579,9 @@ fb_originalAlloc--&gt;alloc的IMP
 
 
   
-    <article id="post-前端代码学习之布局" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2016/06/30/前端代码学习之布局/" class="article-date">
-  	<time datetime="2016-06-30T06:12:05.000Z" itemprop="datePublished">2016-06-30</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/06/30/前端代码学习之布局/">前端代码学习之布局</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="1-选择器"><a href="#1-选择器" class="headerlink" title="1 选择器"></a>1 选择器</h2><p>div p    div下所有p元素，可能多个层级<br>div&gt;p    div下的子元素p，只能是一级<br>div+p    div兄弟节点的第一个p<br>div~p    div兄弟节点所有p元素</p>
-<p>class^=是什么意思啊</p>
-<p>这是css属性选择器的一种：[attribute^=value] ，用来匹配属性值以指定值开头的每个元素。例如：<br>[class^=”test”] { background:#ffff00; }</p>
-<p>表示设置 class 属性值以 “test” 开头的所有元素的背景色，也就是说对class=”test”, class=”test1” class=”test-001”的元素都是有效的。<br>除此之外，还有一些常用的css属性选择器如下：</p>
-<ul>
-<li>[attribute~=value] 选取属性值中包含指定词汇的元素</li>
-<li>[attribute|=value]  选取带有以指定值开头的属性值的元素，该值必须是整个单词。</li>
-<li>[attribute$=value]    匹配属性值以指定值结尾的每个元素</li>
-<li>[attribute*=value]    匹配属性值中包含指定值的每个元素</li>
-</ul>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/css/">css</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/前端/">前端</a></li></ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a  href="/2016/06/30/前端代码学习之布局/#more">more >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/2/">&laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/4/">Next &raquo;</a>
+      <a class="extend prev" rel="prev" href="/page/2/">&laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><a class="extend next" rel="next" href="/page/4/">Next &raquo;</a>
     </nav>
   
 </div>
