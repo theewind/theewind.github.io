@@ -187,6 +187,62 @@
 
       <div class="body-wrap">
   
+    <article id="post-atomic使用" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/07/18/atomic使用/" class="article-date">
+  	<time datetime="2016-07-18T07:41:32.000Z" itemprop="datePublished">2016-07-18</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/07/18/atomic使用/">atomic使用</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>平时我们使用atomic的时候，是希望对一个porperty的操作进行一个原子操作，但是这里的原子操作应该是仅仅对应于Setter和Getter方法，如果property是一个array，比如</p>
+<ul>
+<li>(void)setProp:(NSString <em>)newValue {<br>  [_prop lock];<br>  _prop = newValue;<br>  [_prop unlock];<br>}<br>按我理解：<br>1.此处的线程安全是就getter,setter而言的。比如对于@property(nonatomic,copy)NSString </em>str; 当调用self.str = @”HELLO,GUY”;如果是多线程，在一个线程执行setter方法的时候，会涉及到字符串拷贝，另一个线程去读取，很可能读到一半的数据，也就是garbage数据。<br>2.另外的话，它也仅限于getter,setter时的线程安全。比如@property(atomic,strong)NSMutableArray *arr;如果一个线程循环读数据，一个线程循环写数据，肯定会产生内存问题。因为它和setter,getter没有关系。 </li>
+</ul>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
     <article id="post-UIKit主线程检查" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -484,83 +540,6 @@
       
         <p class="article-more-link">
           <a  href="/2016/07/01/shadowsocket无法更新pac/#more">more >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-FBRetainCycleDetector代码学习" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2016/06/30/FBRetainCycleDetector代码学习/" class="article-date">
-  	<time datetime="2016-06-30T09:39:28.000Z" itemprop="datePublished">2016-06-30</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/06/30/FBRetainCycleDetector代码学习/">FBRetainCycleDetector代码学习</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><a href="https://github.com/facebook/FBMemoryProfiler">FBMemoryProfiler</a>是Facebook开源的一款用于分析iOS内存使用和检测循环引用的工具库，可以让你在应用程序内运行循环应用检测。底层主要由<a href="https://github.com/facebook/FBAllocationTracker">FBAllocationTracker</a>和<a href="https://github.com/facebook/FBRetainCycleDetector#filters">FBRetainCycleDetector</a>两块来实现功能。</p>
-<h2 id="FBAllocationTracker"><a href="#FBAllocationTracker" class="headerlink" title="FBAllocationTracker"></a>FBAllocationTracker</h2><p>通过在main.m中添加</p>
-<pre><code>[[FBAllocationTrackerManager sharedManager] startTrackingAllocations];
---&gt;FB::AllocationTracker::beginTracking
---&gt;    replaceSelectorWithSelector([NSObject class],
-                            @selector(alloc),
-                            @selector(fb_newAlloc),
-                            FBClassMethod);
-
-      replaceSelectorWithSelector([NSObject class],
-                            sel_registerName(&quot;dealloc&quot;),
-                            @selector(fb_newDealloc),
-                            FBInstanceMethod);
-</code></pre><p>就开启了内存检测，主要是通过替换对象的<strong>+alloc</strong> 和<strong> -delloc</strong> 方法，替换后</p>
-<pre><code>alloc--&gt;fb_newAlloc是IMP--&gt;
-fb_originalAlloc--&gt;alloc的IMP
-所以[nsobject alloc]--&gt;fb_newAlloc的IMP--&gt;.....
-</code></pre>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS/">iOS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/内存检测/">内存检测</a></li></ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a  href="/2016/06/30/FBRetainCycleDetector代码学习/#more">more >></a>
         </p>
       
       <div class="clearfix"></div>

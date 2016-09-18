@@ -4,17 +4,27 @@
   <meta charset="utf-8">
   
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
-  <title>Archives: 2016 | sanfeng’s blog</title>
+  <title>perform执行时机 | sanfeng’s blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="这是我的三风的博客">
-<meta property="og:type" content="website">
-<meta property="og:title" content="sanfeng’s blog">
-<meta property="og:url" content="http://theewind.github.io/archives/2016/index.html">
+  <meta name="description" content="在iOS开发中，大家都经常用到performSelector函数，但是他们的执行时机是怎么样的，这里做个简单的介绍。
+首先如果我们在主线程调用和在子线程调用下面的方法有什么区别呢？
+[self performSelector:@selector(testttt) withObject:nil];
+试过后，就知道在主线程会执行testttt函数，而在子线程是不会执行的呢，为什么呢？这里就要涉及到ru">
+<meta property="og:type" content="article">
+<meta property="og:title" content="perform执行时机">
+<meta property="og:url" content="http://theewind.github.io/2016/09/17/perform执行时机/index.html">
 <meta property="og:site_name" content="sanfeng’s blog">
-<meta property="og:description" content="这是我的三风的博客">
+<meta property="og:description" content="在iOS开发中，大家都经常用到performSelector函数，但是他们的执行时机是怎么样的，这里做个简单的介绍。
+首先如果我们在主线程调用和在子线程调用下面的方法有什么区别呢？
+[self performSelector:@selector(testttt) withObject:nil];
+试过后，就知道在主线程会执行testttt函数，而在子线程是不会执行的呢，为什么呢？这里就要涉及到ru">
+<meta property="og:updated_time" content="2016-09-17T15:05:44.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="sanfeng’s blog">
-<meta name="twitter:description" content="这是我的三风的博客">
+<meta name="twitter:title" content="perform执行时机">
+<meta name="twitter:description" content="在iOS开发中，大家都经常用到performSelector函数，但是他们的执行时机是怎么样的，这里做个简单的介绍。
+首先如果我们在主线程调用和在子线程调用下面的方法有什么区别呢？
+[self performSelector:@selector(testttt) withObject:nil];
+试过后，就知道在主线程会执行testttt函数，而在子线程是不会执行的呢，为什么呢？这里就要涉及到ru">
   
   
     <link rel="icon" href="/favicon.png">
@@ -185,212 +195,124 @@
 	</div>
 </nav>
 
-      <div class="body-wrap">
+      <div class="body-wrap"><article id="post-perform执行时机" class="article article-type-post" itemscope itemprop="blogPost">
   
+    <div class="article-meta">
+      <a href="/2016/09/17/perform执行时机/" class="article-date">
+  	<time datetime="2016-09-17T14:51:42.000Z" itemprop="datePublished">2016-09-17</time>
+</a>
+    </div>
   
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
     
     
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      perform执行时机
+    </h1>
+  
+
+      </header>
       
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS/">iOS</a></li></ul>
+	</div>
+
+        
+
+        <div class="clearfix"></div>
+      </div>
       
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2016" class="archive-year">2016</a>
-        </div>
-        <div class="archives">
     
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2016/09/17/perform执行时机/" class="archive-article-date">
-  	<time datetime="2016-09-17T14:51:42.000Z" itemprop="datePublished">Sep 17</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/09/17/perform执行时机/">perform执行时机</a>
-    </h1>
-  
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>在iOS开发中，大家都经常用到performSelector函数，但是他们的执行时机是怎么样的，这里做个简单的介绍。</p>
+<p>首先如果我们在主线程调用和在子线程调用下面的方法有什么区别呢？</p>
+<pre><code>[self performSelector:@selector(testttt) withObject:nil];
+</code></pre><p>试过后，就知道在主线程会执行testttt函数，而在子线程是不会执行的呢，为什么呢？这里就要涉及到runloop了，因为主线程的runloop默认是运行的，但是子线程的runloop默认是没有的，需要自己去创建并执行，通常调用如下</p>
+<pre><code>NSRunLoop *runLoop = [NSRunLoop currentRunLoop];
+子线程在没有第一次调用runloop是会先创建，然后在run。
+</code></pre><blockquote>
+<p>更多可以参考<a href="http://ios.jobbole.com/85759/" target="_blank" rel="external">这里</a><br><a id="more"></a></p>
+</blockquote>
+<p>那么对于，<code>performSelector:withObject:</code> 和 <code>performSelector:withObject:afterDelay:0</code> 有什么区别呢？</p>
+<p>通过如下代码可以测试：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">   NSLog(@&quot;beigi&quot;);</div><div class="line">   </div><div class="line">   [self performSelector:@selector(testttt) withObject:nil];</div><div class="line">   [self performSelector:@selector(testPer) withObject:nil withObject:nil];</div><div class="line">   </div><div class="line">   [self performSelector:@selector(testttt) withObject:nil afterDelay:0];</div><div class="line">   [self performSelector:@selector(testPer) withObject:nil afterDelay:0];</div><div class="line">   </div><div class="line">   NSLog(@&quot;end&quot;);</div><div class="line"></div><div class="line">打印顺序为：</div><div class="line">2016-09-17 23:01:08.430 [76256:1232843] beigi</div><div class="line">2016-09-17 23:01:08.431 [76256:1232843] test tttt</div><div class="line">2016-09-17 23:01:08.431 [76256:1232843] test</div><div class="line">2016-09-17 23:01:08.431 [76256:1232843] end</div><div class="line"></div><div class="line">2016-09-17 23:01:08.470 [76256:1232843] test tttt</div><div class="line">2016-09-17 23:01:08.470 [76256:1232843] test</div></pre></td></tr></table></figure>
+<p>可以发现，<code>performSelector:withObject:</code>是直接调用了方法，而<code>performSelector:withObject:afterDelay:0</code> 即使是延迟0s也是在end之后执行的，这是为什么呢？</p>
+<p>原因就是：前者是在当前runloop中调用的，后者是在先一个runloop方法中调用的。所以如果在代码中，想要通过时间：afterDelay来控制某些动画之类的，就需要注意了。</p>
+<p>&gt;<br><a href="http://ios.jobbole.com/85759/" target="_blank" rel="external">http://ios.jobbole.com/85759/</a></p>
+<p><a href="http://blog.ibireme.com/2015/05/18/runloop/" target="_blank" rel="external">http://blog.ibireme.com/2015/05/18/runloop/</a></p>
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS/">iOS</a></li></ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
+      
+    </div>
+    
   </div>
-</article>
   
     
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2016/09/12/runloop监控主线程/" class="archive-article-date">
-  	<time datetime="2016-09-12T07:37:09.000Z" itemprop="datePublished">Sep 12</time>
-</a>
-        </div>
-    	 
+<nav id="article-nav">
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/09/12/runloop监控主线程/">runloop监控主线程</a>
-    </h1>
   
+    <a href="/2016/09/12/runloop监控主线程/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">runloop监控主线程</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS/">iOS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/runLoop/">runLoop</a></li></ul>
+  
+</article>
+
+
+<div class="share_jia">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">分享到: &nbsp; </span>
+		<a class="jiathis_button_facebook"></a> 
+    <a class="jiathis_button_twitter"></a>
+    <a class="jiathis_button_plus"></a> 
+    <a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+    <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
 	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
 
-          
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2016/09/09/loadView踩坑/" class="archive-article-date">
-  	<time datetime="2016-09-09T02:00:31.000Z" itemprop="datePublished">Sep 9</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/09/09/loadView踩坑/">loadView踩坑</a>
-    </h1>
-  
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS/">iOS</a></li></ul>
-	</div>
 
-          
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2016/09/06/创建一个显示FPS的label/" class="archive-article-date">
-  	<time datetime="2016-09-06T07:40:57.000Z" itemprop="datePublished">Sep 6</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/09/06/创建一个显示FPS的label/">创建一个显示FPS的label</a>
-    </h1>
-  
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS/">iOS</a></li></ul>
-	</div>
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="perform执行时机" data-title="perform执行时机" data-url="http://theewind.github.io/2016/09/17/perform执行时机/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"theewind"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
 
-          
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2016/09/05/ios自动化测试部分知识/" class="archive-article-date">
-  	<time datetime="2016-09-05T03:06:59.000Z" itemprop="datePublished">Sep 5</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/09/05/ios自动化测试部分知识/">ios自动化测试部分知识</a>
-    </h1>
-  
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS/">iOS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/自动化/">自动化</a></li></ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2016/08/19/socket连接池的实现探索/" class="archive-article-date">
-  	<time datetime="2016-08-19T10:27:16.000Z" itemprop="datePublished">Aug 19</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/08/19/socket连接池的实现探索/">socket连接池的实现探索</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/TCP/">TCP</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS/">iOS</a></li></ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
-
-    
-    <nav id="page-nav">
-      <span class="page-number current">1</span><a class="page-number" href="/archives/2016/page/2/">2</a><a class="page-number" href="/archives/2016/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/archives/2016/page/8/">8</a><a class="extend next" rel="next" href="/archives/2016/page/2/">Next &raquo;</a>
-    </nav>
-  
 
 </div>
       <footer id="footer">
@@ -416,8 +338,8 @@
 		mathjax: true,
 		animate: true,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: flase
