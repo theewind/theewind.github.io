@@ -187,6 +187,130 @@
 
       <div class="body-wrap">
   
+    <article id="React Native 学习之F8app代码阅读-study_f8app" class="article article-type-React Native 学习之F8app代码阅读" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/06/07/study_f8app/" class="article-date">
+  	<time datetime="2016-06-07T15:04:01.000Z" itemprop="datePublished">2016-06-07</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/06/07/study_f8app/">study</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>主要是先参考如下篇文章：</p>
+<blockquote>
+<p><a href="http://www.open-open.com/lib/view/open1461512056952.html">http://www.open-open.com/lib/view/open1461512056952.html</a></p>
+</blockquote>
+<p>第一次接触redux，概念还比较模糊，同时js开发水平也一般，对一些语法学习还不是很懂，这里做个记录：<br>代码中的很多function func(): type的用法，我之前接触的基本都是无返回值类型的，这里添加一个 <code>:Action</code>类型，貌似就是确定了返回值类型的，不知道理解的对不对。</p>
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/React-Native/">React Native</a></li></ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a  href="/2016/06/07/study_f8app/#more">more >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-rac-willDeallocSignal" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/06/06/rac-willDeallocSignal/" class="article-date">
+  	<time datetime="2016-06-06T06:46:23.000Z" itemprop="datePublished">2016-06-06</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/06/06/rac-willDeallocSignal/">rac_willDeallocSignal的加载时机</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>今天看了下RAC的rac_willDeallocSignal的方法实现。我最初的猜测是NSObject (RACDeallocating)添加load方法，然后在里面进行method swzziling，添加dealloc方法，但是发现源码不是这样的。他只是通过常用的category 添加 associated 来进行的。先看他的简单实现：</p>
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/RAC/">RAC</a></li></ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a  href="/2016/06/06/rac-willDeallocSignal/#more">more >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
     <article id="post-doubleListViewDemo" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -403,174 +527,6 @@
       
 	<div class="article-tag tagcloud">
 		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS/">iOS</a></li></ul>
-	</div>
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-命令行解释括号说明" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2016/05/03/命令行解释括号说明/" class="article-date">
-  	<time datetime="2016-05-03T07:37:24.000Z" itemprop="datePublished">2016-05-03</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/05/03/命令行解释括号说明/">命令行解释括号说明</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>命令行解释括号的作用：</p>
-<table>
-<thead>
-<tr>
-<th>表示法</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>不带方括号或大括号的文本</td>
-<td>您必须键入如下所示的项目</td>
-<td></td>
-</tr>
-<tr>
-<td>&lt;尖括号内的文本&gt;</td>
-<td>您必须为其提供的占位符</td>
-<td></td>
-</tr>
-<tr>
-<td>[方括号内的文本]</td>
-<td>可选的项目</td>
-<td></td>
-</tr>
-<tr>
-<td>{大括号内的文本}</td>
-<td>一组所需的项目，选择一个</td>
-<td></td>
-</tr>
-<tr>
-<td>竖线（\</td>
-<td>）</td>
-<td>互斥项</td>
-<td></td>
-</tr>
-</tbody>
-</table>
-<p>比如</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">git [--version] [--help] [-C &lt;path&gt;] [-c name=value]</div><div class="line">           [--exec-path[=&lt;path&gt;]] [--html-path] [--man-path] [--info-path]</div><div class="line">           [-p | --paginate | --no-pager] [--no-replace-objects] [--bare]</div><div class="line">           [--git-dir=&lt;path&gt;] [--work-tree=&lt;path&gt;] [--namespace=&lt;name&gt;]</div><div class="line">           &lt;command&gt; [&lt;args&gt;]</div><div class="line"></div><div class="line">NAME</div><div class="line">       git-checkout - Switch branches or restore working tree files</div><div class="line"></div><div class="line">SYNOPSIS</div><div class="line">       git checkout [-q] [-f] [-m] [&lt;branch&gt;]</div><div class="line">       git checkout [-q] [-f] [-m] --detach [&lt;branch&gt;]</div><div class="line">       git checkout [-q] [-f] [-m] [--detach] &lt;commit&gt;</div><div class="line">       git checkout [-q] [-f] [-m] [[-b|-B|--orphan] &lt;new_branch&gt;] [&lt;start_point&gt;]</div><div class="line">       git checkout [-f|--ours|--theirs|-m|--conflict=&lt;style&gt;] [&lt;tree-ish&gt;] [--] &lt;paths&gt;...</div><div class="line">       git checkout [-p|--patch] [&lt;tree-ish&gt;] [--] [&lt;paths&gt;...]</div></pre></td></tr></table></figure>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/shell/">shell</a></li></ul>
-	</div>
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-shell命令学习" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2016/05/03/shell命令学习/" class="article-date">
-  	<time datetime="2016-05-03T06:49:51.000Z" itemprop="datePublished">2016-05-03</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/05/03/shell命令学习/">shell命令学习</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>提交Jenkins的时候，会用到部分命令：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">df -h</div><div class="line"></div><div class="line">Filesystem      Size   Used  Avail Capacity  iused   ifree %iused  Mounted on</div><div class="line">/dev/disk1     233Gi  199Gi   33Gi    86% 52321616 8659602   86%   /</div><div class="line">devfs          187Ki  187Ki    0Bi   100%      648       0  100%   /dev</div><div class="line">map -hosts       0Bi    0Bi    0Bi   100%        0       0  100%   /net</div><div class="line">map auto_home    0Bi    0Bi    0Bi   100%        0       0  100%   /home</div></pre></td></tr></table></figure>
-<ul>
-<li><p><strong><em>df 命令：</em></strong><br>linux中df命令的功能是用来检查linux服务器的文件系统的磁盘空间占用情况。可以利用该命令来获取硬盘被占用了多少空间，目前还剩下多少空间等信息。</p>
-</li>
-<li><p><strong><em>date命令</em></strong><br>修改linux的时间可以使用date指令 </p>
-</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">date</div><div class="line">Tue May  3 14:53:22 CST 2016</div><div class="line">➜  _posts git:(master) ✗ date &apos;+Current time: %H:%M:%S&apos;</div><div class="line">Current time: 14:53:24 //可见这里会自定义输出date的格式</div><div class="line"></div><div class="line">修改日期： </div><div class="line">时间设定成2009年5月10日的命令如下：</div><div class="line">date -s 05/10/2009 </div><div class="line"></div><div class="line">修改时间： </div><div class="line">将系统时间设定成上午10点18分0秒的命令如下。 </div><div class="line">date -s 10:18:00</div></pre></td></tr></table></figure>
-<ul>
-<li><strong>git命令**</strong></li>
-</ul>
-<p>git branch newBranch   创建新分支 git br </p>
-<p>git checkout newBranch    切换到新分支 git co</p>
-<p>合并： git checkout -b newBranch<br>简写： git co -b newBranch</p>
-<p>git br nnew [commit] 以某次commit创建分支</p>
-<p>git checkout -B <branch></branch></p>
-<p>这个命令，可以强制创建新的分支，为什么加-B呢？如果当前仓库中，已经存在一个跟你新建分支同名的分支，那么使用普通的git checkout -b <branch>这个命令，是会报错的，且同名分支无法创建。如果使用-B参数，那么就可以强制创建新的分支，并会覆盖掉原来的分支。</branch></p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/shell/">shell</a></li></ul>
 	</div>
 
       

@@ -187,6 +187,132 @@
 
       <div class="body-wrap">
   
+    <article id="post-ios自动化测试部分知识" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/09/05/ios自动化测试部分知识/" class="article-date">
+  	<time datetime="2016-09-05T03:06:59.000Z" itemprop="datePublished">2016-09-05</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/09/05/ios自动化测试部分知识/">ios自动化测试部分知识</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>最近在看关于iOS自动化测试的内容，其中比较常用的有KIF等，然后自己看他的实现时，发现有个beforeAll和AfterAll的方法，因为在当初写case的时候，不能知道所有case开始，和结束的时机，于是就对它比较好奇，看了他的实现。</p>
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS/">iOS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/自动化/">自动化</a></li></ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a  href="/2016/09/05/ios自动化测试部分知识/#more">more >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-socket连接池的实现探索" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/08/19/socket连接池的实现探索/" class="article-date">
+  	<time datetime="2016-08-19T10:27:16.000Z" itemprop="datePublished">2016-08-19</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/08/19/socket连接池的实现探索/">socket连接池的实现探索</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>点评长连接的是建立一个TCP连接，然后发送一定策略的心跳检测，保持套接字（TCP+port）socket的连接不断开。</p>
+<p>然后看到携程关于网络优化的[文章]</p>
+<blockquote>
+<p>Native模块是携程的核心业务模块（酒店、机票、火车票、攻略等），Native模块的网络服务主要通过TCP连接实现，而非常见的Restful HTTP API那种HTTP连接，只有少数轻量级服务使用HTTP接口作为补充。</p>
+<p>TCP连接网络服务模块使用了长连接+短连接机制，即有一个长连接池保持一定数目长连接，用于减少每次服务额外的连接，服务完成后会将该连接Socket放回长连接池，继续保持连接状态（一段时间空闲后会被回收）；短连接作为补充，每次服务完成后便会主动关闭连接。</p>
+</blockquote>
+<p>点评默认的是一个Socket连接，所有还比较简单，但是如果让实现一个连接池的话，应该怎么做到呢，这个池是如何表示的？</p>
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/TCP/">TCP</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS/">iOS</a></li></ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a  href="/2016/08/19/socket连接池的实现探索/#more">more >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
     <article id="url-URL_encode的问题" class="article article-type-url" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -422,145 +548,6 @@
 
       
 
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-onExit分析" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2016/07/25/onExit分析/" class="article-date">
-  	<time datetime="2016-07-25T04:01:47.000Z" itemprop="datePublished">2016-07-25</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/07/25/onExit分析/">onExit分析</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>defer引发的OnExit</p>
-<p>在swift中，是经常用到defer的，在作用域结束的时候，执行defer的命令，但是在Objective C中是无法使用的，不过有个宏 <code>onExit</code>可以达到这样的效果，比如</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">if (1) &#123;</div><div class="line">	@onExit &#123;</div><div class="line"> 		NSLog(@&quot;ffffff&quot;);</div><div class="line">	&#125;;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>就会在if作用域之后打印fffffff，那么他是怎么实现的呢，主要是用到了 <code>__attribute__</code>变量属性，具体的onExit的定义如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">#ifndef onExit</div><div class="line">#define onExit \</div><div class="line">ext_keywordify \</div><div class="line">__strong ext_cleanupBlock_t metamacro_concat(ext_exitBlock_, __LINE__) __attribute__((cleanup(ext_executeCleanupBlock), unused)) = ^</div><div class="line">#endif</div></pre></td></tr></table></figure>
-<ol>
-<li>ext_keywordify </li>
-<li>ext_clearupBlock_t</li>
-<li>metamacro_concat</li>
-<li>clearup</li>
-</ol>
-<p>其中ext_keywordify 在debug下就是一个@autoreleasepool, release下是@try..cache…finally<br>这里强制要求添加一个@，否则编译器会报错</p>
-<p>ext_clearupBlock_t 是一个typedef void (^ext_cleanupBlock_t)();</p>
-<p>metamacro_concat(A, B) 就是 metamacro_concat(A, B) A ## B ，将AB连接起来，例如</p>
-<pre><code>metamacro_concat(ext_exitBlock_, __LINE__)
-拼接为：ext_exitBlock_19
-</code></pre><p>clearup </p>
-<blockquote>
-<p><a href="http://draveness.me/defer/" target="_blank" rel="external">http://draveness.me/defer/</a></p>
-</blockquote>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS/">iOS</a></li></ul>
-	</div>
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-ios7下UIScrollView和滑动返回" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2016/07/22/ios7下UIScrollView和滑动返回/" class="article-date">
-  	<time datetime="2016-07-22T06:21:40.000Z" itemprop="datePublished">2016-07-22</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/07/22/ios7下UIScrollView和滑动返回/">ios7下UIScrollView和滑动返回</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h1><p>之前因为某些历史原因，外卖基本禁止了所有的滑动返回手势，这次产品过来说需要开发一些正常流程的返回操作，于是在修复菜单页的过程中遇到了一些问题。菜单页可以说是整个外卖最复杂的页面，如下图<img src="http://o981ibvmi.bkt.clouddn.com/QQ20160722-2@2x.png" alt="菜单页"></p>
-<p>图中有p1,p2,p3,p4,p5，整个菜单页的结构是：<br>P5 最底层，UIScrollView<br>P4 标题，UIView<br>P3 内容, UIView<br>P2 tab, UIScrollView<br>P1 page, UIScrollView</p>
-<p>层次是：p1 + p2 –&gt; p3 + p4 –&gt; p5</p>
-<p>这样就有了问题，左右滑P1，其实是UIScrollView的页面切换，分别显示，菜单，点评和商家详情。<br><code>在整个P3区域进行滑动返回操作，是不起效果的。</code></p>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS/">iOS</a></li></ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a  href="/2016/07/22/ios7下UIScrollView和滑动返回/#more">more >></a>
-        </p>
       
       <div class="clearfix"></div>
     </div>

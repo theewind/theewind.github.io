@@ -5,7 +5,7 @@
   <link href="//atom.xml" rel="self"/>
   
   <link href="http://theewind.github.io/"/>
-  <updated>2016-09-17T15:05:44.000Z</updated>
+  <updated>2016-09-24T08:26:00.000Z</updated>
   <id>http://theewind.github.io/</id>
   
   <author>
@@ -14,6 +14,69 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>ipv6环境搭建</title>
+    <link href="http://theewind.github.io/2016/09/24/ipv6%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/"/>
+    <id>http://theewind.github.io/2016/09/24/ipv6环境搭建/</id>
+    <published>2016-09-24T08:05:36.000Z</published>
+    <updated>2016-09-24T08:26:00.000Z</updated>
+    
+    <content type="html">&lt;p&gt;自从5月初Apple明文规定所有开发者在6月1号以后提交新版本需要支持IPV6-Only的网络，大家便开始热火朝天的研究如何支持IPV6，以及应用中哪些模块目前不支持IPV6。&lt;/p&gt;
+&lt;p&gt;IPV6是什么，可以参考网上的文章&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;a href=&quot;http://www.cnblogs.com/isItOk/p/5621530.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;iOS应用如何支持IPV6-b&lt;/a&gt;，&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;如何用自己的Mac搭建ipv6测试环境，可以参考：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;a href=&quot;http://jingyan.baidu.com/article/e75057f2f33cffebc91a89a3.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Mac电脑搭建IPV6测试环境&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
+&lt;p&gt;这里需要注意的是，如果mac电脑本身就是通过wifi连接网络的，需要使用一个USB Ethernet或者雷电转接口，保证电脑是通过网线连接的。比如自己的电脑就是这样的&lt;img src=&quot;http://o981ibvmi.bkt.clouddn.com/QQ20160924-0@2x.png&quot; alt=&quot;网络设置&quot;&gt;&lt;br&gt;确保你的USB Ethernet网络是排在第一位的，如果不是的话，可以先删除Wifi，确保有线网络是第一位，然后再创建一个。&lt;br&gt;之后按照上面文章的配置就可以了。&lt;/p&gt;
+&lt;p&gt;如果应用发布的时候因为ipv6被拒，可以参考&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;a href=&quot;https://github.com/wg689/Solve-App-Store-Review-Problem&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;ipv6审核问题大集合&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;a href=&quot;http://www.brianjcoleman.com/tutorial-how-to-test-your-app-for-ipv6-compatibility/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;TUTORIAL: HOW TO TEST YOUR APP FOR IPV6 COMPATIBILITY&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;http://www.jianshu.com/p/a6bab07c4062&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;iOS应用支持IPV6，就那点事儿&lt;/a&gt;&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;自从5月初Apple明文规定所有开发者在6月1号以后提交新版本需要支持IPV6-Only的网络，大家便开始热火朝天的研究如何支持IPV6，以及应用中哪些模块目前不支持IPV6。&lt;/p&gt;
+&lt;p&gt;IPV6是什么，可以参考网上的文章&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;a href=&quot;http://www.cnblogs.com/isItOk/p/5621530.html&quot;&gt;iOS应用如何支持IPV6-b&lt;/a&gt;，&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;如何用自己的Mac搭建ipv6测试环境，可以参考：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;a href=&quot;http://jingyan.baidu.com/article/e75057f2f33cffebc91a89a3.html&quot;&gt;Mac电脑搭建IPV6测试环境&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>iOS长连接的实现-分析篇</title>
+    <link href="http://theewind.github.io/2016/09/22/iOS%E9%95%BF%E8%BF%9E%E6%8E%A5%E7%9A%84%E5%AE%9E%E7%8E%B0-%E5%88%86%E6%9E%90%E7%AF%87/"/>
+    <id>http://theewind.github.io/2016/09/22/iOS长连接的实现-分析篇/</id>
+    <published>2016-09-22T00:50:12.000Z</published>
+    <updated>2016-09-22T00:51:05.000Z</updated>
+    
+    <content type="html">&lt;p&gt;&amp;gt;&lt;br&gt;&lt;a href=&quot;https://www.zybuluo.com/Xiaojun-Jin/note/29874&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Socket Based iOS Programming&lt;/a&gt;&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&amp;gt;&lt;br&gt;&lt;a href=&quot;https://www.zybuluo.com/Xiaojun-Jin/note/29874&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Socket Based iOS Programming&lt;/a&gt;&lt;/p&gt;
+
+    
+    </summary>
+    
+    
+  </entry>
   
   <entry>
     <title>perform执行时机</title>
@@ -656,7 +719,7 @@
     <link href="http://theewind.github.io/2016/07/14/%E7%BD%91%E7%BB%9C%E5%AD%A6%E4%B9%A0%E6%96%87%E7%AB%A0/"/>
     <id>http://theewind.github.io/2016/07/14/网络学习文章/</id>
     <published>2016-07-14T08:30:21.000Z</published>
-    <updated>2016-07-14T08:31:55.000Z</updated>
+    <updated>2016-09-27T07:33:45.000Z</updated>
     
     <content type="html">&lt;p&gt;下面的文章都是对网络介绍比较深入和有趣的，持续更新。。。&lt;/p&gt;
 &lt;h2 id=&quot;阮一峰&quot;&gt;&lt;a href=&quot;#阮一峰&quot; class=&quot;headerlink&quot; title=&quot;阮一峰&quot;&gt;&lt;/a&gt;阮一峰&lt;/h2&gt;&lt;p&gt;&lt;a href=&quot;http://www.ruanyifeng.com/blog/2013/06/rsa_algorithm_part_one.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;RSA算法原理（一）&lt;/a&gt;&lt;/p&gt;
@@ -668,6 +731,7 @@
 &lt;p&gt;&lt;a href=&quot;http://www.ruanyifeng.com/blog/2014/02/ssl_tls.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;SSL/TLS协议运行机制的概述&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;&lt;a href=&quot;http://www.ruanyifeng.com/blog/2014/09/illustration-ssl.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;图解SSL/TLS协议&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;&lt;a href=&quot;http://www.360doc.com/content/14/0725/20/1073512_397054861.shtml&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;TCP/IP的三次握手与四次挥手详解&lt;/a&gt;  &lt;code&gt;渣渣360doc，还要登陆才能复制&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;http://www.jianshu.com/p/db9c716c3558&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;iOS http &amp;amp; https &amp;amp; 网络请求过程&lt;/a&gt; 这篇文章的第一个动态度很不错，过程也挺清晰&lt;/p&gt;
 &lt;h2 id=&quot;公众号：码农翻身&quot;&gt;&lt;a href=&quot;#公众号：码农翻身&quot; class=&quot;headerlink&quot; title=&quot;公众号：码农翻身&quot;&gt;&lt;/a&gt;公众号：码农翻身&lt;/h2&gt;&lt;p&gt;&lt;a href=&quot;http://mp.weixin.qq.com/s?__biz=MzAxOTc0NzExNg==&amp;amp;mid=2665513017&amp;amp;idx=1&amp;amp;sn=5550ee714abd36d0b580713f673e670b&amp;amp;scene=21#wechat_redirect&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;CPU阿甘&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;&lt;a href=&quot;http://toutiao.com/i6301559248492954113/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;我是一个路由器（我是一个网卡姊妹篇）&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;&lt;a href=&quot;http://toutiao.com/i6301233473227063810/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;我是一个网卡&lt;/a&gt;&lt;/p&gt;
@@ -795,179 +859,6 @@ sh update_gfwlist.sh
     
     
       <category term="shadowsocks" scheme="http://theewind.github.io/tags/shadowsocks/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>FBRetainCycleDetector代码学习</title>
-    <link href="http://theewind.github.io/2016/06/30/FBRetainCycleDetector%E4%BB%A3%E7%A0%81%E5%AD%A6%E4%B9%A0/"/>
-    <id>http://theewind.github.io/2016/06/30/FBRetainCycleDetector代码学习/</id>
-    <published>2016-06-30T09:39:28.000Z</published>
-    <updated>2016-07-02T09:10:40.000Z</updated>
-    
-    <content type="html">&lt;p&gt;&lt;a href=&quot;https://github.com/facebook/FBMemoryProfiler&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;FBMemoryProfiler&lt;/a&gt;是Facebook开源的一款用于分析iOS内存使用和检测循环引用的工具库，可以让你在应用程序内运行循环应用检测。底层主要由&lt;a href=&quot;https://github.com/facebook/FBAllocationTracker&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;FBAllocationTracker&lt;/a&gt;和&lt;a href=&quot;https://github.com/facebook/FBRetainCycleDetector#filters&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;FBRetainCycleDetector&lt;/a&gt;两块来实现功能。&lt;/p&gt;
-&lt;h2 id=&quot;FBAllocationTracker&quot;&gt;&lt;a href=&quot;#FBAllocationTracker&quot; class=&quot;headerlink&quot; title=&quot;FBAllocationTracker&quot;&gt;&lt;/a&gt;FBAllocationTracker&lt;/h2&gt;&lt;p&gt;通过在main.m中添加&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;[[FBAllocationTrackerManager sharedManager] startTrackingAllocations];
---&amp;gt;FB::AllocationTracker::beginTracking
---&amp;gt;    replaceSelectorWithSelector([NSObject class],
-                            @selector(alloc),
-                            @selector(fb_newAlloc),
-                            FBClassMethod);
-
-      replaceSelectorWithSelector([NSObject class],
-                            sel_registerName(&amp;quot;dealloc&amp;quot;),
-                            @selector(fb_newDealloc),
-                            FBInstanceMethod);
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;就开启了内存检测，主要是通过替换对象的&lt;strong&gt;+alloc&lt;/strong&gt; 和&lt;strong&gt; -delloc&lt;/strong&gt; 方法，替换后&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;alloc--&amp;gt;fb_newAlloc是IMP--&amp;gt;
-fb_originalAlloc--&amp;gt;alloc的IMP
-所以[nsobject alloc]--&amp;gt;fb_newAlloc的IMP--&amp;gt;.....
-&lt;/code&gt;&lt;/pre&gt;&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
-&lt;h2 id=&quot;FBRetainCycleDetector&quot;&gt;&lt;a href=&quot;#FBRetainCycleDetector&quot; class=&quot;headerlink&quot; title=&quot;FBRetainCycleDetector&quot;&gt;&lt;/a&gt;FBRetainCycleDetector&lt;/h2&gt;&lt;p&gt;对于通过objc_setAssociatedObject添加的对象，FBRetainCycleDetector也是可以检测的，这里就需要使用&lt;code&gt;fishbook&lt;/code&gt;来进行c函数的hook,&lt;a href=&quot;https://github.com/facebook/fishhook&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;fishhook&lt;/a&gt;是一个非常简单的库，它能动态替换运行在IOS模拟器或设备上Mach-o文件的符号表。是facebook的一个开源工具.&lt;img src=&quot;https://camo.githubusercontent.com/18243516844d12b1bd158ce3687635d6e48d2e2e/687474703a2f2f692e696d6775722e636f6d2f4856587148437a2e706e67&quot; alt=&quot;官网的一个截图为&quot;&gt;&lt;br&gt;官网的一张图很好的解释了fishhook的原理：&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;dyld链接2种符号，lazy和non-lazy，fishhook可以重新链接/替换本地符号。如图所示，&lt;strong&gt;DATA区有两个section和动态符号链接相关：&lt;/strong&gt;nl_symbol_ptr 、&lt;strong&gt;la_symbol_ptr。&lt;/strong&gt;nl_symbol_ptr为一个指针数组，直接对应non-lazy绑定数据。__la_symbol_ptr也是一个指针数组，通过dyld_stub_binder辅助链接。的section头提供符号表的偏移量。图示中，1061是间接符号表的偏移量，*（偏移量+间接符号地址）=16343，即符号表偏移量。符号表中每一个结构都是一个nlist结构体，其中包含字符表偏移量。通过字符表偏移量最终确定函数指针。fishhook就是对间接符号表的偏移量动的手脚，提供一个假的nlist结构体，从而达到hook的目的。&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;具体的源码想要看懂，还是需要对mach_o文件结构有比较深入的理解的。使用过程还是如下&lt;/p&gt;
-&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;4&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;5&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;6&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;7&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;8&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;int main(int argc, char *argv[]) &amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    @autoreleasepool &amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        [FBAssociationManager hook];&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        [[FBAllocationTrackerManager sharedManager] startTrackingAllocations];&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        [[FBAllocationTrackerManager sharedManager] enableGenerations];&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        return UIApplicationMain(argc, argv, NSStringFromClass([NVApplication class]), NSStringFromClass([NVAppDelegate class]));&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &amp;#125;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&amp;#125;&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;p&gt;&lt;code&gt;enableGenerations&lt;/code&gt;开始追踪类的实例对象，就像instruments中的make generations一样，每个新创建的实例都会记录在对应的generations中&lt;/p&gt;
-&lt;p&gt;跟踪官方的demo（testObjectsRetainedBySomeObjectWillBeFetched），可以看到，通过object创建FBObjectiveCObject，然后调用allRetainedObjects–&amp;gt;_unfilteredRetainedObjects–&amp;gt;FBGetObjectStrongReferences–&amp;gt;FBGetStrongReferencesForClass&lt;/p&gt;
-&lt;p&gt;同时也包括[super allRetainedObjects]获取associations的强引用对象，最后通过如下代码生成FBObjectiveCGraphElement，就可以进行循环引用的搜索了。&lt;/p&gt;
-&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;4&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;5&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;6&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;7&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;8&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;9&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;10&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;11&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;12&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;13&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;14&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;15&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;16&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;17&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;18&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;19&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;20&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;21&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;22&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;23&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;24&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;25&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;26&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;27&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;- (NSSet *)allRetainedObjects&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;  NSArray *unfiltered = [self _unfilteredRetainedObjects];&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;  return [self filterObjects:unfiltered];&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&amp;#125;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;- (NSArray *)_unfilteredRetainedObjects&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;  Class aCls = object_getClass(self.object);&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;  if (!self.object || !aCls) &amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    return nil;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;  &amp;#125;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;  NSArray *strongIvars = FBGetObjectStrongReferences(self.object, self.configuration.layoutCache);&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;  NSMutableArray *retainedObjects = [[[super allRetainedObjects] allObjects] mutableCopy];&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;  for (id&amp;lt;FBObjectReference&amp;gt; ref in strongIvars) &amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    id referencedObject = [ref objectReferenceFromObject:self.object];&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    if (referencedObject) &amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;      NSArray&amp;lt;NSString *&amp;gt; *namePath = [ref namePath];&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;      [retainedObjects addObject:FBWrapObjectGraphElementWithContext(referencedObject,&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;                                                                     self.configuration,&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;                                                                     namePath)];&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &amp;#125;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;  &amp;#125;&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;h1 id=&quot;其他代码学习&quot;&gt;&lt;a href=&quot;#其他代码学习&quot; class=&quot;headerlink&quot; title=&quot;其他代码学习&quot;&gt;&lt;/a&gt;其他代码学习&lt;/h1&gt;&lt;p&gt;判断一个对象实例的iVar的类型&lt;/p&gt;
-&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;4&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;5&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;6&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;7&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;8&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;9&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;10&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;11&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;12&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;13&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;14&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;15&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;16&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;17&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;18&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;19&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;20&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;21&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;22&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;23&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;24&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;25&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;26&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;- (FBType)_convertEncodingToType:(const char *)typeEncoding&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;  if (typeEncoding[0] == &amp;apos;&amp;#123;&amp;apos;) &amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    return FBStructType;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;  &amp;#125;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;  if (typeEncoding[0] == &amp;apos;@&amp;apos;) &amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    // It&amp;apos;s an object or block&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    // Let&amp;apos;s try to determine if it&amp;apos;s a block. Blocks tend to have&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    // @? typeEncoding. Docs state that it&amp;apos;s undefined type, so&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    // we should still verify that ivar with that type is a block&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    if (strncmp(typeEncoding, &amp;quot;@?&amp;quot;, 2) == 0) &amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;      return FBBlockType;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &amp;#125;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    return FBObjectType;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;  &amp;#125;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;  return FBUnknownType;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&amp;#125;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;以及对ivar的操作&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    _name = @(ivar_getName(ivar));&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    _type = [self _convertEncodingToType:ivar_getTypeEncoding(ivar)];&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    _offset = ivar_getOffset(ivar);&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;p&gt;&lt;code&gt;日常我们写一个property时，系统会默认给我们生成一个对应的_property的ivar，如果property前面添加了_,或者__呢，经试验系统还是会默认在这些前面继续加_的&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;那如何区分那些是weak，那些是strong呢，这里就需要对Class的 Ivar Layout有一定的了解&lt;/p&gt;
-&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;4&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;5&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;6&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;7&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;8&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;9&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;10&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;11&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;12&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;13&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;14&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;15&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;16&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;17&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;struct class_ro_t &amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    uint32_t flags;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    uint32_t instanceStart;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    uint32_t instanceSize;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;#ifdef __LP64__&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    uint32_t reserved;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;#endif&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    const uint8_t * ivarLayout; // &amp;lt;- 记录了哪些是 strong 的 ivar&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    const char * name;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    const method_list_t * baseMethods;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    const protocol_list_t * baseProtocols;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    const ivar_list_t * ivars;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    const uint8_t * weakIvarLayout; // &amp;lt;- 记录了哪些是 weak 的 ivar&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    const property_list_t *baseProperties;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&amp;#125;;&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;p&gt;所以FBRetainCycleDetector中是通过取 &lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;const uint8_t *fullLayout = class_getIvarLayout(aCls);
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;来获取强引用类型的。&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;&lt;a href=&quot;http://www.alonemonkey.com/2016/05/15/fbretaincycledetector-analyse/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;FBRetainCycleDetector分析&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&lt;a href=&quot;http://www.cocoachina.com/cms/wap.php?action=article&amp;amp;id=14098&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Facebook如何降低应用中的FOOMs（运行在前台内存不足）&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&lt;a href=&quot;http://blog.sunnyxx.com/2015/09/13/class-ivar-layout/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Objective-C Class Ivar Layout 探索&lt;/a&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-</content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;&lt;a href=&quot;https://github.com/facebook/FBMemoryProfiler&quot;&gt;FBMemoryProfiler&lt;/a&gt;是Facebook开源的一款用于分析iOS内存使用和检测循环引用的工具库，可以让你在应用程序内运行循环应用检测。底层主要由&lt;a href=&quot;https://github.com/facebook/FBAllocationTracker&quot;&gt;FBAllocationTracker&lt;/a&gt;和&lt;a href=&quot;https://github.com/facebook/FBRetainCycleDetector#filters&quot;&gt;FBRetainCycleDetector&lt;/a&gt;两块来实现功能。&lt;/p&gt;
-&lt;h2 id=&quot;FBAllocationTracker&quot;&gt;&lt;a href=&quot;#FBAllocationTracker&quot; class=&quot;headerlink&quot; title=&quot;FBAllocationTracker&quot;&gt;&lt;/a&gt;FBAllocationTracker&lt;/h2&gt;&lt;p&gt;通过在main.m中添加&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;[[FBAllocationTrackerManager sharedManager] startTrackingAllocations];
---&amp;gt;FB::AllocationTracker::beginTracking
---&amp;gt;    replaceSelectorWithSelector([NSObject class],
-                            @selector(alloc),
-                            @selector(fb_newAlloc),
-                            FBClassMethod);
-
-      replaceSelectorWithSelector([NSObject class],
-                            sel_registerName(&amp;quot;dealloc&amp;quot;),
-                            @selector(fb_newDealloc),
-                            FBInstanceMethod);
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;就开启了内存检测，主要是通过替换对象的&lt;strong&gt;+alloc&lt;/strong&gt; 和&lt;strong&gt; -delloc&lt;/strong&gt; 方法，替换后&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;alloc--&amp;gt;fb_newAlloc是IMP--&amp;gt;
-fb_originalAlloc--&amp;gt;alloc的IMP
-所以[nsobject alloc]--&amp;gt;fb_newAlloc的IMP--&amp;gt;.....
-&lt;/code&gt;&lt;/pre&gt;
-    
-    </summary>
-    
-    
-      <category term="iOS" scheme="http://theewind.github.io/tags/iOS/"/>
-    
-      <category term="内存检测" scheme="http://theewind.github.io/tags/%E5%86%85%E5%AD%98%E6%A3%80%E6%B5%8B/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>前端代码学习之布局</title>
-    <link href="http://theewind.github.io/2016/06/30/%E5%89%8D%E7%AB%AF%E4%BB%A3%E7%A0%81%E5%AD%A6%E4%B9%A0%E4%B9%8B%E5%B8%83%E5%B1%80/"/>
-    <id>http://theewind.github.io/2016/06/30/前端代码学习之布局/</id>
-    <published>2016-06-30T06:12:05.000Z</published>
-    <updated>2016-06-30T07:03:42.000Z</updated>
-    
-    <content type="html">&lt;h2 id=&quot;1-选择器&quot;&gt;&lt;a href=&quot;#1-选择器&quot; class=&quot;headerlink&quot; title=&quot;1 选择器&quot;&gt;&lt;/a&gt;1 选择器&lt;/h2&gt;&lt;p&gt;div p    div下所有p元素，可能多个层级&lt;br&gt;div&amp;gt;p    div下的子元素p，只能是一级&lt;br&gt;div+p    div兄弟节点的第一个p&lt;br&gt;div~p    div兄弟节点所有p元素&lt;/p&gt;
-&lt;p&gt;class^=是什么意思啊&lt;/p&gt;
-&lt;p&gt;这是css属性选择器的一种：[attribute^=value] ，用来匹配属性值以指定值开头的每个元素。例如：&lt;br&gt;[class^=”test”] { background:#ffff00; }&lt;/p&gt;
-&lt;p&gt;表示设置 class 属性值以 “test” 开头的所有元素的背景色，也就是说对class=”test”, class=”test1” class=”test-001”的元素都是有效的。&lt;br&gt;除此之外，还有一些常用的css属性选择器如下：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;[attribute~=value] 选取属性值中包含指定词汇的元素&lt;/li&gt;
-&lt;li&gt;[attribute|=value]  选取带有以指定值开头的属性值的元素，该值必须是整个单词。&lt;/li&gt;
-&lt;li&gt;[attribute$=value]    匹配属性值以指定值结尾的每个元素&lt;/li&gt;
-&lt;li&gt;[attribute*=value]    匹配属性值中包含指定值的每个元素&lt;/li&gt;
-&lt;/ul&gt;
-&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
-&lt;h2 id=&quot;2-classList&quot;&gt;&lt;a href=&quot;#2-classList&quot; class=&quot;headerlink&quot; title=&quot;2 classList&quot;&gt;&lt;/a&gt;2 classList&lt;/h2&gt;&lt;p&gt;document.classList  属性返回元素的类名，作为DOMTokenList对象，改属性用于在元素中添加，移除及切换CSS类，它是只读的，但你可以使用remove，add修改它&lt;/p&gt;
-&lt;h2 id=&quot;3-判断是否是移动设备&quot;&gt;&lt;a href=&quot;#3-判断是否是移动设备&quot; class=&quot;headerlink&quot; title=&quot;3 判断是否是移动设备&quot;&gt;&lt;/a&gt;3 判断是否是移动设备&lt;/h2&gt;&lt;pre&gt;&lt;code&gt;var IS_TOUCH_DEVICE = !!( &amp;apos;ontouchstart&amp;apos; in window );
-这就是来判断 ontouchstart是不是window下的一个属性，如果是就返回真，如果不是就返回假
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;ontouchstart事件只是在移动端使用的事件，要是判断用户是PC还是移动端的话，你就直接判断用户的系统是否为苹果或者安卓，WP这些就能知道是移动端的了&lt;/p&gt;
-&lt;h2 id=&quot;4-和-的区别&quot;&gt;&lt;a href=&quot;#4-和-的区别&quot; class=&quot;headerlink&quot; title=&quot;4 . 和 # 的区别&quot;&gt;&lt;/a&gt;4 . 和 # 的区别&lt;/h2&gt;&lt;p&gt;id：用来定义页面中大的样式，如栏目划分，顶部，正文，底部等；用#top的形式来定义；&lt;/p&gt;
-&lt;p&gt;class：用来定义一些比较细节的样式，如具体的一个菜单，一行文字等，用.text的形式来定义。&lt;/p&gt;
-&lt;p&gt;定义HTML中的标签，如ul,img,p等时，直接写：img{}&lt;br&gt;class是样式组，用.style定义，class=”style”： &lt;/p&gt;
-&lt;p&gt;.style定义样式组，可以被反复调用，就是说你一个页面里，可以有多个元素用同一个style； &lt;/p&gt;
-&lt;p&gt;ID是固定标签，用#style1定义，ID=”style1”&lt;/p&gt;
-&lt;p&gt;#main和.main有什么区别:&lt;/p&gt;
-&lt;p&gt;#main 定义的是ID为”main”这个元素的样式&lt;/p&gt;
-&lt;p&gt;.main 的意思是新建一个名为”main”的样式&lt;/p&gt;
-&lt;p&gt;#main 只能定义ID为”main”这个元素的样式&lt;/p&gt;
-&lt;p&gt;.main 一但定义以后,可以让其他的元素来调用,方法为class=”main”&lt;/p&gt;
-&lt;h2 id=&quot;5-正则-ul-ol-i&quot;&gt;&lt;a href=&quot;#5-正则-ul-ol-i&quot; class=&quot;headerlink&quot; title=&quot;5 正则/^(ul|ol)$/i&quot;&gt;&lt;/a&gt;5 正则/^(ul|ol)$/i&lt;/h2&gt;&lt;ul&gt;
-&lt;li&gt;i 忽略大小写&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;/^(ul|ol)$/i.test(element.nodeName) 判断element.nodeName是否符合正则表达式，test函数就是判断是否符合。&lt;/p&gt;
-&lt;h2 id=&quot;6-meta&quot;&gt;&lt;a href=&quot;#6-meta&quot; class=&quot;headerlink&quot; title=&quot;6 meta&quot;&gt;&lt;/a&gt;6 meta&lt;/h2&gt;&lt;p&gt; &lt;code&gt;&amp;lt;meta name=&amp;quot;apple-mobile-web-app-capable&amp;quot; content=&amp;quot;yes&amp;quot; /&amp;gt;&lt;/code&gt;&lt;br&gt;网站开启对web app程序的支持&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;&amp;lt;meta name=&amp;quot;apple-mobile-web-app-status-bar-style&amp;quot; content=&amp;quot;black&amp;quot; /&amp;gt;&lt;/code&gt;&lt;br&gt;说明：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;在web app应用下状态条（屏幕顶部条）的颜色；&lt;/li&gt;
-&lt;li&gt;默认值为default（白色），可以定为black（黑色）和black-translucent（灰色半透明）。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;blockquote&gt;
-&lt;p&gt;&lt;a href=&quot;http://www.cnblogs.com/yuzhongwusan/archive/2011/11/29/2267568.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://www.cnblogs.com/yuzhongwusan/archive/2011/11/29/2267568.html&lt;/a&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;h2 id=&quot;7-重定向&quot;&gt;&lt;a href=&quot;#7-重定向&quot; class=&quot;headerlink&quot; title=&quot;7 重定向&quot;&gt;&lt;/a&gt;7 重定向&lt;/h2&gt;&lt;pre&gt;&lt;code&gt;&amp;lt;!-- Redirect to the mobile index page if we&amp;apos;re on a touch device --&amp;gt;
-&amp;lt;script&amp;gt;if( &amp;apos;ontouchstart&amp;apos; in window ) window.location = &amp;apos;mobile.html&amp;apos;;&amp;lt;/script&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;这句话就是判断，如果当前设备是移动设备，就将当前页面的url重定向为mobile.html，学习&lt;a href=&quot;https://github.com/hakimel/stroll.js.git&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;stroll.js&lt;/a&gt;代码时看到的。&lt;br&gt;如果将这个放在head中，那么就会在加载页面的时候，实现自动控制。&lt;/p&gt;
-&lt;h2 id=&quot;8-布局&quot;&gt;&lt;a href=&quot;#8-布局&quot; class=&quot;headerlink&quot; title=&quot;8 布局&quot;&gt;&lt;/a&gt;8 布局&lt;/h2&gt;&lt;p&gt;padding的顺序： 上 右 下 左&lt;/p&gt;
-&lt;p&gt;margin:25px 50px 75px 100px;&lt;code&gt;上右下左&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;margin:25px 50px 75px;&lt;code&gt;上左下&lt;/code&gt;&lt;br&gt;margin:25px;&lt;br&gt;margin: 0 auto  如果后面跟两个参数，第一个表示 top bottom 第二个表示 left right。&lt;br&gt; 因为0 auto，表示上下边界为0，左右则根据宽度自适应相同值（即居中） &lt;/p&gt;
-&lt;h2 id=&quot;9-position&quot;&gt;&lt;a href=&quot;#9-position&quot; class=&quot;headerlink&quot; title=&quot;9 position&quot;&gt;&lt;/a&gt;9 position&lt;/h2&gt;&lt;p&gt;通常使用position用于层的绝对定位&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;static：无特殊定位，默认，遵循html的定位规则，采用常规流向&lt;/li&gt;
-&lt;li&gt;absolute: 将对象从文档常规流向中拖出，使用left，right，top，bottom等属性进行绝对定位&lt;/li&gt;
-&lt;li&gt;relative: 对象不可层叠，但将依据left，right，top，bottom等属性在正常文档流中偏移位置&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;position:absolute；position:relative绝对定位使用通常是父级定义position:relative定位，子级定义position:absolute绝对定位属性，并且子级使用left或right和top或bottom进行绝对定位&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;&lt;a href=&quot;https://segmentfault.com/a/1190000003095582&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://segmentfault.com/a/1190000003095582&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&lt;a href=&quot;http://zh.learnlayout.com/position.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://zh.learnlayout.com/position.html&lt;/a&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;h2 id=&quot;10-before-after&quot;&gt;&lt;a href=&quot;#10-before-after&quot; class=&quot;headerlink&quot; title=&quot;10 before,after&quot;&gt;&lt;/a&gt;10 before,after&lt;/h2&gt;&lt;p&gt;全部都是用before，after，hover等构成的动画，自己还没有看懂，需要慢慢消化 &lt;a href=&quot;http://zaole.net/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://zaole.net/&lt;/a&gt;&lt;br&gt;在学习btn-8的时候，对atuo的理解：&lt;/p&gt;
-&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;4&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;5&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;6&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;7&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;8&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;9&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;10&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;11&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;12&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;13&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;.btn-8:before, .btn-8:after &amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;  content: &amp;apos;&amp;apos;;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;  position: absolute;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;  top:0px;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;  left: 0;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;  width: 250px;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;  height: 20px;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;  background: #0c3829;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&amp;#125;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;.btn-8:after &amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;  top: auto;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;  bottom: 0px;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&amp;#125;&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;p&gt;上面的代码会显示一个上下高度为20的after何before，这里因为他们是z-index=-1，所以不会遮挡content，但是如果没有对.btn-8:after {&lt;br&gt;  top: auto;&lt;br&gt;  bottom: 0px;&lt;br&gt;}&lt;br&gt;单独配置，就会出现，两个互相重叠的效果，这也很好理解，他们的属性完全一样.btn-8:before, .btn-8:after ，添加了.btn-8:after之后，after就出现在了下面，这个是为什么呢，先看下auto的定义：&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;对于 static 元素，为 auto；对于长度值，则为相应的绝对长度；对于百分比数值，为指定值；否则为 auto。&lt;br&gt;对于相对定义元素，如果 top 和 bottom 都是 auto，其计算值则都是 0；如果其中之一为 auto，则取另一个值的相反数；如果二者都不是 auto，bottom 将取 top 值的相反数。&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;所以上面的css动画中，显示如下&lt;br&gt;&lt;img src=&quot;http://o981ibvmi.bkt.clouddn.com/btn_8_smoosh_0.png&quot; alt=&quot;上述css布局显示如下&quot;&gt;&lt;br&gt;absolute，top：auto，bottom：0说明是从底部开始的。&lt;/p&gt;
-</content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;1-选择器&quot;&gt;&lt;a href=&quot;#1-选择器&quot; class=&quot;headerlink&quot; title=&quot;1 选择器&quot;&gt;&lt;/a&gt;1 选择器&lt;/h2&gt;&lt;p&gt;div p    div下所有p元素，可能多个层级&lt;br&gt;div&amp;gt;p    div下的子元素p，只能是一级&lt;br&gt;div+p    div兄弟节点的第一个p&lt;br&gt;div~p    div兄弟节点所有p元素&lt;/p&gt;
-&lt;p&gt;class^=是什么意思啊&lt;/p&gt;
-&lt;p&gt;这是css属性选择器的一种：[attribute^=value] ，用来匹配属性值以指定值开头的每个元素。例如：&lt;br&gt;[class^=”test”] { background:#ffff00; }&lt;/p&gt;
-&lt;p&gt;表示设置 class 属性值以 “test” 开头的所有元素的背景色，也就是说对class=”test”, class=”test1” class=”test-001”的元素都是有效的。&lt;br&gt;除此之外，还有一些常用的css属性选择器如下：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;[attribute~=value] 选取属性值中包含指定词汇的元素&lt;/li&gt;
-&lt;li&gt;[attribute|=value]  选取带有以指定值开头的属性值的元素，该值必须是整个单词。&lt;/li&gt;
-&lt;li&gt;[attribute$=value]    匹配属性值以指定值结尾的每个元素&lt;/li&gt;
-&lt;li&gt;[attribute*=value]    匹配属性值中包含指定值的每个元素&lt;/li&gt;
-&lt;/ul&gt;
-    
-    </summary>
-    
-    
-      <category term="css" scheme="http://theewind.github.io/tags/css/"/>
-    
-      <category term="前端" scheme="http://theewind.github.io/tags/%E5%89%8D%E7%AB%AF/"/>
     
   </entry>
   

@@ -187,6 +187,127 @@
 
       <div class="body-wrap">
   
+    <article id="post-如何在自己的网页中添加ga分析" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/06/23/如何在自己的网页中添加ga分析/" class="article-date">
+  	<time datetime="2016-06-23T08:58:54.000Z" itemprop="datePublished">2016-06-23</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/06/23/如何在自己的网页中添加ga分析/">如何在自己的网页中添加ga分析</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>在学习前端的过程中，自己都想统计用户的访问量，下面代码可以做到最轻量级的追踪：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">/*&lt;script type=&quot;text/javascript&quot;&gt;</div><div class="line"></div><div class="line">  var _gaq = _gaq || [];</div><div class="line">  _gaq.push([&apos;_setAccount&apos;, &apos;UA-XXXXX-X&apos;]);</div><div class="line">  _gaq.push([&apos;_trackPageview&apos;]);</div><div class="line"></div><div class="line">  (function() &#123;</div><div class="line">    var ga = document.createElement(&apos;script&apos;); ga.type = &apos;text/javascript&apos;; ga.async = true;</div><div class="line">    ga.src = (&apos;https:&apos; == document.location.protocol ? &apos;https://ssl&apos; : &apos;http://www&apos;) + &apos;.google-analytics.com/ga.js&apos;;</div><div class="line">    var s = document.getElementsByTagName(&apos;script&apos;)[0]; s.parentNode.insertBefore(ga, s);</div><div class="line">  &#125;)();</div><div class="line"></div><div class="line">&lt;/script&gt;</div><div class="line">*/</div></pre></td></tr></table></figure>
+<blockquote>
+<p>具体可以参考如下<br> <a href="https://developers.google.com/analytics/devguides/collection/gajs/" target="_blank" rel="external">https://developers.google.com/analytics/devguides/collection/gajs/</a></p>
+</blockquote>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/前端/">前端</a></li></ul>
+	</div>
+
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-前端代码学习之scss" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/06/22/前端代码学习之scss/" class="article-date">
+  	<time datetime="2016-06-22T10:39:03.000Z" itemprop="datePublished">2016-06-22</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/06/22/前端代码学习之scss/">前端代码学习之scss</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>今天看到一个网站，主要都是前端动画<a href="http://hakim.se">http://hakim.se</a>,刚好自己最近对前端比较好奇，然后就学习了其中一个demo, <a href="http://codepen.io/hakimel/full/aIhkf">cloudy-spiral</a>,然后这里主要记录自己在学习前端过程中的一些小的知识点，不断更新中。。。</p>
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/css/">css</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/前端/">前端</a></li></ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a  href="/2016/06/22/前端代码学习之scss/#more">more >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
     <article id="post-wkwebview同步获取返回结果" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -516,130 +637,6 @@ import { View } from &apos;react-native&apos;;
 
       
 
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="React Native 学习之F8app代码阅读-study_f8app" class="article article-type-React Native 学习之F8app代码阅读" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2016/06/07/study_f8app/" class="article-date">
-  	<time datetime="2016-06-07T15:04:01.000Z" itemprop="datePublished">2016-06-07</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/06/07/study_f8app/">study</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>主要是先参考如下篇文章：</p>
-<blockquote>
-<p><a href="http://www.open-open.com/lib/view/open1461512056952.html">http://www.open-open.com/lib/view/open1461512056952.html</a></p>
-</blockquote>
-<p>第一次接触redux，概念还比较模糊，同时js开发水平也一般，对一些语法学习还不是很懂，这里做个记录：<br>代码中的很多function func(): type的用法，我之前接触的基本都是无返回值类型的，这里添加一个 <code>:Action</code>类型，貌似就是确定了返回值类型的，不知道理解的对不对。</p>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/React-Native/">React Native</a></li></ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a  href="/2016/06/07/study_f8app/#more">more >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-rac-willDeallocSignal" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2016/06/06/rac-willDeallocSignal/" class="article-date">
-  	<time datetime="2016-06-06T06:46:23.000Z" itemprop="datePublished">2016-06-06</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/06/06/rac-willDeallocSignal/">rac_willDeallocSignal的加载时机</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>今天看了下RAC的rac_willDeallocSignal的方法实现。我最初的猜测是NSObject (RACDeallocating)添加load方法，然后在里面进行method swzziling，添加dealloc方法，但是发现源码不是这样的。他只是通过常用的category 添加 associated 来进行的。先看他的简单实现：</p>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/RAC/">RAC</a></li></ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a  href="/2016/06/06/rac-willDeallocSignal/#more">more >></a>
-        </p>
       
       <div class="clearfix"></div>
     </div>

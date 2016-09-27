@@ -187,6 +187,145 @@
 
       <div class="body-wrap">
   
+    <article id="post-onExit分析" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/07/25/onExit分析/" class="article-date">
+  	<time datetime="2016-07-25T04:01:47.000Z" itemprop="datePublished">2016-07-25</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/07/25/onExit分析/">onExit分析</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>defer引发的OnExit</p>
+<p>在swift中，是经常用到defer的，在作用域结束的时候，执行defer的命令，但是在Objective C中是无法使用的，不过有个宏 <code>onExit</code>可以达到这样的效果，比如</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">if (1) &#123;</div><div class="line">	@onExit &#123;</div><div class="line"> 		NSLog(@&quot;ffffff&quot;);</div><div class="line">	&#125;;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>就会在if作用域之后打印fffffff，那么他是怎么实现的呢，主要是用到了 <code>__attribute__</code>变量属性，具体的onExit的定义如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">#ifndef onExit</div><div class="line">#define onExit \</div><div class="line">ext_keywordify \</div><div class="line">__strong ext_cleanupBlock_t metamacro_concat(ext_exitBlock_, __LINE__) __attribute__((cleanup(ext_executeCleanupBlock), unused)) = ^</div><div class="line">#endif</div></pre></td></tr></table></figure>
+<ol>
+<li>ext_keywordify </li>
+<li>ext_clearupBlock_t</li>
+<li>metamacro_concat</li>
+<li>clearup</li>
+</ol>
+<p>其中ext_keywordify 在debug下就是一个@autoreleasepool, release下是@try..cache…finally<br>这里强制要求添加一个@，否则编译器会报错</p>
+<p>ext_clearupBlock_t 是一个typedef void (^ext_cleanupBlock_t)();</p>
+<p>metamacro_concat(A, B) 就是 metamacro_concat(A, B) A ## B ，将AB连接起来，例如</p>
+<pre><code>metamacro_concat(ext_exitBlock_, __LINE__)
+拼接为：ext_exitBlock_19
+</code></pre><p>clearup </p>
+<blockquote>
+<p><a href="http://draveness.me/defer/" target="_blank" rel="external">http://draveness.me/defer/</a></p>
+</blockquote>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS/">iOS</a></li></ul>
+	</div>
+
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-ios7下UIScrollView和滑动返回" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/07/22/ios7下UIScrollView和滑动返回/" class="article-date">
+  	<time datetime="2016-07-22T06:21:40.000Z" itemprop="datePublished">2016-07-22</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/07/22/ios7下UIScrollView和滑动返回/">ios7下UIScrollView和滑动返回</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h1><p>之前因为某些历史原因，外卖基本禁止了所有的滑动返回手势，这次产品过来说需要开发一些正常流程的返回操作，于是在修复菜单页的过程中遇到了一些问题。菜单页可以说是整个外卖最复杂的页面，如下图<img src="http://o981ibvmi.bkt.clouddn.com/QQ20160722-2@2x.png" alt="菜单页"></p>
+<p>图中有p1,p2,p3,p4,p5，整个菜单页的结构是：<br>P5 最底层，UIScrollView<br>P4 标题，UIView<br>P3 内容, UIView<br>P2 tab, UIScrollView<br>P1 page, UIScrollView</p>
+<p>层次是：p1 + p2 –&gt; p3 + p4 –&gt; p5</p>
+<p>这样就有了问题，左右滑P1，其实是UIScrollView的页面切换，分别显示，菜单，点评和商家详情。<br><code>在整个P3区域进行滑动返回操作，是不起效果的。</code></p>
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS/">iOS</a></li></ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a  href="/2016/07/22/ios7下UIScrollView和滑动返回/#more">more >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
     <article id="post-atomic使用" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -399,6 +538,7 @@
 <p><a href="http://www.ruanyifeng.com/blog/2014/02/ssl_tls.html" target="_blank" rel="external">SSL/TLS协议运行机制的概述</a></p>
 <p><a href="http://www.ruanyifeng.com/blog/2014/09/illustration-ssl.html" target="_blank" rel="external">图解SSL/TLS协议</a></p>
 <p><a href="http://www.360doc.com/content/14/0725/20/1073512_397054861.shtml" target="_blank" rel="external">TCP/IP的三次握手与四次挥手详解</a>  <code>渣渣360doc，还要登陆才能复制</code></p>
+<p><a href="http://www.jianshu.com/p/db9c716c3558" target="_blank" rel="external">iOS http &amp; https &amp; 网络请求过程</a> 这篇文章的第一个动态度很不错，过程也挺清晰</p>
 <h2 id="公众号：码农翻身"><a href="#公众号：码农翻身" class="headerlink" title="公众号：码农翻身"></a>公众号：码农翻身</h2><p><a href="http://mp.weixin.qq.com/s?__biz=MzAxOTc0NzExNg==&amp;mid=2665513017&amp;idx=1&amp;sn=5550ee714abd36d0b580713f673e670b&amp;scene=21#wechat_redirect" target="_blank" rel="external">CPU阿甘</a></p>
 <p><a href="http://toutiao.com/i6301559248492954113/" target="_blank" rel="external">我是一个路由器（我是一个网卡姊妹篇）</a></p>
 <p><a href="http://toutiao.com/i6301233473227063810/" target="_blank" rel="external">我是一个网卡</a></p>
@@ -415,132 +555,6 @@
 
       
 
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-YYModel源码分析" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2016/07/02/YYModel源码分析/" class="article-date">
-  	<time datetime="2016-07-02T07:22:47.000Z" itemprop="datePublished">2016-07-02</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/07/02/YYModel源码分析/">YYModel源码分析</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>根据JSON生成Model是一个iOS开发经常用到的内容，这方面开源的也很多，比如我们公司用的Mantel，但其实效率很一般，最近看了<a href="https://github.com/ibireme/YYModel">YYModel</a>，区区五个文件，功能简单且高效，于是就认真学习一下人家是怎么实现的。</p>
-<p>在我想来，主要就是通过runtime方法获取property和ivar就可以了，通过判断每个ivar的类型，然后根据不同的类型给每个property赋值，应该算是不太难的。在网上看到了<a href="http://blog.csdn.net/woaifen3344/article/details/39301203">这篇文章</a>，就是我想的这个样子，但是YYModel的作者可不是这么认为的。</p>
-<p>作者首先通过runtime方法，生成YYClassInfo，其中YYClassInfo主要是取了YYClassIvarInfo，YYClassMethodInfo，YYClassPropertyInfo。然后通过YYClassInfo构造YYModelMeta。</p>
-<p>YYModelMeta里面包括YYModelPropertyMeta<br>这个过程中，我还有些疑问的，为啥一定要构造这么多中间类呢？咱们继续往下看。</p>
-<p>实际的操作过程中，YYClassIvarInfo和YYClassMethodInfo都没有用到，主要就是用到了YYClassPropertyInfo，由此构造YYModelPropertyMeta，再生成YYModelMeta。</p>
-<p>作者都采用了CoreFoundition类型，比如CFStringRef，CFArrayRef等的操作，相对于 Foundation 的方法来说，CoreFoundation 的方法有更高的性能，用 CFArrayApplyFunction() 和 CFDictionaryApplyFunction() 方法来遍历容器类能带来不少性能提升，以及赋值也是采用objc_sendMsg的方法，就是为了快，省去很多OC方法的查找，这就不难理解，作者为什么用那么多的中间类来记录Method，Ivar，property的setter和getter了。</p>
-<p>作者在<a href="http://blog.ibireme.com/2015/10/23/ios_model_framework_benchmark/">文章中</a>对各个开源库进行了对比，图文声茂，功底了得，膜拜一把。</p>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS/">iOS</a></li></ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a  href="/2016/07/02/YYModel源码分析/#more">more >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-shadowsocket无法更新pac" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2016/07/01/shadowsocket无法更新pac/" class="article-date">
-  	<time datetime="2016-07-01T05:06:05.000Z" itemprop="datePublished">2016-07-01</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/07/01/shadowsocket无法更新pac/">shadowsocks无法更新pac</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>这两天上网发现facebook竟然不能登录，于是首先怀疑了是不是ss账号的问题，换了几个服务器，自己的电脑还是不行，但是其他人的都可以，于是就想是不是gfwlist需要更新先，然后就操作<strong>·Update pac from GFWList·</strong>，但是发现竟然还是request error 404. 之前自己也遇到过这样的事情，但是读没有怎么在意，今天因为要登陆facebook，所以才决定解决下的。</p>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/shadowsocks/">shadowsocks</a></li></ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a  href="/2016/07/01/shadowsocket无法更新pac/#more">more >></a>
-        </p>
       
       <div class="clearfix"></div>
     </div>
