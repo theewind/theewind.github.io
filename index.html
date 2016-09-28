@@ -213,7 +213,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>在iOS开发的过程中， 必然需要制作证书，开发者证书，发布证书，但是在制作他们的第一步都是先生成一个CSR文件<img src="http://o981ibvmi.bkt.clouddn.com/Screen%20Shot%202016-09-28%20at%204.35.22%20PM.png" alt="证书机构申请"></p>
+        <p>在iOS开发的过程中， 必然需要制作证书，开发者证书，发布证书，但是在制作他们的第一步都是先生成一个CSR文件<br><img src="http://o981ibvmi.bkt.clouddn.com/Screen%20Shot%202016-09-28%20at%204.35.22%20PM.png" alt="证书机构申请"></p>
 <p>那么到底CSR是什么东西呢？可以参考下面官方介绍</p>
 <blockquote>
 <p><a href="https://www.sslshopper.com/what-is-a-csr-certificate-signing-request.html">What is a CSR (Certificate Signing Request)?</a></p>
@@ -298,6 +298,69 @@
       
         <p class="article-more-link">
           <a  href="/2016/09/24/ipv6环境搭建/#more">more >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-iOS长连接的实现-端口学习" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/09/22/iOS长连接的实现-端口学习/" class="article-date">
+  	<time datetime="2016-09-22T01:57:15.000Z" itemprop="datePublished">2016-09-22</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/09/22/iOS长连接的实现-端口学习/">iOS长连接的实现--python搭建服务及端口</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>###端口学习<br>80端口，主要是提供http服务用的，一般用户的设备上是不会被占用，服务端开启80端口，监听客户端的连接。</p>
+<p>通过命令</p>
+<pre><code>lsof -i tcp:80
+</code></pre><p>可以有如下打印：</p>
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS/">iOS</a></li></ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a  href="/2016/09/22/iOS长连接的实现-端口学习/#more">more >></a>
         </p>
       
       <div class="clearfix"></div>
@@ -478,73 +541,6 @@
       
         <p class="article-more-link">
           <a  href="/2016/09/12/runloop监控主线程/#more">more >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-loadView踩坑" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2016/09/09/loadView踩坑/" class="article-date">
-  	<time datetime="2016-09-09T02:00:31.000Z" itemprop="datePublished">2016-09-09</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/09/09/loadView踩坑/">loadView踩坑</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>昨天在开始回归的时候，发现预订的订座按钮没有显示，而且big鹏还发现从NVTableView转成NVSensibleTableView也失败，于是就会调用</p>
-<pre><code>方法1：
-[((NVSensibleTableView *)self.tableView) setTouchDownTarget:self selector:@selector(touchDownTableView)];
-</code></pre><p>函数就会crash，这个原因是：</p>
-<ol>
-<li>NVTableView有个setTouchDownTarget:selector:的Categroy，但是参数不一致</li>
-<li>NVTableView转换NVSensibleTableView失败，即tableView根本不是NVSensibleTableView子类，所以无法调用他的setTouchDownTarget:selector:方法，所以崩溃。</li>
-</ol>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS/">iOS</a></li></ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a  href="/2016/09/09/loadView踩坑/#more">more >></a>
         </p>
       
       <div class="clearfix"></div>

@@ -5,7 +5,7 @@
   <link href="//atom.xml" rel="self"/>
   
   <link href="http://theewind.github.io/"/>
-  <updated>2016-09-28T09:17:00.000Z</updated>
+  <updated>2016-09-28T09:18:59.000Z</updated>
   <id>http://theewind.github.io/</id>
   
   <author>
@@ -20,9 +20,9 @@
     <link href="http://theewind.github.io/2016/09/28/iOS%E8%AF%81%E4%B9%A6%E8%A7%A3%E5%AF%86/"/>
     <id>http://theewind.github.io/2016/09/28/iOS证书解密/</id>
     <published>2016-09-28T08:28:47.000Z</published>
-    <updated>2016-09-28T09:17:00.000Z</updated>
+    <updated>2016-09-28T09:18:59.000Z</updated>
     
-    <content type="html">&lt;p&gt;在iOS开发的过程中， 必然需要制作证书，开发者证书，发布证书，但是在制作他们的第一步都是先生成一个CSR文件&lt;img src=&quot;http://o981ibvmi.bkt.clouddn.com/Screen%20Shot%202016-09-28%20at%204.35.22%20PM.png&quot; alt=&quot;证书机构申请&quot;&gt;&lt;/p&gt;
+    <content type="html">&lt;p&gt;在iOS开发的过程中， 必然需要制作证书，开发者证书，发布证书，但是在制作他们的第一步都是先生成一个CSR文件&lt;br&gt;&lt;img src=&quot;http://o981ibvmi.bkt.clouddn.com/Screen%20Shot%202016-09-28%20at%204.35.22%20PM.png&quot; alt=&quot;证书机构申请&quot;&gt;&lt;/p&gt;
 &lt;p&gt;那么到底CSR是什么东西呢？可以参考下面官方介绍&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;&lt;a href=&quot;https://www.sslshopper.com/what-is-a-csr-certificate-signing-request.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;What is a CSR (Certificate Signing Request)?&lt;/a&gt;&lt;/p&gt;
@@ -56,7 +56,7 @@
     
     <summary type="html">
     
-      &lt;p&gt;在iOS开发的过程中， 必然需要制作证书，开发者证书，发布证书，但是在制作他们的第一步都是先生成一个CSR文件&lt;img src=&quot;http://o981ibvmi.bkt.clouddn.com/Screen%20Shot%202016-09-28%20at%204.35.22%20PM.png&quot; alt=&quot;证书机构申请&quot;&gt;&lt;/p&gt;
+      &lt;p&gt;在iOS开发的过程中， 必然需要制作证书，开发者证书，发布证书，但是在制作他们的第一步都是先生成一个CSR文件&lt;br&gt;&lt;img src=&quot;http://o981ibvmi.bkt.clouddn.com/Screen%20Shot%202016-09-28%20at%204.35.22%20PM.png&quot; alt=&quot;证书机构申请&quot;&gt;&lt;/p&gt;
 &lt;p&gt;那么到底CSR是什么东西呢？可以参考下面官方介绍&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;&lt;a href=&quot;https://www.sslshopper.com/what-is-a-csr-certificate-signing-request.html&quot;&gt;What is a CSR (Certificate Signing Request)?&lt;/a&gt;&lt;/p&gt;
@@ -110,6 +110,59 @@
     
     </summary>
     
+    
+  </entry>
+  
+  <entry>
+    <title>iOS长连接的实现--python搭建服务及端口</title>
+    <link href="http://theewind.github.io/2016/09/22/iOS%E9%95%BF%E8%BF%9E%E6%8E%A5%E7%9A%84%E5%AE%9E%E7%8E%B0-%E7%AB%AF%E5%8F%A3%E5%AD%A6%E4%B9%A0/"/>
+    <id>http://theewind.github.io/2016/09/22/iOS长连接的实现-端口学习/</id>
+    <published>2016-09-22T01:57:15.000Z</published>
+    <updated>2016-09-28T09:20:28.000Z</updated>
+    
+    <content type="html">&lt;p&gt;###端口学习&lt;br&gt;80端口，主要是提供http服务用的，一般用户的设备上是不会被占用，服务端开启80端口，监听客户端的连接。&lt;/p&gt;
+&lt;p&gt;通过命令&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;lsof -i tcp:80
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;可以有如下打印：&lt;/p&gt;
+&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
+&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;4&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;5&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;6&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;7&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;8&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;9&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;10&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;11&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;COMMAND   PID    FD   TYPE             DEVICE SIZE/OFF NODE NAME&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;Google    382    92u  IPv4 0x2daafbe57dd15977      0t0  TCP 172.22.32.145:59650-&amp;gt;221.228.218.142:http (CLOSED)&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;com.apple 414    25u  IPv4 0x2daafbe58dbe5d57      0t0  TCP 172.22.32.145:60738-&amp;gt;42.121.252.58:http (ESTABLISHED)&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;com.apple 414    26u  IPv4 0x2daafbe58dbe5d57      0t0  TCP 172.22.32.145:60738-&amp;gt;42.121.252.58:http (ESTABLISHED)&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;SourceTre 380  	 228u  IPv4 0x2daafbe589512d57      0t0  TCP 172.22.32.145:60764-&amp;gt;131.103.28.14:http (ESTABLISHED)&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;SourceTre 380    35u  IPv4 0x2daafbe589512d57      0t0  TCP 172.22.32.145:60764-&amp;gt;131.103.28.14:http (ESTABLISHED)&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;Google    382    92u  IPv4 0x2daafbe57dd15977      0t0  TCP 172.22.32.145:59650-&amp;gt;221.228.218.142:http (CLOSED)&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;com.apple 414    22u  IPv4 0x2daafbe5895e8787      0t0  TCP 172.22.32.145:60772-&amp;gt;101.226.196.38:http (ESTABLISHED)&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;com.apple 414    24u  IPv4 0x2daafbe5895e8787      0t0  TCP 172.22.32.145:60772-&amp;gt;101.226.196.38:http (ESTABLISHED)&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;com.apple 414    33u  IPv4 0x2daafbe588e8e977      0t0  TCP 172.22.32.145:60782-&amp;gt;103.37.152.63:http (CLOSE_WAIT)&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;com.apple 414    34u  IPv4 0x2daafbe588e8e977      0t0  TCP 172.22.32.145:60782-&amp;gt;103.37.152.63:http (CLOSE_WAIT)&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;可以看到自己的源地址都是开启一些临时的端口：比如 59650， 60738等，不同的应用会创建不一样的端口，然后目的端口都是http默认的80端口，这里没有写出来。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;同一个设备，一个端口只能被一个应用使用。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;那什么情况下自己的电脑的80端口会被占用呢？&lt;br&gt;一般是在自己的机器上安装IIS,NGINX或者APACHE，才会冲突&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;windows中经常会被进程为inetinfo.exe占用。（稍后解释inetinfo.exe进程）如果你现在直接结束掉这个进程，无论如何inetinfo.exe都会自动重新运行，只是这个时候的PID就改变了。所以这样不能完全的释放80端口。&lt;br&gt;遇到这种情况，先分析是否是IIS，因为我之前有做网站，需要安装IIS，并且创建了一个站点，在控制面板-管理工具-internet 信息服务-网站下面可以看到这个站点，只需要把这个站点停止掉就可以了，然后你再到开始-运行-输入cmd（回车）-打开命令提示符——netstat -ano，可以看到已经没有80端口，这个时候在安装软件，就一切顺利了。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;进程PID是可以变化的，就是说不同时间运行同一个程序，它的PID号就不同。不同计算机同一个进程的PID号多数情况也是不同的。因此，在结束inetinfo.exe之前的PID是一个三位数，重新启动后，它的PID可能为四位数了。这点不影响问题的解决，我只是好奇，便拿出来说罢了。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;用python写一个简答的服务端程序，可以参考：&lt;br&gt;&lt;a href=&quot;https://www.raywenderlich.com/3932/networking-tutorial-for-ios-how-to-create-a-socket-based-iphone-app-and-server&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Networking Tutorial for iOS: How To Create A Socket Based iPhone App and Server&lt;/a&gt;&lt;br&gt;它里面主要是创建了一个80端口的监听，但是我自己的电脑实际上80端口还是被占用的，执行命令&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;sudo lsof -i:80 | grep LISTEN
+输出
+httpd     66226      root    5u  IPv6 0x2daafbe58b3cc967      0t0  TCP *:http (LISTEN)
+httpd     66230      _www    5u  IPv6 0x2daafbe58b3cc967      0t0  TCP *:http (LISTEN)
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;这是因为80端口被apache给占用了，默认是开机启动的。所以可以执行&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;sudo apachectl stop
+sudo python server.py
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;之后就可以看到了 Iphone Chat server started，后续可以把客户端给搭建起来。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;a href=&quot;http://stackoverflow.com/questions/14640711/python-twisted-reactor-address-already-in-use&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Python twisted reactor - address already in use&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;###端口学习&lt;br&gt;80端口，主要是提供http服务用的，一般用户的设备上是不会被占用，服务端开启80端口，监听客户端的连接。&lt;/p&gt;
+&lt;p&gt;通过命令&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;lsof -i tcp:80
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;可以有如下打印：&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="iOS" scheme="http://theewind.github.io/tags/iOS/"/>
     
   </entry>
   
@@ -802,90 +855,6 @@
     
     
       <category term="互联网" scheme="http://theewind.github.io/tags/%E4%BA%92%E8%81%94%E7%BD%91/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>YYModel源码分析</title>
-    <link href="http://theewind.github.io/2016/07/02/YYModel%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/"/>
-    <id>http://theewind.github.io/2016/07/02/YYModel源码分析/</id>
-    <published>2016-07-02T07:22:47.000Z</published>
-    <updated>2016-07-04T02:01:32.000Z</updated>
-    
-    <content type="html">&lt;p&gt;根据JSON生成Model是一个iOS开发经常用到的内容，这方面开源的也很多，比如我们公司用的Mantel，但其实效率很一般，最近看了&lt;a href=&quot;https://github.com/ibireme/YYModel&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;YYModel&lt;/a&gt;，区区五个文件，功能简单且高效，于是就认真学习一下人家是怎么实现的。&lt;/p&gt;
-&lt;p&gt;在我想来，主要就是通过runtime方法获取property和ivar就可以了，通过判断每个ivar的类型，然后根据不同的类型给每个property赋值，应该算是不太难的。在网上看到了&lt;a href=&quot;http://blog.csdn.net/woaifen3344/article/details/39301203&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;这篇文章&lt;/a&gt;，就是我想的这个样子，但是YYModel的作者可不是这么认为的。&lt;/p&gt;
-&lt;p&gt;作者首先通过runtime方法，生成YYClassInfo，其中YYClassInfo主要是取了YYClassIvarInfo，YYClassMethodInfo，YYClassPropertyInfo。然后通过YYClassInfo构造YYModelMeta。&lt;/p&gt;
-&lt;p&gt;YYModelMeta里面包括YYModelPropertyMeta&lt;br&gt;这个过程中，我还有些疑问的，为啥一定要构造这么多中间类呢？咱们继续往下看。&lt;/p&gt;
-&lt;p&gt;实际的操作过程中，YYClassIvarInfo和YYClassMethodInfo都没有用到，主要就是用到了YYClassPropertyInfo，由此构造YYModelPropertyMeta，再生成YYModelMeta。&lt;/p&gt;
-&lt;p&gt;作者都采用了CoreFoundition类型，比如CFStringRef，CFArrayRef等的操作，相对于 Foundation 的方法来说，CoreFoundation 的方法有更高的性能，用 CFArrayApplyFunction() 和 CFDictionaryApplyFunction() 方法来遍历容器类能带来不少性能提升，以及赋值也是采用objc_sendMsg的方法，就是为了快，省去很多OC方法的查找，这就不难理解，作者为什么用那么多的中间类来记录Method，Ivar，property的setter和getter了。&lt;/p&gt;
-&lt;p&gt;作者在&lt;a href=&quot;http://blog.ibireme.com/2015/10/23/ios_model_framework_benchmark/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;文章中&lt;/a&gt;对各个开源库进行了对比，图文声茂，功底了得，膜拜一把。&lt;/p&gt;
-&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
-&lt;h2 id=&quot;其他知识点：&quot;&gt;&lt;a href=&quot;#其他知识点：&quot; class=&quot;headerlink&quot; title=&quot;其他知识点：&quot;&gt;&lt;/a&gt;其他知识点：&lt;/h2&gt;&lt;h3 id=&quot;1-nonnull&quot;&gt;&lt;a href=&quot;#1-nonnull&quot; class=&quot;headerlink&quot; title=&quot;1. nonnull&quot;&gt;&lt;/a&gt;1. nonnull&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;NS_ASSUME_NONNULL_BEGIN&lt;/li&gt;
-&lt;li&gt;NS_ASSUME_NONNULL_END&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;在这两个宏之间的代码，所有简单指针对象都被假定为nonnull，因此我们只需要去指定那些nullable的指针&lt;/p&gt;
-&lt;h3 id=&quot;2-零依赖&quot;&gt;&lt;a href=&quot;#2-零依赖&quot; class=&quot;headerlink&quot; title=&quot;2. 零依赖&quot;&gt;&lt;/a&gt;2. 零依赖&lt;/h3&gt;&lt;p&gt;自己的类甚至都不用添加&lt;yymodel&gt;的协议，怎么做到呢，其实就是先用respondersToSelector判断是否有&lt;yymodel&gt;协议里面的函数，如果有就通过(id&lt;yymodel&gt;)cls 来调用，如果不这样写，而是直接cls来调用，编译器会有warning的提示，同时也可以采用performSelector来实现。&lt;/yymodel&gt;&lt;/yymodel&gt;&lt;/yymodel&gt;&lt;/p&gt;
-&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;4&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;5&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;6&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;7&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;8&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;// Get black list&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    NSSet *blacklist = nil;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    if ([cls respondsToSelector:@selector(modelPropertyBlacklist)]) &amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        NSArray *properties = [(id&amp;lt;YYModel&amp;gt;)cls modelPropertyBlacklist];&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        if (properties) &amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;            blacklist = [NSSet setWithArray:properties];&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        &amp;#125;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &amp;#125;&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;h3 id=&quot;3-copy记得释放&quot;&gt;&lt;a href=&quot;#3-copy记得释放&quot; class=&quot;headerlink&quot; title=&quot;3. copy记得释放&quot;&gt;&lt;/a&gt;3. copy记得释放&lt;/h3&gt;&lt;pre&gt;&lt;code&gt;Method *methods = class_copyMethodList(cls, &amp;amp;methodCount);
-free(methods);
-objc_property_t *properties = class_copyPropertyList(cls, &amp;amp;propertyCount);
-free(properties);
-&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&quot;4-信号量-读写锁&quot;&gt;&lt;a href=&quot;#4-信号量-读写锁&quot; class=&quot;headerlink&quot; title=&quot;4. 信号量-读写锁&quot;&gt;&lt;/a&gt;4. 信号量-读写锁&lt;/h3&gt;&lt;pre&gt;&lt;code&gt;static dispatch_semaphore_t lock;
-lock = dispatch_semaphore_create(1);
-
-if (!info) {
-    info = [[YYClassInfo alloc] initWithClass:cls];
-    if (info) {
-        dispatch_semaphore_wait(lock, DISPATCH_TIME_FOREVER);
-        CFDictionarySetValue(info.isMeta ? metaCache : classCache, (__bridge const void *)(cls), (__bridge const void *)(info));
-        dispatch_semaphore_signal(lock);
-    }
-}
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&amp;gt;&lt;br&gt;附: YYModel 性能优化的几个 Tip：&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;&lt;p&gt;缓存&lt;br&gt;Model JSON 转换过程中需要很多类的元数据，如果数据足够小，则全部缓存到内存中。&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;查表&lt;br&gt;当遇到多项选择的条件时，要尽量使用查表法实现，比如 switch/case，C Array，如果查表条件是对象，则可以用 NSDictionary 来实现。&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;避免 KVC&lt;br&gt;Key-Value Coding 使用起来非常方便，但性能上要差于直接调用 Getter/Setter，所以如果能避免 KVC 而用 Getter/Setter 代替，性能会有较大提升。&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;避免 Getter/Setter 调用&lt;br&gt;如果能直接访问 ivar，则尽量使用 ivar 而不要使用 Getter/Setter 这样也能节省一部分开销。&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;避免多余的内存管理方法&lt;br&gt;在 ARC 条件下，默认声明的对象是 &lt;strong&gt;strong 类型的，赋值时有可能会产生 retain/release 调用，如果一个变量在其生命周期内不会被释放，则使用 &lt;/strong&gt;unsafe_unretained 会节省很大的开销。&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;访问具有 &lt;strong&gt;weak 属性的变量时，实际上会调用 objc_loadWeak() 和 objc_storeWeak() 来完成，这也会带来很大的开销，所以要避免使用 &lt;/strong&gt;weak 属性。&lt;/p&gt;
-&lt;p&gt;创建和使用对象时，要尽量避免对象进入 autoreleasepool，以避免额外的资源开销。&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;&lt;p&gt;遍历容器类时，选择更高效的方法&lt;br&gt;相对于 Foundation 的方法来说，CoreFoundation 的方法有更高的性能，用 CFArrayApplyFunction() 和 CFDictionaryApplyFunction() 方法来遍历容器类能带来不少性能提升，但代码写起来会非常麻烦。&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;尽量用纯 C 函数、内联函数&lt;br&gt;使用纯 C 函数可以避免 ObjC 的消息发送带来的开销。如果 C 函数比较小，使用 inline 可以避免一部分压栈弹栈等函数调用的开销。&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;减少遍历的循环次数&lt;br&gt;在 JSON 和 Model 转换前，Model 的属性个数和 JSON 的属性个数都是已知的，这时选择数量较少的那一方进行遍历，会节省很多时间。&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
-&lt;blockquote&gt;
-&lt;p&gt;&lt;a href=&quot;http://www.cnblogs.com/develop-SZT/p/5348364.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;runtime之玩转成员变量&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&lt;a href=&quot;http://blog.csdn.net/woaifen3344/article/details/50505808&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;runtime Method&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&lt;a href=&quot;http://blog.ibireme.com/2015/10/23/ios_model_framework_benchmark/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;iOS JSON 模型转换库评测&lt;/a&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-</content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;根据JSON生成Model是一个iOS开发经常用到的内容，这方面开源的也很多，比如我们公司用的Mantel，但其实效率很一般，最近看了&lt;a href=&quot;https://github.com/ibireme/YYModel&quot;&gt;YYModel&lt;/a&gt;，区区五个文件，功能简单且高效，于是就认真学习一下人家是怎么实现的。&lt;/p&gt;
-&lt;p&gt;在我想来，主要就是通过runtime方法获取property和ivar就可以了，通过判断每个ivar的类型，然后根据不同的类型给每个property赋值，应该算是不太难的。在网上看到了&lt;a href=&quot;http://blog.csdn.net/woaifen3344/article/details/39301203&quot;&gt;这篇文章&lt;/a&gt;，就是我想的这个样子，但是YYModel的作者可不是这么认为的。&lt;/p&gt;
-&lt;p&gt;作者首先通过runtime方法，生成YYClassInfo，其中YYClassInfo主要是取了YYClassIvarInfo，YYClassMethodInfo，YYClassPropertyInfo。然后通过YYClassInfo构造YYModelMeta。&lt;/p&gt;
-&lt;p&gt;YYModelMeta里面包括YYModelPropertyMeta&lt;br&gt;这个过程中，我还有些疑问的，为啥一定要构造这么多中间类呢？咱们继续往下看。&lt;/p&gt;
-&lt;p&gt;实际的操作过程中，YYClassIvarInfo和YYClassMethodInfo都没有用到，主要就是用到了YYClassPropertyInfo，由此构造YYModelPropertyMeta，再生成YYModelMeta。&lt;/p&gt;
-&lt;p&gt;作者都采用了CoreFoundition类型，比如CFStringRef，CFArrayRef等的操作，相对于 Foundation 的方法来说，CoreFoundation 的方法有更高的性能，用 CFArrayApplyFunction() 和 CFDictionaryApplyFunction() 方法来遍历容器类能带来不少性能提升，以及赋值也是采用objc_sendMsg的方法，就是为了快，省去很多OC方法的查找，这就不难理解，作者为什么用那么多的中间类来记录Method，Ivar，property的setter和getter了。&lt;/p&gt;
-&lt;p&gt;作者在&lt;a href=&quot;http://blog.ibireme.com/2015/10/23/ios_model_framework_benchmark/&quot;&gt;文章中&lt;/a&gt;对各个开源库进行了对比，图文声茂，功底了得，膜拜一把。&lt;/p&gt;
-    
-    </summary>
-    
-    
-      <category term="iOS" scheme="http://theewind.github.io/tags/iOS/"/>
     
   </entry>
   

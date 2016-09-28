@@ -4,41 +4,27 @@
   <meta charset="utf-8">
   
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
-  <title>ipv6环境搭建 | sanfeng’s blog</title>
+  <title>iOS长连接的实现--python搭建服务及端口 | sanfeng’s blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="自从5月初Apple明文规定所有开发者在6月1号以后提交新版本需要支持IPV6-Only的网络，大家便开始热火朝天的研究如何支持IPV6，以及应用中哪些模块目前不支持IPV6。
-IPV6是什么，可以参考网上的文章
-
-iOS应用如何支持IPV6-b，
-
-如何用自己的Mac搭建ipv6测试环境，可以参考：
-
-Mac电脑搭建IPV6测试环境">
+  <meta name="description" content="###端口学习80端口，主要是提供http服务用的，一般用户的设备上是不会被占用，服务端开启80端口，监听客户端的连接。
+通过命令
+lsof -i tcp:80
+可以有如下打印：">
 <meta property="og:type" content="article">
-<meta property="og:title" content="ipv6环境搭建">
-<meta property="og:url" content="http://theewind.github.io/2016/09/24/ipv6环境搭建/index.html">
+<meta property="og:title" content="iOS长连接的实现--python搭建服务及端口">
+<meta property="og:url" content="http://theewind.github.io/2016/09/22/iOS长连接的实现-端口学习/index.html">
 <meta property="og:site_name" content="sanfeng’s blog">
-<meta property="og:description" content="自从5月初Apple明文规定所有开发者在6月1号以后提交新版本需要支持IPV6-Only的网络，大家便开始热火朝天的研究如何支持IPV6，以及应用中哪些模块目前不支持IPV6。
-IPV6是什么，可以参考网上的文章
-
-iOS应用如何支持IPV6-b，
-
-如何用自己的Mac搭建ipv6测试环境，可以参考：
-
-Mac电脑搭建IPV6测试环境">
-<meta property="og:image" content="http://o981ibvmi.bkt.clouddn.com/QQ20160924-0@2x.png">
-<meta property="og:updated_time" content="2016-09-24T08:26:00.000Z">
+<meta property="og:description" content="###端口学习80端口，主要是提供http服务用的，一般用户的设备上是不会被占用，服务端开启80端口，监听客户端的连接。
+通过命令
+lsof -i tcp:80
+可以有如下打印：">
+<meta property="og:updated_time" content="2016-09-28T09:20:28.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="ipv6环境搭建">
-<meta name="twitter:description" content="自从5月初Apple明文规定所有开发者在6月1号以后提交新版本需要支持IPV6-Only的网络，大家便开始热火朝天的研究如何支持IPV6，以及应用中哪些模块目前不支持IPV6。
-IPV6是什么，可以参考网上的文章
-
-iOS应用如何支持IPV6-b，
-
-如何用自己的Mac搭建ipv6测试环境，可以参考：
-
-Mac电脑搭建IPV6测试环境">
-<meta name="twitter:image" content="http://o981ibvmi.bkt.clouddn.com/QQ20160924-0@2x.png">
+<meta name="twitter:title" content="iOS长连接的实现--python搭建服务及端口">
+<meta name="twitter:description" content="###端口学习80端口，主要是提供http服务用的，一般用户的设备上是不会被占用，服务端开启80端口，监听客户端的连接。
+通过命令
+lsof -i tcp:80
+可以有如下打印：">
   
   
     <link rel="icon" href="/favicon.png">
@@ -209,11 +195,11 @@ Mac电脑搭建IPV6测试环境">
 	</div>
 </nav>
 
-      <div class="body-wrap"><article id="post-ipv6环境搭建" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-iOS长连接的实现-端口学习" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2016/09/24/ipv6环境搭建/" class="article-date">
-  	<time datetime="2016-09-24T08:05:36.000Z" itemprop="datePublished">2016-09-24</time>
+      <a href="/2016/09/22/iOS长连接的实现-端口学习/" class="article-date">
+  	<time datetime="2016-09-22T01:57:15.000Z" itemprop="datePublished">2016-09-22</time>
 </a>
     </div>
   
@@ -226,7 +212,7 @@ Mac电脑搭建IPV6测试环境">
         
   
     <h1 class="article-title" itemprop="name">
-      ipv6环境搭建
+      iOS长连接的实现--python搭建服务及端口
     </h1>
   
 
@@ -234,6 +220,10 @@ Mac电脑搭建IPV6测试环境">
       
       <div class="article-info article-info-post">
         
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS/">iOS</a></li></ul>
+	</div>
+
         
 
         <div class="clearfix"></div>
@@ -242,23 +232,36 @@ Mac电脑搭建IPV6测试环境">
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>自从5月初Apple明文规定所有开发者在6月1号以后提交新版本需要支持IPV6-Only的网络，大家便开始热火朝天的研究如何支持IPV6，以及应用中哪些模块目前不支持IPV6。</p>
-<p>IPV6是什么，可以参考网上的文章</p>
-<blockquote>
-<p><a href="http://www.cnblogs.com/isItOk/p/5621530.html" target="_blank" rel="external">iOS应用如何支持IPV6-b</a>，</p>
-</blockquote>
-<p>如何用自己的Mac搭建ipv6测试环境，可以参考：</p>
-<blockquote>
-<p><a href="http://jingyan.baidu.com/article/e75057f2f33cffebc91a89a3.html" target="_blank" rel="external">Mac电脑搭建IPV6测试环境</a></p>
-</blockquote>
+        <p>###端口学习<br>80端口，主要是提供http服务用的，一般用户的设备上是不会被占用，服务端开启80端口，监听客户端的连接。</p>
+<p>通过命令</p>
+<pre><code>lsof -i tcp:80
+</code></pre><p>可以有如下打印：</p>
 <a id="more"></a>
-<p>这里需要注意的是，如果mac电脑本身就是通过wifi连接网络的，需要使用一个USB Ethernet或者雷电转接口，保证电脑是通过网线连接的。比如自己的电脑就是这样的<img src="http://o981ibvmi.bkt.clouddn.com/QQ20160924-0@2x.png" alt="网络设置"><br>确保你的USB Ethernet网络是排在第一位的，如果不是的话，可以先删除Wifi，确保有线网络是第一位，然后再创建一个。<br>之后按照上面文章的配置就可以了。</p>
-<p>如果应用发布的时候因为ipv6被拒，可以参考</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">COMMAND   PID    FD   TYPE             DEVICE SIZE/OFF NODE NAME</div><div class="line">Google    382    92u  IPv4 0x2daafbe57dd15977      0t0  TCP 172.22.32.145:59650-&gt;221.228.218.142:http (CLOSED)</div><div class="line">com.apple 414    25u  IPv4 0x2daafbe58dbe5d57      0t0  TCP 172.22.32.145:60738-&gt;42.121.252.58:http (ESTABLISHED)</div><div class="line">com.apple 414    26u  IPv4 0x2daafbe58dbe5d57      0t0  TCP 172.22.32.145:60738-&gt;42.121.252.58:http (ESTABLISHED)</div><div class="line">SourceTre 380  	 228u  IPv4 0x2daafbe589512d57      0t0  TCP 172.22.32.145:60764-&gt;131.103.28.14:http (ESTABLISHED)</div><div class="line">SourceTre 380    35u  IPv4 0x2daafbe589512d57      0t0  TCP 172.22.32.145:60764-&gt;131.103.28.14:http (ESTABLISHED)</div><div class="line">Google    382    92u  IPv4 0x2daafbe57dd15977      0t0  TCP 172.22.32.145:59650-&gt;221.228.218.142:http (CLOSED)</div><div class="line">com.apple 414    22u  IPv4 0x2daafbe5895e8787      0t0  TCP 172.22.32.145:60772-&gt;101.226.196.38:http (ESTABLISHED)</div><div class="line">com.apple 414    24u  IPv4 0x2daafbe5895e8787      0t0  TCP 172.22.32.145:60772-&gt;101.226.196.38:http (ESTABLISHED)</div><div class="line">com.apple 414    33u  IPv4 0x2daafbe588e8e977      0t0  TCP 172.22.32.145:60782-&gt;103.37.152.63:http (CLOSE_WAIT)</div><div class="line">com.apple 414    34u  IPv4 0x2daafbe588e8e977      0t0  TCP 172.22.32.145:60782-&gt;103.37.152.63:http (CLOSE_WAIT)</div></pre></td></tr></table></figure>
+<ul>
+<li><p>可以看到自己的源地址都是开启一些临时的端口：比如 59650， 60738等，不同的应用会创建不一样的端口，然后目的端口都是http默认的80端口，这里没有写出来。</p>
+</li>
+<li><p>同一个设备，一个端口只能被一个应用使用。</p>
+</li>
+<li><p>那什么情况下自己的电脑的80端口会被占用呢？<br>一般是在自己的机器上安装IIS,NGINX或者APACHE，才会冲突</p>
+</li>
+</ul>
+<p>windows中经常会被进程为inetinfo.exe占用。（稍后解释inetinfo.exe进程）如果你现在直接结束掉这个进程，无论如何inetinfo.exe都会自动重新运行，只是这个时候的PID就改变了。所以这样不能完全的释放80端口。<br>遇到这种情况，先分析是否是IIS，因为我之前有做网站，需要安装IIS，并且创建了一个站点，在控制面板-管理工具-internet 信息服务-网站下面可以看到这个站点，只需要把这个站点停止掉就可以了，然后你再到开始-运行-输入cmd（回车）-打开命令提示符——netstat -ano，可以看到已经没有80端口，这个时候在安装软件，就一切顺利了。</p>
 <blockquote>
-<p><a href="https://github.com/wg689/Solve-App-Store-Review-Problem" target="_blank" rel="external">ipv6审核问题大集合</a></p>
+<p>进程PID是可以变化的，就是说不同时间运行同一个程序，它的PID号就不同。不同计算机同一个进程的PID号多数情况也是不同的。因此，在结束inetinfo.exe之前的PID是一个三位数，重新启动后，它的PID可能为四位数了。这点不影响问题的解决，我只是好奇，便拿出来说罢了。</p>
 </blockquote>
-<p><a href="http://www.brianjcoleman.com/tutorial-how-to-test-your-app-for-ipv6-compatibility/" target="_blank" rel="external">TUTORIAL: HOW TO TEST YOUR APP FOR IPV6 COMPATIBILITY</a></p>
-<p><a href="http://www.jianshu.com/p/a6bab07c4062" target="_blank" rel="external">iOS应用支持IPV6，就那点事儿</a></p>
+<p>用python写一个简答的服务端程序，可以参考：<br><a href="https://www.raywenderlich.com/3932/networking-tutorial-for-ios-how-to-create-a-socket-based-iphone-app-and-server" target="_blank" rel="external">Networking Tutorial for iOS: How To Create A Socket Based iPhone App and Server</a><br>它里面主要是创建了一个80端口的监听，但是我自己的电脑实际上80端口还是被占用的，执行命令</p>
+<pre><code>sudo lsof -i:80 | grep LISTEN
+输出
+httpd     66226      root    5u  IPv6 0x2daafbe58b3cc967      0t0  TCP *:http (LISTEN)
+httpd     66230      _www    5u  IPv6 0x2daafbe58b3cc967      0t0  TCP *:http (LISTEN)
+</code></pre><p>这是因为80端口被apache给占用了，默认是开机启动的。所以可以执行</p>
+<pre><code>sudo apachectl stop
+sudo python server.py
+</code></pre><p>之后就可以看到了 Iphone Chat server started，后续可以把客户端给搭建起来。</p>
+<blockquote>
+<p><a href="http://stackoverflow.com/questions/14640711/python-twisted-reactor-address-already-in-use" target="_blank" rel="external">Python twisted reactor - address already in use</a></p>
+</blockquote>
 
       
     </div>
@@ -268,18 +271,18 @@ Mac电脑搭建IPV6测试环境">
     
 <nav id="article-nav">
   
-    <a href="/2016/09/28/iOS证书解密/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2016/09/24/ipv6环境搭建/" id="article-nav-newer" class="article-nav-link-wrap">
       <strong class="article-nav-caption"><</strong>
       <div class="article-nav-title">
         
-          iOS证书之CSR文件
+          ipv6环境搭建
         
       </div>
     </a>
   
   
-    <a href="/2016/09/22/iOS长连接的实现-端口学习/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">iOS长连接的实现--python搭建服务及端口</div>
+    <a href="/2016/09/22/iOS长连接的实现-分析篇/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">iOS长连接的实现-分析篇</div>
       <strong class="article-nav-caption">></strong>
     </a>
   
@@ -314,7 +317,7 @@ Mac电脑搭建IPV6测试环境">
 
 <div class="duoshuo">
 	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="ipv6环境搭建" data-title="ipv6环境搭建" data-url="http://theewind.github.io/2016/09/24/ipv6环境搭建/"></div>
+	<div class="ds-thread" data-thread-key="iOS长连接的实现-端口学习" data-title="iOS长连接的实现--python搭建服务及端口" data-url="http://theewind.github.io/2016/09/22/iOS长连接的实现-端口学习/"></div>
 	<!-- 多说评论框 end -->
 	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 	<script type="text/javascript">
