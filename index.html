@@ -187,6 +187,71 @@
 
       <div class="body-wrap">
   
+    <article id="post-iOS证书解密" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/09/28/iOS证书解密/" class="article-date">
+  	<time datetime="2016-09-28T08:28:47.000Z" itemprop="datePublished">2016-09-28</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/09/28/iOS证书解密/">iOS证书之CSR文件</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>在iOS开发的过程中， 必然需要制作证书，开发者证书，发布证书，但是在制作他们的第一步都是先生成一个CSR文件<img src="http://o981ibvmi.bkt.clouddn.com/Screen%20Shot%202016-09-28%20at%204.35.22%20PM.png" alt="证书机构申请"></p>
+<p>那么到底CSR是什么东西呢？可以参考下面官方介绍</p>
+<blockquote>
+<p><a href="https://www.sslshopper.com/what-is-a-csr-certificate-signing-request.html">What is a CSR (Certificate Signing Request)?</a></p>
+</blockquote>
+<p>简单来说，CSR就是Certificate Signing Request的缩写，是从证书颁发机构生成证书时，需要的一串加密的文本信息，也是从证书颁发机构获取的，用文本工具打开，可以看到他是一串</p>
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS/">iOS</a></li></ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a  href="/2016/09/28/iOS证书解密/#more">more >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
     <article id="post-ipv6环境搭建" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -480,67 +545,6 @@
       
         <p class="article-more-link">
           <a  href="/2016/09/09/loadView踩坑/#more">more >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-创建一个显示FPS的label" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2016/09/06/创建一个显示FPS的label/" class="article-date">
-  	<time datetime="2016-09-06T07:40:57.000Z" itemprop="datePublished">2016-09-06</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/09/06/创建一个显示FPS的label/">创建一个显示FPS的label</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>如何创建一个实时显示FPS的Label呢，看了Nova的代码，发现是主要是采用CADisplayLink实现，至于CADisplayLink主要作用是什么，这里简单介绍下：</p>
-<p>CADisplayLink是一个能让我们以和屏幕刷新率同步的频率将特定的内容画到屏幕上的定时器类。CADisplayLink以特定模式注册到runloop后，每当屏幕显示内容刷新结束的时候，runloop就会向CADisplayLink指定的target发送一次指定的selector消息， CADisplayLink类对应的selector就会被调用一次。所以通常情况下，按照iOS设备屏幕的刷新率60次/秒。</p>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS/">iOS</a></li></ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a  href="/2016/09/06/创建一个显示FPS的label/#more">more >></a>
         </p>
       
       <div class="clearfix"></div>

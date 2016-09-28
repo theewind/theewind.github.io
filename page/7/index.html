@@ -187,6 +187,64 @@
 
       <div class="body-wrap">
   
+    <article id="post-iOS横屏应用旋转无动画" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/05/14/iOS横屏应用旋转无动画/" class="article-date">
+  	<time datetime="2016-05-14T06:43:33.000Z" itemprop="datePublished">2016-05-14</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/05/14/iOS横屏应用旋转无动画/">iOS横屏应用旋转无动画</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>最近开发一个仅支持横屏的应用，发现进行180°旋转的时候没有动画，Google也没有找到有用的信息，显示的情况跟下面链接中的比较像<a href="http://stackoverflow.com/questions/32848456/ios-9-orientation-auto-rotation-animation-not-working-but-always-on-main-thread/37222383#37222383" target="_blank" rel="external">无动画效果</a>. 最后在苹果的官网资料上找到了灵感：<a href="https://developer.apple.com/library/ios/technotes/tn2244/_index.html" target="_blank" rel="external">https://developer.apple.com/library/ios/technotes/tn2244/_index.html</a><br>自己就是根据这个里面的内容，全部进行了操作，最后发现是LaunchScreen.stroyboard的问题，在<br><img src="http://7xthb9.com1.z0.glb.clouddn.com/launchScreen.png" alt="设置"> 中对Main Interface 和 Launch Screen File都设置成了空，将Launch Images Source 另外指定了图片，然后就解决了此问题。</p>
+<p>我的解决方案不一定完全使用所有的情况，这里仅仅是做一个记录，有需要的可以试一下。</p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS/">iOS</a></li></ul>
+	</div>
+
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
     <article id="post-命令行解释括号说明" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -512,69 +570,6 @@
         <p class="article-more-link">
           <a  href="/2016/04/29/代码分析脚本/#more">more >></a>
         </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-ios归档需要注意" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2016/04/29/ios归档需要注意/" class="article-date">
-  	<time datetime="2016-04-29T06:01:52.000Z" itemprop="datePublished">2016-04-29</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/04/29/ios归档需要注意/">iOS归档之NSKeyedArchiver</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>如果对象是NSString、NSDictionary、NSArray、NSData、NSNumber等类型，可以直接用NSKeyedArchiver进行归档和恢复。</p>
-<p>不是所有的对象都可以直接用这种方法进行归档，只有遵守了NSCoding协议的对象才可以。</p>
-<p>NSCoding协议有2个方法：</p>
-<pre><code>encodeWithCoder:
-</code></pre><p>每次归档对象时，都会调用这个方法。一般在这个方法里面指定如何归档对象中的每个实例变量，可以使用encodeObject:forKey:方法归档实例变量</p>
-<pre><code>initWithCoder:
-</code></pre><p>每次从文件中恢复(解码)对象时，都会调用这个方法。一般在这个方法里面指定如何解码文件中的数据为对象的实例变量，可以使用decodeObject:forKey方法解码实例变量</p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS/">iOS</a></li></ul>
-	</div>
-
-      
-
       
       <div class="clearfix"></div>
     </div>

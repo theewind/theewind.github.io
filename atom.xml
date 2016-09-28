@@ -5,7 +5,7 @@
   <link href="//atom.xml" rel="self"/>
   
   <link href="http://theewind.github.io/"/>
-  <updated>2016-09-24T08:26:00.000Z</updated>
+  <updated>2016-09-28T09:17:00.000Z</updated>
   <id>http://theewind.github.io/</id>
   
   <author>
@@ -14,6 +14,61 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>iOS证书之CSR文件</title>
+    <link href="http://theewind.github.io/2016/09/28/iOS%E8%AF%81%E4%B9%A6%E8%A7%A3%E5%AF%86/"/>
+    <id>http://theewind.github.io/2016/09/28/iOS证书解密/</id>
+    <published>2016-09-28T08:28:47.000Z</published>
+    <updated>2016-09-28T09:17:00.000Z</updated>
+    
+    <content type="html">&lt;p&gt;在iOS开发的过程中， 必然需要制作证书，开发者证书，发布证书，但是在制作他们的第一步都是先生成一个CSR文件&lt;img src=&quot;http://o981ibvmi.bkt.clouddn.com/Screen%20Shot%202016-09-28%20at%204.35.22%20PM.png&quot; alt=&quot;证书机构申请&quot;&gt;&lt;/p&gt;
+&lt;p&gt;那么到底CSR是什么东西呢？可以参考下面官方介绍&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;a href=&quot;https://www.sslshopper.com/what-is-a-csr-certificate-signing-request.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;What is a CSR (Certificate Signing Request)?&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;简单来说，CSR就是Certificate Signing Request的缩写，是从证书颁发机构生成证书时，需要的一串加密的文本信息，也是从证书颁发机构获取的，用文本工具打开，可以看到他是一串&lt;/p&gt;
+&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
+&lt;p&gt;—–BEGIN CERTIFICATE REQUEST—–&lt;br&gt;MIICkDCCAXgCAQAwSzEkMCIGCSqGSIb3DQEJARYVc2FuZmVuZ2ZseWluZ0AxMjYu&lt;br&gt;Y29tMRYwFAYDVQQDDA1zYW5mZW5nZmx5aW5nMQswCQYDVQQGEwJDTjCCASIwDQYJ&lt;br&gt;KoZIhvcNAQEBBQADggEPADCCAQoCggEBALeOs2Pd65KYGUFXio02QrUyFUSImQ2L&lt;br&gt;NEFNpEga6yWPEsXG+yYAsd4dx5DOkWx4Iiybsdg0v8uB1b9d0GfjIzRiMyhTM24V&lt;br&gt;cgODmijKT2DnxvagDZH9+ikErvlvcb4KtLKNoRYOJ8T0Oc80ibamQULuTRyrixlQ&lt;br&gt;u8G5gIul3MxQpv+ZmJO3DcamqnfKkrQNVw3D9ALUuk7o8W1V8vgea/LzsVMm5JzC&lt;br&gt;mxq1zOnnxpV/7KHdVtrK+rRMOqr2tdTnKtgK9yNVqCjWDgJmmvVtJ1uvmmDWevjg&lt;br&gt;S985hH2niif9zlim4c3tjceGkAaYpuGM+24kQnYvYt6JvNh9XTkeVh0CAwEAAaAA&lt;br&gt;MA0GCSqGSIb3DQEBCwUAA4IBAQAId4jHlTMryJHTDhL/cgSb5rRIYJC7wJ2fvGfu&lt;br&gt;Jwlr6HZplZBZGDr271lYcEJ56VDyXzLEx1ea/4f+I3IFowS6AlcvY2YrJwY7KET+&lt;br&gt;R98GDsprBdgg2RpSxpJPe4rF1rWDjUdPJUCFi+AczQ0aA6ckIzYDhlQpXieTXKPd&lt;br&gt;nrG0cV6vsJBMQ6oAo8eZxDl7HV29sK/RJRa1k0q3GpzyhpKmPTfiA0ig4H4zHE3n&lt;br&gt;TUtwa9EOBuhxcGItZRypdZTOX1Rrp5XFyxdtUgx9eKsg0sys/SGgrTtU+YAiorr1&lt;br&gt;TH4jOKnTy1lATjIn3MQhoBQhPl6WxmtVcWx2+pLklYEW+M+Y&lt;br&gt;—–END CERTIFICATE REQUEST—–&lt;/p&gt;
+&lt;p&gt;这样的内容，它里面实际包含了一些你的个人信息，比如email，国家等，但是最重要的是，他包含了你签名要用的公钥信息，而对应的私钥则存储在你的mac上，打开KeyChain Asscess –login –Keys 发现里面多了两组信息，就是公钥私钥&lt;/p&gt;
+&lt;p&gt;采用如下命令，可以将CSR进行解密：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;openssl req -in CertificateSigningRequest.certSigningRequest -noout -text
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;可以得到如下内容：&lt;/p&gt;
+&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;4&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;5&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;6&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;7&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;8&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;9&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;10&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;11&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;12&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;13&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;14&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;15&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;16&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;17&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;18&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;19&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;20&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;21&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;22&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;23&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;24&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;25&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;26&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;27&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;28&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;29&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;30&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;31&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;32&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;33&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;34&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;35&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;36&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;37&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;38&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;39&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;40&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;41&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;42&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;43&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;44&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;45&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;Certificate Request:&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    Data:&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        Version: 0 (0x0)&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        Subject: emailAddress=sanfengflying@126.com, CN=sanfengflying, C=CN&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        Subject Public Key Info:&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;            Public Key Algorithm: rsaEncryption&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;            RSA Public Key: (2048 bit)&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;                Modulus (2048 bit):&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;                    00:b7:8e:b3:63:dd:eb:92:98:19:41:57:8a:8d:36:&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;                    42:b5:32:15:44:88:99:0d:8b:34:41:4d:a4:48:1a:&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;                    eb:25:8f:12:c5:c6:fb:26:00:b1:de:1d:c7:90:ce:&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;                    91:6c:78:22:2c:9b:b1:d8:34:bf:cb:81:d5:bf:5d:&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;                    d0:67:e3:23:34:62:33:28:53:33:6e:15:72:03:83:&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;                    9a:28:ca:4f:60:e7:c6:f6:a0:0d:91:fd:fa:29:04:&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;                    ae:f9:6f:71:be:0a:b4:b2:8d:a1:16:0e:27:c4:f4:&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;                    39:cf:34:89:b6:a6:41:42:ee:4d:1c:ab:8b:19:50:&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;                    bb:c1:b9:80:8b:a5:dc:cc:50:a6:ff:99:98:93:b7:&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;                    0d:c6:a6:aa:77:ca:92:b4:0d:57:0d:c3:f4:02:d4:&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;                    ba:4e:e8:f1:6d:55:f2:f8:1e:6b:f2:f3:b1:53:26:&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;                    e4:9c:c2:9b:1a:b5:cc:e9:e7:c6:95:7f:ec:a1:dd:&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;                    56:da:ca:fa:b4:4c:3a:aa:f6:b5:d4:e7:2a:d8:0a:&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;                    f7:23:55:a8:28:d6:0e:02:66:9a:f5:6d:27:5b:af:&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;                    9a:60:d6:7a:f8:e0:4b:df:39:84:7d:a7:8a:27:fd:&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;                    ce:58:a6:e1:cd:ed:8d:c7:86:90:06:98:a6:e1:8c:&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;                    fb:6e:24:42:76:2f:62:de:89:bc:d8:7d:5d:39:1e:&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;                    56:1d&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;                Exponent: 65537 (0x10001)&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        Attributes:&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;            a0:00&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    Signature Algorithm: sha256WithRSAEncryption&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        08:77:88:c7:95:33:2b:c8:91:d3:0e:12:ff:72:04:9b:e6:b4:&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        48:60:90:bb:c0:9d:9f:bc:67:ee:27:09:6b:e8:76:69:95:90:&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        59:18:3a:f6:ef:59:58:70:42:79:e9:50:f2:5f:32:c4:c7:57:&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        9a:ff:87:fe:23:72:05:a3:04:ba:02:57:2f:63:66:2b:27:06:&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        3b:28:44:fe:47:df:06:0e:ca:6b:05:d8:20:d9:1a:52:c6:92:&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        4f:7b:8a:c5:d6:b5:83:8d:47:4f:25:40:85:8b:e0:1c:cd:0d:&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        1a:03:a7:24:23:36:03:86:54:29:5e:27:93:5c:a3:dd:9e:b1:&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        b4:71:5e:af:b0:90:4c:43:aa:00:a3:c7:99:c4:39:7b:1d:5d:&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        bd:b0:af:d1:25:16:b5:93:4a:b7:1a:9c:f2:86:92:a6:3d:37:&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        e2:03:48:a0:e0:7e:33:1c:4d:e7:4d:4b:70:6b:d1:0e:06:e8:&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        71:70:62:2d:65:1c:a9:75:94:ce:5f:54:6b:a7:95:c5:cb:17:&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        6d:52:0c:7d:78:ab:20:d2:cc:ac:fd:21:a0:ad:3b:54:f9:80:&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        22:a2:ba:f5:4c:7e:23:38:a9:d3:cb:59:40:4e:32:27:dc:c4:&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        21:a0:14:21:3e:5e:96:c6:6b:55:71:6c:76:fa:92:e4:95:81:&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        16:f8:cf:98&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;可以看到他的全部内容，公钥以及其他内容&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;当然我们也可以使用如下命令&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;openssl req -new -keyout server.key -out server.csr
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;生成CSR和私钥key，有了这两个之后，就可以通过CA机构生成证书。&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;ps：&lt;br&gt;证书相关的有太多的格式，.pem, .cer, .key, .p12 等等，为什么这么多呢？&lt;br&gt;首先要知道，X.509是常见通用的证书格式。所有的证书都符合为Public Key Infrastructure (PKI) 制定的 ITU-T X509 国际标准。&lt;/p&gt;
+&lt;p&gt;.cer/.crt是用于存放证书，它是2进制形式存放的，不含私钥。&lt;/p&gt;
+&lt;p&gt;.pem跟crt/cer的区别是它以Ascii来表示。&lt;/p&gt;
+&lt;p&gt;pfx/p12用于存放个人证书/私钥，他通常包含保护密码，2进制方式&lt;/p&gt;
+&lt;p&gt;der,cer文件一般是二进制格式的，只放证书，不含私钥&lt;/p&gt;
+&lt;p&gt;pem文件一般是文本格式的，可以放证书或者私钥，或者两者都有&lt;/p&gt;
+&lt;p&gt;key文件，pem如果只含私钥的话，一般用.key扩展名，而且可以有密码保护&lt;/p&gt;
+&lt;p&gt;p12文件是二进制格式，同时含私钥和证书，通常有保护密码&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;a href=&quot;http://blog.chinaunix.net/uid-26575352-id-3073802.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://blog.chinaunix.net/uid-26575352-id-3073802.html&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;在iOS开发的过程中， 必然需要制作证书，开发者证书，发布证书，但是在制作他们的第一步都是先生成一个CSR文件&lt;img src=&quot;http://o981ibvmi.bkt.clouddn.com/Screen%20Shot%202016-09-28%20at%204.35.22%20PM.png&quot; alt=&quot;证书机构申请&quot;&gt;&lt;/p&gt;
+&lt;p&gt;那么到底CSR是什么东西呢？可以参考下面官方介绍&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;a href=&quot;https://www.sslshopper.com/what-is-a-csr-certificate-signing-request.html&quot;&gt;What is a CSR (Certificate Signing Request)?&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;简单来说，CSR就是Certificate Signing Request的缩写，是从证书颁发机构生成证书时，需要的一串加密的文本信息，也是从证书颁发机构获取的，用文本工具打开，可以看到他是一串&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="iOS" scheme="http://theewind.github.io/tags/iOS/"/>
+    
+  </entry>
   
   <entry>
     <title>ipv6环境搭建</title>
@@ -719,7 +774,7 @@
     <link href="http://theewind.github.io/2016/07/14/%E7%BD%91%E7%BB%9C%E5%AD%A6%E4%B9%A0%E6%96%87%E7%AB%A0/"/>
     <id>http://theewind.github.io/2016/07/14/网络学习文章/</id>
     <published>2016-07-14T08:30:21.000Z</published>
-    <updated>2016-09-27T07:33:45.000Z</updated>
+    <updated>2016-09-27T09:24:22.000Z</updated>
     
     <content type="html">&lt;p&gt;下面的文章都是对网络介绍比较深入和有趣的，持续更新。。。&lt;/p&gt;
 &lt;h2 id=&quot;阮一峰&quot;&gt;&lt;a href=&quot;#阮一峰&quot; class=&quot;headerlink&quot; title=&quot;阮一峰&quot;&gt;&lt;/a&gt;阮一峰&lt;/h2&gt;&lt;p&gt;&lt;a href=&quot;http://www.ruanyifeng.com/blog/2013/06/rsa_algorithm_part_one.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;RSA算法原理（一）&lt;/a&gt;&lt;/p&gt;
@@ -732,6 +787,7 @@
 &lt;p&gt;&lt;a href=&quot;http://www.ruanyifeng.com/blog/2014/09/illustration-ssl.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;图解SSL/TLS协议&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;&lt;a href=&quot;http://www.360doc.com/content/14/0725/20/1073512_397054861.shtml&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;TCP/IP的三次握手与四次挥手详解&lt;/a&gt;  &lt;code&gt;渣渣360doc，还要登陆才能复制&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;&lt;a href=&quot;http://www.jianshu.com/p/db9c716c3558&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;iOS http &amp;amp; https &amp;amp; 网络请求过程&lt;/a&gt; 这篇文章的第一个动态度很不错，过程也挺清晰&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;http://www.pchou.info/ios/2016/06/05/ios-supporting-ipv6.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;IOS支持IPv6 DNS64/NAT64网络&lt;/a&gt;&lt;/p&gt;
 &lt;h2 id=&quot;公众号：码农翻身&quot;&gt;&lt;a href=&quot;#公众号：码农翻身&quot; class=&quot;headerlink&quot; title=&quot;公众号：码农翻身&quot;&gt;&lt;/a&gt;公众号：码农翻身&lt;/h2&gt;&lt;p&gt;&lt;a href=&quot;http://mp.weixin.qq.com/s?__biz=MzAxOTc0NzExNg==&amp;amp;mid=2665513017&amp;amp;idx=1&amp;amp;sn=5550ee714abd36d0b580713f673e670b&amp;amp;scene=21#wechat_redirect&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;CPU阿甘&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;&lt;a href=&quot;http://toutiao.com/i6301559248492954113/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;我是一个路由器（我是一个网卡姊妹篇）&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;&lt;a href=&quot;http://toutiao.com/i6301233473227063810/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;我是一个网卡&lt;/a&gt;&lt;/p&gt;
@@ -830,35 +886,6 @@ if (!info) {
     
     
       <category term="iOS" scheme="http://theewind.github.io/tags/iOS/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>shadowsocks无法更新pac</title>
-    <link href="http://theewind.github.io/2016/07/01/shadowsocket%E6%97%A0%E6%B3%95%E6%9B%B4%E6%96%B0pac/"/>
-    <id>http://theewind.github.io/2016/07/01/shadowsocket无法更新pac/</id>
-    <published>2016-07-01T05:06:05.000Z</published>
-    <updated>2016-07-01T05:16:40.000Z</updated>
-    
-    <content type="html">&lt;p&gt;这两天上网发现facebook竟然不能登录，于是首先怀疑了是不是ss账号的问题，换了几个服务器，自己的电脑还是不行，但是其他人的都可以，于是就想是不是gfwlist需要更新先，然后就操作&lt;strong&gt;·Update pac from GFWList·&lt;/strong&gt;，但是发现竟然还是request error 404. 之前自己也遇到过这样的事情，但是读没有怎么在意，今天因为要登陆facebook，所以才决定解决下的。&lt;/p&gt;
-&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
-&lt;p&gt;google一下：&lt;a href=&quot;https://github.com/shadowsocks/shadowsocks-iOS/issues/212&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;不能更新 PAC 文件&lt;/a&gt;发现已经在shadowsocks的issues中提交了问题，下面分析了具体的原因，自己一路看下来，决定使用&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;sudo easy_install pip  //已经安装则不需要了
-sudo pip install gfwlist2pac
-sh update_gfwlist.sh
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;但是当打开连接&lt;a href=&quot;https://gist.github.com/VincentSit/b5b112d273513f153caf23a9da112b3a&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://gist.github.com/VincentSit/b5b112d273513f153caf23a9da112b3a&lt;/a&gt;取源码的时候，发现这个都打不开，真是无语（我竟然忍受了这么久。。。）。于是在github中搜索，发现还是有蛮多好心人把这个存下来的，然后自己就顺便copy了下来，代码如下:&lt;/p&gt;
-&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;4&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;5&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;6&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;7&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;8&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;9&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;10&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;11&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;12&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;13&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;14&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;15&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;16&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;17&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;18&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;19&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;20&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;21&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;22&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;23&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;24&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;25&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;26&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;27&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;28&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;29&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;30&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;31&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;32&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;33&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;34&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;35&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;36&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;37&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;38&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;39&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;40&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;41&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;42&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;43&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;44&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;45&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;46&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;47&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;48&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;49&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;50&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;51&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;52&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;53&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;54&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;55&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;56&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;57&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;58&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;59&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;60&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;61&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;62&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;63&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;64&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;65&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;66&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;67&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;68&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;69&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;70&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;71&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;#!/bin/bash&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;# update_gfwlist.sh&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;# Author : VincentSit&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;# Copyright (c) http://xuexuefeng.com&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;#&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;# Example usage&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;#&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;# ./whatever-you-name-this.sh&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;#&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;# Task Scheduling (Optional)&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;#&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;#	crontab -e&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;#&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;# add:&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;# 30 9 * * * sh /path/whatever-you-name-this.sh&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;#&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;# Now it will update the PAC at 9:30 every day.&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;#&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;# Remember to chmod +x the script.&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;GFWLIST=&amp;quot;https://raw.githubusercontent.com/gfwlist/gfwlist/master/gfwlist.txt&amp;quot;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;PROXY=&amp;quot;127.0.0.1:1080&amp;quot;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;USER_RULE_NAME=&amp;quot;user-rule.txt&amp;quot;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;check_module_installed()&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;	pip list | grep gfwlist2pac &amp;amp;&amp;gt; /dev/null&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;	if [ $? -eq 1 ]; then&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;		echo &amp;quot;Installing gfwlist2pac.&amp;quot;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;		pip install gfwlist2pac&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;	fi&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&amp;#125;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;update_gfwlist()&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;	echo &amp;quot;Downloading gfwlist.&amp;quot;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;	curl -s &amp;quot;$GFWLIST&amp;quot; --fail --socks5-hostname &amp;quot;$PROXY&amp;quot; --output /tmp/gfwlist.txt&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;	if [[ $? -ne 0 ]]; then&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;		echo &amp;quot;abort due to error occurred.&amp;quot;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    exit 1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;	fi&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;	cd ~/.ShadowsocksX || exit 1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;	if [ -f &amp;quot;gfwlist.js&amp;quot; ]; then&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;		mv gfwlist.js ~/.Trash&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;	fi&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;	if [ ! -f $USER_RULE_NAME ]; then&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;		touch $USER_RULE_NAME&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;	fi&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;	/usr/local/bin/gfwlist2pac \&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    --input /tmp/gfwlist.txt \&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    --file gfwlist.js \&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    --proxy &amp;quot;SOCKS5 $PROXY; SOCKS $PROXY; DIRECT&amp;quot; \&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    --user-rule $USER_RULE_NAME \&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    --precise&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;  rm -f /tmp/gfwlist.txt&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;  echo &amp;quot;Updated.&amp;quot;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&amp;#125;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;check_module_installed&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;update_gfwlist&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;p&gt;以后需要更新rule的时候，就自己执行以下就可以了。&lt;/p&gt;
-</content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;这两天上网发现facebook竟然不能登录，于是首先怀疑了是不是ss账号的问题，换了几个服务器，自己的电脑还是不行，但是其他人的都可以，于是就想是不是gfwlist需要更新先，然后就操作&lt;strong&gt;·Update pac from GFWList·&lt;/strong&gt;，但是发现竟然还是request error 404. 之前自己也遇到过这样的事情，但是读没有怎么在意，今天因为要登陆facebook，所以才决定解决下的。&lt;/p&gt;
-    
-    </summary>
-    
-    
-      <category term="shadowsocks" scheme="http://theewind.github.io/tags/shadowsocks/"/>
     
   </entry>
   
