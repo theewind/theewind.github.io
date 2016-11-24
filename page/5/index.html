@@ -187,6 +187,75 @@
 
       <div class="body-wrap">
   
+    <article id="post-前端代码学习之布局" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/06/30/前端代码学习之布局/" class="article-date">
+  	<time datetime="2016-06-30T06:12:05.000Z" itemprop="datePublished">2016-06-30</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/06/30/前端代码学习之布局/">前端代码学习之布局</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="1-选择器"><a href="#1-选择器" class="headerlink" title="1 选择器"></a>1 选择器</h2><p>div p    div下所有p元素，可能多个层级<br>div&gt;p    div下的子元素p，只能是一级<br>div+p    div兄弟节点的第一个p<br>div~p    div兄弟节点所有p元素</p>
+<p>class^=是什么意思啊</p>
+<p>这是css属性选择器的一种：[attribute^=value] ，用来匹配属性值以指定值开头的每个元素。例如：<br>[class^=”test”] { background:#ffff00; }</p>
+<p>表示设置 class 属性值以 “test” 开头的所有元素的背景色，也就是说对class=”test”, class=”test1” class=”test-001”的元素都是有效的。<br>除此之外，还有一些常用的css属性选择器如下：</p>
+<ul>
+<li>[attribute~=value] 选取属性值中包含指定词汇的元素</li>
+<li>[attribute|=value]  选取带有以指定值开头的属性值的元素，该值必须是整个单词。</li>
+<li>[attribute$=value]    匹配属性值以指定值结尾的每个元素</li>
+<li>[attribute*=value]    匹配属性值中包含指定值的每个元素</li>
+</ul>
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/css/">css</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/前端/">前端</a></li></ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a  href="/2016/06/30/前端代码学习之布局/#more">more >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
     <article id="post-css中的伪元素after和before的默认顺序" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -504,74 +573,9 @@
 
 
   
-    <article id="react-react-native-新语法" class="article article-type-react" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2016/06/20/react-native-新语法/" class="article-date">
-  	<time datetime="2016-06-20T05:12:08.000Z" itemprop="datePublished">2016-06-20</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/06/20/react-native-新语法/">react native 新语法</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>最新的RN，已经全部转移到ES6，所以很多之前老的写法，会报错，比如<br>在react-native中引用React的做法发生了变更（在当前版本老的做法会报错）：</p>
-<p>之前</p>
-<pre><code>import React, { Component, View } from &apos;react-native&apos;;
-</code></pre><p>现在</p>
-<pre><code>import React, { Component } from &apos;react&apos;;
-import { View } from &apos;react-native&apos;;
-</code></pre><p>具体有很多，可以参考<a href="https://www.facebook.com/groups/reactnativeoss/permalink/1540818949548067/" target="_blank" rel="external">这篇文章</a> 科学上网。</p>
-<p>具体就是：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div></pre></td><td class="code"><pre><div class="line">n React 0.14 for Web we started splitting up the React package into two packages `react` and `react-dom`. Now I&apos;d like to make this consistent in React Native. The new package structure would be...</div><div class="line">&quot;react&quot;:</div><div class="line">Children</div><div class="line">Component</div><div class="line">PropTypes</div><div class="line">createElement</div><div class="line">cloneElement</div><div class="line">isValidElement</div><div class="line">createClass</div><div class="line">createFactory</div><div class="line">createMixin</div><div class="line">&quot;react-native&quot;:</div><div class="line">hasReactNativeInitialized</div><div class="line">findNodeHandle</div><div class="line">render</div><div class="line">unmountComponentAtNode</div><div class="line">unmountComponentAtNodeAndRemoveContainer</div><div class="line">unstable_batchedUpdates</div><div class="line">View</div><div class="line">Text</div><div class="line">ListView</div><div class="line">...</div><div class="line">and all the other native components.</div><div class="line">So for a lot of components you actually have to import both packages.</div><div class="line">var React = require(&apos;react&apos;);</div><div class="line">var &#123; View &#125; = require(&apos;react-native&apos;);</div><div class="line">var Foo = React.createClass(&#123;</div><div class="line">render() &#123; return &lt;View /&gt;; &#125;</div><div class="line">&#125;);</div><div class="line">However, for components that doesn&apos;t know anything about their rendering environment just need the `react` package as a dependency.</div><div class="line">Currently a lot of these are accessible from both packages but we&apos;d start issuing warnings if you use the wrong one.</div><div class="line">This would be a little spammy so ideally we would have a simple codemod script that you can run on your imports to clean them up.</div><div class="line">E.g. something that translates existing patterns like:</div><div class="line">var React = require(&apos;react-native&apos;);</div><div class="line">var &#123; View &#125; = React;</div><div class="line">into:</div><div class="line">var React = require(&apos;react&apos;);</div><div class="line">var &#123; View &#125; = require(&apos;react-native&apos;);</div><div class="line">If anyone wants to write and share that script with the community, that would be highly appreciated. We can start promoting it right now before we deprecate it.</div></pre></td></tr></table></figure>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/react-native/">react native</a></li></ul>
-	</div>
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/4/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><a class="page-number" href="/page/7/">7</a><a class="page-number" href="/page/8/">8</a><a class="extend next" rel="next" href="/page/6/">Next &raquo;</a>
+      <a class="extend prev" rel="prev" href="/page/4/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><a class="page-number" href="/page/7/">7</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/">9</a><a class="extend next" rel="next" href="/page/6/">Next &raquo;</a>
     </nav>
   
 </div>

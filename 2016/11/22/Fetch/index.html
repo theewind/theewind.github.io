@@ -4,17 +4,21 @@
   <meta charset="utf-8">
   
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
-  <title>Archives | sanfeng’s blog</title>
+  <title>iOS 开发记录 | sanfeng’s blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="这是我的三风的博客">
-<meta property="og:type" content="website">
-<meta property="og:title" content="sanfeng’s blog">
-<meta property="og:url" content="http://theewind.github.io/archives/page/6/index.html">
+  <meta name="description" content="###background Fetch 注意使用background Fetch 主要记得要回调completionHandler(UIBackgroundFetchResultNewData)等
+调试有两种方式1 程序进入后台，选择xcode - debug - simulate background fetch，2 选择scheme的 launch due to a background fe">
+<meta property="og:type" content="article">
+<meta property="og:title" content="iOS 开发记录">
+<meta property="og:url" content="http://theewind.github.io/2016/11/22/Fetch/index.html">
 <meta property="og:site_name" content="sanfeng’s blog">
-<meta property="og:description" content="这是我的三风的博客">
+<meta property="og:description" content="###background Fetch 注意使用background Fetch 主要记得要回调completionHandler(UIBackgroundFetchResultNewData)等
+调试有两种方式1 程序进入后台，选择xcode - debug - simulate background fetch，2 选择scheme的 launch due to a background fe">
+<meta property="og:updated_time" content="2016-11-24T10:12:34.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="sanfeng’s blog">
-<meta name="twitter:description" content="这是我的三风的博客">
+<meta name="twitter:title" content="iOS 开发记录">
+<meta name="twitter:description" content="###background Fetch 注意使用background Fetch 主要记得要回调completionHandler(UIBackgroundFetchResultNewData)等
+调试有两种方式1 程序进入后台，选择xcode - debug - simulate background fetch，2 选择scheme的 launch due to a background fe">
   
   
     <link rel="icon" href="/favicon.png">
@@ -185,212 +189,116 @@
 	</div>
 </nav>
 
-      <div class="body-wrap">
+      <div class="body-wrap"><article id="post-Fetch" class="article article-type-post" itemscope itemprop="blogPost">
   
+    <div class="article-meta">
+      <a href="/2016/11/22/Fetch/" class="article-date">
+  	<time datetime="2016-11-22T10:29:39.000Z" itemprop="datePublished">2016-11-22</time>
+</a>
+    </div>
   
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
     
     
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      iOS 开发记录
+    </h1>
+  
+
+      </header>
       
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS/">iOS</a></li></ul>
+	</div>
+
+        
+
+        <div class="clearfix"></div>
+      </div>
       
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2016" class="archive-year">2016</a>
-        </div>
-        <div class="archives">
     
-    <article class="archive-article archive-type-react">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2016/06/20/react-native-新语法/" class="archive-article-date">
-  	<time datetime="2016-06-20T05:12:08.000Z" itemprop="datePublished">Jun 20</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/06/20/react-native-新语法/">react native 新语法</a>
-    </h1>
-  
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>###background Fetch 注意<br>使用background Fetch 主要记得要回调completionHandler(UIBackgroundFetchResultNewData)等</p>
+<p>调试有两种方式<br>1 程序进入后台，选择xcode - debug - simulate background fetch，<br>2 选择scheme的 launch due to a background fetch event 这是谁debug调试的时候，先执行fetch功能，然后自己通过主动启动应用，查看是否执行了fetch</p>
+<p>###离线缓存<br>参考个大厂商的缓存，一种是看过即缓存，比如网易新闻，还有一种直接是离线下载，比如腾讯新闻。<br>针对这两个实现，自己大概想了下，一个是基于webview的缓存实现，另外一种，应该是通过服务下载资源到本地，然后存储到数据库中，比如coredata等。</p>
+<p>webview的缓存实现主要两种，一个html5的manifest文件缓存+url cache<br>还有一个就是采用NSURLProtocol实现存储，可以参考<a href="https://github.com/rnapier/RNCachingURLProtocol" target="_blank" rel="external">https://github.com/rnapier/RNCachingURLProtocol</a> 就是将请求过的内容都缓存下来。</p>
+<p>至于通过服务现在的，这里就不做多处理，因为他们可以把没有看过的 内容都离线到本地，就是 普通的文件下载。</p>
+<blockquote>
+<p><a href="http://www.jcodecraeer.com/a/anzhuokaifa/androidkaifa/2015/0417/2736.html" target="_blank" rel="external">http://www.jcodecraeer.com/a/anzhuokaifa/androidkaifa/2015/0417/2736.html</a><br> <a href="https://github.com/rnapier/RNCachingURLProtocol" target="_blank" rel="external">https://github.com/rnapier/RNCachingURLProtocol</a><br> <a href="https://my.oschina.net/u/2340880/blog?sort=time&amp;p=9&amp;temp=1479982318849" target="_blank" rel="external">https://my.oschina.net/u/2340880/blog?sort=time&amp;p=9&amp;temp=1479982318849</a> 晖少的博客</p>
+</blockquote>
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/react-native/">react native</a></li></ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
+      
+    </div>
+    
   </div>
-</article>
   
     
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2016/06/13/批量生成二维码/" class="archive-article-date">
-  	<time datetime="2016-06-13T07:32:14.000Z" itemprop="datePublished">Jun 13</time>
-</a>
-        </div>
-    	 
+<nav id="article-nav">
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/06/13/批量生成二维码/">批量生成二维码</a>
-    </h1>
   
+    <a href="/2016/09/28/iOS证书解密/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">iOS证书之CSR文件</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/python/">python</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/qrcode/">qrcode</a></li></ul>
+  
+</article>
+
+
+<div class="share_jia">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">分享到: &nbsp; </span>
+		<a class="jiathis_button_facebook"></a> 
+    <a class="jiathis_button_twitter"></a>
+    <a class="jiathis_button_plus"></a> 
+    <a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+    <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
 	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
 
-          
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2016/06/12/正则表达式的学习/" class="archive-article-date">
-  	<time datetime="2016-06-12T08:26:37.000Z" itemprop="datePublished">Jun 12</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/06/12/正则表达式的学习/">正则表达式的学习</a>
-    </h1>
-  
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/正则表达式/">正则表达式</a></li></ul>
-	</div>
 
-          
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-React Native 学习之F8app代码阅读">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2016/06/07/study_f8app/" class="archive-article-date">
-  	<time datetime="2016-06-07T15:04:01.000Z" itemprop="datePublished">Jun 7</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/06/07/study_f8app/">study</a>
-    </h1>
-  
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/React-Native/">React Native</a></li></ul>
-	</div>
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="Fetch" data-title="iOS 开发记录" data-url="http://theewind.github.io/2016/11/22/Fetch/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"theewind"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
 
-          
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2016/06/06/rac-willDeallocSignal/" class="archive-article-date">
-  	<time datetime="2016-06-06T06:46:23.000Z" itemprop="datePublished">Jun 6</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/06/06/rac-willDeallocSignal/">rac_willDeallocSignal的加载时机</a>
-    </h1>
-  
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/RAC/">RAC</a></li></ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2016/06/03/doubleListViewDemo/" class="archive-article-date">
-  	<time datetime="2016-06-03T03:41:01.000Z" itemprop="datePublished">Jun 3</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/06/03/doubleListViewDemo/">React Native 双listView交互动画</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/react-native/">react native</a></li></ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
-
-    
-    <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/archives/page/5/">&laquo; Prev</a><a class="page-number" href="/archives/">1</a><span class="space">&hellip;</span><a class="page-number" href="/archives/page/4/">4</a><a class="page-number" href="/archives/page/5/">5</a><span class="page-number current">6</span><a class="page-number" href="/archives/page/7/">7</a><a class="page-number" href="/archives/page/8/">8</a><a class="page-number" href="/archives/page/9/">9</a><a class="extend next" rel="next" href="/archives/page/7/">Next &raquo;</a>
-    </nav>
-  
 
 </div>
       <footer id="footer">
@@ -416,8 +324,8 @@
 		mathjax: true,
 		animate: true,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: flase

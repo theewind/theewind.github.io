@@ -187,6 +187,76 @@
 
       <div class="body-wrap">
   
+    <article id="post-iOS代码编译速度优化" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/08/11/iOS代码编译速度优化/" class="article-date">
+  	<time datetime="2016-08-11T02:26:29.000Z" itemprop="datePublished">2016-08-11</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/08/11/iOS代码编译速度优化/">iOS代码编译速度优化</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="cleaner源码编译速度优化方案"><a href="#cleaner源码编译速度优化方案" class="headerlink" title="cleaner源码编译速度优化方案"></a>cleaner源码编译速度优化方案</h2><ol>
+<li>参考最新的cleaner，主要是清理头文件之间的依赖，尽量都采取直接依赖，而不是通过间接依赖，比A依赖B，B依赖C。而A如果依赖C的时候，最好是直接通过采用A依赖C的操作，而不是A-&gt;B-&gt;C的操作。</li>
+</ol>
+<p>cleaner要求，在所有的.h文件中，基本都采用@class，@protocol的形式添加声明，然后在.m文件中添加#import的操作，这样是可以最小限度的减少依赖环节，但是也是有弊端的：</p>
+<p>比如常用的model嵌套，如果采用@class的声明的方式，在vm或者v中使用model的时候，都要将他的子model的头文件也添加上，还是比较繁琐的。但是采用这样的操作，可以最大限度的降低头文件依赖和编译时间，所以平台也是在大力推广。</p>
+<ol>
+<li><p>同时为了解决各个模块混乱依赖的问题，公司也要求将prefix.h文件给去掉，但是个人感觉还是可以添加一最常用的，比如 UIKit，NSFoundation等</p>
+</li>
+<li><p>pch的，苹果在xcode6中已经不建议使用了，原因可能是，大家总是把一些头文件都放到prefix中，就导致各个头文件都会包含所有prefix中所包含的，每个文件依赖增多，编译时间也会增加。参考<a href="http://qualitycoding.org/objective-c-code-smells/">Code Smells in Objective-C</a></p>
+</li>
+</ol>
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS/">iOS</a></li></ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a  href="/2016/08/11/iOS代码编译速度优化/#more">more >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
     <article id="post-carthage初入" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -503,69 +573,9 @@
 
 
   
-    <article id="post-UIKit主线程检查" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2016/07/18/UIKit主线程检查/" class="article-date">
-  	<time datetime="2016-07-18T02:57:04.000Z" itemprop="datePublished">2016-07-18</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/07/18/UIKit主线程检查/">UIKit主线程检查</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>iOS开发过程中，很多时候都会使用GCD及NSOperation等涉及到多线程的操作，这样就算是一个老手，也可能会遇到非主线程刷新UI的操作，而结果就是遇到各种不确定的问题，<a href="https://www.objccn.io/issue-2-4/">这篇文章:线程安全类的设计</a>向我们解释了为什么UIKit是非线程安全的，然后也介绍了一个<a href="https://gist.github.com/steipete/5664345">UIKit主线程检查的机制</a>，今天自己又复习下这个内容。</p>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS/">iOS</a></li></ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a  href="/2016/07/18/UIKit主线程检查/#more">more >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/2/">&laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><a class="extend next" rel="next" href="/page/4/">Next &raquo;</a>
+      <a class="extend prev" rel="prev" href="/page/2/">&laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/">9</a><a class="extend next" rel="next" href="/page/4/">Next &raquo;</a>
     </nav>
   
 </div>

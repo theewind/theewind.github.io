@@ -187,6 +187,70 @@
 
       <div class="body-wrap">
   
+    <article id="post-Fetch" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/11/22/Fetch/" class="article-date">
+  	<time datetime="2016-11-22T10:29:39.000Z" itemprop="datePublished">2016-11-22</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/11/22/Fetch/">iOS 开发记录</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>###background Fetch 注意<br>使用background Fetch 主要记得要回调completionHandler(UIBackgroundFetchResultNewData)等</p>
+<p>调试有两种方式<br>1 程序进入后台，选择xcode - debug - simulate background fetch，<br>2 选择scheme的 launch due to a background fetch event 这是谁debug调试的时候，先执行fetch功能，然后自己通过主动启动应用，查看是否执行了fetch</p>
+<p>###离线缓存<br>参考个大厂商的缓存，一种是看过即缓存，比如网易新闻，还有一种直接是离线下载，比如腾讯新闻。<br>针对这两个实现，自己大概想了下，一个是基于webview的缓存实现，另外一种，应该是通过服务下载资源到本地，然后存储到数据库中，比如coredata等。</p>
+<p>webview的缓存实现主要两种，一个html5的manifest文件缓存+url cache<br>还有一个就是采用NSURLProtocol实现存储，可以参考<a href="https://github.com/rnapier/RNCachingURLProtocol" target="_blank" rel="external">https://github.com/rnapier/RNCachingURLProtocol</a> 就是将请求过的内容都缓存下来。</p>
+<p>至于通过服务现在的，这里就不做多处理，因为他们可以把没有看过的 内容都离线到本地，就是 普通的文件下载。</p>
+<blockquote>
+<p><a href="http://www.jcodecraeer.com/a/anzhuokaifa/androidkaifa/2015/0417/2736.html" target="_blank" rel="external">http://www.jcodecraeer.com/a/anzhuokaifa/androidkaifa/2015/0417/2736.html</a><br> <a href="https://github.com/rnapier/RNCachingURLProtocol" target="_blank" rel="external">https://github.com/rnapier/RNCachingURLProtocol</a><br> <a href="https://my.oschina.net/u/2340880/blog?sort=time&amp;p=9&amp;temp=1479982318849" target="_blank" rel="external">https://my.oschina.net/u/2340880/blog?sort=time&amp;p=9&amp;temp=1479982318849</a> 晖少的博客</p>
+</blockquote>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS/">iOS</a></li></ul>
+	</div>
+
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
     <article id="post-iOS证书解密" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -499,69 +563,9 @@
 
 
   
-    <article id="post-runloop监控主线程" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2016/09/12/runloop监控主线程/" class="article-date">
-  	<time datetime="2016-09-12T07:37:09.000Z" itemprop="datePublished">2016-09-12</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/09/12/runloop监控主线程/">runloop监控主线程</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>前几天读了关于微信监控内存卡顿的文章，其中介绍可以同过监控主线程runloop的时间来记录卡顿，当cpu为100%且runloop运行2秒以上时，就会把当前堆栈的所有信息给dump下来，然后上传发服务器，后续再继续进行分析。</p>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS/">iOS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/runLoop/">runLoop</a></li></ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a  href="/2016/09/12/runloop监控主线程/#more">more >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
   
     <nav id="page-nav">
-      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
+      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/">9</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
     </nav>
   
 </div>

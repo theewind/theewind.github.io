@@ -5,7 +5,7 @@
   <link href="//atom.xml" rel="self"/>
   
   <link href="http://theewind.github.io/"/>
-  <updated>2016-09-28T09:18:59.000Z</updated>
+  <updated>2016-11-24T10:12:34.000Z</updated>
   <id>http://theewind.github.io/</id>
   
   <author>
@@ -16,11 +16,40 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>iOS 开发记录</title>
+    <link href="http://theewind.github.io/2016/11/22/Fetch/"/>
+    <id>http://theewind.github.io/2016/11/22/Fetch/</id>
+    <published>2016-11-22T10:29:39.000Z</published>
+    <updated>2016-11-24T10:12:34.000Z</updated>
+    
+    <content type="html">&lt;p&gt;###background Fetch 注意&lt;br&gt;使用background Fetch 主要记得要回调completionHandler(UIBackgroundFetchResultNewData)等&lt;/p&gt;
+&lt;p&gt;调试有两种方式&lt;br&gt;1 程序进入后台，选择xcode - debug - simulate background fetch，&lt;br&gt;2 选择scheme的 launch due to a background fetch event 这是谁debug调试的时候，先执行fetch功能，然后自己通过主动启动应用，查看是否执行了fetch&lt;/p&gt;
+&lt;p&gt;###离线缓存&lt;br&gt;参考个大厂商的缓存，一种是看过即缓存，比如网易新闻，还有一种直接是离线下载，比如腾讯新闻。&lt;br&gt;针对这两个实现，自己大概想了下，一个是基于webview的缓存实现，另外一种，应该是通过服务下载资源到本地，然后存储到数据库中，比如coredata等。&lt;/p&gt;
+&lt;p&gt;webview的缓存实现主要两种，一个html5的manifest文件缓存+url cache&lt;br&gt;还有一个就是采用NSURLProtocol实现存储，可以参考&lt;a href=&quot;https://github.com/rnapier/RNCachingURLProtocol&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://github.com/rnapier/RNCachingURLProtocol&lt;/a&gt; 就是将请求过的内容都缓存下来。&lt;/p&gt;
+&lt;p&gt;至于通过服务现在的，这里就不做多处理，因为他们可以把没有看过的 内容都离线到本地，就是 普通的文件下载。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;a href=&quot;http://www.jcodecraeer.com/a/anzhuokaifa/androidkaifa/2015/0417/2736.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://www.jcodecraeer.com/a/anzhuokaifa/androidkaifa/2015/0417/2736.html&lt;/a&gt;&lt;br&gt; &lt;a href=&quot;https://github.com/rnapier/RNCachingURLProtocol&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://github.com/rnapier/RNCachingURLProtocol&lt;/a&gt;&lt;br&gt; &lt;a href=&quot;https://my.oschina.net/u/2340880/blog?sort=time&amp;amp;p=9&amp;amp;temp=1479982318849&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://my.oschina.net/u/2340880/blog?sort=time&amp;amp;p=9&amp;amp;temp=1479982318849&lt;/a&gt; 晖少的博客&lt;/p&gt;
+&lt;/blockquote&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;###background Fetch 注意&lt;br&gt;使用background Fetch 主要记得要回调completionHandler(UIBackgroundFetchResultNewData)等&lt;/p&gt;
+&lt;p&gt;调试有两种方式&lt;br&gt;1 程序进入后台，选择xcode
+    
+    </summary>
+    
+    
+      <category term="iOS" scheme="http://theewind.github.io/tags/iOS/"/>
+    
+  </entry>
+  
+  <entry>
     <title>iOS证书之CSR文件</title>
     <link href="http://theewind.github.io/2016/09/28/iOS%E8%AF%81%E4%B9%A6%E8%A7%A3%E5%AF%86/"/>
     <id>http://theewind.github.io/2016/09/28/iOS证书解密/</id>
     <published>2016-09-28T08:28:47.000Z</published>
-    <updated>2016-09-28T09:18:59.000Z</updated>
+    <updated>2016-09-28T10:04:27.000Z</updated>
     
     <content type="html">&lt;p&gt;在iOS开发的过程中， 必然需要制作证书，开发者证书，发布证书，但是在制作他们的第一步都是先生成一个CSR文件&lt;br&gt;&lt;img src=&quot;http://o981ibvmi.bkt.clouddn.com/Screen%20Shot%202016-09-28%20at%204.35.22%20PM.png&quot; alt=&quot;证书机构申请&quot;&gt;&lt;/p&gt;
 &lt;p&gt;那么到底CSR是什么东西呢？可以参考下面官方介绍&lt;/p&gt;
@@ -51,6 +80,17 @@
 &lt;p&gt;p12文件是二进制格式，同时含私钥和证书，通常有保护密码&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;&lt;a href=&quot;http://blog.chinaunix.net/uid-26575352-id-3073802.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://blog.chinaunix.net/uid-26575352-id-3073802.html&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;后续开发需要，证书及配置文件的制作，请参考&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;http://www.jianshu.com/p/9d9e3699515e&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;iOS开发证书与配置文件的使用&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Provisioning Profile文件包含了上述所有内容：证书，App ID，设备，后缀名为.mobileprovision。&lt;br&gt;&amp;gt;&lt;br&gt;一个Provisioning Profile对应一个Explicit App ID或Wildcard App ID。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Provisioning Profile决定Xcode用哪个证书（公钥）/私钥组合（Key Pair/Signing Identity）来签名应用程序（Signing Product）,将在应用程序打包时嵌入到.ipa包里。&lt;/p&gt;
+&lt;p&gt;Provisioning Profile把这些信息全部打包在一起，方便我们在调试和发布程序打包时使用。这样，只要在不同的情况下选择不同的Provisioning Profile文件就可以了。&lt;/p&gt;
+&lt;p&gt;Provisioning Profile也分为Development和Distribution两类，有效期同Certificate一样。&lt;/p&gt;
+&lt;p&gt;Development版本的ProvisioningProfile用于开发调试，Distribution版本的ProvisioningProfile主要用于提交App Store审核，其不指定开发测试的Devices。&lt;/p&gt;
+&lt;p&gt;xcode开发时，需在XcodeTarget-&amp;gt;Build Settings-&amp;gt;Code Signing-&amp;gt;Provisioning Profile下配置对应的描述文件（Provisioning Profiles），然后在Code Signing Identity下拉可选择Identities from Profile “…”（即Provisioning Profile中包含的Certificates）。&lt;/p&gt;
+&lt;p&gt;在XcodeTarget-&amp;gt;Build Settings-&amp;gt;Code Signing-&amp;gt;Provisioning Profile可选择“Automatic”，xcode会根据该Target的“Bundle identifier”选择默认的配置文件及证书。&lt;/p&gt;
 &lt;/blockquote&gt;
 </content>
     
@@ -814,42 +854,6 @@ sudo python server.py
     <summary type="html">
     
       &lt;p&gt;继Protocol Buffers 之后Google开源的一个新的数据传输框架，FaltBuffers。先占个坑&lt;/p&gt;
-    
-    </summary>
-    
-    
-      <category term="互联网" scheme="http://theewind.github.io/tags/%E4%BA%92%E8%81%94%E7%BD%91/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>互联网协议相关内容资料</title>
-    <link href="http://theewind.github.io/2016/07/14/%E7%BD%91%E7%BB%9C%E5%AD%A6%E4%B9%A0%E6%96%87%E7%AB%A0/"/>
-    <id>http://theewind.github.io/2016/07/14/网络学习文章/</id>
-    <published>2016-07-14T08:30:21.000Z</published>
-    <updated>2016-09-27T09:24:22.000Z</updated>
-    
-    <content type="html">&lt;p&gt;下面的文章都是对网络介绍比较深入和有趣的，持续更新。。。&lt;/p&gt;
-&lt;h2 id=&quot;阮一峰&quot;&gt;&lt;a href=&quot;#阮一峰&quot; class=&quot;headerlink&quot; title=&quot;阮一峰&quot;&gt;&lt;/a&gt;阮一峰&lt;/h2&gt;&lt;p&gt;&lt;a href=&quot;http://www.ruanyifeng.com/blog/2013/06/rsa_algorithm_part_one.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;RSA算法原理（一）&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&lt;a href=&quot;http://www.ruanyifeng.com/blog/2013/07/rsa_algorithm_part_two.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;RSA算法原理（二）&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&lt;a href=&quot;http://www.ruanyifeng.com/blog/2011/08/what_is_a_digital_signature.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;数字签名是什么？&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&lt;a href=&quot;http://www.ruanyifeng.com/blog/2012/05/internet_protocol_suite_part_i.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;互联网协议入门（一）&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&lt;a href=&quot;http://www.ruanyifeng.com/blog/2012/06/internet_protocol_suite_part_ii.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;互联网协议入门（二）&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&lt;a href=&quot;http://www.ruanyifeng.com/blog/2016/06/dns.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;DNS 原理入门&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&lt;a href=&quot;http://www.ruanyifeng.com/blog/2014/02/ssl_tls.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;SSL/TLS协议运行机制的概述&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&lt;a href=&quot;http://www.ruanyifeng.com/blog/2014/09/illustration-ssl.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;图解SSL/TLS协议&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&lt;a href=&quot;http://www.360doc.com/content/14/0725/20/1073512_397054861.shtml&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;TCP/IP的三次握手与四次挥手详解&lt;/a&gt;  &lt;code&gt;渣渣360doc，还要登陆才能复制&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;&lt;a href=&quot;http://www.jianshu.com/p/db9c716c3558&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;iOS http &amp;amp; https &amp;amp; 网络请求过程&lt;/a&gt; 这篇文章的第一个动态度很不错，过程也挺清晰&lt;/p&gt;
-&lt;p&gt;&lt;a href=&quot;http://www.pchou.info/ios/2016/06/05/ios-supporting-ipv6.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;IOS支持IPv6 DNS64/NAT64网络&lt;/a&gt;&lt;/p&gt;
-&lt;h2 id=&quot;公众号：码农翻身&quot;&gt;&lt;a href=&quot;#公众号：码农翻身&quot; class=&quot;headerlink&quot; title=&quot;公众号：码农翻身&quot;&gt;&lt;/a&gt;公众号：码农翻身&lt;/h2&gt;&lt;p&gt;&lt;a href=&quot;http://mp.weixin.qq.com/s?__biz=MzAxOTc0NzExNg==&amp;amp;mid=2665513017&amp;amp;idx=1&amp;amp;sn=5550ee714abd36d0b580713f673e670b&amp;amp;scene=21#wechat_redirect&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;CPU阿甘&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&lt;a href=&quot;http://toutiao.com/i6301559248492954113/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;我是一个路由器（我是一个网卡姊妹篇）&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&lt;a href=&quot;http://toutiao.com/i6301233473227063810/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;我是一个网卡&lt;/a&gt;&lt;/p&gt;
-</content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;下面的文章都是对网络介绍比较深入和有趣的，持续更新。。。&lt;/p&gt;
-&lt;h2 id=&quot;阮一峰&quot;&gt;&lt;a href=&quot;#阮一峰&quot; class=&quot;headerlink&quot; title=&quot;阮一峰&quot;&gt;&lt;/a&gt;阮一峰&lt;/h2&gt;&lt;p&gt;&lt;a href=&quot;http://www.ruanyifeng
     
     </summary>
     
