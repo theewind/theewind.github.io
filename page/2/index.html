@@ -187,6 +187,73 @@
 
       <div class="body-wrap">
   
+    <article id="post-perform执行时机" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/09/17/perform执行时机/" class="article-date">
+  	<time datetime="2016-09-17T14:51:42.000Z" itemprop="datePublished">2016-09-17</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/09/17/perform执行时机/">perform执行时机</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>在iOS开发中，大家都经常用到performSelector函数，但是他们的执行时机是怎么样的，这里做个简单的介绍。</p>
+<p>首先如果我们在主线程调用和在子线程调用下面的方法有什么区别呢？</p>
+<pre><code>[self performSelector:@selector(testttt) withObject:nil];
+</code></pre><p>试过后，就知道在主线程会执行testttt函数，而在子线程是不会执行的呢，为什么呢？这里就要涉及到runloop了，因为主线程的runloop默认是运行的，但是子线程的runloop默认是没有的，需要自己去创建并执行，通常调用如下</p>
+<pre><code>NSRunLoop *runLoop = [NSRunLoop currentRunLoop];
+子线程在没有第一次调用runloop是会先创建，然后在run。
+</code></pre><blockquote>
+<p>更多可以参考<a href="http://ios.jobbole.com/85759/">这里</a><br>
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS/">iOS</a></li></ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a  href="/2016/09/17/perform执行时机/#more">more >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
     <article id="post-runloop监控主线程" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -483,67 +550,6 @@
       
         <p class="article-more-link">
           <a  href="/2016/08/19/socket连接池的实现探索/#more">more >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="url-URL_encode的问题" class="article article-type-url" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2016/08/18/URL_encode的问题/" class="article-date">
-  	<time datetime="2016-08-18T11:39:46.000Z" itemprop="datePublished">2016-08-18</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/08/18/URL_encode的问题/">url encode的问题</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="URL参数encode的问题"><a href="#URL参数encode的问题" class="headerlink" title="URL参数encode的问题"></a>URL参数encode的问题</h1><p>外卖下单时，会先检测用户是否绑定了手机号，如果没有绑定，preview会提示进行绑定，跳转到绑定手机页面，如果绑定成功，就继续回到preview页面。</p>
-<p>这就需要将preview的URLAction传递给绑定手机页面，它再进行一个透传。</p>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/URL/">URL</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS/">iOS</a></li></ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a  href="/2016/08/18/URL_encode的问题/#more">more >></a>
         </p>
       
       <div class="clearfix"></div>

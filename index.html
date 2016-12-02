@@ -187,6 +187,66 @@
 
       <div class="body-wrap">
   
+    <article id="post-只支持横屏的应用调用竖屏系统库崩溃的问题" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/12/02/只支持横屏的应用调用竖屏系统库崩溃的问题/" class="article-date">
+  	<time datetime="2016-12-02T08:07:28.000Z" itemprop="datePublished">2016-12-02</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/12/02/只支持横屏的应用调用竖屏系统库崩溃的问题/">只支持横屏的应用调用竖屏系统库崩溃的问题</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>###横屏应用调用竖屏内容，crash</p>
+<p>今天在测试开发过程中，如果你的app只支持横屏，如下图<img src="http://o981ibvmi.bkt.clouddn.com/QQ20161202-1.png" alt="图片"><br>在设置中只支持横屏，这时候如果调用一些系统的只支持竖屏的应用，比如UIImagePickerViewcontroller，就会有崩溃，控制台显示如下：</p>
+<p>自己比较纠结的地方在于，控制台完全没有<img src="http://o981ibvmi.bkt.clouddn.com/QQ20161202-2.png" alt="上图"><br>内容的输出，所以比较不好发现，重新写了一个测试程序才正常输出了。</p>
+<p>ps：使用系统的库，CIDetector 自动识别二维码，发现如果二维码是拍照出来的，有比较多干扰，或者二维码内容不加多，CIDetector也是不能准确识别的。</p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS/">iOS</a></li></ul>
+	</div>
+
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
     <article id="post-Fetch" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -216,7 +276,8 @@
         <h2 id="background-Fetch-注意"><a href="#background-Fetch-注意" class="headerlink" title="background Fetch 注意"></a>background Fetch 注意</h2><p>使用background Fetch 主要记得要回调completionHandler(UIBackgroundFetchResultNewData)等</p>
 <p>调试有两种方式<br>1 程序进入后台，选择xcode - debug - simulate background fetch，<br>2 选择scheme的 launch due to a background fetch event 这是谁debug调试的时候，先执行fetch功能，然后自己通过主动启动应用，查看是否执行了fetch</p>
 <h2 id="离线缓存"><a href="#离线缓存" class="headerlink" title="离线缓存"></a>离线缓存</h2><p>参考个大厂商的缓存，一种是看过即缓存，比如网易新闻，还有一种直接是离线下载，比如腾讯新闻。<br>针对这两个实现，自己大概想了下，一个是基于webview的缓存实现，另外一种，应该是通过服务下载资源到本地，然后存储到数据库中，比如coredata等。</p>
-<p>webview的缓存实现主要两种，一个html5的manifest文件缓存+url cache<br>还有一个就是采用NSURLProtocol实现存储，可以参考<a href="https://github.com/rnapier/RNCachingURLProtocol" target="_blank" rel="external">https://github.com/rnapier/RNCachingURLProtocol</a> 就是将请求过的内容都缓存下来。</p>
+<p>webview的缓存实现主要两种，一个html5的manifest文件，也可以通过NSURLCache实现。<br>具体可以参考：<a href="http://www.cocoachina.com/ios/20161107/17981.html" target="_blank" rel="external">iOS开发网络——数据缓存</a></p>
+<p>还有一个就是采用NSURLProtocol实现存储，可以参考<a href="https://github.com/rnapier/RNCachingURLProtocol" target="_blank" rel="external">https://github.com/rnapier/RNCachingURLProtocol</a> 就是将请求过的内容都缓存下来。</p>
 <p>至于为什么说离线是通过服务下载的，因为他们可以把没有看过的内容都离线到本地，那就只能是是通过文件下载来实现。</p>
 <blockquote>
 <p><a href="http://www.jcodecraeer.com/a/anzhuokaifa/androidkaifa/2015/0417/2736.html" target="_blank" rel="external">http://www.jcodecraeer.com/a/anzhuokaifa/androidkaifa/2015/0417/2736.html</a><br> <a href="https://github.com/rnapier/RNCachingURLProtocol" target="_blank" rel="external">https://github.com/rnapier/RNCachingURLProtocol</a><br> <a href="https://my.oschina.net/u/2340880/blog?sort=time&amp;p=9&amp;temp=1479982318849" target="_blank" rel="external">https://my.oschina.net/u/2340880/blog?sort=time&amp;p=9&amp;temp=1479982318849</a> 晖少的博客</p>
@@ -479,73 +540,6 @@
       
       
 
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-perform执行时机" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2016/09/17/perform执行时机/" class="article-date">
-  	<time datetime="2016-09-17T14:51:42.000Z" itemprop="datePublished">2016-09-17</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/09/17/perform执行时机/">perform执行时机</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>在iOS开发中，大家都经常用到performSelector函数，但是他们的执行时机是怎么样的，这里做个简单的介绍。</p>
-<p>首先如果我们在主线程调用和在子线程调用下面的方法有什么区别呢？</p>
-<pre><code>[self performSelector:@selector(testttt) withObject:nil];
-</code></pre><p>试过后，就知道在主线程会执行testttt函数，而在子线程是不会执行的呢，为什么呢？这里就要涉及到runloop了，因为主线程的runloop默认是运行的，但是子线程的runloop默认是没有的，需要自己去创建并执行，通常调用如下</p>
-<pre><code>NSRunLoop *runLoop = [NSRunLoop currentRunLoop];
-子线程在没有第一次调用runloop是会先创建，然后在run。
-</code></pre><blockquote>
-<p>更多可以参考<a href="http://ios.jobbole.com/85759/">这里</a><br>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS/">iOS</a></li></ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a  href="/2016/09/17/perform执行时机/#more">more >></a>
-        </p>
       
       <div class="clearfix"></div>
     </div>

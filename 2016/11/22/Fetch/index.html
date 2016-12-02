@@ -14,7 +14,7 @@
 <meta property="og:site_name" content="sanfeng’s blog">
 <meta property="og:description" content="background Fetch 注意使用background Fetch 主要记得要回调completionHandler(UIBackgroundFetchResultNewData)等
 调试有两种方式1 程序进入后台，选择xcode - debug - simulate background fetch，2 选择scheme的 launch due to a background fetch">
-<meta property="og:updated_time" content="2016-11-24T10:16:00.000Z">
+<meta property="og:updated_time" content="2016-11-25T03:10:54.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="iOS 开发记录">
 <meta name="twitter:description" content="background Fetch 注意使用background Fetch 主要记得要回调completionHandler(UIBackgroundFetchResultNewData)等
@@ -229,7 +229,8 @@
         <h2 id="background-Fetch-注意"><a href="#background-Fetch-注意" class="headerlink" title="background Fetch 注意"></a>background Fetch 注意</h2><p>使用background Fetch 主要记得要回调completionHandler(UIBackgroundFetchResultNewData)等</p>
 <p>调试有两种方式<br>1 程序进入后台，选择xcode - debug - simulate background fetch，<br>2 选择scheme的 launch due to a background fetch event 这是谁debug调试的时候，先执行fetch功能，然后自己通过主动启动应用，查看是否执行了fetch</p>
 <h2 id="离线缓存"><a href="#离线缓存" class="headerlink" title="离线缓存"></a>离线缓存</h2><p>参考个大厂商的缓存，一种是看过即缓存，比如网易新闻，还有一种直接是离线下载，比如腾讯新闻。<br>针对这两个实现，自己大概想了下，一个是基于webview的缓存实现，另外一种，应该是通过服务下载资源到本地，然后存储到数据库中，比如coredata等。</p>
-<p>webview的缓存实现主要两种，一个html5的manifest文件缓存+url cache<br>还有一个就是采用NSURLProtocol实现存储，可以参考<a href="https://github.com/rnapier/RNCachingURLProtocol" target="_blank" rel="external">https://github.com/rnapier/RNCachingURLProtocol</a> 就是将请求过的内容都缓存下来。</p>
+<p>webview的缓存实现主要两种，一个html5的manifest文件，也可以通过NSURLCache实现。<br>具体可以参考：<a href="http://www.cocoachina.com/ios/20161107/17981.html" target="_blank" rel="external">iOS开发网络——数据缓存</a></p>
+<p>还有一个就是采用NSURLProtocol实现存储，可以参考<a href="https://github.com/rnapier/RNCachingURLProtocol" target="_blank" rel="external">https://github.com/rnapier/RNCachingURLProtocol</a> 就是将请求过的内容都缓存下来。</p>
 <p>至于为什么说离线是通过服务下载的，因为他们可以把没有看过的内容都离线到本地，那就只能是是通过文件下载来实现。</p>
 <blockquote>
 <p><a href="http://www.jcodecraeer.com/a/anzhuokaifa/androidkaifa/2015/0417/2736.html" target="_blank" rel="external">http://www.jcodecraeer.com/a/anzhuokaifa/androidkaifa/2015/0417/2736.html</a><br> <a href="https://github.com/rnapier/RNCachingURLProtocol" target="_blank" rel="external">https://github.com/rnapier/RNCachingURLProtocol</a><br> <a href="https://my.oschina.net/u/2340880/blog?sort=time&amp;p=9&amp;temp=1479982318849" target="_blank" rel="external">https://my.oschina.net/u/2340880/blog?sort=time&amp;p=9&amp;temp=1479982318849</a> 晖少的博客</p>
@@ -242,6 +243,15 @@
   
     
 <nav id="article-nav">
+  
+    <a href="/2016/12/02/只支持横屏的应用调用竖屏系统库崩溃的问题/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          只支持横屏的应用调用竖屏系统库崩溃的问题
+        
+      </div>
+    </a>
   
   
     <a href="/2016/09/28/iOS证书解密/" id="article-nav-older" class="article-nav-link-wrap">

@@ -5,7 +5,7 @@
   <link href="//atom.xml" rel="self"/>
   
   <link href="http://theewind.github.io/"/>
-  <updated>2016-11-24T10:16:00.000Z</updated>
+  <updated>2016-12-02T08:22:04.000Z</updated>
   <id>http://theewind.github.io/</id>
   
   <author>
@@ -16,16 +16,42 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>只支持横屏的应用调用竖屏系统库崩溃的问题</title>
+    <link href="http://theewind.github.io/2016/12/02/%E5%8F%AA%E6%94%AF%E6%8C%81%E6%A8%AA%E5%B1%8F%E7%9A%84%E5%BA%94%E7%94%A8%E8%B0%83%E7%94%A8%E7%AB%96%E5%B1%8F%E7%B3%BB%E7%BB%9F%E5%BA%93%E5%B4%A9%E6%BA%83%E7%9A%84%E9%97%AE%E9%A2%98/"/>
+    <id>http://theewind.github.io/2016/12/02/只支持横屏的应用调用竖屏系统库崩溃的问题/</id>
+    <published>2016-12-02T08:07:28.000Z</published>
+    <updated>2016-12-02T08:22:04.000Z</updated>
+    
+    <content type="html">&lt;p&gt;###横屏应用调用竖屏内容，crash&lt;/p&gt;
+&lt;p&gt;今天在测试开发过程中，如果你的app只支持横屏，如下图&lt;img src=&quot;http://o981ibvmi.bkt.clouddn.com/QQ20161202-1.png&quot; alt=&quot;图片&quot;&gt;&lt;br&gt;在设置中只支持横屏，这时候如果调用一些系统的只支持竖屏的应用，比如UIImagePickerViewcontroller，就会有崩溃，控制台显示如下：&lt;/p&gt;
+&lt;p&gt;自己比较纠结的地方在于，控制台完全没有&lt;img src=&quot;http://o981ibvmi.bkt.clouddn.com/QQ20161202-2.png&quot; alt=&quot;上图&quot;&gt;&lt;br&gt;内容的输出，所以比较不好发现，重新写了一个测试程序才正常输出了。&lt;/p&gt;
+&lt;p&gt;ps：使用系统的库，CIDetector 自动识别二维码，发现如果二维码是拍照出来的，有比较多干扰，或者二维码内容不加多，CIDetector也是不能准确识别的。&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;###横屏应用调用竖屏内容，crash&lt;/p&gt;
+&lt;p&gt;今天在测试开发过程中，如果你的app只支持横屏，如下图&lt;img src=&quot;http://o981ibvmi.bkt.clouddn.com/QQ20161202-1.png&quot; alt=&quot;图片&quot;&gt;&lt;br&gt;在设置中只支持横屏
+    
+    </summary>
+    
+    
+      <category term="iOS" scheme="http://theewind.github.io/tags/iOS/"/>
+    
+  </entry>
+  
+  <entry>
     <title>iOS 开发记录</title>
     <link href="http://theewind.github.io/2016/11/22/Fetch/"/>
     <id>http://theewind.github.io/2016/11/22/Fetch/</id>
     <published>2016-11-22T10:29:39.000Z</published>
-    <updated>2016-11-24T10:16:00.000Z</updated>
+    <updated>2016-11-25T03:10:54.000Z</updated>
     
     <content type="html">&lt;h2 id=&quot;background-Fetch-注意&quot;&gt;&lt;a href=&quot;#background-Fetch-注意&quot; class=&quot;headerlink&quot; title=&quot;background Fetch 注意&quot;&gt;&lt;/a&gt;background Fetch 注意&lt;/h2&gt;&lt;p&gt;使用background Fetch 主要记得要回调completionHandler(UIBackgroundFetchResultNewData)等&lt;/p&gt;
 &lt;p&gt;调试有两种方式&lt;br&gt;1 程序进入后台，选择xcode - debug - simulate background fetch，&lt;br&gt;2 选择scheme的 launch due to a background fetch event 这是谁debug调试的时候，先执行fetch功能，然后自己通过主动启动应用，查看是否执行了fetch&lt;/p&gt;
 &lt;h2 id=&quot;离线缓存&quot;&gt;&lt;a href=&quot;#离线缓存&quot; class=&quot;headerlink&quot; title=&quot;离线缓存&quot;&gt;&lt;/a&gt;离线缓存&lt;/h2&gt;&lt;p&gt;参考个大厂商的缓存，一种是看过即缓存，比如网易新闻，还有一种直接是离线下载，比如腾讯新闻。&lt;br&gt;针对这两个实现，自己大概想了下，一个是基于webview的缓存实现，另外一种，应该是通过服务下载资源到本地，然后存储到数据库中，比如coredata等。&lt;/p&gt;
-&lt;p&gt;webview的缓存实现主要两种，一个html5的manifest文件缓存+url cache&lt;br&gt;还有一个就是采用NSURLProtocol实现存储，可以参考&lt;a href=&quot;https://github.com/rnapier/RNCachingURLProtocol&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://github.com/rnapier/RNCachingURLProtocol&lt;/a&gt; 就是将请求过的内容都缓存下来。&lt;/p&gt;
+&lt;p&gt;webview的缓存实现主要两种，一个html5的manifest文件，也可以通过NSURLCache实现。&lt;br&gt;具体可以参考：&lt;a href=&quot;http://www.cocoachina.com/ios/20161107/17981.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;iOS开发网络——数据缓存&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;还有一个就是采用NSURLProtocol实现存储，可以参考&lt;a href=&quot;https://github.com/rnapier/RNCachingURLProtocol&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://github.com/rnapier/RNCachingURLProtocol&lt;/a&gt; 就是将请求过的内容都缓存下来。&lt;/p&gt;
 &lt;p&gt;至于为什么说离线是通过服务下载的，因为他们可以把没有看过的内容都离线到本地，那就只能是是通过文件下载来实现。&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;&lt;a href=&quot;http://www.jcodecraeer.com/a/anzhuokaifa/androidkaifa/2015/0417/2736.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://www.jcodecraeer.com/a/anzhuokaifa/androidkaifa/2015/0417/2736.html&lt;/a&gt;&lt;br&gt; &lt;a href=&quot;https://github.com/rnapier/RNCachingURLProtocol&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://github.com/rnapier/RNCachingURLProtocol&lt;/a&gt;&lt;br&gt; &lt;a href=&quot;https://my.oschina.net/u/2340880/blog?sort=time&amp;amp;p=9&amp;amp;temp=1479982318849&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://my.oschina.net/u/2340880/blog?sort=time&amp;amp;p=9&amp;amp;temp=1479982318849&lt;/a&gt; 晖少的博客&lt;/p&gt;
@@ -834,30 +860,6 @@ sudo python server.py
     
     
       <category term="iOS" scheme="http://theewind.github.io/tags/iOS/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>FlatBuffers</title>
-    <link href="http://theewind.github.io/2016/07/14/FlatBuffers/"/>
-    <id>http://theewind.github.io/2016/07/14/FlatBuffers/</id>
-    <published>2016-07-14T08:32:46.000Z</published>
-    <updated>2016-07-14T08:35:58.000Z</updated>
-    
-    <content type="html">&lt;p&gt;继Protocol Buffers 之后Google开源的一个新的数据传输框架，FaltBuffers。先占个坑&lt;/p&gt;
-&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
-&lt;p&gt;&amp;gt;&lt;br&gt;&lt;a href=&quot;https://code.facebook.com/posts/872547912839369/improving-facebook-s-performance-on-android-with-flatbuffers/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Improving Facebook’s performance on Android with FlatBuffers&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&lt;a href=&quot;http://www.csdn.net/article/2015-08-31/2825579&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;开源、高效、跨平台：深剖Google FlatBuffers工作原理&lt;/a&gt;&lt;/p&gt;
-</content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;继Protocol Buffers 之后Google开源的一个新的数据传输框架，FaltBuffers。先占个坑&lt;/p&gt;
-    
-    </summary>
-    
-    
-      <category term="互联网" scheme="http://theewind.github.io/tags/%E4%BA%92%E8%81%94%E7%BD%91/"/>
     
   </entry>
   

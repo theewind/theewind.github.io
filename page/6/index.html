@@ -187,6 +187,72 @@
 
       <div class="body-wrap">
   
+    <article id="post-wkwebview同步获取返回结果" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/06/21/wkwebview同步获取返回结果/" class="article-date">
+  	<time datetime="2016-06-21T09:46:50.000Z" itemprop="datePublished">2016-06-21</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/06/21/wkwebview同步获取返回结果/">wkwebview同步获取返回结果</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>今天在测试UIWebView和WKWebView的时候，发现如下区别</p>
+<ol>
+<li><p>UIWebView执行stringByEvaluatingJavaScriptFromString方法，因为直接返回结果，所以是<code>同步</code>的。<br>WKWebView执行evaluateJavaScript：completionHandler是在block中获取执行结果的，所以他是<code>异步</code>进行的，<br>这样在进行性能测试的时候，发现如果不将WKWebView他修改为同步，是无法进行对比的，然后自己就通过如下方法</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">   - (NSString *)stringByEvaluatingJavaScriptFromString:(NSString *)javascript &#123;</div><div class="line">    __block NSString *res = nil;</div><div class="line">    __block BOOL finish = NO;</div><div class="line">    </div><div class="line">    [self.webView evaluateJavaScript:javascript completionHandler:^(NSString *result, NSError *error)&#123;</div><div class="line">        res = result;</div><div class="line">        finish = YES;</div><div class="line">    &#125;];</div><div class="line">    </div><div class="line">    while(!finish) &#123;</div><div class="line">        [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate distantFuture]];</div><div class="line">    &#125;</div><div class="line">    return res;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>将WKWebView修改为同步状态，然后进行对比，主要是测试JavaScript函数执行100，300，500，1000，3000次，统计时间，可以发现在相同JS功能情况下，WKWebView的效率还没有UIWebView的效率高，如<img src="http://o981ibvmi.bkt.clouddn.com/uiwebview_wkwebview_jscore.png" alt="下图"><br>可以看出，JavascriptCore的效率是最高的，而WKWebView改成同步以后，实际效果是最差的，分析原因也可能是因为，WKWebView不是这样用的，毕竟在无限等待中，所以结果也可能是受影响的。</p>
+<blockquote>
+<p><a href="http://www.jianshu.com/p/3a59107aa2d2" target="_blank" rel="external">http://www.jianshu.com/p/3a59107aa2d2</a><br><a href="http://stackoverflow.com/questions/26778955/wkwebview-evaluate-javascript-return-value" target="_blank" rel="external">http://stackoverflow.com/questions/26778955/wkwebview-evaluate-javascript-return-value</a></p>
+</blockquote>
+</li>
+</ol>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/WKWebView/">WKWebView</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS/">iOS</a></li></ul>
+	</div>
+
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
     <article id="react-react-native-新语法" class="article article-type-react" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -574,65 +640,6 @@ import { View } from &apos;react-native&apos;;
         <p class="article-more-link">
           <a  href="/2016/06/06/rac-willDeallocSignal/#more">more >></a>
         </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-doubleListViewDemo" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2016/06/03/doubleListViewDemo/" class="article-date">
-  	<time datetime="2016-06-03T03:41:01.000Z" itemprop="datePublished">2016-06-03</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/06/03/doubleListViewDemo/">React Native 双listView交互动画</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>此demo算是自己学习React Natvie的一个小例子的。<img src="http://o981ibvmi.bkt.clouddn.com/doubleListViewdemo.gif" alt="效果如下"></p>
-<p>因为开发过程中，经常需要使用两个ListView进行交互，具体实现参考<a href="https://github.com/theewind/RCTDoubleListViewDemo" target="_blank" rel="external">DEMO</a></p>
-<p>可以通过点击左边的菜品分类，切换到对应的section中，也可以通过滑动右边的菜品，同步更新到左边的分类。<br>主要思路是：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div></pre></td><td class="code"><pre><div class="line">componentDidUpdate() &#123;</div><div class="line">  let scrollResponder = this.refs.listView.getScrollResponder();</div><div class="line">  scrollResponder.scrollResponderScrollTo(&#123;x: 0, y:this.pscroll(), animated: true&#125;);</div><div class="line">&#125;</div><div class="line"></div><div class="line">shouldComponentUpdate(nextProps, nextState) &#123;</div><div class="line">  return nextProps.needUpdate;</div><div class="line">&#125;</div><div class="line"></div><div class="line">pscroll() &#123;</div><div class="line">  console.log(this.props.section);</div><div class="line">   var height = 0;</div><div class="line">   for (var x in spuMenuItemList) &#123;</div><div class="line">     if (parseInt(x) &lt; parseInt(this.props.section)) &#123;</div><div class="line">       height += spuMenuItemList[x].length * 100;</div><div class="line">       height += 20;</div><div class="line">     &#125;</div><div class="line">   &#125;</div><div class="line">   return height;</div><div class="line"> &#125;</div><div class="line"> </div><div class="line">  _onScroll(event: Object) &#123;</div><div class="line">    var scrollProperties = this.refs.listView.scrollProperties;</div><div class="line">    // console.log(scrollProperties);</div><div class="line">    // console.log(scrollProperties.offset);</div><div class="line">    // console.log(this.props.section)</div><div class="line"></div><div class="line">    if (this.props.fromLeftTouched) &#123;</div><div class="line">      return;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    var height = 0;</div><div class="line">    for (var x in spuMenuItemList) &#123;</div><div class="line">      height += spuMenuItemList[x].length * 100;</div><div class="line">      height += 20;</div><div class="line">      if (height &gt; scrollProperties.offset) &#123;</div><div class="line">        if (x != this.state.currentIndex) &#123;</div><div class="line">          this.props.needChangeSection(parseInt(x));</div><div class="line">          this.state.currentIndex = parseInt(x);</div><div class="line">        &#125;</div><div class="line">        break;</div><div class="line">      &#125;</div><div class="line">    &#125;</div><div class="line">  &#125;</div></pre></td></tr></table></figure>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/react-native/">react native</a></li></ul>
-	</div>
-
-      
-
       
       <div class="clearfix"></div>
     </div>

@@ -187,6 +187,67 @@
 
       <div class="body-wrap">
   
+    <article id="url-URL_encode的问题" class="article article-type-url" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/08/18/URL_encode的问题/" class="article-date">
+  	<time datetime="2016-08-18T11:39:46.000Z" itemprop="datePublished">2016-08-18</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/08/18/URL_encode的问题/">url encode的问题</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="URL参数encode的问题"><a href="#URL参数encode的问题" class="headerlink" title="URL参数encode的问题"></a>URL参数encode的问题</h1><p>外卖下单时，会先检测用户是否绑定了手机号，如果没有绑定，preview会提示进行绑定，跳转到绑定手机页面，如果绑定成功，就继续回到preview页面。</p>
+<p>这就需要将preview的URLAction传递给绑定手机页面，它再进行一个透传。</p>
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/URL/">URL</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS/">iOS</a></li></ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a  href="/2016/08/18/URL_encode的问题/#more">more >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
     <article id="post-iOS代码编译速度优化" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -500,62 +561,6 @@
         <p class="article-more-link">
           <a  href="/2016/07/22/ios7下UIScrollView和滑动返回/#more">more >></a>
         </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-atomic使用" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2016/07/18/atomic使用/" class="article-date">
-  	<time datetime="2016-07-18T07:41:32.000Z" itemprop="datePublished">2016-07-18</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/07/18/atomic使用/">atomic使用</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>平时我们使用atomic的时候，是希望对一个porperty的操作进行一个原子操作，但是这里的原子操作应该是仅仅对应于Setter和Getter方法，如果property是一个array，比如</p>
-<ul>
-<li>(void)setProp:(NSString <em>)newValue {<br>  [_prop lock];<br>  _prop = newValue;<br>  [_prop unlock];<br>}<br>按我理解：<br>1.此处的线程安全是就getter,setter而言的。比如对于@property(nonatomic,copy)NSString </em>str; 当调用self.str = @”HELLO,GUY”;如果是多线程，在一个线程执行setter方法的时候，会涉及到字符串拷贝，另一个线程去读取，很可能读到一半的数据，也就是garbage数据。<br>2.另外的话，它也仅限于getter,setter时的线程安全。比如@property(atomic,strong)NSMutableArray *arr;如果一个线程循环读数据，一个线程循环写数据，肯定会产生内存问题。因为它和setter,getter没有关系。 </li>
-</ul>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-      
-
       
       <div class="clearfix"></div>
     </div>
