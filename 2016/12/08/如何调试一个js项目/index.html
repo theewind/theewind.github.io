@@ -4,17 +4,35 @@
   <meta charset="utf-8">
   
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
-  <title>Archives: 2016 | sanfeng’s blog</title>
+  <title>如何调试一个js项目 | sanfeng’s blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="这是我的三风的博客">
-<meta property="og:type" content="website">
-<meta property="og:title" content="sanfeng’s blog">
-<meta property="og:url" content="http://theewind.github.io/archives/2016/page/9/index.html">
+  <meta name="description" content="今天在学习同时开发的一个脚手架工具Tiger，主要是用来快速生成模块化类的一个工具，其中是采用js语言写的，自己想调试的时候发现不得要领，查找一些资料下来有点眉目，此处做个记录。
+首先这个工具的用法是：
+tiger init className superClassName
+其实内部就是调用一个js文件 
+node run.js  init className superClassName
+如果没">
+<meta property="og:type" content="article">
+<meta property="og:title" content="如何调试一个js项目">
+<meta property="og:url" content="http://theewind.github.io/2016/12/08/如何调试一个js项目/index.html">
 <meta property="og:site_name" content="sanfeng’s blog">
-<meta property="og:description" content="这是我的三风的博客">
+<meta property="og:description" content="今天在学习同时开发的一个脚手架工具Tiger，主要是用来快速生成模块化类的一个工具，其中是采用js语言写的，自己想调试的时候发现不得要领，查找一些资料下来有点眉目，此处做个记录。
+首先这个工具的用法是：
+tiger init className superClassName
+其实内部就是调用一个js文件 
+node run.js  init className superClassName
+如果没">
+<meta property="og:image" content="http://o981ibvmi.bkt.clouddn.com/QQ20161209-1.png">
+<meta property="og:updated_time" content="2016-12-09T03:17:37.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="sanfeng’s blog">
-<meta name="twitter:description" content="这是我的三风的博客">
+<meta name="twitter:title" content="如何调试一个js项目">
+<meta name="twitter:description" content="今天在学习同时开发的一个脚手架工具Tiger，主要是用来快速生成模块化类的一个工具，其中是采用js语言写的，自己想调试的时候发现不得要领，查找一些资料下来有点眉目，此处做个记录。
+首先这个工具的用法是：
+tiger init className superClassName
+其实内部就是调用一个js文件 
+node run.js  init className superClassName
+如果没">
+<meta name="twitter:image" content="http://o981ibvmi.bkt.clouddn.com/QQ20161209-1.png">
   
   
     <link rel="icon" href="/favicon.png">
@@ -185,119 +203,112 @@
 	</div>
 </nav>
 
-      <div class="body-wrap">
+      <div class="body-wrap"><article id="post-如何调试一个js项目" class="article article-type-post" itemscope itemprop="blogPost">
   
+    <div class="article-meta">
+      <a href="/2016/12/08/如何调试一个js项目/" class="article-date">
+  	<time datetime="2016-12-08T10:18:39.000Z" itemprop="datePublished">2016-12-08</time>
+</a>
+    </div>
   
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
     
     
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      如何调试一个js项目
+    </h1>
+  
+
+      </header>
       
+      <div class="article-info article-info-post">
+        
+        
+
+        <div class="clearfix"></div>
+      </div>
       
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2016" class="archive-year">2016</a>
-        </div>
-        <div class="archives">
     
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2016/04/28/hexo-study/" class="archive-article-date">
-  	<time datetime="2016-04-28T09:44:20.000Z" itemprop="datePublished">Apr 28</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/04/28/hexo-study/">hexo 基础</a>
-    </h1>
-  
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>今天在学习同时开发的一个脚手架工具Tiger，主要是用来快速生成模块化类的一个工具，其中是采用js语言写的，自己想调试的时候发现不得要领，查找一些资料下来有点眉目，此处做个记录。</p>
+<p>首先这个工具的用法是：</p>
+<pre><code>tiger init className superClassName
+</code></pre><p>其实内部就是调用一个js文件 </p>
+<pre><code>node run.js  init className superClassName
+</code></pre><p>如果没有node环境，可以将run.js添加x属性，然后执行 ./run.js …  操作。</p>
+<p>调试工具选用 webstorm，然后在debug的 Run/Debug Configurations 里面可以选择要调试的js文件，如果需要参数，也可以在Node Parameters里面添加参数。<br><img src="http://o981ibvmi.bkt.clouddn.com/QQ20161209-1.png" alt="如图"></p>
+<p>剩下的问题就是js语法调试。</p>
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hexo/">hexo</a></li></ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
+      
+    </div>
+    
   </div>
-</article>
   
     
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2016/04/28/swift/" class="archive-article-date">
-  	<time datetime="2016-04-28T09:39:06.000Z" itemprop="datePublished">Apr 28</time>
-</a>
-        </div>
-    	 
+<nav id="article-nav">
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/04/28/swift/">swift 学习计划</a>
-    </h1>
   
+    <a href="/2016/12/02/只支持横屏的应用调用竖屏系统库崩溃的问题/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">只支持横屏的应用调用竖屏系统库崩溃的问题</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/swift/">swift</a></li></ul>
+  
+</article>
+
+
+<div class="share_jia">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">分享到: &nbsp; </span>
+		<a class="jiathis_button_facebook"></a> 
+    <a class="jiathis_button_twitter"></a>
+    <a class="jiathis_button_plus"></a> 
+    <a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+    <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
 	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
 
-          
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2016/04/28/hexo-first/" class="archive-article-date">
-  	<time datetime="2016-04-28T02:55:40.000Z" itemprop="datePublished">Apr 28</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/04/28/hexo-first/">Hexo 学习</a>
-    </h1>
-  
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hexo/">hexo</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/测试/">测试</a></li></ul>
-	</div>
 
-          
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
 
-    
-    <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/archives/2016/page/8/">&laquo; Prev</a><a class="page-number" href="/archives/2016/">1</a><span class="space">&hellip;</span><a class="page-number" href="/archives/2016/page/7/">7</a><a class="page-number" href="/archives/2016/page/8/">8</a><span class="page-number current">9</span>
-    </nav>
-  
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="如何调试一个js项目" data-title="如何调试一个js项目" data-url="http://theewind.github.io/2016/12/08/如何调试一个js项目/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"theewind"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
 
 </div>
       <footer id="footer">
@@ -323,8 +334,8 @@
 		mathjax: true,
 		animate: true,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: flase

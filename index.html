@@ -187,6 +187,66 @@
 
       <div class="body-wrap">
   
+    <article id="post-如何调试一个js项目" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/12/08/如何调试一个js项目/" class="article-date">
+  	<time datetime="2016-12-08T10:18:39.000Z" itemprop="datePublished">2016-12-08</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/12/08/如何调试一个js项目/">如何调试一个js项目</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>今天在学习同时开发的一个脚手架工具Tiger，主要是用来快速生成模块化类的一个工具，其中是采用js语言写的，自己想调试的时候发现不得要领，查找一些资料下来有点眉目，此处做个记录。</p>
+<p>首先这个工具的用法是：</p>
+<pre><code>tiger init className superClassName
+</code></pre><p>其实内部就是调用一个js文件 </p>
+<pre><code>node run.js  init className superClassName
+</code></pre><p>如果没有node环境，可以将run.js添加x属性，然后执行 ./run.js …  操作。</p>
+<p>调试工具选用 webstorm，然后在debug的 Run/Debug Configurations 里面可以选择要调试的js文件，如果需要参数，也可以在Node Parameters里面添加参数。<br><img src="http://o981ibvmi.bkt.clouddn.com/QQ20161209-1.png" alt="如图"></p>
+<p>剩下的问题就是js语法调试。</p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
     <article id="post-只支持横屏的应用调用竖屏系统库崩溃的问题" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -213,8 +273,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>###横屏应用调用竖屏内容，crash</p>
-<p>今天在测试开发过程中，如果你的app只支持横屏，如下图<img src="http://o981ibvmi.bkt.clouddn.com/QQ20161202-1.png" alt="图片"><br>在设置中只支持横屏，这时候如果调用一些系统的只支持竖屏的应用，比如UIImagePickerViewcontroller，就会有崩溃，控制台显示如下：</p>
+        <h2 id="横屏应用调用竖屏内容，crash"><a href="#横屏应用调用竖屏内容，crash" class="headerlink" title="横屏应用调用竖屏内容，crash"></a>横屏应用调用竖屏内容，crash</h2><p>今天在测试开发过程中，如果你的app只支持横屏，如下图<img src="http://o981ibvmi.bkt.clouddn.com/QQ20161202-1.png" alt="图片"><br>在设置中只支持横屏，这时候如果调用一些系统的只支持竖屏的应用，比如UIImagePickerViewcontroller，就会有崩溃，控制台显示如下：</p>
 <p>自己比较纠结的地方在于，控制台完全没有<img src="http://o981ibvmi.bkt.clouddn.com/QQ20161202-2.png" alt="上图"><br>内容的输出，所以比较不好发现，重新写了一个测试程序才正常输出了。</p>
 <p>ps：使用系统的库，CIDetector 自动识别二维码，发现如果二维码是拍照出来的，有比较多干扰，或者二维码内容不加多，CIDetector也是不能准确识别的。</p>
 
@@ -487,59 +546,6 @@
         <p class="article-more-link">
           <a  href="/2016/09/22/iOS长连接的实现-端口学习/#more">more >></a>
         </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-iOS长连接的实现-分析篇" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2016/09/22/iOS长连接的实现-分析篇/" class="article-date">
-  	<time datetime="2016-09-22T00:50:12.000Z" itemprop="datePublished">2016-09-22</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/09/22/iOS长连接的实现-分析篇/">iOS长连接的实现-分析篇</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>&gt;<br><a href="https://www.zybuluo.com/Xiaojun-Jin/note/29874" target="_blank" rel="external">Socket Based iOS Programming</a></p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-      
-
       
       <div class="clearfix"></div>
     </div>

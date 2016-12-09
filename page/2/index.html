@@ -187,6 +187,59 @@
 
       <div class="body-wrap">
   
+    <article id="post-iOS长连接的实现-分析篇" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/09/22/iOS长连接的实现-分析篇/" class="article-date">
+  	<time datetime="2016-09-22T00:50:12.000Z" itemprop="datePublished">2016-09-22</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/09/22/iOS长连接的实现-分析篇/">iOS长连接的实现-分析篇</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>&gt;<br><a href="https://www.zybuluo.com/Xiaojun-Jin/note/29874" target="_blank" rel="external">Socket Based iOS Programming</a></p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
     <article id="post-perform执行时机" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -484,72 +537,6 @@
       
         <p class="article-more-link">
           <a  href="/2016/09/05/ios自动化测试部分知识/#more">more >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-socket连接池的实现探索" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2016/08/19/socket连接池的实现探索/" class="article-date">
-  	<time datetime="2016-08-19T10:27:16.000Z" itemprop="datePublished">2016-08-19</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/08/19/socket连接池的实现探索/">socket连接池的实现探索</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>点评长连接的是建立一个TCP连接，然后发送一定策略的心跳检测，保持套接字（TCP+port）socket的连接不断开。</p>
-<p>然后看到携程关于网络优化的[文章]</p>
-<blockquote>
-<p>Native模块是携程的核心业务模块（酒店、机票、火车票、攻略等），Native模块的网络服务主要通过TCP连接实现，而非常见的Restful HTTP API那种HTTP连接，只有少数轻量级服务使用HTTP接口作为补充。</p>
-<p>TCP连接网络服务模块使用了长连接+短连接机制，即有一个长连接池保持一定数目长连接，用于减少每次服务额外的连接，服务完成后会将该连接Socket放回长连接池，继续保持连接状态（一段时间空闲后会被回收）；短连接作为补充，每次服务完成后便会主动关闭连接。</p>
-</blockquote>
-<p>点评默认的是一个Socket连接，所有还比较简单，但是如果让实现一个连接池的话，应该怎么做到呢，这个池是如何表示的？</p>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/TCP/">TCP</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS/">iOS</a></li></ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a  href="/2016/08/19/socket连接池的实现探索/#more">more >></a>
         </p>
       
       <div class="clearfix"></div>

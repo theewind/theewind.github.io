@@ -187,6 +187,69 @@
 
       <div class="body-wrap">
   
+    <article id="post-ios7下UIScrollView和滑动返回" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/07/22/ios7下UIScrollView和滑动返回/" class="article-date">
+  	<time datetime="2016-07-22T06:21:40.000Z" itemprop="datePublished">2016-07-22</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/07/22/ios7下UIScrollView和滑动返回/">ios7下UIScrollView和滑动返回</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h1><p>之前因为某些历史原因，外卖基本禁止了所有的滑动返回手势，这次产品过来说需要开发一些正常流程的返回操作，于是在修复菜单页的过程中遇到了一些问题。菜单页可以说是整个外卖最复杂的页面，如下图<img src="http://o981ibvmi.bkt.clouddn.com/QQ20160722-2@2x.png" alt="菜单页"></p>
+<p>图中有p1,p2,p3,p4,p5，整个菜单页的结构是：<br>P5 最底层，UIScrollView<br>P4 标题，UIView<br>P3 内容, UIView<br>P2 tab, UIScrollView<br>P1 page, UIScrollView</p>
+<p>层次是：p1 + p2 –&gt; p3 + p4 –&gt; p5</p>
+<p>这样就有了问题，左右滑P1，其实是UIScrollView的页面切换，分别显示，菜单，点评和商家详情。<br><code>在整个P3区域进行滑动返回操作，是不起效果的。</code></p>
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS/">iOS</a></li></ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a  href="/2016/07/22/ios7下UIScrollView和滑动返回/#more">more >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
     <article id="post-atomic使用" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -482,66 +545,6 @@
       
         <p class="article-more-link">
           <a  href="/2016/07/02/YYModel源码分析/#more">more >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-shadowsocket无法更新pac" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2016/07/01/shadowsocket无法更新pac/" class="article-date">
-  	<time datetime="2016-07-01T05:06:05.000Z" itemprop="datePublished">2016-07-01</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/07/01/shadowsocket无法更新pac/">shadowsocks无法更新pac</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>这两天上网发现facebook竟然不能登录，于是首先怀疑了是不是ss账号的问题，换了几个服务器，自己的电脑还是不行，但是其他人的都可以，于是就想是不是gfwlist需要更新先，然后就操作<strong>·Update pac from GFWList·</strong>，但是发现竟然还是request error 404. 之前自己也遇到过这样的事情，但是读没有怎么在意，今天因为要登陆facebook，所以才决定解决下的。</p>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/shadowsocks/">shadowsocks</a></li></ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a  href="/2016/07/01/shadowsocket无法更新pac/#more">more >></a>
         </p>
       
       <div class="clearfix"></div>
