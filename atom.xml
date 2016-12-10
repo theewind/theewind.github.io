@@ -5,7 +5,7 @@
   <link href="//atom.xml" rel="self"/>
   
   <link href="http://theewind.github.io/"/>
-  <updated>2016-12-09T03:17:37.000Z</updated>
+  <updated>2016-12-10T01:54:04.000Z</updated>
   <id>http://theewind.github.io/</id>
   
   <author>
@@ -14,6 +14,39 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>webpack+React+gulp的调试</title>
+    <link href="http://theewind.github.io/2016/12/09/webpack-React-gulp%E7%9A%84%E8%B0%83%E8%AF%95/"/>
+    <id>http://theewind.github.io/2016/12/09/webpack-React-gulp的调试/</id>
+    <published>2016-12-09T14:57:26.000Z</published>
+    <updated>2016-12-10T01:54:04.000Z</updated>
+    
+    <content type="html">&lt;p&gt;在开发过程中，开发程序只是第一步，调试才是最重要的，上一节讲了如何在webstorm中进行调试js内容，但是对于进行React进行jsx语法开发时，又是如何调试呢。&lt;/p&gt;
+&lt;p&gt;对于webpack.config.js配置，这里也不做过多介绍，网上有很多内容，其中一个很重要的就是source map。&lt;/p&gt;
+&lt;h1 id=&quot;什么是Source-map&quot;&gt;&lt;a href=&quot;#什么是Source-map&quot; class=&quot;headerlink&quot; title=&quot;什么是Source map&quot;&gt;&lt;/a&gt;什么是Source map&lt;/h1&gt;&lt;p&gt;简单说，Source map就是一个信息文件，里面储存着位置信息。也就是说，转换后的代码的每一个位置，所对应的转换前的位置。&lt;/p&gt;
+&lt;p&gt;JS发布后通常会经过压缩和混淆，所有代码被压缩成一行代码，如果发生错误，无法定位错误，SourceMap因此而生。说起SourceMap，不得不说说uglifyjs，uglifyjs是nodejs下一款优秀的JS压缩优化工具，支持SourceMap的生成。&lt;/p&gt;
+&lt;p&gt;更多可以参考：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;a href=&quot;http://blog.allenm.me/2012/12/whats-sourcemap/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;使用 SourceMap 来进行前端代码调试&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;但是自己在webpack.config.js中添加了如下配置：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;devtool: &amp;apos;eval-source-map&amp;apos;,
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;而且在dish的目录下面有：      &lt;/p&gt;
+&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;4&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;5&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;6&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;7&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;8&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;alliance-detail.js&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;alliance-detail.map&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;alliance-list.js&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;alliance-list.map&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;article-list.js&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;article-list.map&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;business-detail.js&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;business-detail.map&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;文件也有对应关系，但是在chrome中就是看多对应的jsx文件，最后经过公司前端一哥的帮忙，发现如果在webpack中将Debugger中的如下内容打开，就可以看到js对应的jsx文件，断点什么的，就可以飞起来了。&lt;br&gt;&lt;img src=&quot;http://o981ibvmi.bkt.clouddn.com/QQ20161209-1@2x.png&quot; alt=&quot;webstorm Debugger 配置&quot;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://o981ibvmi.bkt.clouddn.com/QQ20161209-0@2x.png&quot; alt=&quot;chrome显示结果如下&quot;&gt;&lt;br&gt;说明source map生效，可以在jsx里面打断点进行调试了。&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;在开发过程中，开发程序只是第一步，调试才是最重要的，上一节讲了如何在webstorm中进行调试js内容，但是对于进行React进行jsx语法开发时，又是如何调试呢。&lt;/p&gt;
+&lt;p&gt;对于webpack.config.js配置，这里也不做过多介绍，网上有很多内容，其中一个很重要
+    
+    </summary>
+    
+    
+  </entry>
   
   <entry>
     <title>如何调试一个js项目</title>
@@ -832,30 +865,6 @@ sudo python server.py
     
     
       <category term="iOS" scheme="http://theewind.github.io/tags/iOS/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>atomic使用</title>
-    <link href="http://theewind.github.io/2016/07/18/atomic%E4%BD%BF%E7%94%A8/"/>
-    <id>http://theewind.github.io/2016/07/18/atomic使用/</id>
-    <published>2016-07-18T07:41:32.000Z</published>
-    <updated>2016-07-18T07:43:32.000Z</updated>
-    
-    <content type="html">&lt;p&gt;平时我们使用atomic的时候，是希望对一个porperty的操作进行一个原子操作，但是这里的原子操作应该是仅仅对应于Setter和Getter方法，如果property是一个array，比如&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;(void)setProp:(NSString &lt;em&gt;)newValue {&lt;br&gt;  [_prop lock];&lt;br&gt;  _prop = newValue;&lt;br&gt;  [_prop unlock];&lt;br&gt;}&lt;br&gt;按我理解：&lt;br&gt;1.此处的线程安全是就getter,setter而言的。比如对于@property(nonatomic,copy)NSString &lt;/em&gt;str; 当调用self.str = @”HELLO,GUY”;如果是多线程，在一个线程执行setter方法的时候，会涉及到字符串拷贝，另一个线程去读取，很可能读到一半的数据，也就是garbage数据。&lt;br&gt;2.另外的话，它也仅限于getter,setter时的线程安全。比如@property(atomic,strong)NSMutableArray *arr;如果一个线程循环读数据，一个线程循环写数据，肯定会产生内存问题。因为它和setter,getter没有关系。 &lt;/li&gt;
-&lt;/ul&gt;
-</content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;平时我们使用atomic的时候，是希望对一个porperty的操作进行一个原子操作，但是这里的原子操作应该是仅仅对应于Setter和Getter方法，如果property是一个array，比如&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;(void)setProp:(NSString &lt;em
-    
-    </summary>
-    
     
   </entry>
   

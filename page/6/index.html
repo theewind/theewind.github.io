@@ -187,6 +187,67 @@
 
       <div class="body-wrap">
   
+    <article id="post-如何在自己的网页中添加ga分析" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/06/23/如何在自己的网页中添加ga分析/" class="article-date">
+  	<time datetime="2016-06-23T08:58:54.000Z" itemprop="datePublished">2016-06-23</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/06/23/如何在自己的网页中添加ga分析/">如何在自己的网页中添加ga分析</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>在学习前端的过程中，自己都想统计用户的访问量，下面代码可以做到最轻量级的追踪：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">/*&lt;script type=&quot;text/javascript&quot;&gt;</div><div class="line"></div><div class="line">  var _gaq = _gaq || [];</div><div class="line">  _gaq.push([&apos;_setAccount&apos;, &apos;UA-XXXXX-X&apos;]);</div><div class="line">  _gaq.push([&apos;_trackPageview&apos;]);</div><div class="line"></div><div class="line">  (function() &#123;</div><div class="line">    var ga = document.createElement(&apos;script&apos;); ga.type = &apos;text/javascript&apos;; ga.async = true;</div><div class="line">    ga.src = (&apos;https:&apos; == document.location.protocol ? &apos;https://ssl&apos; : &apos;http://www&apos;) + &apos;.google-analytics.com/ga.js&apos;;</div><div class="line">    var s = document.getElementsByTagName(&apos;script&apos;)[0]; s.parentNode.insertBefore(ga, s);</div><div class="line">  &#125;)();</div><div class="line"></div><div class="line">&lt;/script&gt;</div><div class="line">*/</div></pre></td></tr></table></figure>
+<blockquote>
+<p>具体可以参考如下<br> <a href="https://developers.google.com/analytics/devguides/collection/gajs/" target="_blank" rel="external">https://developers.google.com/analytics/devguides/collection/gajs/</a></p>
+</blockquote>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/前端/">前端</a></li></ul>
+	</div>
+
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
     <article id="post-前端代码学习之scss" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -576,70 +637,6 @@ import { View } from &apos;react-native&apos;;
 
       
 
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="React Native 学习之F8app代码阅读-study_f8app" class="article article-type-React Native 学习之F8app代码阅读" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2016/06/07/study_f8app/" class="article-date">
-  	<time datetime="2016-06-07T15:04:01.000Z" itemprop="datePublished">2016-06-07</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/06/07/study_f8app/">study</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>主要是先参考如下篇文章：</p>
-<blockquote>
-<p><a href="http://www.open-open.com/lib/view/open1461512056952.html">http://www.open-open.com/lib/view/open1461512056952.html</a></p>
-</blockquote>
-<p>第一次接触redux，概念还比较模糊，同时js开发水平也一般，对一些语法学习还不是很懂，这里做个记录：<br>代码中的很多function func(): type的用法，我之前接触的基本都是无返回值类型的，这里添加一个 <code>:Action</code>类型，貌似就是确定了返回值类型的，不知道理解的对不对。</p>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/React-Native/">React Native</a></li></ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a  href="/2016/06/07/study_f8app/#more">more >></a>
-        </p>
       
       <div class="clearfix"></div>
     </div>

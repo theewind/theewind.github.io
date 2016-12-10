@@ -4,35 +4,27 @@
   <meta charset="utf-8">
   
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
-  <title>如何调试一个js项目 | sanfeng’s blog</title>
+  <title>webpack+React+gulp的调试 | sanfeng’s blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="今天在学习同时开发的一个脚手架工具Tiger，主要是用来快速生成模块化类的一个工具，其中是采用js语言写的，自己想调试的时候发现不得要领，查找一些资料下来有点眉目，此处做个记录。
-首先这个工具的用法是：
-tiger init className superClassName
-其实内部就是调用一个js文件 
-node run.js  init className superClassName
-如果没">
+  <meta name="description" content="在开发过程中，开发程序只是第一步，调试才是最重要的，上一节讲了如何在webstorm中进行调试js内容，但是对于进行React进行jsx语法开发时，又是如何调试呢。
+对于webpack.config.js配置，这里也不做过多介绍，网上有很多内容，其中一个很重要的就是source map。
+什么是Source map简单说，Source map就是一个信息文件，里面储存着位置信息。也就是说，转换后的">
 <meta property="og:type" content="article">
-<meta property="og:title" content="如何调试一个js项目">
-<meta property="og:url" content="http://theewind.github.io/2016/12/08/如何调试一个js项目/index.html">
+<meta property="og:title" content="webpack+React+gulp的调试">
+<meta property="og:url" content="http://theewind.github.io/2016/12/09/webpack-React-gulp的调试/index.html">
 <meta property="og:site_name" content="sanfeng’s blog">
-<meta property="og:description" content="今天在学习同时开发的一个脚手架工具Tiger，主要是用来快速生成模块化类的一个工具，其中是采用js语言写的，自己想调试的时候发现不得要领，查找一些资料下来有点眉目，此处做个记录。
-首先这个工具的用法是：
-tiger init className superClassName
-其实内部就是调用一个js文件 
-node run.js  init className superClassName
-如果没">
-<meta property="og:image" content="http://o981ibvmi.bkt.clouddn.com/QQ20161209-1.png">
-<meta property="og:updated_time" content="2016-12-09T03:17:37.000Z">
+<meta property="og:description" content="在开发过程中，开发程序只是第一步，调试才是最重要的，上一节讲了如何在webstorm中进行调试js内容，但是对于进行React进行jsx语法开发时，又是如何调试呢。
+对于webpack.config.js配置，这里也不做过多介绍，网上有很多内容，其中一个很重要的就是source map。
+什么是Source map简单说，Source map就是一个信息文件，里面储存着位置信息。也就是说，转换后的">
+<meta property="og:image" content="http://o981ibvmi.bkt.clouddn.com/QQ20161209-1@2x.png">
+<meta property="og:image" content="http://o981ibvmi.bkt.clouddn.com/QQ20161209-0@2x.png">
+<meta property="og:updated_time" content="2016-12-10T01:54:04.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="如何调试一个js项目">
-<meta name="twitter:description" content="今天在学习同时开发的一个脚手架工具Tiger，主要是用来快速生成模块化类的一个工具，其中是采用js语言写的，自己想调试的时候发现不得要领，查找一些资料下来有点眉目，此处做个记录。
-首先这个工具的用法是：
-tiger init className superClassName
-其实内部就是调用一个js文件 
-node run.js  init className superClassName
-如果没">
-<meta name="twitter:image" content="http://o981ibvmi.bkt.clouddn.com/QQ20161209-1.png">
+<meta name="twitter:title" content="webpack+React+gulp的调试">
+<meta name="twitter:description" content="在开发过程中，开发程序只是第一步，调试才是最重要的，上一节讲了如何在webstorm中进行调试js内容，但是对于进行React进行jsx语法开发时，又是如何调试呢。
+对于webpack.config.js配置，这里也不做过多介绍，网上有很多内容，其中一个很重要的就是source map。
+什么是Source map简单说，Source map就是一个信息文件，里面储存着位置信息。也就是说，转换后的">
+<meta name="twitter:image" content="http://o981ibvmi.bkt.clouddn.com/QQ20161209-1@2x.png">
   
   
     <link rel="icon" href="/favicon.png">
@@ -203,11 +195,11 @@ node run.js  init className superClassName
 	</div>
 </nav>
 
-      <div class="body-wrap"><article id="post-如何调试一个js项目" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-webpack-React-gulp的调试" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2016/12/08/如何调试一个js项目/" class="article-date">
-  	<time datetime="2016-12-08T10:18:39.000Z" itemprop="datePublished">2016-12-08</time>
+      <a href="/2016/12/09/webpack-React-gulp的调试/" class="article-date">
+  	<time datetime="2016-12-09T14:57:26.000Z" itemprop="datePublished">2016-12-09</time>
 </a>
     </div>
   
@@ -220,7 +212,7 @@ node run.js  init className superClassName
         
   
     <h1 class="article-title" itemprop="name">
-      如何调试一个js项目
+      webpack+React+gulp的调试
     </h1>
   
 
@@ -236,14 +228,20 @@ node run.js  init className superClassName
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>今天在学习同时开发的一个脚手架工具Tiger，主要是用来快速生成模块化类的一个工具，其中是采用js语言写的，自己想调试的时候发现不得要领，查找一些资料下来有点眉目，此处做个记录。</p>
-<p>首先这个工具的用法是：</p>
-<pre><code>tiger init className superClassName
-</code></pre><p>其实内部就是调用一个js文件 </p>
-<pre><code>node run.js  init className superClassName
-</code></pre><p>如果没有node环境，可以将run.js添加x属性，然后执行 ./run.js …  操作。</p>
-<p>调试工具选用 webstorm，然后在debug的 Run/Debug Configurations 里面可以选择要调试的js文件，如果需要参数，也可以在Node Parameters里面添加参数。<br><img src="http://o981ibvmi.bkt.clouddn.com/QQ20161209-1.png" alt="如图"></p>
-<p>剩下的问题就是js语法调试。</p>
+        <p>在开发过程中，开发程序只是第一步，调试才是最重要的，上一节讲了如何在webstorm中进行调试js内容，但是对于进行React进行jsx语法开发时，又是如何调试呢。</p>
+<p>对于webpack.config.js配置，这里也不做过多介绍，网上有很多内容，其中一个很重要的就是source map。</p>
+<h1 id="什么是Source-map"><a href="#什么是Source-map" class="headerlink" title="什么是Source map"></a>什么是Source map</h1><p>简单说，Source map就是一个信息文件，里面储存着位置信息。也就是说，转换后的代码的每一个位置，所对应的转换前的位置。</p>
+<p>JS发布后通常会经过压缩和混淆，所有代码被压缩成一行代码，如果发生错误，无法定位错误，SourceMap因此而生。说起SourceMap，不得不说说uglifyjs，uglifyjs是nodejs下一款优秀的JS压缩优化工具，支持SourceMap的生成。</p>
+<p>更多可以参考：</p>
+<blockquote>
+<p><a href="http://blog.allenm.me/2012/12/whats-sourcemap/" target="_blank" rel="external">使用 SourceMap 来进行前端代码调试</a></p>
+</blockquote>
+<p>但是自己在webpack.config.js中添加了如下配置：</p>
+<pre><code>devtool: &apos;eval-source-map&apos;,
+</code></pre><p>而且在dish的目录下面有：      </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">alliance-detail.js</div><div class="line">alliance-detail.map</div><div class="line">alliance-list.js</div><div class="line">alliance-list.map</div><div class="line">article-list.js</div><div class="line">article-list.map</div><div class="line">business-detail.js</div><div class="line">business-detail.map</div></pre></td></tr></table></figure>
+<p>文件也有对应关系，但是在chrome中就是看多对应的jsx文件，最后经过公司前端一哥的帮忙，发现如果在webpack中将Debugger中的如下内容打开，就可以看到js对应的jsx文件，断点什么的，就可以飞起来了。<br><img src="http://o981ibvmi.bkt.clouddn.com/QQ20161209-1@2x.png" alt="webstorm Debugger 配置"></p>
+<p><img src="http://o981ibvmi.bkt.clouddn.com/QQ20161209-0@2x.png" alt="chrome显示结果如下"><br>说明source map生效，可以在jsx里面打断点进行调试了。</p>
 
       
     </div>
@@ -253,18 +251,9 @@ node run.js  init className superClassName
     
 <nav id="article-nav">
   
-    <a href="/2016/12/09/webpack-React-gulp的调试/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption"><</strong>
-      <div class="article-nav-title">
-        
-          webpack+React+gulp的调试
-        
-      </div>
-    </a>
   
-  
-    <a href="/2016/12/02/只支持横屏的应用调用竖屏系统库崩溃的问题/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">只支持横屏的应用调用竖屏系统库崩溃的问题</div>
+    <a href="/2016/12/08/如何调试一个js项目/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">如何调试一个js项目</div>
       <strong class="article-nav-caption">></strong>
     </a>
   
@@ -299,7 +288,7 @@ node run.js  init className superClassName
 
 <div class="duoshuo">
 	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="如何调试一个js项目" data-title="如何调试一个js项目" data-url="http://theewind.github.io/2016/12/08/如何调试一个js项目/"></div>
+	<div class="ds-thread" data-thread-key="webpack-React-gulp的调试" data-title="webpack+React+gulp的调试" data-url="http://theewind.github.io/2016/12/09/webpack-React-gulp的调试/"></div>
 	<!-- 多说评论框 end -->
 	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 	<script type="text/javascript">
